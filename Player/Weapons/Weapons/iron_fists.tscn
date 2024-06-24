@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyxrt2hyxo6ko"]
+
+[ext_resource type="Script" path="res://Player/Weapons/Weapons/IronFists.gd" id="1_cnrxy"]
+[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/DarkestPlayer.png" id="2_r3f4l"]
+
+[node name="IronFists" type="Node2D"]
+script = ExtResource("1_cnrxy")
+
+[node name="Left" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_r3f4l")
+
+[node name="Right" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_r3f4l")

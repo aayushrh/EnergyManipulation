@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj4sdy7sreyxa"]
+
+[ext_resource type="Script" path="res://Effects/afterimage.gd" id="1_o0h51"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xox6a"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_084l8"]
+radius = 9.0
+
+[node name="Afterimage" type="Node2D"]
+script = ExtResource("1_o0h51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xox6a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-20, -20)
+shape = SubResource("CircleShape2D_084l8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(20, -20)
+shape = SubResource("CircleShape2D_084l8")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://nqt08ivqhy5v"]
+
+[ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
+[ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="2_ipdvr"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_s7tpg")]
+position = Vector2(561, 300)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("2_ipdvr")]
+position = Vector2(949, 464)

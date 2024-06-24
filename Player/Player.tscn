@@ -1,0 +1,242 @@
+[gd_scene load_steps=18 format=3 uid="uid://mpo3uyl0648p"]
+
+[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="1_6knnn"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
+[ext_resource type="Texture2D" uid="uid://d111rb48bkbqo" path="res://Art/LighterPlayer.png" id="3_uvy4f"]
+[ext_resource type="Texture2D" uid="uid://bsje8ww5cxxb0" path="res://Art/LightPlayer.png" id="4_ykwnj"]
+[ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/DarkPlayer.png" id="5_f28jr"]
+[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/DarkestPlayer.png" id="6_h5m0r"]
+[ext_resource type="PackedScene" uid="uid://dyxrt2hyxo6ko" path="res://Player/Weapons/Weapons/iron_fists.tscn" id="7_qarxu"]
+[ext_resource type="PackedScene" uid="uid://br6ytfcgobjqd" path="res://Player/Weapons/WeaponSprites/iron_fists.tscn" id="8_6jguk"]
+[ext_resource type="Script" path="res://World/UI/SelectionWheel.gd" id="8_7enys"]
+[ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
+[ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7140r"]
+radius = 38.0132
+
+[sub_resource type="Animation" id="Animation_fwvlo"]
+resource_name = "Block"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/RArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, -20), Vector2(-15, -25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Art/LArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, -20), Vector2(15, -25)]
+}
+
+[sub_resource type="Animation" id="Animation_72mav"]
+resource_name = "LeftPunch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/LArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-20, -20), Vector2(-20, -50), Vector2(-20, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Art:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.48787e-16, 0.349066, 3.48787e-16]
+}
+
+[sub_resource type="Animation" id="Animation_e1mkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/RArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Art/LArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-20, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Art:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.349066]
+}
+
+[sub_resource type="Animation" id="Animation_kg8yj"]
+resource_name = "RightPunch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/RArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, -20), Vector2(20, -50), Vector2(20, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Art:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.48787e-16, -0.349066, 3.48787e-16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eifdg"]
+_data = {
+"Block": SubResource("Animation_fwvlo"),
+"LeftPunch": SubResource("Animation_72mav"),
+"RESET": SubResource("Animation_e1mkl"),
+"RightPunch": SubResource("Animation_kg8yj")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_u8cgp")
+lightest = ExtResource("1_6knnn")
+lighter = ExtResource("3_uvy4f")
+light = ExtResource("4_ykwnj")
+dark = ExtResource("5_f28jr")
+darkest = ExtResource("6_h5m0r")
+skinTone = "Dark"
+ACCELERATION = 50.0
+FRICTION = 0.9
+TOPSPEED = 500.0
+TURNINGSPEED = 1.0
+DASHSPEED = 3000.0
+DASHTIME = 0.1
+WeaponsScenes = Array[PackedScene]([ExtResource("7_qarxu")])
+WeaponsSprite = Array[PackedScene]([ExtResource("8_6jguk")])
+Shockwave = ExtResource("9_613qk")
+Afterimage = ExtResource("10_boodf")
+
+[node name="Art" type="Node2D" parent="."]
+rotation = -0.349066
+
+[node name="RArm" type="Sprite2D" parent="Art"]
+position = Vector2(20, -20)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_6knnn")
+
+[node name="LArm" type="Sprite2D" parent="Art"]
+position = Vector2(-20, -20)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_6knnn")
+
+[node name="Body" type="Sprite2D" parent="Art"]
+rotation = -0.341083
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_6knnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_7140r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eifdg")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.215902, 0.215902, 0.215902, 0.737255)
+
+[node name="SelectionWheel" type="Control" parent="CanvasLayer/Background"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("8_7enys")
+outer_radius = 256
+inner_radius = 100
+segments = 5
+bkg_color = Color(0.521141, 0.521141, 0.521141, 1)
+inside_color = Color(0.215686, 0.215686, 0.215686, 1)
+selected_color = Color(0.879776, 0.879776, 0.879776, 1)
+
+[node name="HealthBar" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 60.0
+color = Color(1, 0, 0, 1)
+
+[node name="EnergyBar" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 90.0
+color = Color(0.278047, 0.498946, 1, 1)
+
+[node name="EnergyBar2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 100.0
+offset_top = 70.0
+offset_right = 110.0
+offset_bottom = 90.0
+
+[node name="WeaponSlot" type="Node2D" parent="."]
+
+[node name="DashingTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
