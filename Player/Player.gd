@@ -141,8 +141,8 @@ func _switchingWeapons():
 			if($WeaponSlot.get_children().size() > 0):
 				$WeaponSlot.get_child(0).queue_free()
 				can_attack = true
-			if($CanvasLayer/SelectionWheel.selectedNum < weapons.size()):
-				var weapon = WeaponsScenes[weapons[$CanvasLayer/SelectionWheel.selectedNum]].instantiate()
+			if($CanvasLayer/Background/SelectionWheel.selectedNum < weapons.size()):
+				var weapon = WeaponsScenes[weapons[$CanvasLayer/Background/SelectionWheel.selectedNum]].instantiate()
 				weapon.leftArm = $Art/LArm
 				weapon.rightArm = $Art/RArm
 				$WeaponSlot.add_child(weapon)
