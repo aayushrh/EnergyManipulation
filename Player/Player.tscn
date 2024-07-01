@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://mpo3uyl0648p"]
+[gd_scene load_steps=15 format=3 uid="uid://mpo3uyl0648p"]
 
 [ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="1_6knnn"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bsje8ww5cxxb0" path="res://Art/LightPlayer.png" id="4_ykwnj"]
 [ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/DarkPlayer.png" id="5_f28jr"]
 [ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/DarkestPlayer.png" id="6_h5m0r"]
-[ext_resource type="PackedScene" uid="uid://dyxrt2hyxo6ko" path="res://Player/Weapons/Weapons/iron_fists.tscn" id="7_qarxu"]
-[ext_resource type="PackedScene" uid="uid://br6ytfcgobjqd" path="res://Player/Weapons/WeaponSprites/iron_fists.tscn" id="8_6jguk"]
-[ext_resource type="Script" path="res://World/UI/SelectionWheel.gd" id="8_7enys"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
@@ -160,8 +157,6 @@ TOPSPEED = 500.0
 TURNINGSPEED = 1.0
 DASHSPEED = 3000.0
 DASHTIME = 0.1
-WeaponsScenes = Array[PackedScene]([ExtResource("7_qarxu")])
-WeaponsSprite = Array[PackedScene]([ExtResource("8_6jguk")])
 Shockwave = ExtResource("9_613qk")
 Afterimage = ExtResource("10_boodf")
 
@@ -194,27 +189,6 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Background" type="ColorRect" parent="CanvasLayer"]
-visible = false
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0.215902, 0.215902, 0.215902, 0.737255)
-
-[node name="SelectionWheel" type="Control" parent="CanvasLayer/Background"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 576.0
-offset_top = 324.0
-offset_right = 576.0
-offset_bottom = 324.0
-script = ExtResource("8_7enys")
-outer_radius = 256
-inner_radius = 100
-segments = 5
-bkg_color = Color(0.521141, 0.521141, 0.521141, 1)
-inside_color = Color(0.215686, 0.215686, 0.215686, 1)
-selected_color = Color(0.879776, 0.879776, 0.879776, 1)
-
 [node name="HealthBar" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0
 offset_top = 20.0
@@ -229,7 +203,7 @@ offset_right = 120.0
 offset_bottom = 90.0
 color = Color(0.278047, 0.498946, 1, 1)
 
-[node name="EnergyBar2" type="ColorRect" parent="CanvasLayer"]
+[node name="Indicator" type="ColorRect" parent="CanvasLayer"]
 offset_left = 100.0
 offset_top = 70.0
 offset_right = 110.0
@@ -239,4 +213,8 @@ offset_bottom = 90.0
 
 [node name="DashingTimer" type="Timer" parent="."]
 
+[node name="HitRegisterTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
+[connection signal="timeout" from="HitRegisterTimer" to="." method="_on_hit_register_timer_timeout"]

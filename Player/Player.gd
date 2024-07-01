@@ -16,28 +16,25 @@ extends CharacterBody2D
 @export var DASHSPEED : float
 @export var DASHTIME : float
 
-@export_group("Weapons")
-@export var WeaponsScenes : Array[PackedScene]
-@export var WeaponsSprite : Array[PackedScene]
-
 @export_group("Effects")
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
 
 var rng = RandomNumberGenerator.new()
 var right = true
-var switchingWeapons = false
-var weapons = [Constants.IRONFISTS]
 var can_attack = true
 var clicked = ""
 var timer = 120
 var dashing = false
 var blocking = false
-var time_since_block = 0
-var stored_energy = 0
+var time = 0
+var stored_energy = 0.0
+var dmgTaken = 0
+var time_last_block = -1
+var time_last_hit = 0
+var health = 10
 
 func _ready():
-	_checkWeapons()
 	_skinColor()
 
 func _skinColor():
@@ -57,27 +54,26 @@ func _skinColor():
 	$Art/Body.texture = texture
 
 func _process(delta):
-	time_since_block += delta
+	time += delta
 	queue_redraw()
 	if(!Global.pause and !dashing):
 		_movement()
 		_rotation()
-		_attack()
-		_dash_check()
-		_block()
+		attack()
+		dash_check()
+		block()
 	if(dashing):
 		var after = Afterimage.instantiate()
 		after.global_position = global_position
 		after.rotation_degrees = rotation_degrees
 		get_tree().current_scene.add_child(after)
-	_switchingWeapons()
-	move_and_slide()
+	if(!Global.pause): move_and_slide()
 
-func _block():
+func block():
 	if(Input.is_action_just_pressed("Block")):
-		$AnimationPlayer.play("Block")
-		blocking = true
-		time_since_block = 0
+			$AnimationPlayer.play("Block")
+			blocking = true
+			time_last_block = time
 	if(Input.is_action_just_released("Block")):
 		$AnimationPlayer.play_backwards("Block")
 		blocking = false
@@ -86,72 +82,40 @@ func _draw():
 	if(blocking):
 		draw_arc(Vector2.ZERO, 50, -PI/4 - PI/8, -3*PI/4 - PI/8, 20, Color.WHITE, 5)
 
-func _dash_check():
+func dash_check():
+	var justClicked = ""
+	var dir = Vector2.ZERO
+	if(Input.is_action_just_pressed("down")):
+		justClicked = "s"
+		dir = Vector2(0, 1)
+	if(Input.is_action_just_pressed("up")):
+		justClicked = "w"
+		dir = Vector2(0, -1)
+	if(Input.is_action_just_pressed("left")):
+		justClicked = "a"
+		dir = Vector2(-1, 0)
+	if(Input.is_action_just_pressed("right")):
+		justClicked = "d"
+		dir = Vector2(1, 0)
+	if(justClicked != ""):
+		if(clicked == justClicked):
+			dash(dir)
+		else:
+			clicked = justClicked
+			timer = 120
 	if clicked != "" :
 		timer -= 1
 		if timer <= 0:
 			clicked = ""
-	if(Input.is_action_just_pressed("down")):
-		timer = 120
-		if(clicked == ""):
-			clicked = "s"
-		elif(clicked == "s"):
-			_dash(Vector2(0, 1))
-		else:
-			clicked = ""
-	if(Input.is_action_just_pressed("up")):
-		timer = 120
-		if(clicked == ""):
-			clicked = "w"
-		elif(clicked == "w"):
-			_dash(Vector2(0, -1))
-		else:
-			clicked = ""
-	if(Input.is_action_just_pressed("left")):
-		timer = 120
-		if(clicked == ""):
-			clicked = "a"
-		elif(clicked == "a"):
-			_dash(Vector2(-1, 0))
-		else:
-			clicked = ""
-	if(Input.is_action_just_pressed("right")):
-		timer = 120
-		if(clicked == ""):
-			clicked = "d"
-		elif(clicked == "d"):
-			_dash(Vector2(1, 0))
-		else:
-			clicked = ""
 
-func _dash(dir):
+func dash(dir):
 	velocity = dir * DASHSPEED
 	dashing = true
 	$DashingTimer.start(DASHTIME)
 	clicked = ""
 	timer = 60
 
-func _switchingWeapons():
-	if Input.is_action_pressed("SwitchWeapons"):
-		$CanvasLayer/Background.visible = true
-		switchingWeapons = true
-		Global.pause = true
-	else:
-		if(switchingWeapons):
-			if($WeaponSlot.get_children().size() > 0):
-				$WeaponSlot.get_child(0).queue_free()
-				can_attack = true
-			if($CanvasLayer/Background/SelectionWheel.selectedNum < weapons.size()):
-				var weapon = WeaponsScenes[weapons[$CanvasLayer/Background/SelectionWheel.selectedNum]].instantiate()
-				weapon.leftArm = $Art/LArm
-				weapon.rightArm = $Art/RArm
-				$WeaponSlot.add_child(weapon)
-				can_attack = !weapon.fistLock
-			switchingWeapons = false
-			Global.pause = false
-		$CanvasLayer/Background.visible = false
-
-func _attack():
+func attack():
 	if !$AnimationPlayer.is_playing() and Input.is_action_just_pressed("Hit"):
 		if right:
 			$AnimationPlayer.play("RightPunch")
@@ -163,12 +127,10 @@ func _attack():
 			shockwave.global_position = global_position
 			shockwave.rotation_degrees = rotation_degrees
 			shockwave.sender = self
-			shockwave.energy = min(stored_energy, 1)
+			shockwave.energy = max(min(stored_energy, 1), 0.05)
 			stored_energy -= min(stored_energy, 1)
 			$CanvasLayer/EnergyBar.size.x = stored_energy*100
-			shockwave.damage = 1
 			get_tree().current_scene.add_child(shockwave)
-		
 
 func _rotation():
 	var mouse_pos = get_global_mouse_position()
@@ -187,19 +149,31 @@ func _movement():
 	else:
 		velocity = velocity.limit_length(TOPSPEED/2)
 
-func _checkWeapons():
-	for i in weapons:
-		$CanvasLayer/Background/SelectionWheel.sprites.append(WeaponsSprite[i])
-	$CanvasLayer/Background/SelectionWheel._checkWeapons()
-
 func _hit(hitbox):
-	var dmg = hitbox.damage * (256 - global_position.distance_to(hitbox.sender.global_position))/256
-	if(!blocking):
-		pass
-	else:
-		stored_energy += (dmg - dmg*time_since_block)
-		$CanvasLayer/EnergyBar.size.x = stored_energy * 100.0
-		blocking = false
+	dmgTaken = hitbox.damageTaken(self)
+	$HitRegisterTimer.start(0.15)
+	time_last_hit = time
+
+func _dmgRed(time):
+	if(time > 0 and time < 0.0417):
+		return 1
+	if(time > 0.0417 and time < 0.0833):
+		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
+	if(time > 0.0833 and time < 0.125):
+		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
+	return 0
 
 func _on_dashing_timer_timeout():
 	dashing = false
+
+func _on_hit_register_timer_timeout():
+	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
+	print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
+	print("damage: " + str(dmgTaken * (1-dmgRed)))
+	print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
+	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
+	stored_energy += dmgTaken * dmgRed
+	health -= dmgTaken * (1-dmgRed)
+	$CanvasLayer/EnergyBar.size.x = stored_energy*100.0
+	$CanvasLayer/HealthBar.size.x = health*10.0
+	time = 0

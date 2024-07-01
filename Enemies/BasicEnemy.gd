@@ -11,6 +11,8 @@ var slow = false
 @export var Shockwave : PackedScene
 
 func _process(delta):
+	var softBodyPush = $SoftBody.getVector()
+	
 	cooldown -= delta
 	if(cooldown <=0):
 		can_attack = true
@@ -20,6 +22,7 @@ func _process(delta):
 		velocity = (player.global_position - global_position).normalized() * speed
 		if(slow):
 			velocity = velocity * 0.5
+		velocity -= softBodyPush * speed
 		move_and_slide()
 		
 		if(dist(player, self) <= 250) and can_attack:
@@ -35,7 +38,7 @@ func _on_vision_body_entered(body):
 	player = body
 
 func _hit(hitbox):
-	print(hitbox.damage)
+	print(hitbox.damageTaken(self))
 
 func dist(a, b):
 	var sub = a.global_position - b.global_position
@@ -46,7 +49,6 @@ func _shockwave():
 	shockwave.global_position = global_position
 	shockwave.rotation_degrees = rotation_degrees
 	shockwave.sender = self
-	shockwave.damage = 1
 	shockwave.energy = 1
 	get_tree().current_scene.add_child(shockwave)
 	slow = false
@@ -54,4 +56,3 @@ func _shockwave():
 func _on_animation_player_animation_finished(anim_name):
 	if(anim_name == "Charging"):
 		$AnimationPlayer.play("Punch")
-		

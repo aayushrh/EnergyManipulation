@@ -1,17 +1,20 @@
 extends Node2D
 
 var sender : Node2D
-var damage : int
 var energy : float
 
 var lifetime = 20
 
 func _ready():
-	scale.y = energy
+	$Node2D.scale.y = energy
 
 func _on_hitbox_body_entered(body):
 	if body != sender :
 		body._hit(self)
+
+func damageTaken(reciever):
+	var damage = energy
+	return damage * (256 - reciever.global_position.distance_to(sender.global_position))/256
 	
 func _process(delta):
 	lifetime -= 1

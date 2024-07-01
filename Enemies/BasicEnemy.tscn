@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2gbss4jwhyhl"]
+[gd_scene load_steps=12 format=3 uid="uid://c2gbss4jwhyhl"]
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_2rskt"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="2_52n48"]
 [ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="2_qpj02"]
+[ext_resource type="Script" path="res://Effects/SoftBody.gd" id="4_ugpfv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7svlq"]
 radius = 641.175
@@ -150,6 +151,9 @@ _data = {
 "RESET": SubResource("Animation_440o6")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nt3qm"]
+radius = 46.0
+
 [node name="BasicEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -192,5 +196,14 @@ libraries = {
 "": SubResource("AnimationLibrary_ref8m")
 }
 
+[node name="SoftBody" type="Area2D" parent="."]
+script = ExtResource("4_ugpfv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftBody"]
+visible = false
+shape = SubResource("CircleShape2D_nt3qm")
+
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="SoftBody" to="SoftBody" method="_on_body_entered"]
+[connection signal="body_exited" from="SoftBody" to="SoftBody" method="_on_body_exited"]

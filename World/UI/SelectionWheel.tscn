@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://b02bpnb2newhv"]
+
+[ext_resource type="Script" path="res://World/UI/SelectionWheel.gd" id="1_3u762"]
+
+[node name="Selection" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.215902, 0.215902, 0.215902, 0.737255)
+
+[node name="SelectionWheel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("1_3u762")
+outer_radius = 256
+inner_radius = 100
+segments = 5
+bkg_color = Color(0.521141, 0.521141, 0.521141, 1)
+inside_color = Color(0.215686, 0.215686, 0.215686, 1)
+selected_color = Color(0.879776, 0.879776, 0.879776, 1)
