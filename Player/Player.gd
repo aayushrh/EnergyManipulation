@@ -177,3 +177,4 @@ func _on_hit_register_timer_timeout():
 	$CanvasLayer/EnergyBar.size.x = stored_energy*100.0
 	$CanvasLayer/HealthBar.size.x = health*10.0
 	time = 0
+	time_last_block = -1
