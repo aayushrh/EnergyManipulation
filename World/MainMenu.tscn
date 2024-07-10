@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3h00uru71r6u"]
+
+[ext_resource type="Script" path="res://World/UI/ButtonSceneSwitch.gd" id="2_6p8w8"]
+[ext_resource type="Script" path="res://World/UI/Exit.gd" id="3_0ldpl"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 278.0
+offset_top = 134.0
+offset_right = 878.0
+offset_bottom = 208.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "ENERGY MANIPULATION"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="."]
+offset_left = 430.0
+offset_top = 251.0
+offset_right = 705.0
+offset_bottom = 316.0
+mouse_default_cursor_shape = 2
+text = "START"
+script = ExtResource("2_6p8w8")
+switching = "World"
+metadata/_edit_use_anchors_ = true
+
+[node name="Options" type="Button" parent="."]
+offset_left = 429.0
+offset_top = 361.0
+offset_right = 704.0
+offset_bottom = 426.0
+mouse_default_cursor_shape = 2
+text = "OPTIONS"
+script = ExtResource("2_6p8w8")
+switching = "Options"
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 428.0
+offset_top = 482.0
+offset_right = 703.0
+offset_bottom = 547.0
+mouse_default_cursor_shape = 2
+text = "EXIT"
+script = ExtResource("3_0ldpl")
+maxtimer = 2.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Exit"]
+layout_mode = 0
+offset_bottom = 64.0
+color = Color(1, 0, 0, 1)
+
+[connection signal="pressed" from="Start" to="Start" method="_on_pressed"]
+[connection signal="pressed" from="Options" to="Options" method="_on_pressed"]
+[connection signal="button_down" from="Exit" to="Exit" method="_on_button_down"]
+[connection signal="button_up" from="Exit" to="Exit" method="_on_button_up"]

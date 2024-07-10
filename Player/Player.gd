@@ -74,7 +74,7 @@ func block():
 			$AnimationPlayer.play("Block")
 			blocking = true
 			time_last_block = time
-	if(Input.is_action_just_released("Block")):
+	if(Input.is_action_just_released("Block") and blocking):
 		$AnimationPlayer.play_backwards("Block")
 		blocking = false
 
@@ -114,9 +114,11 @@ func dash(dir):
 	$DashingTimer.start(DASHTIME)
 	clicked = ""
 	timer = 60
+	blocking = false
+	$AnimationPlayer.play_backwards("Block")
 
 func attack():
-	if !$AnimationPlayer.is_playing() and Input.is_action_just_pressed("Hit"):
+	if !$AnimationPlayer.is_playing() and Input.is_action_just_pressed("Hit") and !blocking:
 		if right:
 			$AnimationPlayer.play("RightPunch")
 		else:
@@ -162,6 +164,7 @@ func _dmgRed(time):
 	if(time > 0.0833 and time < 0.125):
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
 	return 0
+	
 
 func _on_dashing_timer_timeout():
 	dashing = false
@@ -174,6 +177,8 @@ func _on_hit_register_timer_timeout():
 	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed
 	health -= dmgTaken * (1-dmgRed)
+	if(health<0):
+		Global._change_tscn("res://MainMenu.tscn")
 	$CanvasLayer/EnergyBar.size.x = stored_energy*100.0
 	$CanvasLayer/HealthBar.size.x = health*10.0
 	time = 0

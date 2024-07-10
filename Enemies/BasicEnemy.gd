@@ -11,6 +11,10 @@ var slow = false
 @export var Shockwave : PackedScene
 
 func _process(delta):
+	if(!Global.pause):
+		_move(delta)
+
+func _move(delta):
 	var softBodyPush = $SoftBody.getVector()
 	
 	cooldown -= delta

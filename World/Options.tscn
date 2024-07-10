@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://btx2r6x4qjs13"]
+
+[ext_resource type="Script" path="res://World/UI/Back.gd" id="1_gs523"]
+[ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="2_u1ing"]
+
+[node name="Node2D" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-136.0]
+
+[node name="Back" type="RichTextLabel" parent="."]
+offset_left = 4.0
+offset_top = 10.0
+offset_right = 93.0
+offset_bottom = 53.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 0
+bbcode_enabled = true
+text = "[url=something]<Back[/url]"
+scroll_active = false
+meta_underlined = false
+script = ExtResource("1_gs523")
+
+[node name="InputChangeSystem" parent="." instance=ExtResource("2_u1ing")]
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="meta_clicked" from="Back" to="Back" method="_on_meta_clicked"]

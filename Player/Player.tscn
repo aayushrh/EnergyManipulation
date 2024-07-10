@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://mpo3uyl0648p"]
 
-[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="1_6knnn"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
-[ext_resource type="Texture2D" uid="uid://d111rb48bkbqo" path="res://Art/LighterPlayer.png" id="3_uvy4f"]
-[ext_resource type="Texture2D" uid="uid://bsje8ww5cxxb0" path="res://Art/LightPlayer.png" id="4_ykwnj"]
-[ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/DarkPlayer.png" id="5_f28jr"]
-[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/DarkestPlayer.png" id="6_h5m0r"]
+[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_cijjh"]
+[ext_resource type="Texture2D" uid="uid://d111rb48bkbqo" path="res://Art/Ethan.png" id="3_6x1qk"]
+[ext_resource type="Texture2D" uid="uid://bsje8ww5cxxb0" path="res://Art/Kyle.png" id="4_l7f5n"]
+[ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/Aayush.png" id="5_firqd"]
+[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/Mathavan.png" id="6_gs2oo"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
@@ -145,11 +145,11 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_u8cgp")
-lightest = ExtResource("1_6knnn")
-lighter = ExtResource("3_uvy4f")
-light = ExtResource("4_ykwnj")
-dark = ExtResource("5_f28jr")
-darkest = ExtResource("6_h5m0r")
+lightest = ExtResource("2_cijjh")
+lighter = ExtResource("3_6x1qk")
+light = ExtResource("4_l7f5n")
+dark = ExtResource("5_firqd")
+darkest = ExtResource("6_gs2oo")
 skinTone = "Dark"
 ACCELERATION = 50.0
 FRICTION = 0.9
@@ -166,17 +166,17 @@ rotation = -0.349066
 [node name="RArm" type="Sprite2D" parent="Art"]
 position = Vector2(20, -20)
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("1_6knnn")
+texture = ExtResource("2_cijjh")
 
 [node name="LArm" type="Sprite2D" parent="Art"]
 position = Vector2(-20, -20)
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("1_6knnn")
+texture = ExtResource("2_cijjh")
 
 [node name="Body" type="Sprite2D" parent="Art"]
 rotation = -0.341083
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_6knnn")
+texture = ExtResource("2_cijjh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

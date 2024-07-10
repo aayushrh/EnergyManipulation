@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://br6ytfcgobjqd"]
 
-[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/DarkestPlayer.png" id="1_dbgad"]
+[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/Mathavan.png" id="1_dbgad"]
 
 [node name="IronFists" type="Node2D"]
 
