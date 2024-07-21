@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=5 format=3 uid="uid://nqt08ivqhy5v"]
 
+[ext_resource type="Script" path="res://World/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="2_ipdvr"]
+[ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_dcdsc")
 
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
 position = Vector2(561, 300)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("2_ipdvr")]
 position = Vector2(949, 464)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.190762, 0.190762, 0.190762, 0.678431)
+
+[node name="InputChangeSystem" parent="CanvasLayer" instance=ExtResource("4_eyl0v")]

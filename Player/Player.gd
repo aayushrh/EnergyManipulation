@@ -129,8 +129,9 @@ func attack():
 			shockwave.global_position = global_position
 			shockwave.rotation_degrees = rotation_degrees
 			shockwave.sender = self
-			shockwave.energy = max(min(stored_energy, 1), 0.05)
-			stored_energy -= min(stored_energy, 1)
+			#shockwave.energy = max(min(stored_energy, 1), 0.05)
+			shockwave.energy = 1
+			#stored_energy -= min(stored_energy, 1)
 			$CanvasLayer/EnergyBar.size.x = stored_energy*100
 			get_tree().current_scene.add_child(shockwave)
 

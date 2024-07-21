@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_2rskt"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="2_52n48"]
-[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="2_qpj02"]
+[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_qpj02"]
 [ext_resource type="Script" path="res://Effects/SoftBody.gd" id="4_ugpfv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7svlq"]

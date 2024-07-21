@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0vwv5gyabyk7"]
+
+[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="1_0kolu"]
+[ext_resource type="Script" path="res://AnimationTest.gd" id="1_hrqdx"]
+
+[sub_resource type="Animation" id="Animation_71x8b"]
+resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_2syft"]
+resource_name = "DragonStyle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/RArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(20, -20), Vector2(30, -10), Vector2(40, 10), Vector2(50, -10), Vector2(60, -20), Vector2(50, -20), Vector2(40, -30), Vector2(30, -50), Vector2(20, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_dmkkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art/RArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jrcg4"]
+_data = {
+"DragonStyle": SubResource("Animation_2syft"),
+"RESET": SubResource("Animation_dmkkx"),
+"new_animation": SubResource("Animation_71x8b")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_hrqdx")
+
+[node name="Art" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 100)
+scale = Vector2(5, 5)
+
+[node name="RArm" type="Sprite2D" parent="Art"]
+position = Vector2(20, -20)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_0kolu")
+
+[node name="LArm" type="Sprite2D" parent="Art"]
+position = Vector2(-20, -20)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_0kolu")
+
+[node name="Body" type="Sprite2D" parent="Art"]
+rotation = -0.341083
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_0kolu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jrcg4")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
