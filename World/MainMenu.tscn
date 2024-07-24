@@ -1,7 +1,53 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3h00uru71r6u"]
 
-[ext_resource type="Script" path="res://World/UI/ButtonSceneSwitch.gd" id="2_6p8w8"]
-[ext_resource type="Script" path="res://World/UI/Exit.gd" id="3_0ldpl"]
+[sub_resource type="GDScript" id="GDScript_lgw87"]
+script/source = "extends Button
+
+@export var switching = \"\"
+
+func _on_pressed():
+	Global._change_tscn(\"res://World/\" + switching + \".tscn\")
+
+func _on_meta_clicked(meta):
+	Global._change_tscn(\"res://World/\" + switching + \".tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_7rs32"]
+script/source = "extends Button
+
+@export var maxtimer : float
+
+var press = false
+var timer = maxtimer
+
+func _ready():
+	timer = maxtimer
+
+func _process(delta):
+	if(timer<maxtimer):
+		text = str(snapped(timer,.01)).pad_decimals(2)
+		$ColorRect.size.x = (maxtimer-timer)/maxtimer*275
+		$ColorRect.color = Color(1,0,0,(maxtimer-timer)/maxtimer) 
+	if(press):
+		timer-=delta
+		if(timer<=0):
+			get_tree().quit()
+	else:
+		if(timer<maxtimer):
+			timer+=delta*2
+		else:
+			timer = maxtimer
+			text = \"EXIT\"
+
+
+func _on_button_up():
+	press = false;
+
+
+
+func _on_button_down():
+	press = true;
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -23,7 +69,7 @@ offset_right = 705.0
 offset_bottom = 316.0
 mouse_default_cursor_shape = 2
 text = "START"
-script = ExtResource("2_6p8w8")
+script = SubResource("GDScript_lgw87")
 switching = "World"
 metadata/_edit_use_anchors_ = true
 
@@ -34,7 +80,7 @@ offset_right = 704.0
 offset_bottom = 426.0
 mouse_default_cursor_shape = 2
 text = "OPTIONS"
-script = ExtResource("2_6p8w8")
+script = SubResource("GDScript_lgw87")
 switching = "Options"
 metadata/_edit_use_anchors_ = true
 
@@ -45,7 +91,7 @@ offset_right = 703.0
 offset_bottom = 547.0
 mouse_default_cursor_shape = 2
 text = "EXIT"
-script = ExtResource("3_0ldpl")
+script = SubResource("GDScript_7rs32")
 maxtimer = 2.0
 metadata/_edit_use_anchors_ = true
 

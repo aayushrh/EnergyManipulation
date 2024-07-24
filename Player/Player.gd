@@ -15,6 +15,7 @@ extends CharacterBody2D
 @export var TURNINGSPEED : float
 @export var DASHSPEED : float
 @export var DASHTIME : float
+@export var ROTATIONSPEED : float
 
 @export_group("Effects")
 @export var Shockwave : PackedScene
@@ -55,10 +56,10 @@ func _skinColor():
 
 func _process(delta):
 	time += delta
+	rotateToTarget(get_global_mouse_position(), delta)
 	queue_redraw()
 	if(!Global.pause and !dashing):
 		_movement()
-		_rotation()
 		attack()
 		dash_check()
 		block()
@@ -134,10 +135,12 @@ func attack():
 			$CanvasLayer/EnergyBar.size.x = stored_energy*100
 			get_tree().current_scene.add_child(shockwave)
 
-func _rotation():
-	var mouse_pos = get_global_mouse_position()
-	look_at(mouse_pos)
-	rotation_degrees += 90
+func rotateToTarget(target, delta):
+	var direction = (target - global_position)
+	rotation_degrees -= 100
+	var angleTo = transform.x.angle_to(direction)
+	rotation_degrees += 100
+	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
 func _movement():
 	var input_vector = Vector2.ZERO

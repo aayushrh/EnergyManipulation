@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://40bmdusc71q3"]
+
+[ext_resource type="Script" path="res://World/spell_select.gd" id="1_fa4vy"]
+[ext_resource type="Script" path="res://World/Selection.gd" id="2_8xajc"]
+
+[node name="MAGIC" type="Node2D"]
+
+[node name="spell_select" type="OptionButton" parent="."]
+offset_left = 765.0
+offset_top = 1.0
+offset_right = 1149.0
+offset_bottom = 61.0
+text_overrun_behavior = 3
+allow_reselect = true
+script = ExtResource("1_fa4vy")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(685, 423)
+points = PackedVector2Array(49, 49, -115, -268, -277, 47, 50, 49)
+
+[node name="Element" type="OptionButton" parent="."]
+offset_left = 523.0
+offset_top = 119.0
+offset_right = 616.0
+offset_bottom = 207.0
+allow_reselect = true
+script = ExtResource("2_8xajc")
+
+[node name="Symbol" type="OptionButton" parent="."]
+offset_left = 364.0
+offset_top = 425.0
+offset_right = 450.0
+offset_bottom = 519.0
+allow_reselect = true
+
+[node name="Attribute" type="OptionButton" parent="."]
+offset_left = 685.0
+offset_top = 423.0
+offset_right = 774.0
+offset_bottom = 516.0
+allow_reselect = true
+
+[node name="Spell type" type="OptionButton" parent="."]
+offset_left = 525.0
+offset_top = 317.0
+offset_right = 615.0
+offset_bottom = 410.0
+allow_reselect = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+visible = false
+offset_left = 207.0
+offset_top = 66.0
+offset_right = 914.0
+offset_bottom = 579.0
+placeholder_text = "Input the name of the spell!!!111111!!!11!!!!!!!!!!!!"
+
+[connection signal="item_selected" from="spell_select" to="spell_select" method="_on_item_selected"]

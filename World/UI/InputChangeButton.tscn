@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://oflqybs67ydg"]
+[gd_scene load_steps=2 format=3 uid="uid://oflqybs67ydg"]
+
+[ext_resource type="Script" path="res://World/UI/InputChangeButton.gd" id="1_w65p5"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(2.08165e-12, 52)
 size_flags_vertical = 3
+script = ExtResource("1_w65p5")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -25,6 +28,7 @@ text = "INPUT"
 [node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Action" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -34,3 +38,5 @@ text = "NONE"
 [node name="Seperation2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

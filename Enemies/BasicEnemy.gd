@@ -7,8 +7,17 @@ var slow = false
 
 @export var cooldownAttack : float
 @export var speed : int
+@export var ROTATIONSPEED : float
 
 @export var Shockwave : PackedScene
+
+func _ready():
+	$EnemyArt.finishCharge.connect(_finishCharge)
+	$EnemyArt.hit.connect(_shockwave)
+
+func _finishCharge():
+	slow = false
+	ROTATIONSPEED *= 2
 
 func _process(delta):
 	if(!Global.pause):
@@ -21,8 +30,8 @@ func _move(delta):
 	if(cooldown <=0):
 		can_attack = true
 	if player != null:
-		look_at(player.global_position)
-		rotation_degrees += 90
+		rotateToTarget(player, delta)
+		#rotation_degrees += 90
 		velocity = (player.global_position - global_position).normalized() * speed
 		if(slow):
 			velocity = velocity * 0.5
@@ -33,10 +42,18 @@ func _move(delta):
 			_punch()
 			can_attack = false
 			slow = true
+			ROTATIONSPEED /= 2
 			cooldown = cooldownAttack
 
+func rotateToTarget(target, delta):
+	var direction = (target.global_position - global_position)
+	rotation_degrees -= 100
+	var angleTo = transform.x.angle_to(direction)
+	rotation_degrees += 100
+	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
+
 func _punch():
-	$AnimationPlayer.play("Charging")
+	$EnemyArt._startPunch()
 
 func _on_vision_body_entered(body):
 	player = body
@@ -55,8 +72,3 @@ func _shockwave():
 	shockwave.sender = self
 	shockwave.energy = 1
 	get_tree().current_scene.add_child(shockwave)
-	slow = false
-
-func _on_animation_player_animation_finished(anim_name):
-	if(anim_name == "Charging"):
-		$AnimationPlayer.play("Punch")
