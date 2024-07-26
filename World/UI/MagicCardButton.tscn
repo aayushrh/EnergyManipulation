@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1ih3khnb752"]
+
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rntnr"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(0, 40)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_rntnr")
+theme_override_font_sizes/font_size = 32

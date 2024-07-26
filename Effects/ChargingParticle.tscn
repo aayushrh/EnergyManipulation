@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://6y8mwjedceom"]
 
-[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="1_yuoit"]
+[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="1_baq5t"]
 [ext_resource type="Script" path="res://Effects/ChargingParticle.gd" id="2_hpw26"]
 
 [node name="Node2D" type="Sprite2D"]
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_yuoit")
+texture = ExtResource("1_baq5t")
 script = ExtResource("2_hpw26")

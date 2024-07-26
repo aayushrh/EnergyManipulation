@@ -1,13 +1,5 @@
 extends CharacterBody2D
 
-@export_group("Skin Color")
-@export var lightest : CompressedTexture2D
-@export var lighter : CompressedTexture2D
-@export var light : CompressedTexture2D
-@export var dark : CompressedTexture2D
-@export var darkest : CompressedTexture2D
-@export var skinTone = "Lighter"
-
 @export_group("Movement")
 @export var ACCELERATION : float
 @export var FRICTION : float
@@ -36,23 +28,7 @@ var time_last_hit = 0
 var health = 10
 
 func _ready():
-	_skinColor()
-
-func _skinColor():
-	var texture = null
-	if skinTone == "Lightest":
-		texture = lightest
-	if skinTone == "Lighter":
-		texture = lighter
-	if skinTone == "Light":
-		texture = light
-	if skinTone == "Dark":
-		texture = dark
-	if skinTone == "Darkest":
-		texture = darkest
-	$Art/RArm.texture = texture
-	$Art/LArm.texture = texture
-	$Art/Body.texture = texture
+	$PlayerArt.hit.connect(_shockwave)
 
 func _process(delta):
 	time += delta
@@ -72,11 +48,11 @@ func _process(delta):
 
 func block():
 	if(Input.is_action_just_pressed("Block")):
-			$AnimationPlayer.play("Block")
+			$PlayerArt._block()
 			blocking = true
 			time_last_block = time
 	if(Input.is_action_just_released("Block") and blocking):
-		$AnimationPlayer.play_backwards("Block")
+		$PlayerArt._unblock()
 		blocking = false
 
 func _draw():
@@ -84,6 +60,16 @@ func _draw():
 		draw_arc(Vector2.ZERO, 50, -PI/4 - PI/8, -3*PI/4 - PI/8, 20, Color.WHITE, 5)
 
 func dash_check():
+	if(Input.is_action_pressed("Dash")):
+		var input_vector = Vector2.ZERO
+		input_vector.y = Input.get_axis("up", "down")
+		input_vector.x = Input.get_axis("left", "right")
+		input_vector = input_vector.normalized()
+		dash(input_vector)
+	elif(InputMap.action_get_events("Dash").size() == 0):
+		_doubleClickCheck()
+
+func _doubleClickCheck():
 	var justClicked = ""
 	var dir = Vector2.ZERO
 	if(Input.is_action_just_pressed("down")):
@@ -116,24 +102,20 @@ func dash(dir):
 	clicked = ""
 	timer = 60
 	blocking = false
-	$AnimationPlayer.play_backwards("Block")
+	$PlayerArt._unblock()
+
+func _shockwave():
+	var shockwave = Shockwave.instantiate()
+	shockwave.global_position = global_position
+	shockwave.rotation_degrees = rotation_degrees
+	shockwave.sender = self
+	shockwave.energy = 1
+	$CanvasLayer/EnergyBar.size.x = stored_energy*100
+	get_tree().current_scene.add_child(shockwave)
 
 func attack():
-	if !$AnimationPlayer.is_playing() and Input.is_action_just_pressed("Hit") and !blocking:
-		if right:
-			$AnimationPlayer.play("RightPunch")
-		else:
-			$AnimationPlayer.play("LeftPunch")
-		right = !right
-		if(can_attack):
-			var shockwave = Shockwave.instantiate()
-			shockwave.global_position = global_position
-			shockwave.rotation_degrees = rotation_degrees
-			shockwave.sender = self
-			shockwave.energy = max(min(stored_energy, 1), 0.05)
-			stored_energy -= min(stored_energy, 1)
-			$CanvasLayer/EnergyBar.size.x = stored_energy*100
-			get_tree().current_scene.add_child(shockwave)
+	if Input.is_action_just_pressed("Hit") and !blocking:
+		$PlayerArt._click()
 
 func rotateToTarget(target, delta):
 	var direction = (target - global_position)

@@ -33,9 +33,9 @@ func _move(delta):
 		rotateToTarget(player, delta)
 		#rotation_degrees += 90
 		velocity = (player.global_position - global_position).normalized() * speed
+		velocity -= softBodyPush * speed
 		if(slow):
 			velocity = velocity * 0.5
-		velocity -= softBodyPush * speed
 		move_and_slide()
 		
 		if(dist(player, self) <= 250) and can_attack:

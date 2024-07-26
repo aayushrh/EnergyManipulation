@@ -24,6 +24,7 @@ var list = {
 func _ready():
 	for i in list:
 		var inputButton = InputButton.instantiate()
+		inputButton.action = list[i]
 		var inputLabel = inputButton.find_child(\"Input\")
 		var actionLabel = inputButton.find_child(\"Action\")
 		inputLabel.text = i

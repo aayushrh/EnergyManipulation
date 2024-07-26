@@ -1,156 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://mpo3uyl0648p"]
+[gd_scene load_steps=6 format=3 uid="uid://mpo3uyl0648p"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
-[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_cijjh"]
-[ext_resource type="Texture2D" uid="uid://d111rb48bkbqo" path="res://Art/Ethan.png" id="3_6x1qk"]
-[ext_resource type="Texture2D" uid="uid://bsje8ww5cxxb0" path="res://Art/Kyle.png" id="4_l7f5n"]
-[ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/Aayush.png" id="5_firqd"]
-[ext_resource type="Texture2D" uid="uid://b5d0fv1jnsox4" path="res://Art/Mathavan.png" id="6_gs2oo"]
+[ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7140r"]
 radius = 38.0132
 
-[sub_resource type="Animation" id="Animation_fwvlo"]
-resource_name = "Block"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Art/RArm:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(20, -20), Vector2(-15, -25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Art/LArm:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-20, -20), Vector2(15, -25)]
-}
-
-[sub_resource type="Animation" id="Animation_72mav"]
-resource_name = "LeftPunch"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Art/LArm:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-20, -20), Vector2(-20, -50), Vector2(-20, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Art:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [3.48787e-16, 0.349066, 3.48787e-16]
-}
-
-[sub_resource type="Animation" id="Animation_e1mkl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Art/RArm:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(20, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Art/LArm:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-20, -20)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Art:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.349066]
-}
-
-[sub_resource type="Animation" id="Animation_kg8yj"]
-resource_name = "RightPunch"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Art/RArm:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(20, -20), Vector2(20, -50), Vector2(20, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Art:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [3.48787e-16, -0.349066, 3.48787e-16]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eifdg"]
-_data = {
-"Block": SubResource("Animation_fwvlo"),
-"LeftPunch": SubResource("Animation_72mav"),
-"RESET": SubResource("Animation_e1mkl"),
-"RightPunch": SubResource("Animation_kg8yj")
-}
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_u8cgp")
-lightest = ExtResource("2_cijjh")
-lighter = ExtResource("3_6x1qk")
-light = ExtResource("4_l7f5n")
-dark = ExtResource("5_firqd")
-darkest = ExtResource("6_gs2oo")
-skinTone = "Dark"
 ACCELERATION = 50.0
 FRICTION = 0.9
 TOPSPEED = 500.0
@@ -160,32 +19,9 @@ DASHTIME = 0.1
 Shockwave = ExtResource("9_613qk")
 Afterimage = ExtResource("10_boodf")
 
-[node name="Art" type="Node2D" parent="."]
-rotation = -0.349066
-
-[node name="RArm" type="Sprite2D" parent="Art"]
-position = Vector2(20, -20)
-scale = Vector2(0.075, 0.075)
-texture = ExtResource("2_cijjh")
-
-[node name="LArm" type="Sprite2D" parent="Art"]
-position = Vector2(-20, -20)
-scale = Vector2(0.075, 0.075)
-texture = ExtResource("2_cijjh")
-
-[node name="Body" type="Sprite2D" parent="Art"]
-rotation = -0.341083
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_cijjh")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_7140r")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_eifdg")
-}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -215,6 +51,8 @@ offset_bottom = 90.0
 
 [node name="HitRegisterTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PlayerArt" parent="." instance=ExtResource("4_1ei8s")]
 
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
 [connection signal="timeout" from="HitRegisterTimer" to="." method="_on_hit_register_timer_timeout"]

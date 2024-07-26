@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfugmqkrscero"]
 
-[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/LightestPlayer.png" id="1_3yusn"]
 [ext_resource type="Script" path="res://Enemies/enemyArt.gd" id="1_l6bng"]
+[ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_ca6vm"]
 [ext_resource type="PackedScene" uid="uid://bjdxvwof6staf" path="res://Effects/charging.tscn" id="3_c2wng"]
 
 [sub_resource type="Animation" id="Animation_j6erc"]
@@ -145,16 +145,16 @@ libraries = {
 [node name="LArm" type="Sprite2D" parent="."]
 position = Vector2(-20, -20)
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("1_3yusn")
+texture = ExtResource("2_ca6vm")
 
 [node name="RArm" type="Sprite2D" parent="."]
 position = Vector2(20, -20)
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("1_3yusn")
+texture = ExtResource("2_ca6vm")
 
 [node name="Charging" parent="RArm" instance=ExtResource("3_c2wng")]
 scale = Vector2(13.3333, 13.3333)
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_3yusn")
+texture = ExtResource("2_ca6vm")

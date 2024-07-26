@@ -2,24 +2,22 @@ extends Button
 
 var changing = false
 var prevA = ""
+var action = ""
 
 func _input(event):
-	if event is InputEventKey and changing:
-		var action = $HBoxContainer/Input.text
-		for i in InputMap.action_get_events(action):
-			InputMap.action_erase_event(action, i)
+	if (event is InputEventKey or event is InputEventMouseButton) and changing:
+		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)
+		print(event)
+		print(InputMap.action_get_events(action))
 		_not_changing()
 		$HBoxContainer/Action.text = event.as_text() + " "
 		prevA = $HBoxContainer/Action.text
-	elif event is InputEventMouseButton:
-		_not_changing()
+		accept_event()
 
 func _on_pressed():
 	if(!changing):
 		_is_changing()
-	else:
-		_not_changing()
 
 func _is_changing():
 	prevA = $HBoxContainer/Action.text

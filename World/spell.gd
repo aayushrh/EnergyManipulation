@@ -1,11 +1,9 @@
 extends Node2D
-class_name spell
+class_name SpellCard
 
-var type = [-1,-1,-1,-1]
-func _ready():
-	pass # Replace with function body.
+var type = 0
+var spellName = ""
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _init(typeI, nameI):
+	type = typeI
+	spellName = nameI

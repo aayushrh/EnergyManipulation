@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://oflqybs67ydg"]
+[gd_scene load_steps=3 format=3 uid="uid://oflqybs67ydg"]
 
 [ext_resource type="Script" path="res://World/UI/InputChangeButton.gd" id="1_w65p5"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_veb40"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(2.08165e-12, 52)
@@ -18,10 +19,12 @@ theme_override_constants/separation = 20
 
 [node name="Seperation" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_veb40")
 theme_override_font_sizes/font_size = 30
 
 [node name="Input" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_veb40")
 theme_override_font_sizes/font_size = 30
 text = "INPUT"
 
@@ -32,6 +35,7 @@ mouse_filter = 1
 
 [node name="Action" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_veb40")
 theme_override_font_sizes/font_size = 30
 text = "NONE"
 
