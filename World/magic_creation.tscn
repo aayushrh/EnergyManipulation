@@ -1,79 +1,75 @@
 [gd_scene load_steps=6 format=3 uid="uid://40bmdusc71q3"]
 
-[ext_resource type="Script" path="res://World/spell_select.gd" id="1_fa4vy"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_ho38x"]
 [ext_resource type="Script" path="res://World/magic_creation.gd" id="1_kd2ls"]
 [ext_resource type="Script" path="res://World/CardList.gd" id="4_fkw6w"]
-[ext_resource type="PackedScene" uid="uid://b1ih3khnb752" path="res://World/UI/MagicCardButton.tscn" id="5_yj351"]
+[ext_resource type="Script" path="res://World/SpellList.gd" id="6_q74it"]
+[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/UI/SpellButton.tscn" id="7_340hf"]
 
-[node name="MAGIC" type="Node2D"]
+[node name="MAGIC" type="Node2D" node_paths=PackedStringArray("element", "type", "style", "cardList")]
 script = ExtResource("1_kd2ls")
+element = NodePath("Control/Element")
+type = NodePath("Control/SpellType")
+style = NodePath("Control/Style")
+cardList = NodePath("CardSelection/Control/ScrollContainer/CardList")
 
-[node name="spell_select" type="OptionButton" parent="."]
-offset_left = 765.0
-offset_top = 1.0
-offset_right = 1149.0
-offset_bottom = 61.0
-theme_override_fonts/font = ExtResource("1_ho38x")
-text_overrun_behavior = 3
-allow_reselect = true
-script = ExtResource("1_fa4vy")
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Element2" type="Button" parent="."]
-offset_left = 735.0
-offset_top = 113.0
-offset_right = 825.0
-offset_bottom = 203.0
+[node name="Element" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 115.0
+offset_right = 624.0
+offset_bottom = 205.0
 text = "ELEMENT"
 
-[node name="Symbol2" type="Button" parent="."]
-offset_left = 570.0
-offset_top = 423.0
-offset_right = 660.0
-offset_bottom = 513.0
+[node name="Style" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 396.0
+offset_right = 458.0
+offset_bottom = 486.0
 text = "STYLE"
 
-[node name="Attribute2" type="Button" parent="."]
-offset_left = 893.0
-offset_top = 421.0
-offset_right = 983.0
-offset_bottom = 511.0
-text = "ATTRIBUTE"
+[node name="Attribute" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 691.0
+offset_top = 394.0
+offset_right = 784.0
+offset_bottom = 484.0
+text = "Attribute"
 
-[node name="SpellType" type="Button" parent="."]
-offset_left = 737.0
-offset_top = 304.0
-offset_right = 827.0
-offset_bottom = 394.0
+[node name="SpellType" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 286.0
+offset_right = 624.0
+offset_bottom = 376.0
 text = "TYPE"
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="Control"]
 z_index = -1
-position = Vector2(895, 426)
-points = PackedVector2Array(49, 49, -115, -268, -277, 47, 50, 49)
+position = Vector2(693, 399)
+points = PackedVector2Array(49, 49, -114, -233, -277, 49, 49, 49)
 
-[node name="TextEdit" type="TextEdit" parent="."]
-visible = false
-offset_left = 768.0
-offset_right = 1152.0
-offset_bottom = 60.0
-theme_override_fonts/font = ExtResource("1_ho38x")
-theme_override_font_sizes/font_size = 30
-placeholder_text = "Name"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 499.0
-offset_bottom = 645.0
+[node name="CardSelection" type="ColorRect" parent="."]
+offset_right = 350.0
+offset_bottom = 650.0
 color = Color(0.20871, 0.20871, 0.20871, 1)
 
-[node name="Control" type="Control" parent="ColorRect"]
+[node name="Control" type="Control" parent="CardSelection"]
 anchors_preset = 0
 offset_left = 13.0
 offset_top = 76.0
-offset_right = 487.0
+offset_right = 332.0
 offset_bottom = 632.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CardSelection/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,64 +77,127 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CardList" type="VBoxContainer" parent="ColorRect/Control/ScrollContainer"]
+[node name="CardList" type="VBoxContainer" parent="CardSelection/Control/ScrollContainer" node_paths=PackedStringArray("magicMenu")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 script = ExtResource("4_fkw6w")
+magicMenu = NodePath("../../../..")
 
-[node name="Button" parent="ColorRect/Control/ScrollContainer/CardList" instance=ExtResource("5_yj351")]
+[node name="SpellSelection" type="ColorRect" parent="."]
+offset_left = 804.0
+offset_top = -3.0
+offset_right = 1154.0
+offset_bottom = 647.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Control" type="Control" parent="SpellSelection"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.0
+offset_top = 76.0
+offset_right = 332.0
+offset_bottom = 632.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SpellSelection/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpellList" type="VBoxContainer" parent="SpellSelection/Control/ScrollContainer" node_paths=PackedStringArray("textEdit", "magicMenu")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("6_q74it")
+textEdit = NodePath("../../../../TextEdit")
+magicMenu = NodePath("../../../..")
+
+[node name="Button" parent="SpellSelection/Control/ScrollContainer/SpellList" instance=ExtResource("7_340hf")]
 layout_mode = 2
 
-[node name="Label" parent="ColorRect/Control/ScrollContainer/CardList/Button" index="0"]
-text = "EA SPROTS"
+[node name="AddButton" type="Button" parent="SpellSelection/Control/ScrollContainer/SpellList"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SpellSelection/Control/ScrollContainer/SpellList/AddButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.5
+offset_top = -11.5
+offset_right = 5.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_font_sizes/font_size = 50
+text = "+"
 
 [node name="Category" type="Label" parent="."]
-offset_left = 153.0
-offset_top = 4.0
-offset_right = 369.0
-offset_bottom = 56.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 165.0
+offset_top = 2.0
+offset_right = 166.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_ho38x")
 theme_override_font_sizes/font_size = 40
-text = "Category"
 
-[node name="Element" type="OptionButton" parent="."]
+[node name="Spell" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 905.0
+offset_top = 12.0
+offset_right = 1049.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_font_sizes/font_size = 40
+text = "Spells"
+
+[node name="CurrentSpell" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 572.0
+offset_top = 2.0
+offset_right = 572.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_font_sizes/font_size = 40
+text = "
+"
+
+[node name="TextEdit" type="TextEdit" parent="."]
 visible = false
-offset_left = 733.0
-offset_top = 122.0
-offset_right = 826.0
-offset_bottom = 210.0
-allow_reselect = true
+offset_left = 818.0
+offset_top = 69.0
+offset_right = 1134.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_font_sizes/font_size = 30
 
-[node name="Symbol" type="OptionButton" parent="."]
-visible = false
-offset_left = 574.0
-offset_top = 428.0
-offset_right = 660.0
-offset_bottom = 522.0
-allow_reselect = true
-
-[node name="Attribute" type="OptionButton" parent="."]
-visible = false
-offset_left = 895.0
-offset_top = 426.0
-offset_right = 984.0
-offset_bottom = 519.0
-allow_reselect = true
-
-[node name="Spell type" type="OptionButton" parent="."]
-visible = false
-offset_left = 735.0
-offset_top = 320.0
-offset_right = 825.0
-offset_bottom = 413.0
-allow_reselect = true
-
-[connection signal="item_selected" from="spell_select" to="spell_select" method="_on_item_selected"]
-[connection signal="pressed" from="Element2" to="." method="_on_element_2_pressed"]
-[connection signal="pressed" from="Symbol2" to="." method="_on_symbol_2_pressed"]
-[connection signal="pressed" from="Attribute2" to="." method="_on_attribute_2_pressed"]
-[connection signal="pressed" from="SpellType" to="." method="_on_spell_type_pressed"]
-
-[editable path="ColorRect/Control/ScrollContainer/CardList/Button"]
+[connection signal="pressed" from="Control/Element" to="." method="_on_element_2_pressed"]
+[connection signal="pressed" from="Control/Style" to="." method="_on_symbol_2_pressed"]
+[connection signal="pressed" from="Control/Attribute" to="." method="_on_attribute_2_pressed"]
+[connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
+[connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]

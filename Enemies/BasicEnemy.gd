@@ -8,12 +8,14 @@ var slow = false
 @export var cooldownAttack : float
 @export var speed : int
 @export var ROTATIONSPEED : float
-
 @export var Shockwave : PackedScene
 
+@export var art : Node2D
+@export var softBody : Area2D
+
 func _ready():
-	$EnemyArt.finishCharge.connect(_finishCharge)
-	$EnemyArt.hit.connect(_shockwave)
+	art.finishCharge.connect(_finishCharge)
+	art.hit.connect(_shockwave)
 
 func _finishCharge():
 	slow = false
@@ -47,13 +49,11 @@ func _move(delta):
 
 func rotateToTarget(target, delta):
 	var direction = (target.global_position - global_position)
-	rotation_degrees -= 100
-	var angleTo = transform.x.angle_to(direction)
-	rotation_degrees += 100
+	var angleTo = transform.x.angle_to(direction) + PI/2
 	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
 func _punch():
-	$EnemyArt._startPunch()
+	art._startPunch()
 
 func _on_vision_body_entered(body):
 	player = body

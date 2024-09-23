@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqatyjcy8scuy"]
+
+[ext_resource type="Script" path="res://World/UI/SpellButton.gd" id="1_lte4g"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rhipx"]
+
+[node name="Button" type="Button" node_paths=PackedStringArray("nameText")]
+custom_minimum_size = Vector2(0, 40)
+script = ExtResource("1_lte4g")
+nameText = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_rhipx")
+theme_override_font_sizes/font_size = 32
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

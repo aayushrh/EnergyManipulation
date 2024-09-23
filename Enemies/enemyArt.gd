@@ -3,15 +3,18 @@ extends Node2D
 signal hit
 signal finishCharge
 
+@export var particles : Node2D
+@export var animPlayer : AnimationPlayer
+
 func _startPunch():
-	$AnimationPlayer.play("Punch")
+	animPlayer.play("Punch")
 
 func _start_Charge():
-	$RArm/Charging.emitting = true
+	particles.emitting = true
 
 func _finish_Charge():
 	finishCharge.emit()
-	$RArm/Charging.emitting = false
+	particles.emitting = false
 
 func _hit():
 	hit.emit()

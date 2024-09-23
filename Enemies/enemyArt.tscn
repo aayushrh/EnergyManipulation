@@ -134,8 +134,10 @@ _data = {
 "RESET": SubResource("Animation_fxsu2")
 }
 
-[node name="EnemyArt" type="Node2D"]
+[node name="EnemyArt" type="Node2D" node_paths=PackedStringArray("particles", "animPlayer")]
 script = ExtResource("1_l6bng")
+particles = NodePath("RArm/Charging")
+animPlayer = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
