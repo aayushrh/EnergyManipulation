@@ -36,6 +36,21 @@ func _inputCard(card):
 					selectedSpell.type = card
 			Global.spellList.append(selectedSpell)
 			cardList._reload(card.type)
+		else:
+			Global.magicCards.remove_at(Global.magicCards.find(card))
+			Global.spellList.remove_at(Global.spellList.find(selectedSpell))
+			match card.type:
+				0:
+					Global.magicCards.append(selectedSpell.element)
+					selectedSpell.element = card
+				1:
+					Global.magicCards.append(selectedSpell.style)
+					selectedSpell.style = card
+				2:
+					Global.magicCards.append(selectedSpell.type)
+					selectedSpell.type = card
+			Global.spellList.append(selectedSpell)
+			cardList._reload(card.type)
 		_changeSpell(selectedSpell)
 		
 
