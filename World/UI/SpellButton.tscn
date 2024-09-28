@@ -6,13 +6,23 @@
 [node name="Button" type="Button" node_paths=PackedStringArray("nameText")]
 custom_minimum_size = Vector2(0, 40)
 script = ExtResource("1_lte4g")
-nameText = NodePath("Label")
+nameText = NodePath("HBoxContainer/Label")
 
-[node name="Label" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rhipx")
 theme_override_font_sizes/font_size = 32
 
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 39)
+layout_mode = 2
+size_flags_vertical = 4
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -26,7 +26,7 @@ func _process(delta):
 		for i in Global.spellList:
 			if(nname == i.spellName):
 				found = true
-		if !found and nname.length() < 18:
+		if !found and nname.length() < 15:
 			Global.spellList.append(Spell.new(nname))
 			textEdit.visible = false
 			textEdit.text = ""

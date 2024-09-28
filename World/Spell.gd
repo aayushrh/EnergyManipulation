@@ -6,6 +6,7 @@ var style = null
 var attributes = null
 var type = null
 var spellName = ""
+var binding = ""
 
 func _init(namen):
 	spellName = namen
