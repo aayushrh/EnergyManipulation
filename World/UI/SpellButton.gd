@@ -8,7 +8,10 @@ var changing = false
 
 func _initialize():
 	nameText.text = spell.spellName
-	$HBoxContainer/Button.text = "?"
+	if(spell.binding == null):
+		$HBoxContainer/Button.text = "?"
+	else:
+		$HBoxContainer/Button.text = (char)(spell.binding)
 
 func _on_pressed():
 	magicMenu._changeSpell(spell)

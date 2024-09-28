@@ -21,12 +21,14 @@ func _on_add_button_pressed():
 
 func _process(delta):
 	if(adding and Input.is_action_just_pressed("enter")):
+		textEdit.undo()
 		var nname = textEdit.text
 		var found = false
 		for i in Global.spellList:
 			if(nname == i.spellName):
 				found = true
 		if !found and nname.length() < 15:
+			adding = false
 			Global.spellList.append(Spell.new(nname))
 			textEdit.visible = false
 			textEdit.text = ""

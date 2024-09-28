@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://40bmdusc71q3"]
+[gd_scene load_steps=7 format=3 uid="uid://40bmdusc71q3"]
 
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_ho38x"]
 [ext_resource type="Script" path="res://World/magic_creation.gd" id="1_kd2ls"]
 [ext_resource type="Script" path="res://World/CardList.gd" id="4_fkw6w"]
+[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/UI/MagicSettings.tscn" id="6_0whim"]
 [ext_resource type="Script" path="res://World/SpellList.gd" id="6_q74it"]
 [ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/UI/SpellButton.tscn" id="7_340hf"]
 
@@ -36,26 +37,41 @@ offset_right = 458.0
 offset_bottom = 486.0
 text = "STYLE"
 
-[node name="Attribute" type="Button" parent="Control"]
+[node name="SpellType" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 691.0
 offset_top = 394.0
-offset_right = 784.0
+offset_right = 781.0
 offset_bottom = 484.0
-text = "Attribute"
-
-[node name="SpellType" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 534.0
-offset_top = 286.0
-offset_right = 624.0
-offset_bottom = 376.0
 text = "TYPE"
 
 [node name="Line2D" type="Line2D" parent="Control"]
 z_index = -1
 position = Vector2(693, 399)
 points = PackedVector2Array(49, 49, -114, -233, -277, 49, 49, 49)
+
+[node name="CurrentSpell" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 572.0
+offset_top = 0.5
+offset_right = 572.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_font_sizes/font_size = 40
+
+[node name="Settings" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 544.0
+offset_right = 773.0
+offset_bottom = 602.0
+theme_override_font_sizes/font_size = 20
+text = "SETTINGS"
 
 [node name="CardSelection" type="ColorRect" parent="."]
 offset_right = 350.0
@@ -119,6 +135,7 @@ magicMenu = NodePath("../../../..")
 
 [node name="Button" parent="SpellSelection/Control/ScrollContainer/SpellList" instance=ExtResource("7_340hf")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="AddButton" type="Button" parent="SpellSelection/Control/ScrollContainer/SpellList"]
 custom_minimum_size = Vector2(0, 40)
@@ -172,21 +189,6 @@ theme_override_fonts/font = ExtResource("1_ho38x")
 theme_override_font_sizes/font_size = 40
 text = "Spells"
 
-[node name="CurrentSpell" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 572.0
-offset_top = 2.0
-offset_right = 572.0
-offset_bottom = 54.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ho38x")
-theme_override_font_sizes/font_size = 40
-text = "
-"
-
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
 offset_left = 818.0
@@ -196,8 +198,13 @@ offset_bottom = 110.0
 theme_override_fonts/font = ExtResource("1_ho38x")
 theme_override_font_sizes/font_size = 30
 
+[node name="MagicSettings" parent="." node_paths=PackedStringArray("MagicMenu", "SpellList") instance=ExtResource("6_0whim")]
+visible = false
+MagicMenu = NodePath("..")
+SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
+
 [connection signal="pressed" from="Control/Element" to="." method="_on_element_2_pressed"]
 [connection signal="pressed" from="Control/Style" to="." method="_on_symbol_2_pressed"]
-[connection signal="pressed" from="Control/Attribute" to="." method="_on_attribute_2_pressed"]
 [connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]

@@ -14,7 +14,7 @@ func _changeSpell(nspell):
 	ifNullDefault("Element", element, nspell.element)
 	ifNullDefault("Style", style, nspell.style)
 	ifNullDefault("Type", type, nspell.type)
-	$CurrentSpell.text = selectedSpell.spellName
+	$Control/CurrentSpell.text = selectedSpell.spellName
 
 func ifNullDefault(default, change, check):
 	if(check != null):
@@ -25,8 +25,9 @@ func ifNullDefault(default, change, check):
 func _inputCard(card):
 	if selectedSpell != null:
 		if (card.type == 0 and selectedSpell.element == null) or (card.type == 1 and selectedSpell.style == null) or (card.type == 2 and selectedSpell.type == null):
+			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
-			Global.spellList.remove_at(Global.spellList.find(selectedSpell))
+			Global.spellList.remove_at(location)
 			match card.type:
 				0:
 					selectedSpell.element = card
@@ -34,22 +35,7 @@ func _inputCard(card):
 					selectedSpell.style = card
 				2:
 					selectedSpell.type = card
-			Global.spellList.append(selectedSpell)
-			cardList._reload(card.type)
-		else:
-			Global.magicCards.remove_at(Global.magicCards.find(card))
-			Global.spellList.remove_at(Global.spellList.find(selectedSpell))
-			match card.type:
-				0:
-					Global.magicCards.append(selectedSpell.element)
-					selectedSpell.element = card
-				1:
-					Global.magicCards.append(selectedSpell.style)
-					selectedSpell.style = card
-				2:
-					Global.magicCards.append(selectedSpell.type)
-					selectedSpell.type = card
-			Global.spellList.append(selectedSpell)
+			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
 		_changeSpell(selectedSpell)
 		
@@ -66,6 +52,9 @@ func reset(nselected, changing, type):
 		return true
 	_change(type)
 	return false
+
+func control_invisible():
+	$Control.visible=false
 
 func _on_element_2_pressed():
 	if(reset("Element", selectedSpell.element, 0)):
@@ -88,3 +77,8 @@ func _on_spell_type_pressed():
 		selectedSpell.type = null
 		_changeSpell(selectedSpell)
 		_change(2)
+
+
+func _on_button_pressed():
+	$MagicSettings.visible = true
+	$MagicSettings.on_open()

@@ -1,0 +1,69 @@
+extends Control
+
+@export var Title: Label
+@export var Size: HSlider
+@export var Power: HSlider
+@export var Stealth: HSlider
+@export var MagicMenu: Node2D
+@export var Name: TextEdit
+@export var SpellList: VBoxContainer
+@export var Keybind: Button
+
+var changing = false
+var keybind = ""
+
+func on_open():
+	Name.text = MagicMenu.selectedSpell.spellName
+	if(!(MagicMenu.selectedSpell.attributes == null)):
+		Size.value = (MagicMenu.selectedSpell.attributes.size-1)*100
+		Power.value = (MagicMenu.selectedSpell.attributes.power-1)*100
+		Stealth.value = (MagicMenu.selectedSpell.attributes.stealth-1)*100
+	Title.text = Name.text
+	keybind = (char)(MagicMenu.selectedSpell.binding)
+	Keybind.text = keybind
+
+func _on_exit_pressed():
+	var location = Global.spellList.find(MagicMenu.selectedSpell)
+	Global.spellList.remove_at(location)
+	MagicMenu.selectedSpell.attributes = Attributes.new(Size.value,Power.value,Stealth.value)
+	MagicMenu.selectedSpell.spellName = Name.text
+	MagicMenu.selectedSpell.binding = keybind
+	MagicMenu._changeSpell(MagicMenu.selectedSpell)
+	Global.spellList.insert(location,MagicMenu.selectedSpell)
+	SpellList.reload()
+	visible=false
+
+func _process(delta):
+	if(Input.is_action_just_pressed("enter")):
+		var found = false
+		Name.visible=false
+		Name.visible=true
+		Name.undo()
+		for i in Global.spellList:
+			if(Name.text == i.spellName):
+				found = true
+		if found or Name.text.length() >= 15:
+			Name.text = MagicMenu.selectedSpell.spellName
+
+
+func _on_deletion_pressed():
+	Global.spellList.remove_at(Global.spellList.find(MagicMenu.selectedSpell))
+	SpellList.reload()
+	MagicMenu.control_invisible()
+	if(MagicMenu.selectedSpell.element!=null):
+		Global.magicCards.append(MagicMenu.selectedSpell.element)
+	if(MagicMenu.selectedSpell.style!=null):
+		Global.magicCards.append(MagicMenu.selectedSpell.style)
+	if(MagicMenu.selectedSpell.type!=null):
+		Global.magicCards.append(MagicMenu.selectedSpell.type)
+	visible=false
+
+func _input(event):
+	if(event is InputEventKey and event.pressed and changing):
+		keybind = (event.keycode)
+		Keybind.text = (char)(keybind)
+		changing = false
+		
+
+func _on_keybind_pressed():
+	changing = true
