@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqatyjcy8scuy"]
 
-[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellButton.gd" id="1_foj2d"]
-[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_x2qx1"]
+[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellButton.gd" id="1_v15du"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_p8sp4"]
 
 [node name="Button" type="Button" node_paths=PackedStringArray("nameText")]
 custom_minimum_size = Vector2(0, 40)
-script = ExtResource("1_foj2d")
+script = ExtResource("1_v15du")
 nameText = NodePath("HBoxContainer/Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -16,7 +16,7 @@ theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_x2qx1")
+theme_override_fonts/font = ExtResource("2_p8sp4")
 theme_override_font_sizes/font_size = 32
 
 [node name="Button" type="Button" parent="HBoxContainer"]

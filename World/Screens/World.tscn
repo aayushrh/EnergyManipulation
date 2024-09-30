@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=7 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
+[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 [ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="4_gl31p"]
-
+[ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://World/Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dcdsc")
@@ -14,9 +15,20 @@ position = Vector2(561, 300)
 ROTATIONSPEED = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="InputOptions" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InputOptions"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +36,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.190762, 0.190762, 0.190762, 0.678431)
 
-[node name="InputChangeSystem" parent="CanvasLayer" instance=ExtResource("4_eyl0v")]
+[node name="InputChangeSystem" parent="CanvasLayer/InputOptions" instance=ExtResource("4_eyl0v")]
+layout_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+offset_left = 977.0
+offset_top = 423.0
+offset_right = 1127.0
+offset_bottom = 623.0
+
+[node name="SpellListUI" type="VBoxContainer" parent="CanvasLayer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 2
+script = ExtResource("4_7sx84")
+
+[node name="SpellUI" parent="CanvasLayer/ScrollContainer/SpellListUI" instance=ExtResource("5_cmnpc")]
+layout_mode = 2
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_gl31p")]
 position = Vector2(800, 465)

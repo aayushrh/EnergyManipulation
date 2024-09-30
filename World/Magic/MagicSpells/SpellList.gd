@@ -5,7 +5,7 @@ var adding = false
 @export var textEdit : TextEdit
 @export var magicMenu : Node2D
 
-@onready var spellButton = preload("res://World/UI/SpellButton.tscn")
+@onready var spellButton = preload("res://World/Magic/MagicSpells/SpellButton.tscn")
 
 func _ready():
 	reload()
