@@ -10,7 +10,7 @@ extends Control
 @export var Keybind: Button
 
 var changing = false
-var keybind = ""
+var keybind = 0
 
 func on_open():
 	Name.text = MagicMenu.selectedSpell.spellName
@@ -19,15 +19,19 @@ func on_open():
 		Power.value = (MagicMenu.selectedSpell.attributes.power-1)*100
 		Stealth.value = (MagicMenu.selectedSpell.attributes.stealth-1)*100
 	Title.text = Name.text
-	keybind = (char)(MagicMenu.selectedSpell.binding)
-	Keybind.text = keybind
+	if MagicMenu.selectedSpell.binding != null:
+		keybind = (char)(MagicMenu.selectedSpell.binding)
+		Keybind.text = keybind
+	else:
+		Keybind.text = "Create new Keybind..."
 
 func _on_exit_pressed():
 	var location = Global.spellList.find(MagicMenu.selectedSpell)
 	Global.spellList.remove_at(location)
 	MagicMenu.selectedSpell.attributes = Attributes.new(Size.value,Power.value,Stealth.value)
 	MagicMenu.selectedSpell.spellName = Name.text
-	MagicMenu.selectedSpell.binding = keybind
+	if keybind == 0:
+		MagicMenu.selectedSpell.binding = keybind
 	MagicMenu._changeSpell(MagicMenu.selectedSpell)
 	Global.spellList.insert(location,MagicMenu.selectedSpell)
 	SpellList.reload()

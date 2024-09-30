@@ -7,6 +7,7 @@ var changing = false
 @export var nameText : Label
 
 func _initialize():
+	$HBoxContainer/Button.visible = true
 	nameText.text = spell.spellName
 	if(spell.binding == null):
 		$HBoxContainer/Button.text = "?"

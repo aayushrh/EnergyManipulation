@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1ih3khnb752"]
 
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rntnr"]
-[ext_resource type="Script" path="res://World/UI/MagicCardButton.gd" id="1_yqehn"]
+[ext_resource type="Script" path="res://World/Magic/MagicCards/MagicCardButton.gd" id="1_yqehn"]
+
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(0, 40)

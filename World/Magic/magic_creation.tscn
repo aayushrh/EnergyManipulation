@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://40bmdusc71q3"]
 
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_ho38x"]
-[ext_resource type="Script" path="res://World/magic_creation.gd" id="1_kd2ls"]
-[ext_resource type="Script" path="res://World/CardList.gd" id="4_fkw6w"]
-[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/UI/MagicSettings.tscn" id="6_0whim"]
-[ext_resource type="Script" path="res://World/SpellList.gd" id="6_q74it"]
-[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/UI/SpellButton.tscn" id="7_340hf"]
+[ext_resource type="Script" path="res://World/Magic/magic_creation.gd" id="1_kd2ls"]
+[ext_resource type="Script" path="res://World/Magic/MagicCards/CardList.gd" id="4_fkw6w"]
+[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/Magic/MagicSettings.tscn" id="6_0whim"]
+[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellList.gd" id="6_q74it"]
+[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/Magic/MagicSpells/SpellButton.tscn" id="7_340hf"]
 
 [node name="MAGIC" type="Node2D" node_paths=PackedStringArray("element", "type", "style", "cardList")]
 script = ExtResource("1_kd2ls")
@@ -15,7 +15,6 @@ style = NodePath("Control/Style")
 cardList = NodePath("CardSelection/Control/ScrollContainer/CardList")
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -23,9 +22,9 @@ offset_bottom = 40.0
 
 [node name="Element" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 534.0
+offset_left = 529.0
 offset_top = 115.0
-offset_right = 624.0
+offset_right = 619.0
 offset_bottom = 205.0
 text = "ELEMENT"
 
@@ -48,7 +47,7 @@ text = "TYPE"
 [node name="Line2D" type="Line2D" parent="Control"]
 z_index = -1
 position = Vector2(693, 399)
-points = PackedVector2Array(49, 49, -114, -233, -277, 49, 49, 49)
+points = PackedVector2Array(49, 49, -119, -233, -277, 49, 49, 49, -119, -233)
 
 [node name="CurrentSpell" type="Label" parent="Control"]
 layout_mode = 1
