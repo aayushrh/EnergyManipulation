@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var selected = ""
 var selectedSpell = null
@@ -37,6 +37,23 @@ func _inputCard(card):
 					selectedSpell.type = card
 			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
+		else:
+			Global.magicCards.append(selectedSpell)
+			var location = Global.spellList.find(selectedSpell)
+			Global.magicCards.remove_at(Global.magicCards.find(card))
+			Global.spellList.remove_at(location)
+			match card.type:
+				0:
+					Global.magicCards.append(selectedSpell.element)
+					selectedSpell.element = card
+				1:
+					Global.magicCards.append(selectedSpell.style)
+					selectedSpell.style = card
+				2:
+					Global.magicCards.append(selectedSpell.type)
+					selectedSpell.type = card
+			Global.spellList.insert(location, selectedSpell)
+			cardList._reload(card.type)
 		_changeSpell(selectedSpell)
 		
 
@@ -56,21 +73,21 @@ func reset(nselected, changing, type):
 func control_invisible():
 	$Control.visible=false
 
-func _on_element_2_pressed():
+func _on_attribute_2_pressed():
+	selected = "Attribute"
+	_change(-1)
+
+func _on_element_pressed():
 	if(reset("Element", selectedSpell.element, 0)):
 		selectedSpell.element = null
 		_changeSpell(selectedSpell)
 		_change(0)
 
-func _on_symbol_2_pressed():
+func _on_style_pressed():
 	if(reset("Style", selectedSpell.style, 1)):
 		selectedSpell.style = null
 		_changeSpell(selectedSpell)
 		_change(1)
-
-func _on_attribute_2_pressed():
-	selected = "Attribute"
-	_change(-1)
 
 func _on_spell_type_pressed():
 	if(reset("Type", selectedSpell.type, 2)):
@@ -78,7 +95,6 @@ func _on_spell_type_pressed():
 		_changeSpell(selectedSpell)
 		_change(2)
 
-
-func _on_button_pressed():
+func _on_settings_pressed():
 	$MagicSettings.visible = true
 	$MagicSettings.on_open()

@@ -1,18 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://40bmdusc71q3"]
+[gd_scene load_steps=7 format=3 uid="uid://bllickk0pk5b8"]
 
-[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_ho38x"]
-[ext_resource type="Script" path="res://World/Magic/magic_creation.gd" id="1_kd2ls"]
-[ext_resource type="Script" path="res://World/Magic/MagicCards/CardList.gd" id="4_fkw6w"]
-[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/Magic/MagicSettings.tscn" id="6_0whim"]
-[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellList.gd" id="6_q74it"]
-[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/Magic/MagicSpells/SpellButton.tscn" id="7_340hf"]
+[ext_resource type="Script" path="res://World/Magic/MagicCreationMenu.gd" id="1_ovg3u"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_578rg"]
+[ext_resource type="Script" path="res://World/Magic/MagicCards/CardList.gd" id="3_d1bvh"]
+[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellList.gd" id="4_xl77e"]
+[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/Magic/MagicSpells/SpellButton.tscn" id="5_a46rx"]
+[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/Magic/MagicSettings.tscn" id="6_tqnvs"]
 
-[node name="MAGIC" type="Node2D" node_paths=PackedStringArray("element", "type", "style", "cardList")]
-script = ExtResource("1_kd2ls")
+[node name="Magic" type="Control" node_paths=PackedStringArray("element", "type", "style", "cardList")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ovg3u")
 element = NodePath("Control/Element")
 type = NodePath("Control/SpellType")
 style = NodePath("Control/Style")
 cardList = NodePath("CardSelection/Control/ScrollContainer/CardList")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.192157, 0.192157, 0.713726)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -54,13 +69,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 572.0
-offset_top = 0.5
-offset_right = 572.0
-offset_bottom = 52.5
+offset_left = 576.0
+offset_top = 15.0
+offset_right = 537.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 40
 
 [node name="Settings" type="Button" parent="Control"]
@@ -73,6 +88,7 @@ theme_override_font_sizes/font_size = 20
 text = "SETTINGS"
 
 [node name="CardSelection" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 350.0
 offset_bottom = 650.0
 color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -97,10 +113,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
-script = ExtResource("4_fkw6w")
+script = ExtResource("3_d1bvh")
 magicMenu = NodePath("../../../..")
 
 [node name="SpellSelection" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 804.0
 offset_top = -3.0
 offset_right = 1154.0
@@ -128,11 +145,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
-script = ExtResource("6_q74it")
+script = ExtResource("4_xl77e")
 textEdit = NodePath("../../../../TextEdit")
 magicMenu = NodePath("../../../..")
 
-[node name="Button" parent="SpellSelection/Control/ScrollContainer/SpellList" instance=ExtResource("7_340hf")]
+[node name="Button" parent="SpellSelection/Control/ScrollContainer/SpellList" instance=ExtResource("5_a46rx")]
 layout_mode = 2
 focus_mode = 0
 
@@ -153,57 +170,62 @@ offset_right = 5.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 50
 text = "+"
 
 [node name="Category" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 165.0
-offset_top = 2.0
-offset_right = 166.0
-offset_bottom = 54.0
+offset_left = -401.0
+offset_top = -309.0
+offset_right = -401.0
+offset_bottom = -257.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 40
+text = "
+"
 
 [node name="Spell" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 905.0
-offset_top = 12.0
-offset_right = 1049.0
-offset_bottom = 64.0
+offset_left = 331.0
+offset_top = -309.0
+offset_right = 475.0
+offset_bottom = -257.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 40
 text = "Spells"
 
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 818.0
 offset_top = 69.0
 offset_right = 1134.0
 offset_bottom = 110.0
-theme_override_fonts/font = ExtResource("1_ho38x")
+theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 30
 
-[node name="MagicSettings" parent="." node_paths=PackedStringArray("MagicMenu", "SpellList") instance=ExtResource("6_0whim")]
+[node name="MagicSettings" parent="." node_paths=PackedStringArray("MagicMenu", "SpellList") instance=ExtResource("6_tqnvs")]
 visible = false
 MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
-[connection signal="pressed" from="Control/Element" to="." method="_on_element_2_pressed"]
-[connection signal="pressed" from="Control/Style" to="." method="_on_symbol_2_pressed"]
+[connection signal="pressed" from="Control/Element" to="." method="_on_element_pressed"]
+[connection signal="pressed" from="Control/Style" to="." method="_on_style_pressed"]
 [connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
-[connection signal="pressed" from="Control/Settings" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]

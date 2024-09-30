@@ -4,7 +4,7 @@ extends Control
 @export var Size: HSlider
 @export var Power: HSlider
 @export var Stealth: HSlider
-@export var MagicMenu: Node2D
+@export var MagicMenu: Control
 @export var Name: TextEdit
 @export var SpellList: VBoxContainer
 @export var Keybind: Button

@@ -3,7 +3,7 @@ extends VBoxContainer
 var adding = false
 
 @export var textEdit : TextEdit
-@export var magicMenu : Node2D
+@export var magicMenu : Control
 
 @onready var spellButton = preload("res://World/Magic/MagicSpells/SpellButton.tscn")
 

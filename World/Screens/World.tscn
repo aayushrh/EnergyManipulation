@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=8 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
+[ext_resource type="PackedScene" uid="uid://bllickk0pk5b8" path="res://World/Magic/MagicCreationMenu.tscn" id="3_pl71l"]
 [ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 [ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="4_gl31p"]
@@ -16,28 +17,15 @@ ROTATIONSPEED = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="InputOptions" type="Control" parent="CanvasLayer"]
+[node name="Magic" parent="CanvasLayer" instance=ExtResource("3_pl71l")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InputOptions"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.190762, 0.190762, 0.190762, 0.678431)
-
-[node name="InputChangeSystem" parent="CanvasLayer/InputOptions" instance=ExtResource("4_eyl0v")]
-layout_mode = 1
+[node name="InputChangeSystem" parent="CanvasLayer" instance=ExtResource("4_eyl0v")]
+visible = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 offset_left = 977.0

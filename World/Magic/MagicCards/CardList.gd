@@ -1,8 +1,8 @@
 extends VBoxContainer
 
-@onready var MagicButton = preload("res://World/UI/MagicCardButton.tscn")
+@onready var MagicButton = preload("res://World/Magic/MagicCards/MagicCardButton.tscn")
 
-@export var magicMenu : Node2D
+@export var magicMenu : Control
 		
 func _reload(typeShow):
 	for i in get_children():
