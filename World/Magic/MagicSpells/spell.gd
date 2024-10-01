@@ -10,3 +10,109 @@ var binding = null
 
 func _init(namen):
 	spellName = namen
+
+func getcd():
+	var cd = 0
+	if(Constants.isValid(element)):
+		match(element.spellName.to_lower()):
+			"fire", "water", "electric", "light", "dark":
+				cd += 3
+			"nature":
+				cd += 5
+	if(Constants.isValid(style)):
+		match(style.spellName.to_lower()):
+			"dragon", "rabbit", "horse":
+				cd += 5
+			"boar", "monkey":
+				cd += 3
+			"rat":
+				cd += 1
+	if(Constants.isValid(type)):
+		match(style.spellName.to_lower()):
+			"blast":
+				cd += 1
+			"beam":
+				cd += 3
+			"shield":
+				cd += 10
+			"explosion":
+				cd += 4
+			"placed explosion":
+				cd += 6
+			"aura":
+				cd += 30
+	return cd
+
+#perfect block = 10 mana
+func initcost():
+	var cost = 0
+	if(Constants.isValid(element)):
+		match(element.spellName.to_lower()):
+			"water":
+				cost += 1
+			"fire", "electric", "light", "dark":
+				cost += 1.5
+			"nature":
+				cost += 3
+	if(Constants.isValid(style)):
+		match(style.spellName.to_lower()):
+			"dragon", "rabbit":
+				cost += 3
+			"horse":
+				cost -= 2
+			"boar", "monkey":
+				cost += 1
+			"rat":
+				cost += 0.5
+	if(Constants.isValid(type)):
+		match(style.spellName.to_lower()):
+			"blast":
+				cost += 1
+			"beam":
+				cost += 3
+			"shield":
+				cost += 5
+			"explosion":
+				cost += 10
+			"placed explosion":
+				cost += 15
+			"aura":
+				cost += 20
+	return cost
+
+#cost per second, 5 seconds max charge
+func contcost():
+	var cost = 0
+	"""if(Constants.isValid(element)):
+		match(element.spellName.to_lower()):
+			"water":
+				cost += 1
+			"fire", "electric", "light", "dark":
+				cost += 1.5
+			"nature":
+				cost += 3"""
+	if(Constants.isValid(style)):
+		match(style.spellName.to_lower()):
+			"dragon", "rabbit":
+				cost += 0
+			"horse":
+				cost -= 0.5
+			"boar", "monkey":
+				cost += 0
+			"rat":
+				cost += 0
+	if(Constants.isValid(type)):
+		match(style.spellName.to_lower()):
+			"blast":
+				cost += 1
+			"beam":
+				cost += 4
+			"shield":
+				cost += 10
+			"explosion":
+				cost += 3
+			"placed explosion":
+				cost += 5
+			"aura":
+				cost += 100
+	return cost

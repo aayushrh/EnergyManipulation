@@ -160,7 +160,7 @@ func _on_hit_register_timer_timeout():
 	print("damage: " + str(dmgTaken * (1-dmgRed)))
 	print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
-	stored_energy += dmgTaken * dmgRed
+	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
 	if(health<0):
 		Global._change_tscn("res://MainMenu.tscn")
