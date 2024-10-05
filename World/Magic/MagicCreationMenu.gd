@@ -2,6 +2,7 @@ extends Control
 
 var selected = ""
 var selectedSpell = null
+var dontLeave = false
 
 @export var element : Button
 @export var type : Button

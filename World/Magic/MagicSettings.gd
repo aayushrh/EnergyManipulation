@@ -13,6 +13,7 @@ var changing = false
 var keybind = 0
 
 func on_open():
+	MagicMenu.dontLeave = true
 	Name.text = MagicMenu.selectedSpell.spellName
 	if(!(MagicMenu.selectedSpell.attributes == null)):
 		Size.value = (MagicMenu.selectedSpell.attributes.size-1)*100
@@ -26,6 +27,7 @@ func on_open():
 		Keybind.text = "Create new Keybind..."
 
 func _on_exit_pressed():
+	MagicMenu.dontLeave = false
 	var location = Global.spellList.find(MagicMenu.selectedSpell)
 	Global.spellList.remove_at(location)
 	MagicMenu.selectedSpell.attributes = Attributes.new(Size.value,Power.value,Stealth.value)

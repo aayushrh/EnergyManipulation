@@ -17,6 +17,7 @@ func _on_add_button_pressed():
 	var button = spellButton.instantiate()
 	add_child(button)
 	move_child(button, 0)
+	magicMenu.dontLeave = true
 	#Global.spellList.append()
 
 func _process(delta):
@@ -33,6 +34,7 @@ func _process(delta):
 			textEdit.visible = false
 			textEdit.text = ""
 			reload()
+			magicMenu.dontLeave = false
 		else:
 			textEdit.text = ""
 
