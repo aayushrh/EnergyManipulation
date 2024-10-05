@@ -18,7 +18,7 @@ script = ExtResource("1_ahfbw")
 Title = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Title")
 Size = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed")
 Power = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed")
-Stealth = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Stealth_Supreme")
+Stealth = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme")
 Name = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Renaming")
 Keybind = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind")
 
@@ -95,21 +95,24 @@ offset_top = -12.5
 offset_right = 45.0
 offset_bottom = 27.5
 theme_override_font_sizes/font_size = 20
-text = "Size
+text = "Attack Speed
 "
 
 [node name="Size_CastingSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -127.0
-offset_top = -12.5
-offset_bottom = 27.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -32.5
+offset_bottom = 7.5
 grow_horizontal = 0
+grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "Attack Speed"
+text = "Size"
 
 [node name="Power_ProjectileSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
@@ -126,42 +129,46 @@ offset_top = -12.5
 offset_right = 65.0
 offset_bottom = 27.5
 theme_override_font_sizes/font_size = 20
-text = "Power
+text = "Projectile Speed
 "
 
 [node name="Power_ProjectileSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -155.0
-offset_top = -12.5
-offset_bottom = 27.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -32.5
+offset_bottom = 7.5
 grow_horizontal = 0
+grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "Projectile Speed
+text = "Power
 "
 
-[node name="Stealth_Supreme" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Amount_Supreme" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wo8ml")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_axwco")
-min_value = -50.0
-max_value = 50.0
+min_value = 1.0
+max_value = 20.0
+value = 1.0
 
-[node name="Stealth_Supreme2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Stealth_Supreme"]
+[node name="Amount_Supreme2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 offset_top = -12.5
 offset_right = 73.0
 offset_bottom = 27.5
 theme_override_font_sizes/font_size = 20
-text = "Stealth
+text = "Amount
 "
 
-[node name="Stealth_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Stealth_Supreme"]
+[node name="Amount_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 1

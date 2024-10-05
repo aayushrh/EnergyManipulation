@@ -11,7 +11,7 @@ var cooldown = 0
 
 func _init(namen):
 	spellName = namen
-	attributes = Attributes.new(0, 0, 0)
+	attributes = Attributes.new(1, 1, 1)
 
 func resetCooldown():
 	cooldown = getcd()

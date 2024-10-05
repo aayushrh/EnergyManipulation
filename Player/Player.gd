@@ -67,14 +67,15 @@ func _draw():
 func magic_check():
 	var hit = false
 	for e in Global.spellList:
-		if Input.is_key_pressed(e.binding):
-			hit = true
-		if Input.is_key_pressed(e.binding) and !onLastTurn:
-			if(e.type != null and e.type.spellName.to_lower() == "blast"):
-				var blast = Blast.instantiate()
-				blast.player = self
-				blast.setSpell(e)
-				get_tree().current_scene.add_child(blast)
+		if e.binding != null:
+			if Input.is_key_pressed(e.binding):
+				hit = true
+			if Input.is_key_pressed(e.binding) and !onLastTurn:
+				if(e.type != null and e.type.spellName.to_lower() == "blast"):
+					var blast = Blast.instantiate()
+					blast.player = self
+					blast.setSpell(e)
+					get_tree().current_scene.add_child(blast)
 	onLastTurn = hit
 
 func dash_check():
