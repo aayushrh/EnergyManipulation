@@ -25,6 +25,7 @@ func _input(event):
 	if changing and event is InputEventKey and event.pressed:
 		Global.spellList.remove_at(Global.spellList.find(spell))
 		spell.binding = event.keycode
+		print(spell.binding)
 		$HBoxContainer/Button.text = char(event.keycode)
 		Global.spellList.append(spell)
 		changing = false

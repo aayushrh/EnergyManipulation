@@ -13,6 +13,8 @@ extends CharacterBody2D
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
 
+@onready var Blast = preload("res://World/Magic/MagicCasts/Blast.tscn")
+
 var rng = RandomNumberGenerator.new()
 var right = true
 var can_attack = true
@@ -26,15 +28,18 @@ var dmgTaken = 0
 var time_last_block = -1
 var time_last_hit = 0
 var health = 10
+var slow = false
+var onLastTurn = false
 
 func _ready():
 	$PlayerArt.hit.connect(_shockwave)
 
 func _process(delta):
 	time += delta
-	rotateToTarget(get_global_mouse_position(), delta)
 	queue_redraw()
 	if(!Global.pause and !dashing):
+		magic_check()
+		rotateToTarget(get_global_mouse_position(), delta)
 		_movement()
 		attack()
 		dash_check()
@@ -58,6 +63,19 @@ func block():
 func _draw():
 	if(blocking):
 		draw_arc(Vector2.ZERO, 50, -PI/4 - PI/8, -3*PI/4 - PI/8, 20, Color.WHITE, 5)
+
+func magic_check():
+	var hit = false
+	for e in Global.spellList:
+		if Input.is_key_pressed(e.binding):
+			hit = true
+		if Input.is_key_pressed(e.binding) and !onLastTurn:
+			if(e.type != null and e.type.spellName.to_lower() == "blast"):
+				var blast = Blast.instantiate()
+				blast.player = self
+				blast.setSpell(e)
+				get_tree().current_scene.add_child(blast)
+	onLastTurn = hit
 
 func dash_check():
 	if(Input.is_action_pressed("Dash")):
@@ -119,9 +137,9 @@ func attack():
 
 func rotateToTarget(target, delta):
 	var direction = (target - global_position)
-	rotation_degrees -= 100
+	rotation_degrees -= 90
 	var angleTo = transform.x.angle_to(direction)
-	rotation_degrees += 100
+	rotation_degrees += 90
 	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
 func _movement():
@@ -150,16 +168,18 @@ func _dmgRed(time):
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
 	return 0
 	
+func doneCasting():
+	slow = false
 
 func _on_dashing_timer_timeout():
 	dashing = false
 
 func _on_hit_register_timer_timeout():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
-	print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
-	print("damage: " + str(dmgTaken * (1-dmgRed)))
-	print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
-	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
+	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
+	#print("damage: " + str(dmgTaken * (1-dmgRed)))
+	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
+	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
 	if(health<0):

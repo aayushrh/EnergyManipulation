@@ -8,7 +8,6 @@ var adding = false
 @onready var spell = preload("res://World/Magic/MagicSpells/SpellUI.tscn")
 
 func _ready():
-	test()
 	reload()
 
 func test():

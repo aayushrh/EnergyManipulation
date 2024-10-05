@@ -30,6 +30,7 @@ grow_vertical = 2
 color = Color(0.192157, 0.192157, 0.192157, 0.713726)
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwpix3e1prdn7"]
+
+[ext_resource type="Script" path="res://World/Magic/MagicCasts/Blast.gd" id="1_gxgia"]
+[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="2_bjtmp"]
+
+[node name="Blast" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_gxgia")
+baseSpeed = 200
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.45098)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bjtmp")

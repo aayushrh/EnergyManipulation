@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=7 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="PackedScene" uid="uid://bllickk0pk5b8" path="res://World/Magic/MagicCreationMenu.tscn" id="3_pl71l"]
 [ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
-[ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="4_gl31p"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://World/Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
 
 [node name="World" type="Node2D"]
@@ -42,7 +41,3 @@ script = ExtResource("4_7sx84")
 
 [node name="SpellUI" parent="CanvasLayer/ScrollContainer/SpellListUI" instance=ExtResource("5_cmnpc")]
 layout_mode = 2
-
-[node name="BasicEnemy" parent="." instance=ExtResource("4_gl31p")]
-position = Vector2(800, 465)
-ROTATIONSPEED = 10.0

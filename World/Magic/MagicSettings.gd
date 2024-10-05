@@ -17,11 +17,11 @@ func on_open():
 	if(!(MagicMenu.selectedSpell.attributes == null)):
 		Size.value = (MagicMenu.selectedSpell.attributes.size-1)*100
 		Power.value = (MagicMenu.selectedSpell.attributes.power-1)*100
-		Stealth.value = (MagicMenu.selectedSpell.attributes.stealth-1)*100
+		Stealth.value = (MagicMenu.selectedSpell.attributes.amount-1)*100
 	Title.text = Name.text
 	if MagicMenu.selectedSpell.binding != null:
-		keybind = (char)(MagicMenu.selectedSpell.binding)
-		Keybind.text = keybind
+		keybind = (MagicMenu.selectedSpell.binding)
+		Keybind.text = (char)(keybind)
 	else:
 		Keybind.text = "Create new Keybind..."
 

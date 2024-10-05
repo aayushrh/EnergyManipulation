@@ -7,9 +7,14 @@ var attributes = null
 var type = null
 var spellName = ""
 var binding = null
+var cooldown = 0
 
 func _init(namen):
 	spellName = namen
+	attributes = Attributes.new(0, 0, 0)
+
+func resetCooldown():
+	cooldown = getcd()
 
 func getcd():
 	var cd = 0
@@ -42,6 +47,29 @@ func getcd():
 			"aura":
 				cd += 30
 	return cd
+
+func getCastingTime():
+	if attributes != null:
+		return attributes.attack_speed*0.5
+	else:
+		return 0
+
+func getMaxPowerTime():
+	var t = 2
+	if(Constants.isValid(type)):
+		match(type.spellName.to_lower()):
+			"blast":
+				t *= 2.5
+			"beam", "shield", "aura":
+				return INF
+			"explosion":
+				t *= 4
+			"placed explosion":
+				t *= 6
+	if(attributes != null):
+		return t*attributes.attack_speed
+	else:
+		return 0
 
 #perfect block = 10 mana
 func initcost():
