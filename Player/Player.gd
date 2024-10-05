@@ -29,10 +29,12 @@ var time_last_block = -1
 var time_last_hit = 0
 var health = 10
 var slow = false
+var rotation_speed = 0
 var onLastTurn = false
 
 func _ready():
 	$PlayerArt.hit.connect(_shockwave)
+	rotation_speed = ROTATIONSPEED
 
 func _process(delta):
 	time += delta
@@ -174,7 +176,7 @@ func _dmgRed(time):
 	
 func doneCasting():
 	slow = false
-	ROTATIONSPEED *= 2
+	ROTATIONSPEED = rotation_speed
 
 func _on_dashing_timer_timeout():
 	dashing = false

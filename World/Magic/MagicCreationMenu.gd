@@ -39,7 +39,7 @@ func _inputCard(card):
 			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
 		else:
-			Global.magicCards.append(selectedSpell)
+			#Global.magicCards.append(card)
 			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
 			Global.spellList.remove_at(location)

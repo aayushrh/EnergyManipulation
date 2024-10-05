@@ -50,7 +50,7 @@ func getcd():
 
 func getCastingTime():
 	if attributes != null:
-		return attributes.attack_speed*0.5
+		return 1/attributes.getASpeed()
 	else:
 		return 0
 
@@ -67,7 +67,7 @@ func getMaxPowerTime():
 			"placed explosion":
 				t *= 6
 	if(attributes != null):
-		return t*attributes.attack_speed
+		return t/attributes.getASpeed()
 	else:
 		return 0
 

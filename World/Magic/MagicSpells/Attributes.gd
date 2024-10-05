@@ -3,17 +3,24 @@ class_name Attributes
 
 var size
 var power
-var attack_speed
-var projectile_speed
 var amount
-var supreme
 
 func _init(siz, pow, amt):
-	size = siz/100+1
-	attack_speed = (-size)/100+1
-	power = pow/100+1
-	projectile_speed = (-pow)/100+1
+	size = siz
+	power = pow
 	amount = amt
-	supreme = 10/(3*amt + 7)
 
+func getSize():
+	return (size/100+1)/(0.1*amount+0.9)
 
+func getASpeed():
+	return (-size/100+1)/(0.05*amount+1)
+
+func getPSpeed():
+	return (-power/100+1)/(0.0263157894739*amount+0.9736842105261)
+
+func getPower():
+	return (power/100+1)/(0.3*amount+0.7)
+
+func getAmount():
+	return amount

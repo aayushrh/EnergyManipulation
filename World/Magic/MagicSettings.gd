@@ -16,8 +16,8 @@ func on_open():
 	MagicMenu.dontLeave = true
 	Name.text = MagicMenu.selectedSpell.spellName
 	if(!(MagicMenu.selectedSpell.attributes == null)):
-		Size.value = (MagicMenu.selectedSpell.attributes.size-1)*100
-		Power.value = (MagicMenu.selectedSpell.attributes.power-1)*100
+		Size.value = MagicMenu.selectedSpell.attributes.size
+		Power.value = MagicMenu.selectedSpell.attributes.power
 		Stealth.value = MagicMenu.selectedSpell.attributes.amount
 	Title.text = Name.text
 	if MagicMenu.selectedSpell.binding != null:
@@ -32,7 +32,7 @@ func _on_exit_pressed():
 	Global.spellList.remove_at(location)
 	MagicMenu.selectedSpell.attributes = Attributes.new(Size.value,Power.value,Stealth.value)
 	MagicMenu.selectedSpell.spellName = Name.text
-	if keybind == 0:
+	if keybind != 0:
 		MagicMenu.selectedSpell.binding = keybind
 	MagicMenu._changeSpell(MagicMenu.selectedSpell)
 	Global.spellList.insert(location,MagicMenu.selectedSpell)
@@ -40,7 +40,8 @@ func _on_exit_pressed():
 	visible=false
 
 func _process(delta):
-	if(Input.is_action_just_pressed("enter")):
+	if(Input.is_action_just_pressed("enter") and get_viewport().gui_get_focus_owner() == Name):
+		print("Gay")
 		var found = false
 		Name.visible=false
 		Name.visible=true
@@ -69,6 +70,8 @@ func _input(event):
 		keybind = (event.keycode)
 		Keybind.text = (char)(keybind)
 		changing = false
+		Keybind.visible = false
+		Keybind.visible = true
 		
 
 func _on_keybind_pressed():

@@ -6,6 +6,7 @@ var chargeTimer = 0
 var shot = false
 var timesShot = 0
 var timer = 0
+var chargeMulti = 1.0
 
 @onready var BlastProj = preload("res://World/Magic/MagicCasts/BlastProj.tscn")
 
@@ -13,12 +14,14 @@ func setSpell(nspell):
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
-	scale = Vector2(0.5, 0.5) * spell.attributes.size
+	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
 	print(str(scale.x) + "SPAWN")
 
 func _shoot():
+	print(spell.attributes.getPSpeed())
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 	var blastProj = BlastProj.instantiate()
+	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
 	blastProj._setSpell(spell)
 	blastProj._setV(direction)
@@ -33,7 +36,8 @@ func _process(delta):
 			chargeTimer -= delta
 			if !Input.is_key_pressed(spell.binding):
 				shot = true
-			spell.attributes.power *= 1.01
+			chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
+			scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
 		else:
 			if !Input.is_key_pressed(spell.binding):
 				shot = true
@@ -42,7 +46,7 @@ func _process(delta):
 		global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 		timer -= delta
 		if timer < 0:
-			if timesShot < spell.attributes.amount:
+			if timesShot < spell.attributes.getAmount():
 				timesShot+=1
 				_shoot()
 			else:
