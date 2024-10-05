@@ -33,7 +33,7 @@ func getcd():
 			"rat":
 				cd += 1
 	if(Constants.isValid(type)):
-		match(style.spellName.to_lower()):
+		match(type.spellName.to_lower()):
 			"blast":
 				cd += 1
 			"beam":

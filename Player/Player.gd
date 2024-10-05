@@ -38,7 +38,7 @@ func _process(delta):
 	time += delta
 	queue_redraw()
 	if(!Global.pause and !dashing):
-		magic_check()
+		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
 		_movement()
 		attack()
@@ -64,7 +64,7 @@ func _draw():
 	if(blocking):
 		draw_arc(Vector2.ZERO, 50, -PI/4 - PI/8, -3*PI/4 - PI/8, 20, Color.WHITE, 5)
 
-func magic_check():
+func magic_check(delta):
 	var hit = false
 	for e in Global.spellList:
 		if e.binding != null:
@@ -76,6 +76,9 @@ func magic_check():
 					blast.player = self
 					blast.setSpell(e)
 					get_tree().current_scene.add_child(blast)
+					e.resetCooldown()
+				slow = true
+				ROTATIONSPEED = ROTATIONSPEED/2
 	onLastTurn = hit
 
 func dash_check():
@@ -150,7 +153,7 @@ func _movement():
 	input_vector = input_vector.normalized()
 	velocity += input_vector * ACCELERATION
 	velocity *= FRICTION
-	if(!blocking):
+	if(!blocking and !slow):
 		velocity = velocity.limit_length(TOPSPEED)
 	else:
 		velocity = velocity.limit_length(TOPSPEED/2)
@@ -171,6 +174,7 @@ func _dmgRed(time):
 	
 func doneCasting():
 	slow = false
+	ROTATIONSPEED *= 2
 
 func _on_dashing_timer_timeout():
 	dashing = false
