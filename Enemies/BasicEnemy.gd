@@ -4,9 +4,10 @@ var player = null
 var cooldown = 5
 var can_attack = true
 var slow = false
+var effects = []
 
 @export var cooldownAttack : float
-@export var speed : int
+@export var TOPSPEED : int
 @export var ROTATIONSPEED : float
 @export var Shockwave : PackedScene
 
@@ -23,7 +24,12 @@ func _finishCharge():
 
 func _process(delta):
 	if(!Global.pause):
+		_effectsHandle()
 		_move(delta)
+
+func _effectsHandle():
+	for e in effects:
+		e._tick()
 
 func _move(delta):
 	var softBodyPush = $SoftBody.getVector()
@@ -34,8 +40,8 @@ func _move(delta):
 	if player != null:
 		rotateToTarget(player, delta)
 		#rotation_degrees += 90
-		velocity = (player.global_position - global_position).normalized() * speed
-		velocity -= softBodyPush * speed
+		velocity = (player.global_position - global_position).normalized() * TOPSPEED
+		velocity -= softBodyPush * TOPSPEED
 		if(slow):
 			velocity = velocity * 0.5
 		move_and_slide()

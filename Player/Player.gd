@@ -13,7 +13,7 @@ extends CharacterBody2D
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
 
-@onready var Blast = preload("res://World/Magic/MagicCasts/Blast.tscn")
+@onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
 
 var rng = RandomNumberGenerator.new()
 var right = true
@@ -31,6 +31,7 @@ var health = 10
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
+var effects = []
 
 func _ready():
 	$PlayerArt.hit.connect(_shockwave)
@@ -40,6 +41,7 @@ func _process(delta):
 	time += delta
 	queue_redraw()
 	if(!Global.pause and !dashing):
+		_effectsHandle()
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
 		_movement()
@@ -80,7 +82,7 @@ func magic_check(delta):
 					get_tree().current_scene.add_child(blast)
 					e.resetCooldown()
 				slow = true
-				ROTATIONSPEED = ROTATIONSPEED/2
+				ROTATIONSPEED /= 2
 	onLastTurn = hit
 
 func dash_check():
@@ -148,6 +150,10 @@ func rotateToTarget(target, delta):
 	rotation_degrees += 90
 	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
+func _effectsHandle():
+	for e in effects:
+		e._tick()
+
 func _movement():
 	var input_vector = Vector2.ZERO
 	input_vector.y = Input.get_axis("up", "down")
@@ -176,7 +182,8 @@ func _dmgRed(time):
 	
 func doneCasting():
 	slow = false
-	ROTATIONSPEED = rotation_speed
+	ROTATIONSPEED *= 2
+	print("setback")
 
 func _on_dashing_timer_timeout():
 	dashing = false

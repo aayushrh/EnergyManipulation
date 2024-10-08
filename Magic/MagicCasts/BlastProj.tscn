@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7n1s2fb77tim"]
+
+[ext_resource type="Script" path="res://Magic/MagicCasts/BlastProj.gd" id="1_cbhg2"]
+[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="2_cb3kh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuxju"]
+size = Vector2(122, 106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gum72"]
+size = Vector2(114, 102)
+
+[node name="BlastProj" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_cbhg2")
+metadata/_edit_horizontal_guides_ = [-255.0]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -2)
+shape = SubResource("RectangleShape2D_vuxju")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_cb3kh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_gum72")

@@ -8,14 +8,13 @@ var timesShot = 0
 var timer = 0
 var chargeMulti = 1.0
 
-@onready var BlastProj = preload("res://World/Magic/MagicCasts/BlastProj.tscn")
+@onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
 func setSpell(nspell):
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
-	print(str(scale.x) + "SPAWN")
 
 func _shoot():
 	print(spell.attributes.getPSpeed())
@@ -49,6 +48,6 @@ func _process(delta):
 			if timesShot < spell.attributes.getAmount():
 				timesShot+=1
 				_shoot()
-			else:
-				player.doneCasting()
-				queue_free()
+				if timesShot >= spell.attributes.getAmount():
+					player.doneCasting()
+					queue_free()

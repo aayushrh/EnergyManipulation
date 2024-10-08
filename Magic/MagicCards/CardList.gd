@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var MagicButton = preload("res://World/Magic/MagicCards/MagicCardButton.tscn")
+@onready var MagicButton = preload("res://Magic/MagicCards/MagicCardButton.tscn")
 
 @export var magicMenu : Control
 		

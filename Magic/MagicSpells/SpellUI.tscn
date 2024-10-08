@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://1sfun4lwfipy"]
 
-[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellUI.gd" id="1_4ms8m"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/SpellUI.gd" id="1_q16n4"]
 
 [node name="SpellUI" type="ColorRect"]
 custom_minimum_size = Vector2(0, 30)
 color = Color(0.243137, 0.243137, 0.243137, 0.713726)
-script = ExtResource("1_4ms8m")
+script = ExtResource("1_q16n4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bllickk0pk5b8"]
 
-[ext_resource type="Script" path="res://World/Magic/MagicCreationMenu.gd" id="1_ovg3u"]
+[ext_resource type="Script" path="res://Magic/MagicCreationMenu.gd" id="1_ovg3u"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_578rg"]
-[ext_resource type="Script" path="res://World/Magic/MagicCards/CardList.gd" id="3_d1bvh"]
-[ext_resource type="Script" path="res://World/Magic/MagicSpells/SpellList.gd" id="4_xl77e"]
-[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://World/Magic/MagicSpells/SpellButton.tscn" id="5_a46rx"]
-[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://World/Magic/MagicSettings.tscn" id="6_tqnvs"]
+[ext_resource type="Script" path="res://Magic/MagicCards/CardList.gd" id="3_d1bvh"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/SpellList.gd" id="4_xl77e"]
+[ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://Magic/MagicSpells/SpellButton.tscn" id="5_a46rx"]
+[ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://Magic/MagicSettings.tscn" id="6_tqnvs"]
 
 [node name="Magic" type="Control" node_paths=PackedStringArray("element", "type", "style", "cardList")]
 layout_mode = 3
