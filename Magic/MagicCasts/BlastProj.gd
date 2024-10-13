@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Blast
 
 var spell = null
 var v = Vector2.ZERO

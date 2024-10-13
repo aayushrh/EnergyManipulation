@@ -8,10 +8,10 @@ script/source = "extends Button
 @export var switching = \"\"
 
 func _on_pressed():
-	Global._change_tscn(\"res://World/\" + switching + \".tscn\")
+	Global._change_tscn(\"res://World/Screens/\" + switching + \".tscn\")
 
 func _on_meta_clicked(meta):
-	Global._change_tscn(\"res://World/\" + switching + \".tscn\")
+	Global._change_tscn(\"res://World/Screens/\" + switching + \".tscn\")
 "
 
 [sub_resource type="GDScript" id="GDScript_7rs32"]

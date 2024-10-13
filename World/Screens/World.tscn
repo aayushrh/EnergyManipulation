@@ -45,5 +45,10 @@ layout_mode = 2
 
 [node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
 position = Vector2(290, 524)
+checkAngle = 10.0
+DASHSPEED = 3000.0
 TOPSPEED = 300
 ROTATIONSPEED = 10.0
+dash_cd = 10.0
+dash_time = 0.1
+block_cd = 0.5
