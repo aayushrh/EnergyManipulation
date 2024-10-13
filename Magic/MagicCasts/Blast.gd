@@ -51,3 +51,4 @@ func _process(delta):
 				if timesShot >= spell.attributes.getAmount():
 					player.doneCasting()
 					queue_free()
+					spell.resetCooldown()

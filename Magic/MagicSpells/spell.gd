@@ -16,7 +16,18 @@ func _init(namen):
 func resetCooldown():
 	cooldown = getcd()
 
+func getcd2():
+	var cd = 1
+	if(Constants.isValid(element)):
+		cd += 1.3
+	if(Constants.isValid(style)):
+		cd += 1.3
+	if(Constants.isValid(type)):
+		cd += 1.3
+	return cd
+
 func getcd():
+	return getcd2()
 	var cd = 0
 	if(Constants.isValid(element)):
 		match(element.spellName.to_lower()):
@@ -71,8 +82,19 @@ func getMaxPowerTime():
 	else:
 		return 0
 
+func initCost():
+	var cost = 3
+	if(Constants.isValid(element)):
+		cost += 7
+	if(Constants.isValid(element)):
+		cost += 3
+	if(Constants.isValid(element)):
+		cost += 5
+	return cost
+
 #perfect block = 10 mana
 func initcost():
+	return initCost()
 	var cost = 0
 	if(Constants.isValid(element)):
 		match(element.spellName.to_lower()):

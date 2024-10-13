@@ -7,4 +7,3 @@ var player = null
 
 func _on_release():
 	holding = false
-

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de5rft8m8wnj6"]
+
+[ext_resource type="Script" path="res://Magic/MagicCasts/ExplosionCast.gd" id="1_ptv3o"]
+[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="2_o2l0f"]
+
+[node name="ExplosionCast" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ptv3o")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_o2l0f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

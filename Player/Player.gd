@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var Afterimage : PackedScene
 
 @onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
+@onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
 
 var rng = RandomNumberGenerator.new()
 var right = true
@@ -71,15 +72,22 @@ func _draw():
 func magic_check(delta):
 	var hit = false
 	for e in Global.spellList:
+		e.cooldown -= delta
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn:
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0:
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
 					blast.player = self
 					blast.setSpell(e)
 					get_tree().current_scene.add_child(blast)
+					e.resetCooldown()
+				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
+					var explosion = Explosion.instantiate()
+					explosion.player = self
+					explosion.setSpell(e)
+					get_tree().current_scene.add_child(explosion)
 					e.resetCooldown()
 				slow = true
 				ROTATIONSPEED /= 2
