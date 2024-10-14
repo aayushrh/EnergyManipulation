@@ -8,26 +8,17 @@ var type = null
 var spellName = ""
 var binding = null
 var cooldown = 0
+var using = false
 
 func _init(namen):
 	spellName = namen
 	attributes = Attributes.new(1, 1, 1)
 
-func resetCooldown():
+func resetCooldown(use):
 	cooldown = getcd()
-
-func getcd2():
-	var cd = 1
-	if(Constants.isValid(element)):
-		cd += 1.3
-	if(Constants.isValid(style)):
-		cd += 1.3
-	if(Constants.isValid(type)):
-		cd += 1.3
-	return cd
+	using = use
 
 func getcd():
-	return getcd2()
 	var cd = 0
 	if(Constants.isValid(element)):
 		match(element.spellName.to_lower()):
@@ -82,19 +73,8 @@ func getMaxPowerTime():
 	else:
 		return 0
 
-func initCost():
-	var cost = 3
-	if(Constants.isValid(element)):
-		cost += 7
-	if(Constants.isValid(element)):
-		cost += 3
-	if(Constants.isValid(element)):
-		cost += 5
-	return cost
-
 #perfect block = 10 mana
-func initcost():
-	return initCost()
+func initCost():
 	var cost = 0
 	if(Constants.isValid(element)):
 		match(element.spellName.to_lower()):
@@ -115,7 +95,7 @@ func initcost():
 			"rat":
 				cost += 0.5
 	if(Constants.isValid(type)):
-		match(style.spellName.to_lower()):
+		match(type.spellName.to_lower()):
 			"blast":
 				cost += 1
 			"beam":

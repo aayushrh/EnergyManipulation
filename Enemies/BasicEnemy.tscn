@@ -24,6 +24,7 @@ art = NodePath("EnemyArt")
 softBody = NodePath("SoftBody")
 
 [node name="block_cd" type="Timer" parent="."]
+one_shot = true
 
 [node name="Vision" type="Area2D" parent="."]
 
@@ -54,6 +55,7 @@ collision_mask = 2
 polygon = PackedVector2Array(-99, -253, 99, -255, 2, -3)
 
 [node name="dashing" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="block_cd" to="." method="_on_block_cd_timeout"]
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]

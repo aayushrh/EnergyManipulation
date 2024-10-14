@@ -24,7 +24,7 @@ var timer = 120
 var dashing = false
 var blocking = false
 var time = 0
-var stored_energy = 0.0
+var stored_energy = 10.0
 var dmgTaken = 0
 var time_last_block = -1
 var time_last_hit = 0
@@ -35,6 +35,7 @@ var onLastTurn = false
 var effects = []
 
 func _ready():
+	updateEnergy()
 	$PlayerArt.hit.connect(_shockwave)
 	rotation_speed = ROTATIONSPEED
 
@@ -67,12 +68,16 @@ func block():
 
 func _draw():
 	if(blocking):
-		draw_arc(Vector2.ZERO, 50, -PI/4 - PI/8, -3*PI/4 - PI/8, 20, Color.WHITE, 5)
+		draw_arc(Vector2.ZERO, 50, -PI/4, -3*PI/4, 20, Color.WHITE, 5)
+
+func updateEnergy():
+	$CanvasLayer/EnergyBar.size.x = stored_energy*50
 
 func magic_check(delta):
 	var hit = false
 	for e in Global.spellList:
-		e.cooldown -= delta
+		if(!e.using):
+			e.cooldown -= delta
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
@@ -82,15 +87,17 @@ func magic_check(delta):
 					blast.player = self
 					blast.setSpell(e)
 					get_tree().current_scene.add_child(blast)
-					e.resetCooldown()
+					e.resetCooldown(true)
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()
 					explosion.player = self
 					explosion.setSpell(e)
 					get_tree().current_scene.add_child(explosion)
-					e.resetCooldown()
+					e.resetCooldown(true)
 				slow = true
 				ROTATIONSPEED /= 2
+				stored_energy -= e.initCost()
+				updateEnergy()
 	onLastTurn = hit
 
 func dash_check():
@@ -144,12 +151,13 @@ func _shockwave():
 	shockwave.rotation_degrees = rotation_degrees
 	shockwave.sender = self
 	shockwave.energy = 1
-	$CanvasLayer/EnergyBar.size.x = stored_energy*100
+	updateEnergy()
 	get_tree().current_scene.add_child(shockwave)
 
 func attack():
-	if Input.is_action_just_pressed("Hit") and !blocking:
-		$PlayerArt._click()
+	pass
+	#if Input.is_action_just_pressed("Hit") and !blocking:
+		#$PlayerArt._click()
 
 func rotateToTarget(target, delta):
 	var direction = (target - global_position)
@@ -176,8 +184,8 @@ func _movement():
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
-	$HitRegisterTimer.start(0.15)
 	time_last_hit = time
+	_hit_register()
 
 func _dmgRed(time):
 	if(time > 0 and time < 0.0417):
@@ -191,22 +199,21 @@ func _dmgRed(time):
 func doneCasting():
 	slow = false
 	ROTATIONSPEED *= 2
-	print("setback")
 
 func _on_dashing_timer_timeout():
 	dashing = false
 
-func _on_hit_register_timer_timeout():
+func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
-	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
-	#print("damage: " + str(dmgTaken * (1-dmgRed)))
-	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
-	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
+	print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
+	print("damage: " + str(dmgTaken * (1-dmgRed)))
+	print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
+	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
 	if(health<0):
-		Global._change_tscn("res://MainMenu.tscn")
-	$CanvasLayer/EnergyBar.size.x = stored_energy*100.0
+		Global._change_tscn("res://World/Screens/MainMenu.tscn")
+	updateEnergy()
 	$CanvasLayer/HealthBar.size.x = health*10.0
 	time = 0
 	time_last_block = -1

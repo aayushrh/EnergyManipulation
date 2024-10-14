@@ -61,7 +61,6 @@ func _hit(hitbox):
 	else:
 		health -= dmgTaken
 	time = 0
-	print("frick i got hit")
 
 func _move(delta):
 	var softBodyPush = $SoftBody.getVector()
@@ -78,12 +77,12 @@ func _move(delta):
 			velocity = velocity * 0.5
 		#move_and_slide()
 		
-		if(dist(player, self) <= 250) and can_attack:
-			_punch()
-			can_attack = false
-			slow = true
-			ROTATIONSPEED /= 2
-			cooldown = cooldownAttack
+		#if(dist(player, self) <= 250) and can_attack:
+			#_punch()
+			#can_attack = false
+			#slow = true
+			#ROTATIONSPEED /= 2
+			#cooldown = cooldownAttack
 
 func rotateToTarget(target, delta):
 	var direction = (target.global_position - global_position)
@@ -148,13 +147,11 @@ func do_block():
 		block = time
 		slow = true
 		$block_cd.start(block_cd)
-		print("I swear i'm blocking maybe")
 	
 
 func un_block():
 	block = -1
 	slow = false
-	print("no more block")
 
 func perp_vector(vect):
 	if(rng.randi_range(0,1)==1):
@@ -183,19 +180,15 @@ func _on_block_cd_timeout() -> void:
 	un_block()
 
 func _on_dash_cd_timeout() -> void:
-	pass
-
+	canDash = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	print("asdf")
 	magic.append(area.get_parent())
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	print("outta here")
 	magic.remove_at(magic.find(area.get_parent()))
 
 
 func _on_dashing_timeout() -> void:
-	print("no more dash")
 	nomove = false

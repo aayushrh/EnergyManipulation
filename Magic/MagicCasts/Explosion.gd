@@ -47,5 +47,5 @@ func _process(delta):
 				timesShot+=1
 				_shoot()
 				if timesShot >= spell.attributes.getAmount():
-					player.doneCasting()
+					player.doneCasting(false)
 					queue_free()
