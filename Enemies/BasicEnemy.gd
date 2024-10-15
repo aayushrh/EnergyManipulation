@@ -12,6 +12,7 @@ var block = -1
 var rng = RandomNumberGenerator.new()
 var magic = []
 var canDash = true
+var type = 1
 
 @export var health : float
 
@@ -32,6 +33,10 @@ var canDash = true
 @export var art : Node2D
 @export var softBody : Area2D
 
+@onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
+@onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
+
+
 func _ready():
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
@@ -43,6 +48,7 @@ func _finishCharge():
 func _process(delta):
 	if(!Global.pause):
 		time+=delta
+		magic_check(delta)
 		_effectsHandle()
 		if(!nomove):
 			_move(delta)
@@ -127,6 +133,30 @@ func tactCheck(req):
 		return randi_range(0,tact*2)>req
 	else:
 		return randi_range(tact,req+tact)>req
+
+func magic_check(delta):
+	for e in Global.spellList:
+		if(!e.using):
+			e.cooldown -= delta
+		if(e.cooldown < 0):
+			if(e.type != null and e.type.spellName.to_lower() == "blast"):
+				var blast = Blast.instantiate()
+				blast.player = self
+				blast.setSpell(e)
+				get_tree().current_scene.add_child(blast)
+				e.resetCooldown(true)
+			if(e.type != null and e.type.spellName.to_lower() == "explosion"):
+				var explosion = Explosion.instantiate()
+				explosion.player = self
+				explosion.setSpell(e)
+				get_tree().current_scene.add_child(explosion)
+				e.resetCooldown(true)
+			slow = true
+			ROTATIONSPEED /= 2
+
+func doneCasting():
+	slow = false
+	ROTATIONSPEED *= 2
 
 func avgDir(arr):
 	var ae = Vector2.ZERO

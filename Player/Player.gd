@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export_group("Movement")
 @export var ACCELERATION : float
@@ -16,6 +17,7 @@ extends CharacterBody2D
 @onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
 
+var type = 0
 var rng = RandomNumberGenerator.new()
 var right = true
 var can_attack = true

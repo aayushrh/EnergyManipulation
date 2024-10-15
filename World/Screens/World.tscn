@@ -50,6 +50,6 @@ blockOrFlight = 3
 DASHSPEED = 3000.0
 TOPSPEED = 300
 ROTATIONSPEED = 10.0
-dash_cd = 1.0
+dash_cd = 10.0
 dash_time = 0.1
 block_cd = 0.5

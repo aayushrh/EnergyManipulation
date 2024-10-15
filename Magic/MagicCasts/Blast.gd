@@ -17,9 +17,10 @@ func setSpell(nspell):
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
 
 func _shoot():
-	print(spell.attributes.getPSpeed())
+	#print(spell.attributes.getPSpeed())
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 	var blastProj = BlastProj.instantiate()
+	blastProj.sender = player
 	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
 	blastProj._setSpell(spell)
