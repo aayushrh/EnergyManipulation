@@ -12,8 +12,11 @@
 script = ExtResource("1_dcdsc")
 
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
-position = Vector2(561, 300)
+position = Vector2(253, -101)
 ROTATIONSPEED = 20.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -44,7 +47,7 @@ script = ExtResource("4_7sx84")
 layout_mode = 2
 
 [node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
-position = Vector2(290, 524)
+position = Vector2(-244, 135)
 checkAngle = 10.0
 blockOrFlight = 3
 DASHSPEED = 3000.0
@@ -53,3 +56,11 @@ ROTATIONSPEED = 10.0
 dash_cd = 10.0
 dash_time = 0.1
 block_cd = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(253, -101)
+limit_left = -1500
+limit_top = -1000
+limit_right = 1500
+limit_bottom = 1000
+limit_smoothed = true

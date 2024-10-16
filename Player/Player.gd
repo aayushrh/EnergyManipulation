@@ -215,6 +215,7 @@ func _hit_register():
 	health -= dmgTaken * (1-dmgRed)
 	if(health<0):
 		Global._change_tscn("res://World/Screens/MainMenu.tscn")
+		Global.pause = false
 	updateEnergy()
 	$CanvasLayer/HealthBar.size.x = health*10.0
 	time = 0

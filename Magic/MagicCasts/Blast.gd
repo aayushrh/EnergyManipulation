@@ -29,27 +29,28 @@ func _shoot():
 	timer = 0.1
 
 func _process(delta):
-	if !shot:
-		if (castingTimer >= 0 ):
-			castingTimer -= delta
-		elif chargeTimer >= 0:
-			chargeTimer -= delta
-			if !Input.is_key_pressed(spell.binding):
-				shot = true
-			chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
-			scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
+	if !Global.pause:
+		if !shot:
+			if (castingTimer >= 0 ):
+				castingTimer -= delta
+			elif chargeTimer >= 0:
+				chargeTimer -= delta
+				if spell.binding == null or !Input.is_key_pressed(spell.binding):
+					shot = true
+				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
+				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
+			else:
+				if !Input.is_key_pressed(spell.binding):
+					shot = true
+			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 		else:
-			if !Input.is_key_pressed(spell.binding):
-				shot = true
-		global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
-	else:
-		global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
-		timer -= delta
-		if timer < 0:
-			if timesShot < spell.attributes.getAmount():
-				timesShot+=1
-				_shoot()
-				if timesShot >= spell.attributes.getAmount():
-					player.doneCasting()
-					queue_free()
-					spell.resetCooldown(false)
+			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
+			timer -= delta
+			if timer < 0:
+				if timesShot < spell.attributes.getAmount():
+					timesShot+=1
+					_shoot()
+					if timesShot >= spell.attributes.getAmount():
+						player.doneCasting()
+						queue_free()
+						spell.resetCooldown(false)

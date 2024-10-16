@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bq7gr6cuu7mcy"
-path="res://.godot/imported/ethan.png-12fbb3eea96bb71fee7de8b6700489c7.ctex"
+path="res://.godot/imported/Ethan.png-abeb941bc5efbc3ba110ae17f37f0e8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ethan.png"
-dest_files=["res://.godot/imported/ethan.png-12fbb3eea96bb71fee7de8b6700489c7.ctex"]
+source_file="res://Art/Ethan.png"
+dest_files=["res://.godot/imported/Ethan.png-abeb941bc5efbc3ba110ae17f37f0e8e.ctex"]
 
 [params]
 

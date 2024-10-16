@@ -33,13 +33,17 @@ var type = 1
 @export var art : Node2D
 @export var softBody : Area2D
 
-@onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
+@onready var BlastTscn = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
 
+var spells = []
 
 func _ready():
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
+	var spell = Spell.new("firstSpell")
+	spell.type = SpellCard.new(2, "Blast")
+	spells.append(spell)
 
 func _finishCharge():
 	slow = false
@@ -76,19 +80,10 @@ func _move(delta):
 		can_attack = true
 	if player != null:
 		rotateToTarget(player, delta)
-		#rotation_degrees += 90
 		velocity = (player.global_position - global_position).normalized() * TOPSPEED
 		velocity -= softBodyPush * TOPSPEED
 		if(slow):
 			velocity = velocity * 0.5
-		#move_and_slide()
-		
-		#if(dist(player, self) <= 250) and can_attack:
-			#_punch()
-			#can_attack = false
-			#slow = true
-			#ROTATIONSPEED /= 2
-			#cooldown = cooldownAttack
 
 func rotateToTarget(target, delta):
 	var direction = (target.global_position - global_position)
@@ -135,12 +130,12 @@ func tactCheck(req):
 		return randi_range(tact,req+tact)>req
 
 func magic_check(delta):
-	for e in Global.spellList:
+	for e in spells:
 		if(!e.using):
 			e.cooldown -= delta
 		if(e.cooldown < 0):
 			if(e.type != null and e.type.spellName.to_lower() == "blast"):
-				var blast = Blast.instantiate()
+				var blast = BlastTscn.instantiate()
 				blast.player = self
 				blast.setSpell(e)
 				get_tree().current_scene.add_child(blast)
