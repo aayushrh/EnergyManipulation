@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=9 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
 [ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="7_tu6r2"]
+[ext_resource type="Texture2D" uid="uid://ikmnxavupf63" path="res://Art/kitchenTile(2).png" id="8_oobl3"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dcdsc")
@@ -64,3 +65,10 @@ limit_top = -1000
 limit_right = 1500
 limit_bottom = 1000
 limit_smoothed = true
+
+[node name="KitchenTile(2)" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(200, 200)
+texture = ExtResource("8_oobl3")
