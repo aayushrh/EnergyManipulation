@@ -84,22 +84,26 @@ func magic_check(delta):
 			if Input.is_key_pressed(e.binding):
 				hit = true
 			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0:
+				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
 					blast.player = self
 					blast.setSpell(e)
 					get_tree().current_scene.add_child(blast)
 					e.resetCooldown(true)
+					shot = true
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()
 					explosion.player = self
 					explosion.setSpell(e)
 					get_tree().current_scene.add_child(explosion)
 					e.resetCooldown(true)
-				slow = true
-				ROTATIONSPEED /= 2
-				stored_energy -= e.initCost()
-				updateEnergy()
+					shot = true
+				if shot:
+					slow = true
+					ROTATIONSPEED /= 2
+					stored_energy -= e.initCost()
+					updateEnergy()
 	onLastTurn = hit
 
 func dash_check():

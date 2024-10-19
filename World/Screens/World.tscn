@@ -60,6 +60,7 @@ block_cd = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(253, -101)
+zoom = Vector2(0.8, 0.8)
 limit_left = -1500
 limit_top = -1000
 limit_right = 1500
