@@ -64,7 +64,7 @@ func _process(delta):
 
 func _effectsHandle():
 	for e in effects:
-		e._tick()
+		e._tick(self)
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)

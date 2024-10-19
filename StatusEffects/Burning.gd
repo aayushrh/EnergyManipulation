@@ -1,17 +1,16 @@
 extends Effects
-class_name Soggy
+class_name Burning
 
-var handledEffect = false
+var timer = 10
 
 func _init(life):
 	lifetime = life
 
 func _tick(entity):
-	print("soggyness")
-	if !handledEffect:
-		entity.TOPSPEED /= 2
-		handledEffect = true
+	timer -= 1
+	if(timer < 0):
+		entity.health -= 1
+		timer = 10
 	lifetime -= 1
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))
-		entity.TOPSPEED *= 2

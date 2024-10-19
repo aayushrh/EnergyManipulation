@@ -170,7 +170,7 @@ func rotateToTarget(target, delta):
 
 func _effectsHandle():
 	for e in effects:
-		e._tick()
+		e._tick(self)
 
 func _movement():
 	var input_vector = Vector2.ZERO
