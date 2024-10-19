@@ -13,6 +13,7 @@ var rng = RandomNumberGenerator.new()
 var magic = []
 var canDash = true
 var type = 1
+var moveDir = 0
 
 @export var health : float
 
@@ -29,6 +30,8 @@ var type = 1
 @export var dash_cd : float
 @export var dash_time : float
 @export var block_cd : float
+@export var min_range : int
+@export var max_range : int
 
 @export var art : Node2D
 @export var softBody : Area2D
@@ -51,12 +54,12 @@ func _finishCharge():
 
 func _process(delta):
 	if(!Global.pause):
+		queue_redraw()
 		time+=delta
 		magic_check(delta)
 		_effectsHandle()
 		if(!nomove):
 			_move(delta)
-		awareness()
 		move_and_slide()
 
 func _effectsHandle():
@@ -80,7 +83,12 @@ func _move(delta):
 		can_attack = true
 	if player != null:
 		rotateToTarget(player, delta)
-		velocity = (player.global_position - global_position).normalized() * TOPSPEED
+		if((player.global_position - global_position).length() > max_range):
+			#print((player.global_position - global_position).length())
+			velocity = (player.global_position - global_position).normalized() * TOPSPEED
+		elif((player.global_position - global_position).length() < min_range):
+			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
+		awareness(delta)
 		velocity -= softBodyPush * TOPSPEED
 		if(slow):
 			velocity = velocity * 0.5
@@ -117,11 +125,12 @@ func _shockwave():
 	shockwave.energy = 1
 	get_tree().current_scene.add_child(shockwave)
 
+#in degrees
 func is_this_thing_going_towards_me(angle, velo):
-	return abs(angle-velo.angle())<checkAngle
+	return rad_to_deg(abs(angle-velo.angle()))<checkAngle
 
-func is_this_thing_too_close_to_me(angle, speed):
-	return (speed*cos(angle) - DASHSPEED) < 0
+func is_this_thing_too_close_to_me(angle, vect, speed2):
+	return (vect.length()*cos(angle) - speed2) < 0
 
 func tactCheck(req):
 	if(tact>=req):
@@ -133,7 +142,7 @@ func magic_check(delta):
 	for e in spells:
 		if(!e.using):
 			e.cooldown -= delta
-		if(e.cooldown < 0):
+		if(moveDir == 0 and e.cooldown < 0):
 			if(e.type != null and e.type.spellName.to_lower() == "blast"):
 				var blast = BlastTscn.instantiate()
 				blast.player = self
@@ -159,6 +168,12 @@ func avgDir(arr):
 		ae+=(global_position-n.global_position).normalized()
 	return ae.normalized()
 
+func avgVelo(arr):
+	var ae = Vector2.ZERO
+	for n in arr:
+		ae+=n.v.normalized()
+	return ae.normalized()
+
 func dash(dir):
 	print("i tried")
 	velocity = dir*DASHSPEED
@@ -172,7 +187,10 @@ func do_block():
 		block = time
 		slow = true
 		$block_cd.start(block_cd)
-	
+
+func _draw():
+	if(block != -1):
+		draw_arc(Vector2.ZERO, 50, -PI/4, -3*PI/4, 20, Color.WHITE, 5)
 
 func un_block():
 	block = -1
@@ -183,23 +201,46 @@ func perp_vector(vect):
 		return Vector2(vect.y,-vect.x)
 	else:
 		return Vector2(-vect.y,vect.x)
-	
-func awareness():
+
+func set_perp_vector(vect, right):
+	if(right):
+		return Vector2(vect.y,-vect.x)
+	else:
+		return Vector2(-vect.y,vect.x)
+
+func awareness(delta):
 	var help = []
 	for n in magic:
 		if(n is Blast):
 			var asdf = is_this_thing_going_towards_me((global_position-n.global_position).angle(),n.v)
 			if(asdf):
 				help.append(n)
+	if(moveDir != 0 and help.size() <= 0):
+		moveDir = 0
 	for n in help:
 		if(help.size()>=blockOrFlight):
-			if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.velocity).angle(),n.speed)):
-				do_block()
-			elif(canDash and block == -1):
-				dash(avgDir(help))
-		elif(canDash and block == -1):
-			dash(perp_vector(avgDir(help)))
-
+			if(block == -1):
+				if(canDash):
+					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
+						do_block()
+					else:
+						dash(avgDir(help))
+				else:
+					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,TOPSPEED)):
+						do_block()
+					else:
+						velocity = avgDir(help) * TOPSPEED
+		elif(block == -1):
+			if(canDash):
+				dash(perp_vector(avgDir(help)))
+			else:
+				#print(moveDir)
+				if(moveDir == 0):
+					#if(tactCheck(20)):
+						moveDir = int((avgDir(help)-avgVelo(help)).angle()>0)*2-1
+					#else:
+					#	moveDir = rng.randi_range(0,1)*2-1
+				velocity = set_perp_vector(avgDir(help),moveDir>0) * TOPSPEED
 
 func _on_block_cd_timeout() -> void:
 	un_block()

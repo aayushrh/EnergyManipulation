@@ -11,10 +11,10 @@ func _init(siz, pow, amt):
 	amount = amt
 
 func getSize():
-	return (size/100+1)/(0.1*amount+0.9)
+	return (size/100+1)/(0.05*amount+0.95)
 
 func getASpeed():
-	return (-size/100+1)/(0.05*amount+1)
+	return (-size/100+1)/(0.05*amount+0.95)
 
 func getPSpeed():
 	return (-power/100+1)/(0.0263157894739*amount+0.9736842105261)
