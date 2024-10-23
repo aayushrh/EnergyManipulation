@@ -10,10 +10,13 @@ var dmgTaken = 0
 var time = 0
 var block = -1
 var rng = RandomNumberGenerator.new()
-var magic = []
+var magic = []#player casted spell
+var spells = []# enemy casted spells
+var castedIndex = -1
 var canDash = true
 var type = 1
 var moveDir = 0
+var blast = null
 
 @export var health : float
 
@@ -39,7 +42,6 @@ var moveDir = 0
 @onready var BlastTscn = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
 
-var spells = []
 
 func _ready():
 	art.finishCharge.connect(_finishCharge)
@@ -55,6 +57,8 @@ func _finishCharge():
 func _process(delta):
 	if(!Global.pause):
 		queue_redraw()
+		if(health <= 0):
+			queue_free()
 		time+=delta
 		magic_check(delta)
 		_effectsHandle()
@@ -82,7 +86,10 @@ func _move(delta):
 	if(cooldown <=0):
 		can_attack = true
 	if player != null:
-		rotateToTarget(player, delta)
+		if(castedIndex != -1 and (spells[castedIndex].type.spellName.to_lower() == "blast" or spells[castedIndex].type.spellName.to_lower() == "beam")):
+			predictionrotate(player, delta)
+		else:
+			rotateToTarget(player.global_position, delta)
 		if((player.global_position - global_position).length() > max_range):
 			#print((player.global_position - global_position).length())
 			velocity = (player.global_position - global_position).normalized() * TOPSPEED
@@ -94,7 +101,7 @@ func _move(delta):
 			velocity = velocity * 0.5
 
 func rotateToTarget(target, delta):
-	var direction = (target.global_position - global_position)
+	var direction = (target - global_position)
 	var angleTo = transform.x.angle_to(direction) + PI/2
 	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
@@ -139,12 +146,15 @@ func tactCheck(req):
 		return randi_range(tact,req+tact)>req
 
 func magic_check(delta):
+	var track = -1
 	for e in spells:
+		track += 1
 		if(!e.using):
 			e.cooldown -= delta
 		if(moveDir == 0 and e.cooldown < 0):
 			if(e.type != null and e.type.spellName.to_lower() == "blast"):
-				var blast = BlastTscn.instantiate()
+				castedIndex = track
+				blast = BlastTscn.instantiate()
 				blast.player = self
 				blast.setSpell(e)
 				get_tree().current_scene.add_child(blast)
@@ -157,6 +167,19 @@ func magic_check(delta):
 				e.resetCooldown(true)
 			slow = true
 			ROTATIONSPEED /= 2
+
+func predictionrotate(player,delta):
+	if(blast!=null):
+		var a = pow(blast.getSpeed(),2)-player.velocity.distance_squared_to(Vector2.ZERO)
+		var b = -2*(((player.global_position.x-global_position.x)*player.velocity.x)+((player.global_position.y-global_position.y)*player.velocity.y))
+		var c = -(player.global_position-global_position).x-(player.global_position-global_position).y
+		var time = (-b + sqrt(b * b - 4 * a * c))/(2 * a)
+		rotateToTarget(player.global_position+player.velocity*time,delta)
+		if(blast.shot):
+			blast = null
+			castedIndex = -1
+	else:
+		pass#for beam in the future not now lol
 
 func doneCasting():
 	slow = false

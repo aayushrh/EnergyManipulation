@@ -48,7 +48,7 @@ func _process(delta):
 		_effectsHandle()
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
-		_movement()
+		_movement(delta)
 		attack()
 		dash_check()
 		block()
@@ -176,13 +176,13 @@ func _effectsHandle():
 	for e in effects:
 		e._tick(self)
 
-func _movement():
+func _movement(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.y = Input.get_axis("up", "down")
 	input_vector.x = Input.get_axis("left", "right")
 	input_vector = input_vector.normalized()
-	velocity += input_vector * ACCELERATION
-	velocity *= FRICTION
+	velocity += input_vector * ACCELERATION * delta
+	velocity *= pow(FRICTION,delta)
 	if(!blocking and !slow):
 		velocity = velocity.limit_length(TOPSPEED)
 	else:

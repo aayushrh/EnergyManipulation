@@ -7,6 +7,7 @@ var shot = false
 var timesShot = 0
 var timer = 0
 var chargeMulti = 1.0
+var speed = 1000
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -20,6 +21,7 @@ func _shoot():
 	#print(spell.attributes.getPSpeed())
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 	var blastProj = BlastProj.instantiate()
+	blastProj.speed = speed
 	blastProj.sender = player
 	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
@@ -54,3 +56,6 @@ func _process(delta):
 						player.doneCasting()
 						queue_free()
 						spell.resetCooldown(false)
+
+func getSpeed():
+	return speed * spell.attributes.getPSpeed() * chargeMulti

@@ -14,15 +14,18 @@ func _setSpell(nspell):
 
 func _setV(nvelocity):
 	nvel = nvelocity
-	velocity = nvelocity.normalized() * speed * spell.attributes.getPSpeed() * mult
+	velocity = nvelocity.normalized() * getSpeed()
 	v = velocity
+
+func getSpeed():
+	return speed * spell.attributes.getPSpeed() * mult
 
 func _process(delta):
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize() * mult
 	if(Global.pause):
 		velocity = Vector2.ZERO
 	else:
-		velocity = nvel.normalized() * speed * spell.attributes.getPSpeed() * mult
+		velocity = nvel.normalized() * getSpeed()
 	move_and_slide()
 
 func damageTaken(reciever):

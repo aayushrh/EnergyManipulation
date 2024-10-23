@@ -1,9 +1,9 @@
 extends Node
 class_name Attributes
 
-var size
-var power
-var amount
+var size = 0.0
+var power = 0.0
+var amount = 1
 
 func _init(siz, pow, amt):
 	size = siz
