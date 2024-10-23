@@ -35,6 +35,7 @@ var slow = false
 var rotation_speed = 0
 var onLastTurn = false
 var effects = []
+var casting = false
 
 func _ready():
 	updateEnergy()
@@ -83,7 +84,7 @@ func magic_check(delta):
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0:
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting:
 				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
@@ -92,6 +93,7 @@ func magic_check(delta):
 					get_tree().current_scene.add_child(blast)
 					e.resetCooldown(true)
 					shot = true
+					casting = true
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()
 					explosion.player = self
@@ -205,6 +207,7 @@ func _dmgRed(time):
 func doneCasting():
 	slow = false
 	ROTATIONSPEED *= 2
+	casting = false
 
 func _on_dashing_timer_timeout():
 	dashing = false

@@ -49,7 +49,7 @@ layout_mode = 2
 
 [node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
 position = Vector2(-244, 135)
-health = 999.0
+health = 10.0
 checkAngle = 10.0
 blockOrFlight = 3
 DASHSPEED = 3000.0

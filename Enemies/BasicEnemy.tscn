@@ -52,11 +52,27 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 position = Vector2(38, 235)
 polygon = PackedVector2Array(-559, -685, 487, -705, 487, 183, -567, 189)
 
 [node name="dashing" type="Timer" parent="."]
 one_shot = true
+
+[node name="HpBG" type="ColorRect" parent="."]
+layout_direction = 1
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="Health" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 40.0
+color = Color(0, 1, 0, 1)
 
 [connection signal="timeout" from="block_cd" to="." method="_on_block_cd_timeout"]
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]

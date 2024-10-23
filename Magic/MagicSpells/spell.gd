@@ -12,7 +12,7 @@ var using = false
 
 func _init(namen):
 	spellName = namen
-	attributes = Attributes.new(1, 1, 1)
+	attributes = Attributes.new(0.0, 0.0, 1.0)
 
 func resetCooldown(use):
 	cooldown = getcd()

@@ -8,6 +8,7 @@ var timesShot = 0
 var timer = 0
 var chargeMulti = 1.0
 var speed = 1000
+var buttonLetGo = false
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -37,7 +38,7 @@ func _process(delta):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
 				chargeTimer -= delta
-				if spell.binding == null or !Input.is_key_pressed(spell.binding):
+				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
 				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
@@ -56,6 +57,9 @@ func _process(delta):
 						player.doneCasting()
 						queue_free()
 						spell.resetCooldown(false)
+
+func letGo():
+	buttonLetGo = true
 
 func getSpeed():
 	return speed * spell.attributes.getPSpeed() * chargeMulti

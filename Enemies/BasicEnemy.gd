@@ -17,6 +17,8 @@ var canDash = true
 var type = 1
 var moveDir = 0
 var blast = null
+var casting = false
+var maxHealth = 0
 
 @export var health : float
 
@@ -49,6 +51,7 @@ func _ready():
 	var spell = Spell.new("firstSpell")
 	spell.type = SpellCard.new(2, "Blast")
 	spells.append(spell)
+	maxHealth = health
 
 func _finishCharge():
 	slow = false
@@ -56,6 +59,7 @@ func _finishCharge():
 
 func _process(delta):
 	if(!Global.pause):
+		$Health.size.x = 80 * (health * 1.0)/(maxHealth*1.0)
 		queue_redraw()
 		if(health <= 0):
 			queue_free()
@@ -74,9 +78,12 @@ func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
+		print(dmgTaken*(1-_dmgRed(time-block)))
 		un_block()
 	else:
 		health -= dmgTaken
+		print(dmgTaken)
+		print(health/maxHealth)
 	time = 0
 
 func _move(delta):
@@ -151,14 +158,16 @@ func magic_check(delta):
 		track += 1
 		if(!e.using):
 			e.cooldown -= delta
-		if(moveDir == 0 and e.cooldown < 0):
+		if(moveDir == 0 and e.cooldown < 0 and !casting):
 			if(e.type != null and e.type.spellName.to_lower() == "blast"):
 				castedIndex = track
 				blast = BlastTscn.instantiate()
 				blast.player = self
 				blast.setSpell(e)
+				blast.letGo()
 				get_tree().current_scene.add_child(blast)
 				e.resetCooldown(true)
+				casting = true
 			if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 				var explosion = Explosion.instantiate()
 				explosion.player = self
@@ -184,6 +193,7 @@ func predictionrotate(player,delta):
 func doneCasting():
 	slow = false
 	ROTATIONSPEED *= 2
+	casting = false
 
 func avgDir(arr):
 	var ae = Vector2.ZERO
