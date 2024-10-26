@@ -5,6 +5,7 @@ var cooldown = 5
 var can_attack = true
 var slow = false
 var effects = []
+var vfx = []
 var nomove = false
 var dmgTaken = 0
 var time = 0
@@ -291,3 +292,9 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_dashing_timeout() -> void:
 	nomove = false
+
+func attachEffect(effect):
+	var visual = effect.visual.instantiate()
+	add_child(visual)
+	vfx.append(visual)
+	effects.append(effect)

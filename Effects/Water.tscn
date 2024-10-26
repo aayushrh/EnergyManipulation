@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtt7rwxaunqqm"]
+
+[ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_n8865"]
+[ext_resource type="Script" path="res://Effects/VFXIndentifier.gd" id="2_1ljxo"]
+
+[sub_resource type="Gradient" id="Gradient_fvdh6"]
+offsets = PackedFloat32Array(0, 0.993333)
+colors = PackedColorArray(0.279524, 0.548695, 1, 1, 0.565296, 0.773163, 1, 1)
+
+[node name="Water" type="CPUParticles2D"]
+amount = 250
+lifetime = 0.2
+lifetime_randomness = 1.0
+texture = ExtResource("1_n8865")
+emission_shape = 1
+emission_sphere_radius = 75.0
+gravity = Vector2(0, 0)
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_fvdh6")
+script = ExtResource("2_1ljxo")
+vfxName = "Water"

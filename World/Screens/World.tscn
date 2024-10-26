@@ -47,18 +47,6 @@ script = ExtResource("4_7sx84")
 [node name="SpellUI" parent="CanvasLayer/ScrollContainer/SpellListUI" instance=ExtResource("5_cmnpc")]
 layout_mode = 2
 
-[node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
-position = Vector2(-244, 135)
-health = 10.0
-checkAngle = 10.0
-blockOrFlight = 3
-DASHSPEED = 3000.0
-TOPSPEED = 300
-ROTATIONSPEED = 10.0
-dash_cd = 10.0
-dash_time = 0.1
-block_cd = 0.5
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(253, -101)
 zoom = Vector2(0.8, 0.8)
@@ -74,3 +62,19 @@ texture_filter = 1
 texture_repeat = 2
 scale = Vector2(200, 200)
 texture = ExtResource("8_oobl3")
+
+[node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
+position = Vector2(-244, 135)
+health = 10.0
+checkBlasts = 2.0
+checkAngle = 45.0
+blockOrFlight = 2
+tact = 1
+DASHSPEED = 5000.0
+TOPSPEED = 500
+ROTATIONSPEED = 20.0
+dash_cd = 10.0
+dash_time = 0.1
+block_cd = 1.0
+min_range = 50
+max_range = 60

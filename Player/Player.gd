@@ -35,6 +35,7 @@ var slow = false
 var rotation_speed = 0
 var onLastTurn = false
 var effects = []
+var vfx = []
 var casting = false
 
 func _ready():
@@ -227,3 +228,9 @@ func _hit_register():
 	$CanvasLayer/HealthBar.size.x = health*10.0
 	time = 0
 	time_last_block = -1
+
+func attachEffect(effect):
+	var visual = effect.visual.instantiate()
+	add_child(visual)
+	vfx.append(visual)
+	effects.append(effect)

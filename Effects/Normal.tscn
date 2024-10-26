@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b00n10yi8h2iu"]
+
+[ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_074wd"]
+[ext_resource type="Script" path="res://Effects/VFXIndentifier.gd" id="2_76i3y"]
+
+[node name="Normal" type="CPUParticles2D"]
+amount = 250
+lifetime = 0.2
+lifetime_randomness = 1.0
+texture = ExtResource("1_074wd")
+emission_shape = 1
+emission_sphere_radius = 75.0
+gravity = Vector2(0, 0)
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+script = ExtResource("2_76i3y")
+vfxName = "Normal"

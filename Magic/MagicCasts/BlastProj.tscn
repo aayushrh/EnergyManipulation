@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7n1s2fb77tim"]
 
 [ext_resource type="Script" path="res://Magic/MagicCasts/BlastProj.gd" id="1_cbhg2"]
-[ext_resource type="Texture2D" uid="uid://bocn4o4l72aid" path="res://icon.svg" id="2_cb3kh"]
+[ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="2_o26kl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuxju"]
-size = Vector2(122, 106)
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3xxi"]
+radius = 75.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gum72"]
-size = Vector2(114, 102)
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfyfv"]
+radius = 75.0
 
 [node name="BlastProj" type="CharacterBody2D"]
 collision_layer = 0
@@ -17,17 +17,18 @@ metadata/_edit_horizontal_guides_ = [-255.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, -2)
-shape = SubResource("RectangleShape2D_vuxju")
+shape = SubResource("CircleShape2D_i3xxi")
 
 [node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_cb3kh")
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_o26kl")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, -4)
-shape = SubResource("RectangleShape2D_gum72")
+shape = SubResource("CircleShape2D_dfyfv")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

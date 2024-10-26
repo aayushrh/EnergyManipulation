@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv7ctjy2t1vta"]
+
+[ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_8kiry"]
+[ext_resource type="Script" path="res://Effects/VFXIndentifier.gd" id="2_srgte"]
+
+[sub_resource type="Gradient" id="Gradient_fvdh6"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 0)
+
+[node name="Fire" type="CPUParticles2D"]
+amount = 250
+lifetime = 0.2
+lifetime_randomness = 1.0
+texture = ExtResource("1_8kiry")
+emission_shape = 1
+emission_sphere_radius = 75.0
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_fvdh6")
+script = ExtResource("2_srgte")
+vfxName = "Fire"
