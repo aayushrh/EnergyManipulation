@@ -21,23 +21,20 @@ var blast = null
 var casting = false
 var maxHealth = 0
 
-@export var health : float
-
-@export var checkBlasts : float # how oftden check blast, in sec
-#@export var skillIssue : float
-@export var checkAngle : float # angle checked for things that will be going towards them
-@export var blockOrFlight : int # how many will have to be going for it to block
-@export var tact : int # chance to do smarter things
-@export var DASHSPEED : float
-@export var cooldownAttack : float
-@export var TOPSPEED : int
-@export var ROTATIONSPEED : float
+@export var health = 10.0
+@export var checkAngle = 45 # angle checked for things that will be going towards them
+@export var blockOrFlight = 2 # how many will have to be going for it to block
+@export var tact = 1 # chance to do smarter things
+@export var DASHSPEED = 5000
+@export var cooldownAttack = 1.0
+@export var TOPSPEED = 200
+@export var ROTATIONSPEED = 10
 @export var Shockwave : PackedScene
-@export var dash_cd : float
-@export var dash_time : float
-@export var block_cd : float
-@export var min_range : int
-@export var max_range : int
+@export var dash_cd = 5
+@export var dash_time = 0.1
+@export var block_cd = 1.0
+@export var min_range = 300
+@export var max_range = 500
 
 @export var art : Node2D
 @export var softBody : Area2D
@@ -51,6 +48,7 @@ func _ready():
 	art.hit.connect(_shockwave)
 	var spell = Spell.new("firstSpell")
 	spell.type = SpellCard.new(2, "Blast")
+	spell.element = SpellCard.new(0, "Water")
 	spells.append(spell)
 	maxHealth = health
 
@@ -66,14 +64,14 @@ func _process(delta):
 			queue_free()
 		time+=delta
 		magic_check(delta)
-		_effectsHandle()
+		_effectsHandle(delta)
 		if(!nomove):
 			_move(delta)
 		move_and_slide()
 
-func _effectsHandle():
+func _effectsHandle(delta):
 	for e in effects:
-		e._tick(self)
+		e._tick(self, delta)
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
@@ -217,10 +215,11 @@ func dash(dir):
 	$dash_cd.start(dash_cd+dash_time)
 
 func do_block():
-	if(block==-1 and !nomove):
-		block = time
-		slow = true
-		$block_cd.start(block_cd)
+	pass
+	#if(block==-1 and !nomove):
+		#block = time
+		#slow = true
+		#$block_cd.start(block_cd)
 
 func _draw():
 	if(block != -1):
@@ -245,7 +244,7 @@ func set_perp_vector(vect, right):
 func awareness(delta):
 	var help = []
 	for n in magic:
-		if(n is Blast):
+		if(is_instance_valid(n) and n is Blast):
 			var asdf = is_this_thing_going_towards_me((global_position-n.global_position).angle(),n.v)
 			if(asdf):
 				help.append(n)
@@ -283,12 +282,13 @@ func _on_dash_cd_timeout() -> void:
 	canDash = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	magic.append(area.get_parent())
+	if(area.get_parent() is Blast and area.get_parent().sender.type != type):
+		magic.append(area.get_parent())
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	magic.remove_at(magic.find(area.get_parent()))
-
+	if(is_instance_valid(area.get_parent()) and area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
+		magic.append(area.get_parent())
 
 func _on_dashing_timeout() -> void:
 	nomove = false

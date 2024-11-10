@@ -47,7 +47,7 @@ func _process(delta):
 	time += delta
 	queue_redraw()
 	if(!Global.pause and !dashing):
-		_effectsHandle()
+		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
 		_movement(delta)
@@ -85,7 +85,7 @@ func magic_check(delta):
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting:
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
 				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
@@ -175,9 +175,9 @@ func rotateToTarget(target, delta):
 	rotation_degrees += 90
 	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
 
-func _effectsHandle():
+func _effectsHandle(delta):
 	for e in effects:
-		e._tick(self)
+		e._tick(self, delta)
 
 func _movement(delta):
 	var input_vector = Vector2.ZERO

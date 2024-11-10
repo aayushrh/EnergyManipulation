@@ -7,12 +7,11 @@ func _init(life):
 	lifetime = life
 	visual = load("res://Effects/Soggy.tscn")
 
-func _tick(entity):
-	print("soggyness")
+func _tick(entity, delta):
 	if !handledEffect:
 		entity.TOPSPEED /= 2
 		handledEffect = true
-	lifetime -= 1
+	lifetime -= delta
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))
 		for i in entity.vfx:

@@ -32,6 +32,8 @@ func _shoot():
 	timer = 0.1
 
 func _process(delta):
+	if !is_instance_valid(player):
+		queue_free()
 	if !Global.pause and is_instance_valid(player):
 		if !shot:
 			if (castingTimer >= 0 ):

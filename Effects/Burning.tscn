@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Effects/VFXIndentifier.gd" id="2_tvdnb"]
 
 [sub_resource type="Gradient" id="Gradient_fvdh6"]
-colors = PackedColorArray(1, 0, 0, 1, 0.760784, 0.701961, 0.227451, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.705882, 0.705882, 0, 1)
 
 [node name="Fire" type="CPUParticles2D"]
 amount = 100

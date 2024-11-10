@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=10 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -6,14 +6,23 @@
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
-[ext_resource type="PackedScene" uid="uid://c2gbss4jwhyhl" path="res://Enemies/BasicEnemy.tscn" id="7_tu6r2"]
 [ext_resource type="Texture2D" uid="uid://ikmnxavupf63" path="res://Art/kitchenTile(2).png" id="8_oobl3"]
+[ext_resource type="PackedScene" uid="uid://bj4aovx2vn01h" path="res://World/UI/CardSelection.tscn" id="8_v2hr7"]
+[ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dcdsc")
 
+[node name="KitchenTile(2)2" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(120, 120)
+texture = ExtResource("8_oobl3")
+region_enabled = true
+region_rect = Rect2(0, 0, 25, 25)
+
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
-position = Vector2(253, -101)
 ROTATIONSPEED = 20.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -23,10 +32,6 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Magic" parent="CanvasLayer" instance=ExtResource("3_pl71l")]
 visible = false
-offset_left = 1.0
-offset_top = 3.0
-offset_right = 1.0
-offset_bottom = 3.0
 
 [node name="InputChangeSystem" parent="CanvasLayer" instance=ExtResource("4_eyl0v")]
 visible = false
@@ -47,8 +52,11 @@ script = ExtResource("4_7sx84")
 [node name="SpellUI" parent="CanvasLayer/ScrollContainer/SpellListUI" instance=ExtResource("5_cmnpc")]
 layout_mode = 2
 
+[node name="CardSelection" parent="CanvasLayer" node_paths=PackedStringArray("spawner") instance=ExtResource("8_v2hr7")]
+visible = false
+spawner = NodePath("../../Spawner")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(253, -101)
 zoom = Vector2(0.8, 0.8)
 limit_left = -1500
 limit_top = -1000
@@ -56,25 +64,10 @@ limit_right = 1500
 limit_bottom = 1000
 limit_smoothed = true
 
-[node name="KitchenTile(2)" type="Sprite2D" parent="."]
-show_behind_parent = true
-texture_filter = 1
-texture_repeat = 2
-scale = Vector2(200, 200)
-texture = ExtResource("8_oobl3")
+[node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("enemyParent", "player", "cardSelection")]
+script = ExtResource("9_vxjm2")
+enemyParent = NodePath("../Enemies")
+player = NodePath("../Player")
+cardSelection = NodePath("../CanvasLayer/CardSelection")
 
-[node name="BasicEnemy" parent="." instance=ExtResource("7_tu6r2")]
-position = Vector2(-244, 135)
-health = 10.0
-checkBlasts = 2.0
-checkAngle = 45.0
-blockOrFlight = 2
-tact = 1
-DASHSPEED = 5000.0
-TOPSPEED = 500
-ROTATIONSPEED = 20.0
-dash_cd = 10.0
-dash_time = 0.1
-block_cd = 1.0
-min_range = 50
-max_range = 60
+[node name="Enemies" type="Node2D" parent="."]

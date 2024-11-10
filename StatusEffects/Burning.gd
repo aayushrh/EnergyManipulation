@@ -1,18 +1,18 @@
 extends Effects
 class_name Burning
 
-var timer = 10
+var timer = 60
 
 func _init(life):
 	lifetime = life
 	visual = load("res://Effects/Burning.tscn")
 
-func _tick(entity):
+func _tick(entity, delta):
 	timer -= 1
 	if(timer < 0):
-		entity.health -= 1
-		timer = 10
-	lifetime -= 1
+		entity.health -= 0.5
+		timer = 60
+	lifetime -= delta
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))
 		for i in entity.vfx:

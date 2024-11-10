@@ -9,7 +9,9 @@ var sender = null
 var nvel = Vector2.ZERO
 
 @onready var Fire = preload("res://Effects/Fire.tscn")
+@onready var FireHit = preload("res://Effects/FireHit.tscn")
 @onready var Water = preload("res://Effects/Water.tscn")
+@onready var WaterHit = preload("res://Effects/WaterHit.tscn")
 @onready var Normal = preload("res://Effects/Normal.tscn")
 
 func _setSpell(nspell):
@@ -48,10 +50,27 @@ func damageTaken(reciever):
 func _on_area_2d_body_entered(body) -> void:
 	if !(body.type == sender.type):
 		body._hit(self)
-		if(spell.element != null):
+		if(spell.element != null and is_instance_valid(self)):
 			if(spell.element.spellName.to_lower() == "water"):
-				body.attachEffect(Soggy.new(100))
-				print("e")
+				body.attachEffect(Soggy.new(5))
+				var waterHit = WaterHit.instantiate()
+				waterHit.global_position = global_position
+				waterHit.scale = scale
+				waterHit.emitting = true
+				get_tree().current_scene.add_child(waterHit)
 			elif(spell.element.spellName.to_lower() == "fire") :
-				body.attachEffect(Burning.new(50))
+				body.attachEffect(Burning.new(3))
+				var fireHit = FireHit.instantiate()
+				fireHit.global_position = global_position
+				fireHit.scale = scale
+				fireHit.emitting = true
+				get_tree().current_scene.add_child(fireHit)
 		queue_free()
+
+func _on_area_2d_area_entered(area):
+	var body = area.get_parent()
+	if(body is Blast and body.sender.type != sender.type):
+		if(body.spell.initCost() * body.mult * 1/body.spell.attributes.amount > spell.initCost() * mult * 1/spell.attributes.amount and is_instance_valid(self)):
+			queue_free()
+		elif(is_instance_valid(body)):
+			body.queue_free()
