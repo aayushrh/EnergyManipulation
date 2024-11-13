@@ -7,17 +7,19 @@
 colors = PackedColorArray(1, 0, 0, 1, 0.705882, 0.705882, 0, 1)
 
 [node name="Fire" type="CPUParticles2D"]
-amount = 100
+amount = 25
+lifetime = 0.25
+speed_scale = 0.5
 texture = ExtResource("1_jmcc3")
 emission_shape = 1
-emission_sphere_radius = 75.0
+emission_sphere_radius = 25.0
 spread = 180.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, -980)
 initial_velocity_min = 100.0
 initial_velocity_max = 200.0
 angle_max = 360.0
-scale_amount_min = 0.05
-scale_amount_max = 0.1
+scale_amount_min = 0.04
+scale_amount_max = 0.06
 color_ramp = SubResource("Gradient_fvdh6")
 script = ExtResource("2_tvdnb")
 vfxName = "Fire"

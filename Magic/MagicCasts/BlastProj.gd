@@ -7,6 +7,7 @@ var speed = 1000
 var mult = 1
 var sender = null
 var nvel = Vector2.ZERO
+var effect = null
 
 @onready var Fire = preload("res://Effects/Fire.tscn")
 @onready var FireHit = preload("res://Effects/FireHit.tscn")
@@ -17,6 +18,10 @@ var nvel = Vector2.ZERO
 func _setSpell(nspell):
 	scale = Vector2(0.5, 0.5) * nspell.attributes.getSize() * mult
 	spell = nspell
+	if(spell.element.spellName.to_lower() == "water"):
+		effect = (Soggy.new(5))
+	elif(spell.element.spellName.to_lower() == "fire") :
+		effect = (Burning.new(3))
 
 func _setV(nvelocity):
 	nvel = nvelocity
@@ -51,15 +56,15 @@ func _on_area_2d_body_entered(body) -> void:
 	if !(body.type == sender.type):
 		body._hit(self)
 		if(spell.element != null and is_instance_valid(self)):
+			if(effect != null):
+				body.attachEffect(effect)
 			if(spell.element.spellName.to_lower() == "water"):
-				body.attachEffect(Soggy.new(5))
 				var waterHit = WaterHit.instantiate()
 				waterHit.global_position = global_position
 				waterHit.scale = scale
 				waterHit.emitting = true
 				get_tree().current_scene.add_child(waterHit)
 			elif(spell.element.spellName.to_lower() == "fire") :
-				body.attachEffect(Burning.new(3))
 				var fireHit = FireHit.instantiate()
 				fireHit.global_position = global_position
 				fireHit.scale = scale

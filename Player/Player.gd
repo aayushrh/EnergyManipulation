@@ -16,6 +16,9 @@ class_name Player
 
 @onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
+@onready var PerfectBlock = preload("res://Effects/PerfectBlock.tscn")
+@onready var GoodBlock = preload("res://Effects/GoodBlock.tscn")
+@onready var BadBlock = preload("res://Effects/BadBlock.tscn")
 
 var type = 0
 var rng = RandomNumberGenerator.new()
@@ -37,6 +40,7 @@ var onLastTurn = false
 var effects = []
 var vfx = []
 var casting = false
+var blockedEffects = []
 
 func _ready():
 	updateEnergy()
@@ -194,14 +198,26 @@ func _movement(delta):
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
 	time_last_hit = time
-	_hit_register()
+	_hit_register(hitbox)
 
-func _dmgRed(time):
+func _dmgRed(time, hitbox):
 	if(time > 0 and time < 0.0417):
+		var perfectBlock = PerfectBlock.instantiate()
+		perfectBlock.global_position = hitbox.global_position
+		get_tree().current_scene.add_child(perfectBlock)
+		blockedEffects.append(hitbox.effect)
 		return 1
 	if(time > 0.0417 and time < 0.0833):
+		var goodBlock = GoodBlock.instantiate()
+		goodBlock.global_position = hitbox.global_position
+		get_tree().current_scene.add_child(goodBlock)
+		blockedEffects.append(hitbox.effect)
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
+		var badBlock = BadBlock.instantiate()
+		badBlock.global_position = hitbox.global_position
+		get_tree().current_scene.add_child(badBlock)
+		print(effects.find(hitbox.effect))
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
 	return 0
 	
@@ -213,12 +229,12 @@ func doneCasting():
 func _on_dashing_timer_timeout():
 	dashing = false
 
-func _hit_register():
-	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
-	print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
-	print("damage: " + str(dmgTaken * (1-dmgRed)))
-	print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
-	print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
+func _hit_register(hitbox):
+	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block), hitbox)
+	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
+	#print("damage: " + str(dmgTaken * (1-dmgRed)))
+	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
+	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
 	if(health<0):
@@ -230,7 +246,13 @@ func _hit_register():
 	time_last_block = -1
 
 func attachEffect(effect):
-	var visual = effect.visual.instantiate()
-	add_child(visual)
-	vfx.append(visual)
-	effects.append(effect)
+	var stop = false
+	for b in blockedEffects:
+		if(b == effect):
+			stop = true
+			blockedEffects.remove_at(blockedEffects.find(b))
+	if(!stop):
+		var visual = effect.visual.instantiate()
+		add_child(visual)
+		vfx.append(visual)
+		effects.append(effect)

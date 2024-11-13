@@ -1,6 +1,6 @@
-extends Node2D
+extends Node
 
-var lifetime = 20
+@export var lifetime = 20
 
 func _process(delta):
 	lifetime -= 1

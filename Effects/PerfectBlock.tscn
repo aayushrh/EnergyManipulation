@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://da876df0ssu07"]
+
+[ext_resource type="Script" path="res://Effects/afterimage.gd" id="1_m7rmy"]
+
+[node name="PerfectBlock" type="Label"]
+offset_left = -67.0
+offset_top = -26.0
+offset_right = 64.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "PERFECT"
+script = ExtResource("1_m7rmy")
+lifetime = 120

@@ -26,4 +26,3 @@ func _process(delta):
 	for i in get_children():
 		if(pow(i.position.x, 2) + pow(i.position.y, 2) < 1000):
 			i.queue_free()
-

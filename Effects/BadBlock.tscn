@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwe7eaad21t2p"]
+
+[ext_resource type="Script" path="res://Effects/afterimage.gd" id="1_v1d4o"]
+
+[node name="BadBlock" type="Label"]
+offset_left = -30.0
+offset_top = -25.0
+offset_right = 36.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 0.341176, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "BAD"
+script = ExtResource("1_v1d4o")
+lifetime = 120
