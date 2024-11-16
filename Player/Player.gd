@@ -44,6 +44,7 @@ var vfx = []
 var casting = false
 var blockedEffects = []
 var can_dash = true
+var pause = false
 
 func _ready():
 	updateEnergy()
@@ -53,7 +54,7 @@ func _ready():
 func _process(delta):
 	time += delta
 	queue_redraw()
-	if(!Global.pause and !dashing):
+	if((!Global.pause and !pause) and !dashing):
 		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)

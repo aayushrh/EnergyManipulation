@@ -17,3 +17,4 @@ func _on_stats_pressed():
 func _on_exit_pressed():
 	visible = false
 	Global.pause = false
+	get_tree().current_scene._reloadSpellList()

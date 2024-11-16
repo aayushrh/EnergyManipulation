@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-	Global.magicCards = [SpellCard.new(0, "Fire"), SpellCard.new(0, "Fire"), SpellCard.new(1, "Dragon"), SpellCard.new(1, "Dragon"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Explosion"), SpellCard.new(0, "Water")]
+	Global.magicCards = [SpellCard.new(0, "Fire"), SpellCard.new(0, "Fire"), SpellCard.new(1, "Dragon"), SpellCard.new(1, "Boar"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Blast"), SpellCard.new(2, "Explosion"), SpellCard.new(0, "Water")]
 	Global.spellList = []
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
@@ -19,3 +19,6 @@ func _process(delta):
 		$CanvasLayer/MainMenu.visible = true
 		Global.pause = true
 		$CanvasLayer/ScrollContainer/SpellListUI.reload()
+
+func _reloadSpellList():
+	$CanvasLayer/ScrollContainer/SpellListUI.reload()

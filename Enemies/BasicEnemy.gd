@@ -22,6 +22,7 @@ var blast = null
 var casting = false
 var maxHealth = 0
 var agg = false#(randi_range(0,1)==0)
+var pause = false
 
 @export var health = 10.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
@@ -60,17 +61,20 @@ func _finishCharge():
 	ROTATIONSPEED *= 2
 
 func _process(delta):
-	if(!Global.pause):
+	if(!Global.pause and !pause):
 		$Health.size.x = 80 * (health * 1.0)/(maxHealth*1.0)
 		queue_redraw()
 		if(health <= 0):
 			queue_free()
 		time+=delta
-		magic_check(delta)
+		#magic_check(delta)
 		_effectsHandle(delta)
 		if(!nomove):
+			pass
 			_move(delta)
 		move_and_slide()
+	if(!Global.pause and pause):
+		_effectsHandle(delta)
 
 func _effectsHandle(delta):
 	for e in effects:
