@@ -8,7 +8,7 @@ func isValidElement(a):
 	return false
 
 func isValidStyle(a):
-	var elements = ["dragon", "tiger", "rabbit", "horse", "monkey", "rat"]
+	var elements = ["dragon", "tiger", "rabbit", "horse", "monkey", "rat", "boar"]
 	for e in elements:
 		if(e == (a.to_lower())):
 			return true

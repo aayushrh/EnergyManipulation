@@ -20,8 +20,11 @@ func _setSpell(nspell):
 	spell = nspell
 	if(spell.element.spellName.to_lower() == "water"):
 		effect = (Soggy.new(5))
-	elif(spell.element.spellName.to_lower() == "fire") :
-		effect = (Burning.new(3))
+	elif(spell.element.spellName.to_lower() == "fire"):
+		var e = Burning.new(3)
+		e.dmg = spell.attributes.getPower() * ((mult-1)/2+1)
+		effect = (e)
+		
 
 func _setV(nvelocity):
 	nvel = nvelocity
@@ -50,7 +53,7 @@ func _process(delta):
 	move_and_slide()
 
 func damageTaken(reciever):
-	return spell.attributes.getPower()
+	return spell.attributes.getPower() * ((mult-1)/2+1)
 
 func _on_area_2d_body_entered(body) -> void:
 	if !(body.type == sender.type):

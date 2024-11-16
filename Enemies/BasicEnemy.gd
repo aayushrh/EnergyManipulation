@@ -20,21 +20,23 @@ var moveDir = 0
 var blast = null
 var casting = false
 var maxHealth = 0
+var agg = (randi_range(0,1)==0)
 
 @export var health = 10.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
-@export var tact = 1 # chance to do smarter things
+@export var tact = 0 # chance to do smarter things
 @export var DASHSPEED = 5000
 @export var cooldownAttack = 1.0
 @export var TOPSPEED = 200
 @export var ROTATIONSPEED = 10
 @export var Shockwave : PackedScene
-@export var dash_cd = 5
+@export var dash_cd = 2.5
 @export var dash_time = 0.1
 @export var block_cd = 1.0
-@export var min_range = 300
-@export var max_range = 500
+@export var caution_range = 300
+@export var min_range = 300 - 50*int(agg)
+@export var max_range = 500 - 50*int(agg)
 
 @export var art : Node2D
 @export var softBody : Area2D
@@ -93,15 +95,20 @@ func _move(delta):
 		can_attack = true
 	if player != null:
 		if(castedIndex != -1 and (spells[castedIndex].type.spellName.to_lower() == "blast" or spells[castedIndex].type.spellName.to_lower() == "beam")):
-			predictionrotate(player, delta)
+			if(agg):
+				rotateToTarget(player.global_position, delta)
+			else:
+				predictionrotate(player, delta)
 		else:
 			rotateToTarget(player.global_position, delta)
-		if((player.global_position - global_position).length() > max_range):
+		if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
 			#print((player.global_position - global_position).length())
 			velocity = (player.global_position - global_position).normalized() * TOPSPEED
-		elif((player.global_position - global_position).length() < min_range):
+		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 		awareness(delta)
+		if(agg):
+			aggro(player, delta)
 		velocity -= softBodyPush * TOPSPEED
 		if(slow):
 			velocity = velocity * 0.5
@@ -152,29 +159,30 @@ func tactCheck(req):
 		return randi_range(tact,req+tact)>req
 
 func magic_check(delta):
-	var track = -1
-	for e in spells:
-		track += 1
-		if(!e.using):
-			e.cooldown -= delta
-		if(moveDir == 0 and e.cooldown < 0 and !casting):
-			if(e.type != null and e.type.spellName.to_lower() == "blast"):
-				castedIndex = track
-				blast = BlastTscn.instantiate()
-				blast.player = self
-				blast.setSpell(e)
-				blast.letGo()
-				get_tree().current_scene.add_child(blast)
-				e.resetCooldown(true)
-				casting = true
-			if(e.type != null and e.type.spellName.to_lower() == "explosion"):
-				var explosion = Explosion.instantiate()
-				explosion.player = self
-				explosion.setSpell(e)
-				get_tree().current_scene.add_child(explosion)
-				e.resetCooldown(true)
-			slow = true
-			ROTATIONSPEED /= 2
+	if(player!=null):
+		var track = -1
+		for e in spells:
+			track += 1
+			if(!e.using):
+				e.cooldown -= delta
+			if(moveDir == 0 and e.cooldown < 0 and !casting):
+				if(e.type != null and e.type.spellName.to_lower() == "blast"):
+					castedIndex = track
+					blast = BlastTscn.instantiate()
+					blast.player = self
+					blast.setSpell(e)
+					blast.letGo()
+					get_tree().current_scene.add_child(blast)
+					e.resetCooldown(true)
+					casting = true
+				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
+					var explosion = Explosion.instantiate()
+					explosion.player = self
+					explosion.setSpell(e)
+					get_tree().current_scene.add_child(explosion)
+					e.resetCooldown(true)
+				slow = true
+				ROTATIONSPEED /= 2
 
 func predictionrotate(player,delta):
 	if(blast!=null):
@@ -241,6 +249,13 @@ func set_perp_vector(vect, right):
 	else:
 		return Vector2(-vect.y,vect.x)
 
+func aggro(player, delta):
+	if(blast != null):
+		if(blast.castingTimer < 0.1):
+			if(canDash and blast.castingTimer < (player.global_position.distance_to(global_position)-50)*2/DASHSPEED):
+				dash((player.global_position - global_position).normalized())
+
+
 func awareness(delta):
 	var help = []
 	for n in magic:
@@ -253,7 +268,7 @@ func awareness(delta):
 	for n in help:
 		if(help.size()>=blockOrFlight):
 			if(block == -1):
-				if(canDash):
+				if(!agg and canDash):
 					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
 						do_block()
 					else:
@@ -264,7 +279,7 @@ func awareness(delta):
 					else:
 						velocity = avgDir(help) * TOPSPEED
 		elif(block == -1):
-			if(canDash):
+			if(!agg and canDash):
 				dash(perp_vector(avgDir(help)))
 			else:
 				#print(moveDir)
@@ -274,6 +289,8 @@ func awareness(delta):
 					#else:
 					#	moveDir = rng.randi_range(0,1)*2-1
 				velocity = set_perp_vector(avgDir(help),moveDir>0) * TOPSPEED
+	#if(help.size() == 0 and player != null and player.casting):
+	#	velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 
 func _on_block_cd_timeout() -> void:
 	un_block()

@@ -56,7 +56,7 @@ func _process(delta):
 		rotateToTarget(get_global_mouse_position(), delta)
 		_movement(delta)
 		attack()
-		dash_check()
+		dash_check(delta)
 		block()
 	if(dashing):
 		var after = Afterimage.instantiate()
@@ -113,7 +113,7 @@ func magic_check(delta):
 					updateEnergy()
 	onLastTurn = hit
 
-func dash_check():
+func dash_check(delta):
 	if(Input.is_action_pressed("Dash")):
 		var input_vector = Vector2.ZERO
 		input_vector.y = Input.get_axis("up", "down")
@@ -121,9 +121,9 @@ func dash_check():
 		input_vector = input_vector.normalized()
 		dash(input_vector)
 	elif(InputMap.action_get_events("Dash").size() == 0):
-		_doubleClickCheck()
+		_doubleClickCheck(delta)
 
-func _doubleClickCheck():
+func _doubleClickCheck(delta):
 	var justClicked = ""
 	var dir = Vector2.ZERO
 	if(Input.is_action_just_pressed("down")):
@@ -143,9 +143,9 @@ func _doubleClickCheck():
 			dash(dir)
 		else:
 			clicked = justClicked
-			timer = 120
+			timer = 0.25
 	if clicked != "" :
-		timer -= 1
+		timer -= delta
 		if timer <= 0:
 			clicked = ""
 
