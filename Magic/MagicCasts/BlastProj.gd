@@ -61,13 +61,13 @@ func _on_area_2d_body_entered(body) -> void:
 		if(spell.element != null and is_instance_valid(self)):
 			if(effect != null):
 				body.attachEffect(effect)
-			if(spell.element.spellName.to_lower() == "water"):
+			if(spell.element.spellName.to_lower() == "water" and get_tree() != null):
 				var waterHit = WaterHit.instantiate()
 				waterHit.global_position = global_position
 				waterHit.scale = scale
 				waterHit.emitting = true
 				get_tree().current_scene.add_child(waterHit)
-			elif(spell.element.spellName.to_lower() == "fire") :
+			elif(spell.element.spellName.to_lower() == "fire" and get_tree() != null) :
 				var fireHit = FireHit.instantiate()
 				fireHit.global_position = global_position
 				fireHit.scale = scale

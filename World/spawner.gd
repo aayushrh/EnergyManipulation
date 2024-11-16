@@ -19,8 +19,8 @@ func _ready():
 	cardSelection.connect("finishedSelecting", _startNextWave)
 
 func _process(delta):
-	var spawn = rng.randi_range(0, 1000)
-	if(spawn < 1 and spawned < waveNumber):
+	var spawn = rng.randi_range(0, 500)
+	if(spawn < 1 and spawned < floor(waveNumber/4) + 1):
 		var num = rng.randi_range(0, 3)
 		var spawnLoc = Vector2.ZERO
 		if(num == 0):

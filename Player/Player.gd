@@ -13,6 +13,7 @@ class_name Player
 @export_group("Effects")
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
+@export var HurtBackground : Node2D
 
 @onready var Blast = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
@@ -237,11 +238,12 @@ func _hit_register(hitbox):
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
+	HurtBackground._update(health)
 	if(health<0):
 		Global._change_tscn("res://World/Screens/MainMenu.tscn")
 		Global.pause = false
 	updateEnergy()
-	$CanvasLayer/HealthBar.size.x = health*10.0
+	$CanvasLayer/HealthBar.size.x = health*20.0
 	time = 0
 	time_last_block = -1
 

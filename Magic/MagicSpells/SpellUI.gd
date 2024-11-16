@@ -8,8 +8,9 @@ func _initialize():
 	$Label2.text = (char)(spell.binding)
 
 func _process(delta):
-	if initSize == 0:
-		initSize = $ColorRect2.size.x
-		$ColorRect2.size.x = 0
-	$ColorRect2.size.x = (spell.cooldown/spell.getcd()) * initSize
+	if(spell != null):
+		if initSize == 0:
+			initSize = $ColorRect2.size.x
+			$ColorRect2.size.x = 0
+		$ColorRect2.size.x = (spell.cooldown/spell.getcd()) * initSize
 	#print(spell.cooldown)

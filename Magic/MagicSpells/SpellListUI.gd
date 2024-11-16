@@ -10,13 +10,6 @@ var adding = false
 func _ready():
 	reload()
 
-func test():
-	for i in range(0, 10):
-		var namem = "e" + str(i)
-		var spell = Spell.new(namem)
-		spell.binding = 64
-		Global.spellList.append(spell)
-
 func reload():
 	for i in get_children():
 		i.queue_free()
