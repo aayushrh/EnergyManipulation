@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cekec7pbvckd0"]
+
+[ext_resource type="Script" path="res://World/UI/EffectUI.gd" id="1_wy0x1"]
+[ext_resource type="Texture2D" uid="uid://np0r1pb6l1gh" path="res://Art/sprint.png" id="2_o4evp"]
+[ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/Aayush.png" id="2_u4cuo"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="3_xen2r"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wy0x1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_o4evp")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.1, 0.1)
+step = 0.01
+value = 100.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = ExtResource("2_u4cuo")
+texture_progress = ExtResource("3_xen2r")

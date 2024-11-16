@@ -20,6 +20,7 @@ class_name Player
 @onready var PerfectBlock = preload("res://Effects/PerfectBlock.tscn")
 @onready var GoodBlock = preload("res://Effects/GoodBlock.tscn")
 @onready var BadBlock = preload("res://Effects/BadBlock.tscn")
+@onready var EffectUI = preload("res://World/UI/EffectUI.tscn")
 
 var type = 0
 var rng = RandomNumberGenerator.new()
@@ -42,6 +43,7 @@ var effects = []
 var vfx = []
 var casting = false
 var blockedEffects = []
+var can_dash = true
 
 func _ready():
 	updateEnergy()
@@ -151,13 +153,16 @@ func _doubleClickCheck(delta):
 			clicked = ""
 
 func dash(dir):
-	velocity = dir * DASHSPEED
-	dashing = true
-	$DashingTimer.start(DASHTIME)
-	clicked = ""
-	timer = 60
-	blocking = false
-	$PlayerArt._unblock()
+	if(can_dash):
+		velocity = dir * DASHSPEED
+		dashing = true
+		$DashingTimer.start(DASHTIME)
+		clicked = ""
+		blocking = false
+		$PlayerArt._unblock()
+		$DashingCooldown.start(2.5)
+		attachEffect(Dash.new(2.5))
+		can_dash = false
 
 func _shockwave():
 	var shockwave = Shockwave.instantiate()
@@ -258,3 +263,9 @@ func attachEffect(effect):
 		add_child(visual)
 		vfx.append(visual)
 		effects.append(effect)
+		var effectUI = EffectUI.instantiate()
+		effectUI.initialize(effect)
+		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+
+func _on_dashing_cooldown_timeout():
+	can_dash = true

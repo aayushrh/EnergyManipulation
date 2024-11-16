@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://mpo3uyl0648p"]
+[gd_scene load_steps=9 format=3 uid="uid://mpo3uyl0648p"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
 [ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
 [ext_resource type="Texture2D" uid="uid://qakb1qsi280l" path="res://Art/HurtBackground.png" id="4_51wdw"]
 [ext_resource type="Script" path="res://Effects/HurtBackground.gd" id="5_lab3i"]
+[ext_resource type="PackedScene" uid="uid://cekec7pbvckd0" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
@@ -55,10 +56,26 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_51wdw")
 script = ExtResource("5_lab3i")
 
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+offset_left = 852.0
+offset_top = 20.0
+offset_right = 1152.0
+offset_bottom = 85.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" parent="CanvasLayer/ScrollContainer/HBoxContainer" instance=ExtResource("7_2i676")]
+layout_mode = 2
+
 [node name="WeaponSlot" type="Node2D" parent="."]
 
 [node name="DashingTimer" type="Timer" parent="."]
 
 [node name="PlayerArt" parent="." instance=ExtResource("4_1ei8s")]
 
+[node name="DashingCooldown" type="Timer" parent="."]
+
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
+[connection signal="timeout" from="DashingCooldown" to="." method="_on_dashing_cooldown_timeout"]

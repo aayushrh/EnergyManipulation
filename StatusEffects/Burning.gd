@@ -7,7 +7,7 @@ var dmg = 0.5
 func _init(life):
 	lifetime = life
 	visual = load("res://Effects/Burning.tscn")
-	
+	icon = load("res://Art/flame.png")
 	
 func _tick(entity, delta):
 	timer -= delta

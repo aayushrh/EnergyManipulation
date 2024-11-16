@@ -8,7 +8,7 @@ offsets = PackedFloat32Array(0, 0.993333)
 colors = PackedColorArray(0.279524, 0.548695, 1, 1, 0.565296, 0.773163, 1, 1)
 
 [node name="Water" type="CPUParticles2D"]
-amount = 250
+amount = 150
 lifetime = 0.2
 lifetime_randomness = 1.0
 texture = ExtResource("1_n8865")
