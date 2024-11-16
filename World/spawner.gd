@@ -34,10 +34,11 @@ func _process(delta):
 		
 		var basicEnemy = BasicEnemy.instantiate()
 		basicEnemy.global_position = spawnLoc + player.global_position
+		basicEnemy.agg = randi_range(0,1)==1
 		enemyParent.add_child(basicEnemy)
 		spawned += 1
 	
-	if enemyParent.get_children().size() <= 0 and spawned >= waveNumber:
+	if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/4) + 1:
 		readyToSpawn = true
 		if !emitted:
 			waveFinished.emit()

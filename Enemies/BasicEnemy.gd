@@ -16,11 +16,12 @@ var spells = []# enemy casted spells
 var castedIndex = -1
 var canDash = true
 var type = 1
-var moveDir = 0
+var dodgeDir = 0
+var moveDir = 0.0
 var blast = null
 var casting = false
 var maxHealth = 0
-var agg = (randi_range(0,1)==0)
+var agg = false#(randi_range(0,1)==0)
 
 @export var health = 10.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
@@ -106,6 +107,14 @@ func _move(delta):
 			velocity = (player.global_position - global_position).normalized() * TOPSPEED
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
+		else:
+			if(moveDir == 0):
+				moveDir = rng.randi_range(0,1)*2-1
+			elif(rng.randi_range(0,100000)==1):
+				moveDir = -moveDir
+			else:
+				moveDir = moveDir*pow(1.5,delta)
+			velocity = set_perp_vector((player.global_position - global_position).normalized(), moveDir>0) * TOPSPEED
 		awareness(delta)
 		if(agg):
 			aggro(player, delta)
@@ -165,7 +174,7 @@ func magic_check(delta):
 			track += 1
 			if(!e.using):
 				e.cooldown -= delta
-			if(moveDir == 0 and e.cooldown < 0 and !casting):
+			if(dodgeDir == 0 and e.cooldown < 0 and !casting):
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					castedIndex = track
 					blast = BlastTscn.instantiate()
@@ -189,8 +198,12 @@ func predictionrotate(player,delta):
 		var a = pow(blast.getSpeed(),2)-player.velocity.distance_squared_to(Vector2.ZERO)
 		var b = -2*(((player.global_position.x-global_position.x)*player.velocity.x)+((player.global_position.y-global_position.y)*player.velocity.y))
 		var c = -(player.global_position-global_position).x-(player.global_position-global_position).y
-		var time = (-b + sqrt(b * b - 4 * a * c))/(2 * a)
-		rotateToTarget(player.global_position+player.velocity*time,delta)
+		var time = (-b + int(player.global_position.y > global_position.y)*sqrt(b * b - 4 * a * c))/(2 * a)
+		if(!is_nan(time)):
+			rotateToTarget(player.global_position+player.velocity*time,delta)
+		else:
+			print("hello123")
+			rotateToTarget(player.global_position,delta)
 		if(blast.shot):
 			blast = null
 			castedIndex = -1
@@ -263,8 +276,8 @@ func awareness(delta):
 			var asdf = is_this_thing_going_towards_me((global_position-n.global_position).angle(),n.v)
 			if(asdf):
 				help.append(n)
-	if(moveDir != 0 and help.size() <= 0):
-		moveDir = 0
+	if(dodgeDir != 0 and help.size() <= 0):
+		dodgeDir = 0
 	for n in help:
 		if(help.size()>=blockOrFlight):
 			if(block == -1):
@@ -282,13 +295,13 @@ func awareness(delta):
 			if(!agg and canDash):
 				dash(perp_vector(avgDir(help)))
 			else:
-				#print(moveDir)
-				if(moveDir == 0):
+				#print(dodgeDir)
+				if(dodgeDir == 0):
 					#if(tactCheck(20)):
-						moveDir = int((avgDir(help)-avgVelo(help)).angle()>0)*2-1
+						dodgeDir = int((avgDir(help)-avgVelo(help)).angle()>0)*2-1
 					#else:
-					#	moveDir = rng.randi_range(0,1)*2-1
-				velocity = set_perp_vector(avgDir(help),moveDir>0) * TOPSPEED
+					#	dodgeDir = rng.randi_range(0,1)*2-1
+				velocity = set_perp_vector(avgDir(help),dodgeDir>0) * TOPSPEED
 	#if(help.size() == 0 and player != null and player.casting):
 	#	velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 
