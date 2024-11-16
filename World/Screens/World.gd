@@ -15,10 +15,11 @@ func _process(delta):
 		#Global.pause = !Global.pause
 		#$CanvasLayer/Magic.visible = !$CanvasLayer/Magic.visible
 		#$CanvasLayer/ScrollContainer.visible = !$CanvasLayer/ScrollContainer.visible
-	if Input.is_action_just_pressed("Pause"):
-		$CanvasLayer/MainMenu.visible = true
+	if Input.is_action_just_pressed("Pause") and !$CanvasLayer/MainMenu.visible:
+		$CanvasLayer/MainMenu._show()
 		Global.pause = true
 		$CanvasLayer/ScrollContainer/SpellListUI.reload()
+		print("true")
 
 func _reloadSpellList():
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()

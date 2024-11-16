@@ -6,8 +6,8 @@ var oldTopSpeed = 0
 
 func _init(life):
 	lifetime = life
-	visual = load("res://Effects/Soggy.tscn")
-	icon = load("res://Art/despair (1).png")
+	visual = load("res://Effects/Stunned.tscn")
+	icon = load("res://Art/stoned-skull.png")
 
 func _tick(entity, delta):
 	if !handledEffect:
@@ -16,7 +16,7 @@ func _tick(entity, delta):
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))
 		for i in entity.vfx:
-			if i.vfxName.to_lower() == "water":
+			if i.vfxName.to_lower() == "stun":
 				entity.vfx.remove_at(entity.vfx.find(i))
 				i.queue_free()
 				break

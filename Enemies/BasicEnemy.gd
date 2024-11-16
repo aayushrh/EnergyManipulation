@@ -23,6 +23,7 @@ var casting = false
 var maxHealth = 0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
+var stored_energy = 0
 
 @export var health = 10.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them

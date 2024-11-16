@@ -3,6 +3,17 @@ extends Control
 @onready var MagicCreation = preload("res://Magic/MagicCreationMenu.tscn")
 @onready var InputChangeSystem = preload("res://World/UI/input_change_system.tscn")
 
+var timer = 0
+
+func _show():
+	visible = true
+	timer = 10
+
+func _process(delta):
+	timer -= 1
+	if Input.is_action_just_pressed("Pause") and get_children().size() <= 3 and timer <= 0:
+		_on_exit_pressed()
+
 func _on_magic_creation_pressed():
 	var magicCreation = MagicCreation.instantiate()
 	add_child(magicCreation)
