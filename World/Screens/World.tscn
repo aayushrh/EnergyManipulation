@@ -1,16 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=9 format=3 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
-[ext_resource type="PackedScene" uid="uid://bllickk0pk5b8" path="res://Magic/MagicCreationMenu.tscn" id="3_pl71l"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
-[ext_resource type="PackedScene" uid="uid://c65x0w6dlh245" path="res://World/UI/input_change_system.tscn" id="4_eyl0v"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
+[ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
 [ext_resource type="Texture2D" uid="uid://ikmnxavupf63" path="res://Art/kitchenTile(2).png" id="8_oobl3"]
 [ext_resource type="PackedScene" uid="uid://bj4aovx2vn01h" path="res://World/UI/CardSelection.tscn" id="8_v2hr7"]
-[ext_resource type="Texture2D" uid="uid://qakb1qsi280l" path="res://Art/HurtBackground.png" id="9_ixrar"]
 [ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
-[ext_resource type="Script" path="res://World/Screens/HurtBackground.gd" id="10_yr7mo"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dcdsc")
@@ -24,20 +21,13 @@ texture = ExtResource("8_oobl3")
 region_enabled = true
 region_rect = Rect2(0, 0, 25, 25)
 
-[node name="Player" parent="." node_paths=PackedStringArray("HurtBackground") instance=ExtResource("1_s7tpg")]
+[node name="Player" parent="." instance=ExtResource("1_s7tpg")]
 ROTATIONSPEED = 20.0
-HurtBackground = NodePath("../CanvasLayer/Sprite2D")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Magic" parent="CanvasLayer" instance=ExtResource("3_pl71l")]
-visible = false
-
-[node name="InputChangeSystem" parent="CanvasLayer" instance=ExtResource("4_eyl0v")]
-visible = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 offset_left = 977.0
@@ -59,11 +49,8 @@ layout_mode = 2
 visible = false
 spawner = NodePath("../../Spawner")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(576, 324)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("9_ixrar")
-script = ExtResource("10_yr7mo")
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]
+visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)

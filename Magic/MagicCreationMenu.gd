@@ -99,3 +99,7 @@ func _on_spell_type_pressed():
 func _on_settings_pressed():
 	$MagicSettings.visible = true
 	$MagicSettings.on_open()
+
+func _on_exit_pressed():
+	if(!dontLeave):
+		queue_free()

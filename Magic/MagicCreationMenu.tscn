@@ -225,8 +225,17 @@ visible = false
 MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 75.0
+offset_bottom = 75.0
+text = "Exit"
+
 [connection signal="pressed" from="Control/Element" to="." method="_on_element_pressed"]
 [connection signal="pressed" from="Control/Style" to="." method="_on_style_pressed"]
 [connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
 [connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
