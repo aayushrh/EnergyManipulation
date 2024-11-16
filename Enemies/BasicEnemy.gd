@@ -68,7 +68,7 @@ func _process(delta):
 		if(health <= 0):
 			queue_free()
 		time+=delta
-		#magic_check(delta)
+		magic_check(delta)
 		_effectsHandle(delta)
 		if(!nomove):
 			pass
