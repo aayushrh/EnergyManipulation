@@ -88,8 +88,6 @@ func initCost():
 		match(style.spellName.to_lower()):
 			"dragon", "rabbit":
 				cost += 3
-			"horse":
-				cost -= 2
 			"boar", "monkey":
 				cost += 1
 			"rat":
