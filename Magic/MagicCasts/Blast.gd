@@ -20,7 +20,6 @@ func setSpell(nspell):
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
-	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 	var blastProj = BlastProj.instantiate()
 	blastProj.speed = speed
 	blastProj.sender = player
@@ -30,12 +29,14 @@ func _shoot():
 	blastProj._setV(direction)
 	get_tree().current_scene.add_child(blastProj)
 	timer = 0.1
+	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 
 func _process(delta):
 	if !is_instance_valid(player):
 		queue_free()
 	if !Global.pause and is_instance_valid(player):
 		if !shot:
+			direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
@@ -45,13 +46,14 @@ func _process(delta):
 				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
 			else:
-				if !Input.is_key_pressed(spell.binding):
+				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
 			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 		else:
+			
 			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 			timer -= delta
-			if timer < 0:
+			if timer <= 0:
 				if timesShot < spell.attributes.getAmount():
 					timesShot+=1
 					_shoot()

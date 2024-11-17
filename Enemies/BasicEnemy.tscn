@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2gbss4jwhyhl"]
+[gd_scene load_steps=10 format=3 uid="uid://c2gbss4jwhyhl"]
 
 [ext_resource type="Script" path="res://Enemies/BasicEnemy.gd" id="1_2rskt"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="2_52n48"]
@@ -13,6 +13,12 @@ radius = 25.02
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nt3qm"]
 radius = 46.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_biyio"]
+b = Vector2(-3, -1747)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e250f"]
+radius = 80.0999
 
 [node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("art", "softBody")]
 collision_layer = 2
@@ -73,6 +79,12 @@ offset_top = 30.0
 offset_right = -10.0
 offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_biyio")
+
+[node name="gaming" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e250f")
 
 [connection signal="timeout" from="block_cd" to="." method="_on_block_cd_timeout"]
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]

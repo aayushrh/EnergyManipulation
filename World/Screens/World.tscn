@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
-[ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
+[ext_resource type="PackedScene" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
 [ext_resource type="Texture2D" uid="uid://ikmnxavupf63" path="res://Art/kitchenTile(2).png" id="8_oobl3"]
 [ext_resource type="PackedScene" uid="uid://bj4aovx2vn01h" path="res://World/UI/CardSelection.tscn" id="8_v2hr7"]
 [ext_resource type="Texture2D" uid="uid://di23s0ipx556c" path="res://Art/TX Tileset Grass.png" id="9_tvb2g"]
