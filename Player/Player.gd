@@ -45,6 +45,9 @@ var casting = false
 var blockedEffects = []
 var can_dash = true
 var pause = false
+var charging = false
+var hitboxpos = Vector2.ZERO
+var hitboxEffects = []
 
 func _ready():
 	updateEnergy()
@@ -55,6 +58,8 @@ func _process(delta):
 	time += delta
 	queue_redraw()
 	if((!Global.pause and !pause) and !dashing):
+		if(charging):
+			updateEnergy()
 		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
@@ -103,6 +108,7 @@ func magic_check(delta):
 					e.resetCooldown(true)
 					shot = true
 					casting = true
+					charging = true
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()
 					explosion.player = self
@@ -205,29 +211,57 @@ func _movement(delta):
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
 	time_last_hit = time
-	_hit_register(hitbox)
+	$HitRegister.start(0.06125)
+	self.hitboxpos = hitbox.global_position
+	self.hitboxEffects = hitbox.effects
+	print(hitbox.effects[0])
+	#_hit_register(hitbox)
 
-func _dmgRed(time, hitbox):
+func _dmgRed(time):
+	if(time < 0 and time > -0.02085):
+		var perfectBlock = PerfectBlock.instantiate()
+		perfectBlock.global_position = hitboxpos
+		get_tree().current_scene.add_child(perfectBlock)
+		for e in hitboxEffects:
+			removeEffects(e)
+		#blockedEffects.append_array(hitboxEffects)
+		return 1
+	if(time < -0.02085 and time > -0.04165):
+		var goodBlock = GoodBlock.instantiate()
+		goodBlock.global_position = hitboxpos
+		get_tree().current_scene.add_child(goodBlock)
+		for e in hitboxEffects:
+			removeEffects(e)
+		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
+	if(time < -0.04165 and time > -0.06125):
+		var badBlock = BadBlock.instantiate()
+		badBlock.global_position = hitboxpos
+		get_tree().current_scene.add_child(badBlock)
+		return (-13.68 + 3.173*(abs(time)*200) + 0.02387*pow((abs(time)*200), 2))/100.0
 	if(time > 0 and time < 0.0417):
 		var perfectBlock = PerfectBlock.instantiate()
-		perfectBlock.global_position = hitbox.global_position
+		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
-		blockedEffects.append_array(hitbox.effects)
+		for e in hitboxEffects:
+			removeEffects(e)
+		print(blockedEffects)
 		return 1
 	if(time > 0.0417 and time < 0.0833):
 		var goodBlock = GoodBlock.instantiate()
-		goodBlock.global_position = hitbox.global_position
+		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
-		blockedEffects.append_array(hitbox.effects)
+		for e in hitboxEffects:
+			removeEffects(e)
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
 		var badBlock = BadBlock.instantiate()
-		badBlock.global_position = hitbox.global_position
+		badBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(badBlock)
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
 	return 0
 	
 func doneCasting():
+	charging = false
 	slow = false
 	ROTATIONSPEED *= 2
 	casting = false
@@ -235,8 +269,8 @@ func doneCasting():
 func _on_dashing_timer_timeout():
 	dashing = false
 
-func _hit_register(hitbox):
-	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block), hitbox)
+func _hit_register():
+	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
@@ -267,5 +301,13 @@ func attachEffect(effect):
 		effectUI.initialize(effect)
 		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 
+func removeEffects(effect):
+	for b in effects:
+		if(b == effect):
+			b._tick(self, 1000000)
+
 func _on_dashing_cooldown_timeout():
 	can_dash = true
+
+func _on_hit_register_timeout():
+	_hit_register()

@@ -40,6 +40,7 @@ func _process(delta):
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
+				player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
 				chargeTimer -= delta
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
