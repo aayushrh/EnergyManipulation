@@ -7,7 +7,7 @@ var speed = 1000
 var mult = 1
 var sender = null
 var nvel = Vector2.ZERO
-var effect = null
+var effects = []
 
 @onready var Fire = preload("res://Effects/Fire.tscn")
 @onready var FireHit = preload("res://Effects/FireHit.tscn")
@@ -18,13 +18,15 @@ var effect = null
 func _setSpell(nspell):
 	scale = Vector2(0.5, 0.5) * nspell.attributes.getSize() * mult
 	spell = nspell
-	if(spell.element.spellName.to_lower() == "water"):
-		effect = (Soggy.new(5))
-	elif(spell.element.spellName.to_lower() == "fire"):
+	if(spell.element != null and spell.element.spellName.to_lower() == "water"):
+		effects.append(Soggy.new(5))
+	elif(spell.element != null and spell.element.spellName.to_lower() == "fire"):
 		var e = Burning.new(3)
 		e.dmg = spell.attributes.getPower() * ((mult-1)/2+1)
-		effect = (e)
+		effects.append(e)
 		
+	if(spell.style != null and spell.style.spellName.to_lower() == "boar"):
+		effects.append(Stun.new(2))
 
 func _setV(nvelocity):
 	nvel = nvelocity
@@ -59,8 +61,9 @@ func _on_area_2d_body_entered(body) -> void:
 	if !(body.type == sender.type):
 		body._hit(self)
 		if(spell.element != null and is_instance_valid(self)):
-			if(effect != null):
-				body.attachEffect(effect)
+			if(effects != null):
+				for e in effects:
+					body.attachEffect(e)
 			if(spell.element.spellName.to_lower() == "water" and get_tree() != null):
 				var waterHit = WaterHit.instantiate()
 				waterHit.global_position = global_position
@@ -73,7 +76,8 @@ func _on_area_2d_body_entered(body) -> void:
 				fireHit.scale = scale
 				fireHit.emitting = true
 				get_tree().current_scene.add_child(fireHit)
-		queue_free()
+		if(spell.style == null or spell.style.spellName.to_lower() != "monkey"):
+			queue_free()
 
 func _on_area_2d_area_entered(area):
 	var body = area.get_parent()

@@ -78,6 +78,10 @@ func _on_attribute_2_pressed():
 	selected = "Attribute"
 	_change(-1)
 
+func _process(delta):
+	if Input.is_action_just_pressed("Pause"):
+		_on_exit_pressed()
+
 func _on_element_pressed():
 	if(reset("Element", selectedSpell.element, 0)):
 		selectedSpell.element = null

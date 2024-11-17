@@ -59,6 +59,8 @@ func _process(delta):
 					_shoot()
 					if timesShot >= spell.attributes.getAmount():
 						player.doneCasting()
+						if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
+							player.stored_energy += 0.2 * spell.initCost()
 						queue_free()
 						spell.resetCooldown(false)
 
