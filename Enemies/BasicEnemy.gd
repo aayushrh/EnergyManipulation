@@ -215,8 +215,6 @@ func predictionrotate(player,delta):
 		var v = player.global_position
 		if(!is_nan(time)):
 			v += player.velocity*time
-		$gaming.global_position = v
-		$gaming.visible = true
 		rotateToTarget(v,delta)
 		#print(rotation)
 		#print(v.angle_to_point(global_position))
