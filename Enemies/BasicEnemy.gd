@@ -113,16 +113,22 @@ func _move(delta):
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 		else:
-			if(moveDir == 0):
-				moveDir = rng.randi_range(0,1)*2-1
-			elif(rng.randi_range(0,100000)==1):
-				moveDir = -moveDir
-			else:
-				moveDir = moveDir*pow(1.5,delta)
-			velocity = set_perp_vector((player.global_position - global_position).normalized(), moveDir>0) * TOPSPEED
+			pass
+			#if(moveDir == 0):
+			#	moveDir = rng.randi_range(0,1)*2-1
+			#elif(rng.randi_range(0,10000)==1):
+			#	moveDir = -moveDir
+			#else:
+			#	moveDir = moveDir*pow(1.5,delta)
+			#velocity = set_perp_vector((player.global_position - global_position).normalized(), moveDir>0) * TOPSPEED
 		awareness(delta)
 		if(agg):
 			aggro(player, delta)
+			if(blast != null and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<100)):
+				print("LET GO DAMMIT")
+				blast.letGo()
+				blast = null
+				castedIndex = -1
 		velocity -= softBodyPush * TOPSPEED
 		if(slow):
 			velocity = velocity * 0.5
@@ -185,7 +191,6 @@ func magic_check(delta):
 					blast = BlastTscn.instantiate()
 					blast.player = self
 					blast.setSpell(e)
-					blast.letGo()
 					get_tree().current_scene.add_child(blast)
 					e.resetCooldown(true)
 					casting = true
@@ -198,18 +203,27 @@ func magic_check(delta):
 				slow = true
 				ROTATIONSPEED /= 2
 
-func predictionrotate(player,delta):
+func predictionrotate(player,delta):	
 	if(blast!=null):
 		var a = pow(blast.getSpeed(),2)-player.velocity.distance_squared_to(Vector2.ZERO)
 		var b = -2*(((player.global_position.x-global_position.x)*player.velocity.x)+((player.global_position.y-global_position.y)*player.velocity.y))
 		var c = -(player.global_position-global_position).x-(player.global_position-global_position).y
-		var time = (-b + int(player.global_position.y > global_position.y)*sqrt(b * b - 4 * a * c))/(2 * a)
+		var time = (-b + sqrt(b * b - 4 * a * c))/(2 * a)
+		if(time < 0):
+			time = abs((-b - sqrt(b * b - 4 * a * c))/(2 * a))
+		print(time < 0)
+		var v = player.global_position
 		if(!is_nan(time)):
-			rotateToTarget(player.global_position+player.velocity*time,delta)
-		else:
-			print("hello123")
-			rotateToTarget(player.global_position,delta)
-		if(blast.shot):
+			v += player.velocity*time
+		$gaming.global_position = v
+		$gaming.visible = true
+		rotateToTarget(v,delta)
+		#print(rotation)
+		#print(v.angle_to_point(global_position))
+		#print(rotation-v.angle_to_point(global_position))
+		if(blast.castingTimer<=0 and (int(abs(rotation + PI/2 - v.angle_to_point(global_position)))%3) < 0.1):#yay radians
+			print("LETTTTGOOOOOOOOO")
+			blast.letGo()
 			blast = null
 			castedIndex = -1
 	else:
@@ -269,8 +283,8 @@ func set_perp_vector(vect, right):
 
 func aggro(player, delta):
 	if(blast != null):
-		if(blast.castingTimer < 0.1):
-			if(canDash and blast.castingTimer < (player.global_position.distance_to(global_position)-50)*2/DASHSPEED):
+		if(blast.castingTimer < 0):
+			if(canDash):
 				dash((player.global_position - global_position).normalized())
 
 
@@ -286,7 +300,7 @@ func awareness(delta):
 	for n in help:
 		if(help.size()>=blockOrFlight):
 			if(block == -1):
-				if(!agg and canDash):
+				if(canDash):
 					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
 						do_block()
 					else:
@@ -297,7 +311,7 @@ func awareness(delta):
 					else:
 						velocity = avgDir(help) * TOPSPEED
 		elif(block == -1):
-			if(!agg and canDash):
+			if(canDash):
 				dash(perp_vector(avgDir(help)))
 			else:
 				#print(dodgeDir)
