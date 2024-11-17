@@ -18,7 +18,8 @@ var list = {
 	\"PUNCH/ATTACK\" : \"Hit\",
 	\"BLOCK\" : \"Block\",
 	\"DASH\" : \"Dash\",
-	\"PAUSE\" : \"Pause\"
+	\"PAUSE\" : \"Pause\",
+	\"HEAL\" : \"Heal\"
 }
 
 func _ready():

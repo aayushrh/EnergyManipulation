@@ -24,8 +24,6 @@ class_name Player
 
 var type = 0
 var rng = RandomNumberGenerator.new()
-var right = true
-var can_attack = true
 var clicked = ""
 var timer = 120
 var dashing = false
@@ -42,12 +40,11 @@ var onLastTurn = false
 var effects = []
 var vfx = []
 var casting = false
-var blockedEffects = []
-var can_dash = true
 var pause = false
 var charging = false
 var hitboxpos = Vector2.ZERO
 var hitboxEffects = []
+var healing = false
 
 func _ready():
 	updateEnergy()
@@ -57,9 +54,13 @@ func _ready():
 func _process(delta):
 	time += delta
 	queue_redraw()
+	healing = false
 	if((!Global.pause and !pause) and !dashing):
-		if(charging):
+		_heal(delta)
+		if(charging or healing):
 			updateEnergy()
+		if(healing):
+			updateHealth()
 		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
@@ -86,6 +87,12 @@ func block():
 func _draw():
 	if(blocking):
 		draw_arc(Vector2.ZERO, 50, -PI/4, -3*PI/4, 20, Color.WHITE, 5)
+
+func _heal(delta):
+	if(Input.is_action_pressed("Heal")):
+		healing = true
+		stored_energy -= delta
+		health += delta/10
 
 func updateEnergy():
 	$CanvasLayer/EnergyBar.size.x = stored_energy*50
@@ -160,16 +167,14 @@ func _doubleClickCheck(delta):
 			clicked = ""
 
 func dash(dir):
-	if(can_dash):
+	if(canDash()):
 		velocity = dir * DASHSPEED
 		dashing = true
 		$DashingTimer.start(DASHTIME)
 		clicked = ""
 		blocking = false
 		$PlayerArt._unblock()
-		$DashingCooldown.start(2.5)
 		attachEffect(Dash.new(2.5))
-		can_dash = false
 
 func _shockwave():
 	var shockwave = Shockwave.instantiate()
@@ -208,6 +213,12 @@ func _movement(delta):
 	else:
 		velocity = velocity.limit_length(TOPSPEED/2)
 
+func canDash():
+	for e in effects:
+		if(e is Dash):
+			return false
+	return true
+
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
 	time_last_hit = time
@@ -224,7 +235,6 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		for e in hitboxEffects:
 			removeEffects(e)
-		#blockedEffects.append_array(hitboxEffects)
 		return 1
 	if(time < -0.02085 and time > -0.04165):
 		var goodBlock = GoodBlock.instantiate()
@@ -244,7 +254,6 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		for e in hitboxEffects:
 			removeEffects(e)
-		print(blockedEffects)
 		return 1
 	if(time > 0.0417 and time < 0.0833):
 		var goodBlock = GoodBlock.instantiate()
@@ -277,37 +286,32 @@ func _hit_register():
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
-	HurtBackground._update(health)
 	if(health<0):
 		Global._change_tscn("res://World/Screens/MainMenu.tscn")
 		Global.pause = false
 	updateEnergy()
-	$CanvasLayer/HealthBar.size.x = health*20.0
+	#$CanvasLayer/HealthBar.size.x = health*20.0
+	updateHealth()
 	time = 0
 	time_last_block = -1
 
+func updateHealth():
+	$CanvasLayer/HealthBar.size.x = health*20.0
+	HurtBackground._update(health)
+
 func attachEffect(effect):
-	var stop = false
-	for b in blockedEffects:
-		if(b == effect):
-			stop = true
-			blockedEffects.remove_at(blockedEffects.find(b))
-	if(!stop):
-		var visual = effect.visual.instantiate()
-		add_child(visual)
-		vfx.append(visual)
-		effects.append(effect)
-		var effectUI = EffectUI.instantiate()
-		effectUI.initialize(effect)
-		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+	var visual = effect.visual.instantiate()
+	add_child(visual)
+	vfx.append(visual)
+	effects.append(effect)
+	var effectUI = EffectUI.instantiate()
+	effectUI.initialize(effect)
+	$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 
 func removeEffects(effect):
 	for b in effects:
 		if(b == effect):
 			b._tick(self, 1000000)
-
-func _on_dashing_cooldown_timeout():
-	can_dash = true
 
 func _on_hit_register_timeout():
 	_hit_register()

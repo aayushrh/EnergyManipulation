@@ -75,11 +75,8 @@ layout_mode = 2
 
 [node name="PlayerArt" parent="." instance=ExtResource("4_1ei8s")]
 
-[node name="DashingCooldown" type="Timer" parent="."]
-
 [node name="HitRegister" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
-[connection signal="timeout" from="DashingCooldown" to="." method="_on_dashing_cooldown_timeout"]
 [connection signal="timeout" from="HitRegister" to="." method="_on_hit_register_timeout"]
