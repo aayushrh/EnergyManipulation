@@ -130,7 +130,7 @@ func contcost():
 			"rat":
 				cost += 0
 	if(Constants.isValid(type)):
-		match(style.spellName.to_lower()):
+		match(type.spellName.to_lower()):
 			"blast":
 				cost += 1
 			"beam":

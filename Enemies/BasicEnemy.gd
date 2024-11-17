@@ -85,12 +85,9 @@ func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
-		print(dmgTaken*(1-_dmgRed(time-block)))
 		un_block()
 	else:
 		health -= dmgTaken
-		print(dmgTaken)
-		print(health/maxHealth)
 	time = 0
 
 func _move(delta):
@@ -108,7 +105,6 @@ func _move(delta):
 		else:
 			rotateToTarget(player.global_position, delta)
 		if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
-			#print((player.global_position - global_position).length())
 			velocity = (player.global_position - global_position).normalized() * TOPSPEED
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
@@ -125,7 +121,6 @@ func _move(delta):
 		if(agg):
 			aggro(player, delta)
 			if(blast != null and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<100)):
-				print("LET GO DAMMIT")
 				blast.letGo()
 				blast = null
 				castedIndex = -1
@@ -211,16 +206,11 @@ func predictionrotate(player,delta):
 		var time = (-b + sqrt(b * b - 4 * a * c))/(2 * a)
 		if(time < 0):
 			time = abs((-b - sqrt(b * b - 4 * a * c))/(2 * a))
-		print(time < 0)
 		var v = player.global_position
 		if(!is_nan(time)):
 			v += player.velocity*time
 		rotateToTarget(v,delta)
-		#print(rotation)
-		#print(v.angle_to_point(global_position))
-		#print(rotation-v.angle_to_point(global_position))
 		if(blast.castingTimer<=0 and (int(abs(rotation + PI/2 - v.angle_to_point(global_position)))%3) < 0.1):#yay radians
-			print("LETTTTGOOOOOOOOO")
 			blast.letGo()
 			blast = null
 			castedIndex = -1
@@ -245,7 +235,6 @@ func avgVelo(arr):
 	return ae.normalized()
 
 func dash(dir):
-	print("i tried")
 	velocity = dir*DASHSPEED
 	nomove = true
 	canDash = false
@@ -312,7 +301,6 @@ func awareness(delta):
 			if(canDash):
 				dash(perp_vector(avgDir(help)))
 			else:
-				#print(dodgeDir)
 				if(dodgeDir == 0):
 					#if(tactCheck(20)):
 						dodgeDir = int((avgDir(help)-avgVelo(help)).angle()>0)*2-1
