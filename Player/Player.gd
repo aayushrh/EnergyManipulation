@@ -212,19 +212,18 @@ func _dmgRed(time, hitbox):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
-		blockedEffects.append(hitbox.effect)
+		blockedEffects.append_array(hitbox.effects)
 		return 1
 	if(time > 0.0417 and time < 0.0833):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
-		blockedEffects.append(hitbox.effect)
+		blockedEffects.append_array(hitbox.effects)
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
 		var badBlock = BadBlock.instantiate()
 		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
-		print(effects.find(hitbox.effect))
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
 	return 0
 	
