@@ -7,6 +7,7 @@ var c = null
 func _show(card):
 	c = card
 	$VBoxContainer/Label.text = card.spellName
+	$VBoxContainer/Label3.text = card.spellDesc
 	match(card.type):
 		0:
 			$VBoxContainer/Label2.text = "Element"
