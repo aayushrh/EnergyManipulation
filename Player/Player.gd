@@ -89,10 +89,14 @@ func _draw():
 		draw_arc(Vector2.ZERO, 50, -PI/4, -3*PI/4, 20, Color.WHITE, 5)
 
 func _heal(delta):
-	if(Input.is_action_pressed("Heal")):
+	if(Input.is_action_pressed("Heal") and stored_energy > delta):
 		healing = true
-		stored_energy -= delta
-		health += delta/10
+		stored_energy -= delta * 5
+		if(health+delta/2 < 10):
+			health += delta/2
+		else:
+			health += delta/4
+		get_tree().current_scene.damageHealed += delta/10
 
 func updateEnergy():
 	$CanvasLayer/EnergyBar.size.x = stored_energy*50
@@ -116,6 +120,7 @@ func magic_check(delta):
 					shot = true
 					casting = true
 					charging = true
+					get_tree().current_scene.amountShot += e.attributes.amount
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()
 					explosion.player = self
@@ -174,7 +179,7 @@ func dash(dir):
 		clicked = ""
 		blocking = false
 		$PlayerArt._unblock()
-		attachEffect(Dash.new(2.5))
+		attachEffect(Dash.new(1))
 
 func _shockwave():
 	var shockwave = Shockwave.instantiate()
@@ -286,6 +291,8 @@ func _hit_register():
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
+	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
+	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	if(health<0):
 		Global._change_tscn("res://World/Screens/MainMenu.tscn")
 		Global.pause = false

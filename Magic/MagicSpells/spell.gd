@@ -19,55 +19,57 @@ func resetCooldown(use):
 	using = use
 
 func getcd():
-	var cd = 0
+	var cd = 1
 	if(Constants.isValid(element)):
-		match(element.spellName.to_lower()):
-			"fire", "water", "electric", "light", "dark":
-				cd += 3
-			"nature":
-				cd += 5
+		cd *= 1
+	else:
+		cd *= 0.5
 	if(Constants.isValid(style)):
-		match(style.spellName.to_lower()):
-			"dragon", "rabbit", "horse":
-				cd += 5
-			"boar", "monkey":
-				cd += 3
-			"rat":
-				cd += 1
+		cd *= 1.5
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
-			"blast":
-				cd += 1
 			"beam":
-				cd += 3
+				cd *= 5
 			"shield":
-				cd += 10
+				cd *= 30
 			"explosion":
-				cd += 4
+				cd *= 2
 			"placed explosion":
-				cd += 6
+				cd *= 5
 			"aura":
-				cd += 30
+				cd *= 60
 	return cd
 
 func getCastingTime():
-	if attributes != null:
-		return 1/attributes.getASpeed()
-	else:
-		return 0
-
-func getMaxPowerTime():
-	var t = 2
+	var time = 1
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
 			"blast":
-				t *= 2.5
+				time *= 0.5
+			"beam":
+				time *= 0.2
+			"shield":
+				time *= 0.3
+			"explosion":
+				time *= 0.75
+			"placed explosion":
+				time *= 1
+			"aura":
+				time *= 2
+	return time
+
+func getMaxPowerTime():
+	var t = 1
+	if(Constants.isValid(type)):
+		match(type.spellName.to_lower()):
+			"blast":
+				t *= 1.5
 			"beam", "shield", "aura":
 				return INF
 			"explosion":
-				t *= 4
+				t *= 2.25
 			"placed explosion":
-				t *= 6
+				t *= 3
 	if(attributes != null):
 		return t/attributes.getASpeed()
 	else:
@@ -75,72 +77,50 @@ func getMaxPowerTime():
 
 #perfect block = 10 mana
 func initCost():
-	var cost = 0
+	var cost = 1
 	if(Constants.isValid(element)):
-		match(element.spellName.to_lower()):
-			"water":
-				cost += 1
-			"fire", "electric", "light", "dark":
-				cost += 1.5
-			"nature":
-				cost += 3
+		cost *= 1
+	else:
+		cost *= 2
 	if(Constants.isValid(style)):
-		match(style.spellName.to_lower()):
-			"dragon", "rabbit":
-				cost += 3
-			"boar", "monkey":
-				cost += 1
-			"rat":
-				cost += 0.5
+		cost *= 1.5
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
 			"blast":
-				cost += 1
+				cost *= 5
 			"beam":
-				cost += 3
+				cost *= 4
 			"shield":
-				cost += 5
+				cost *= 4
 			"explosion":
-				cost += 10
+				cost *= 7
 			"placed explosion":
-				cost += 15
+				cost *= 10
 			"aura":
-				cost += 20
+				cost *= 20
 	return cost
 
-#cost per second, 5 seconds max charge
+#total cost for max charge expect for holdings
 func contcost():
-	var cost = 0
-	"""if(Constants.isValid(element)):
-		match(element.spellName.to_lower()):
-			"water":
-				cost += 1
-			"fire", "electric", "light", "dark":
-				cost += 1.5
-			"nature":
-				cost += 3"""
+	var cost = 1
+	if(Constants.isValid(element)):
+		cost *= 1
+	else:
+		cost *= 2
 	if(Constants.isValid(style)):
-		match(style.spellName.to_lower()):
-			"dragon", "rabbit":
-				cost += 0
-			"horse":
-				cost -= 0.5
-			"boar", "monkey":
-				cost += 0
-			"rat":
-				cost += 0
+		cost *= 1.5
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
 			"blast":
-				cost += 1
+				cost *= 3
 			"beam":
-				cost += 4
+				cost *= 5
 			"shield":
-				cost += 10
+				cost *= 1
 			"explosion":
-				cost += 3
+				cost *= 3
 			"placed explosion":
-				cost += 5
+				cost *= 5
 			"aura":
-				cost += 100
+				cost *= 2
 	return cost

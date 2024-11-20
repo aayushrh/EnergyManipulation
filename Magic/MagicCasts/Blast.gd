@@ -28,7 +28,7 @@ func _shoot():
 	blastProj._setSpell(spell)
 	blastProj._setV(direction)
 	get_tree().current_scene.add_child(blastProj)
-	timer = 0.1
+	timer = 0.1 * 1/spell.attributes.getASpeed()
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 
 func _process(delta):

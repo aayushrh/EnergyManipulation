@@ -45,7 +45,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-visible = false
 position = Vector2(150, 250)
 shape = SubResource("RectangleShape2D_gtgs2")
 

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name BasicEnemy
 
 var player = null
 var cooldown = 5
@@ -25,7 +26,7 @@ var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 0
 
-@export var health = 10.0
+@export var health = 5.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
 @export var tact = 0 # chance to do smarter things
@@ -317,7 +318,7 @@ func _on_dash_cd_timeout() -> void:
 	canDash = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if(area.get_parent() is Blast and area.get_parent().sender.type != type):
+	if(area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
 		magic.append(area.get_parent())
 
 

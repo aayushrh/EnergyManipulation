@@ -165,7 +165,7 @@ offset_top = -12.5
 offset_right = 73.0
 offset_bottom = 27.5
 theme_override_font_sizes/font_size = 20
-text = "Amount
+text = "Supreme
 "
 
 [node name="Amount_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme"]
@@ -174,12 +174,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -87.0
+offset_left = -80.0
 offset_top = -12.5
 offset_bottom = 27.5
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
-text = "Supreme"
+text = "Amount"
 
 [node name="Keybind" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)

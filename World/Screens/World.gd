@@ -6,8 +6,13 @@ var damageTaken = 0
 var damageBlocked = 0
 var damageHealed = 0
 
+@export var player : CharacterBody2D
+@export var camera : Camera2D
+
+@onready var Indicator = preload("res://Effects/EnemyIndicator.tscn")
+
 func _ready():
-	Global.magicCards = [SpellCard.new(0, "Fire"), SpellCard.new(2, "Blast")]
+	Global.magicCards = [SpellCard.new(2, "Blast")]
 	Global.spellList = []
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
@@ -17,6 +22,42 @@ func _process(delta):
 		Global.pause = true
 		$CanvasLayer/ScrollContainer/SpellListUI.reload()
 		print("true")
+	for e in $Enemies.get_children():
+		var cameraPos = camera.get_screen_center_position()
+		if e.global_position.x > cameraPos.x + 1440/2:
+			var indicator = Indicator.instantiate()
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x + 1440/2, cameraPos.y - 812/2)
+			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
+			if(indicator.global_position != Vector2.ZERO):
+				get_tree().current_scene.add_child(indicator)
+		elif e.global_position.x < cameraPos.x - 1440/2:
+			var indicator = Indicator.instantiate()
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x - 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2)
+			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
+			if(indicator.global_position != Vector2.ZERO):
+				get_tree().current_scene.add_child(indicator)
+		elif e.global_position.y > cameraPos.y + 812/2:
+			var indicator = Indicator.instantiate()
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y + 812/2)
+			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
+			if(indicator.global_position != Vector2.ZERO):
+				get_tree().current_scene.add_child(indicator)
+		elif e.global_position.y < cameraPos.y - 812/2:
+			var indicator = Indicator.instantiate()
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y - 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2)
+			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
+			if(indicator.global_position != Vector2.ZERO):
+				get_tree().current_scene.add_child(indicator)
+
+func lineLine(x1, y1, x2, y2, x3, y3, x4, y4):
+	var uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+	var uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+
+	if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1):
+		var intersectionX = x1 + (uA * (x2-x1));
+		var intersectionY = y1 + (uA * (y2-y1));
+		return Vector2(intersectionX, intersectionY);
+	return Vector2.ZERO;
 
 func _reloadSpellList():
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()

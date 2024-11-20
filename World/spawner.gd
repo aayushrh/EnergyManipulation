@@ -19,22 +19,23 @@ func _ready():
 	cardSelection.connect("finishedSelecting", _startNextWave)
 
 func _process(delta):
-	var spawn = rng.randi_range(0, 500)
+	var spawn = rng.randi_range(0, 250)
 	if(spawn < 1 and spawned < floor(waveNumber/4) + 1):
 		var num = rng.randi_range(0, 3)
 		var spawnLoc = Vector2.ZERO
 		if(num == 0):
-			spawnLoc = Vector2(rng.randf_range(-1152/2 - 10, 1152/2 + 10), 648/2 + 10)
+			spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), 1000 + 10)
 		if(num == 1):
-			spawnLoc = Vector2(rng.randf_range(-1152/2 - 10, 1152/2 + 10), -648/2 - 10)
+			spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), -1000 - 10)
 		if(num == 2):
-			spawnLoc = Vector2(1152/2 + 10, rng.randf_range(-648/2 - 10, 648/2 + 10))
+			spawnLoc = Vector2(1500 + 10, rng.randf_range(-1000 - 10, 1000 + 10))
 		if(num == 3):
-			spawnLoc = Vector2(-1152/2 - 10, rng.randf_range(-648/2 - 10, 648/2 + 10))
+			spawnLoc = Vector2(-1500 - 10, rng.randf_range(-1000 - 10, 1000 + 10))
 		
 		var basicEnemy = BasicEnemy.instantiate()
-		basicEnemy.global_position = spawnLoc + player.global_position
+		basicEnemy.global_position = spawnLoc# + player.global_position
 		basicEnemy.agg = randi_range(0,1)==1
+		basicEnemy.health = max(1, waveNumber/4)
 		enemyParent.add_child(basicEnemy)
 		spawned += 1
 	
