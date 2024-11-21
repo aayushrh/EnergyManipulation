@@ -9,6 +9,7 @@ class_name Player
 @export var DASHSPEED : float
 @export var DASHTIME : float
 @export var ROTATIONSPEED : float
+@export var MAXHEALTH : float
 
 @export_group("Effects")
 @export var Shockwave : PackedScene
@@ -33,7 +34,7 @@ var stored_energy = 10.0
 var dmgTaken = 0
 var time_last_block = -1
 var time_last_hit = 0
-var health = 10
+var health = 0
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
@@ -50,6 +51,7 @@ func _ready():
 	updateEnergy()
 	$PlayerArt.hit.connect(_shockwave)
 	rotation_speed = ROTATIONSPEED
+	health = MAXHEALTH
 
 func _process(delta):
 	time += delta
@@ -91,11 +93,8 @@ func _draw():
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
 		healing = true
-		stored_energy -= delta * 5
-		if(health+delta/2 < 10):
-			health += delta/2
-		else:
-			health += delta/4
+		stored_energy -= delta * 5 * pow(2,(health/MAXHEALTH))
+		health += delta/2
 		get_tree().current_scene.damageHealed += delta/10
 
 func updateEnergy():
@@ -109,7 +108,7 @@ func magic_check(delta):
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost():
 				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
@@ -291,6 +290,7 @@ func _on_dashing_timer_timeout():
 	dashing = false
 
 func _hit_register():
+	print(health)
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
@@ -298,6 +298,7 @@ func _hit_register():
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
+	print(dmgTaken)
 	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	if(health<0):

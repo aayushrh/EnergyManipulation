@@ -54,7 +54,16 @@ func _ready():
 	art.hit.connect(_shockwave)
 	var spell = Spell.new("firstSpell")
 	spell.type = SpellCard.new(2, "Blast")
-	spell.element = SpellCard.new(0, "Water")
+	if(rng.randi_range(0,1) == 0):
+		spell.element = SpellCard.new(0, "Water")
+	else:
+		spell.element = SpellCard.new(0, "Fire")
+	var r = rng.randi_range(1,210)
+	for i in range(19):
+		r -= 20 + i
+		if(r<0):
+			r = i+1
+	spell.attributes = Attributes.new(rng.randf_range(-.5,.5),rng.randf_range(-.5,.5),r)
 	spells.append(spell)
 	maxHealth = health
 
