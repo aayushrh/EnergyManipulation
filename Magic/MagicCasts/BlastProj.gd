@@ -70,7 +70,7 @@ func _on_area_2d_body_entered(body) -> void:
 				waterHit.scale = scale
 				waterHit.emitting = true
 				get_tree().current_scene.add_child(waterHit)
-				if(body.type == 0):
+				if(sender.type == 0):
 					get_tree().current_scene.amountHit += 1
 			elif(spell.element.spellName.to_lower() == "fire" and get_tree() != null) :
 				var fireHit = FireHit.instantiate()

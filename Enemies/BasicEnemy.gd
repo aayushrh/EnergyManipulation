@@ -68,6 +68,7 @@ func _process(delta):
 		queue_redraw()
 		if(health <= 0):
 			queue_free()
+			get_tree().current_scene.enemiesKilled += 1
 		time+=delta
 		magic_check(delta)
 		_effectsHandle(delta)
@@ -320,7 +321,6 @@ func _on_dash_cd_timeout() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
 		magic.append(area.get_parent())
-
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(is_instance_valid(area.get_parent()) and area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):

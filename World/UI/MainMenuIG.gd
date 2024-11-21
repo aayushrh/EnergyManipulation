@@ -2,6 +2,7 @@ extends Control
 
 @onready var MagicCreation = preload("res://Magic/MagicCreationMenu.tscn")
 @onready var InputChangeSystem = preload("res://World/UI/input_change_system.tscn")
+@onready var Stats = preload("res://World/Screens/Stats.tscn")
 
 var timer = 0
 
@@ -23,7 +24,8 @@ func _on_input_change_pressed():
 	add_child(inputChangeSystem)
 
 func _on_stats_pressed():
-	pass # Replace with function body.
+	var stats = Stats.instantiate()
+	add_child(stats)
 
 func _on_exit_pressed():
 	visible = false

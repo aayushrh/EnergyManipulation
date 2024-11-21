@@ -5,6 +5,11 @@ var amountHit = 0
 var damageTaken = 0
 var damageBlocked = 0
 var damageHealed = 0
+var perfectBlocks = 0
+var goodBlocks = 0
+var badBlocks = 0
+var noBlocks = 0
+var enemiesKilled = 0
 
 @export var player : CharacterBody2D
 @export var camera : Camera2D

@@ -9,6 +9,7 @@ var timer = 0
 var chargeMulti = 1.0
 var speed = 1000
 var buttonLetGo = false
+var castingCost = 0
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -41,6 +42,7 @@ func _process(delta):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
 				player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
+				castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
 				chargeTimer -= delta
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
@@ -61,7 +63,7 @@ func _process(delta):
 					if timesShot >= spell.attributes.getAmount():
 						player.doneCasting()
 						if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
-							player.stored_energy += 0.2 * spell.initCost()
+							player.stored_energy += 0.36 * (spell.initCost() + castingCost)
 						queue_free()
 						spell.resetCooldown(false)
 
