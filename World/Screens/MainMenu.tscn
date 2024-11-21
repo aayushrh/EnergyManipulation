@@ -64,9 +64,9 @@ text = "ENERGY MANIPULATION"
 
 [node name="Start" type="Button" parent="."]
 offset_left = 439.0
-offset_top = 250.0
+offset_top = 200.0
 offset_right = 714.0
-offset_bottom = 315.0
+offset_bottom = 265.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_ucovb")
 text = "START"
@@ -76,14 +76,26 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Options" type="Button" parent="."]
 offset_left = 439.0
-offset_top = 375.0
+offset_top = 300.0
 offset_right = 714.0
-offset_bottom = 440.0
+offset_bottom = 365.0
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("1_ucovb")
 text = "OPTIONS"
 script = SubResource("GDScript_lgw87")
 switching = "Options"
+metadata/_edit_use_anchors_ = true
+
+[node name="Options2" type="Button" parent="."]
+offset_left = 439.0
+offset_top = 400.0
+offset_right = 714.0
+offset_bottom = 465.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_ucovb")
+text = "TUTORIAL"
+script = SubResource("GDScript_lgw87")
+switching = "Tutorial"
 metadata/_edit_use_anchors_ = true
 
 [node name="Exit" type="Button" parent="."]
@@ -105,5 +117,6 @@ color = Color(1, 0, 0, 1)
 
 [connection signal="pressed" from="Start" to="Start" method="_on_pressed"]
 [connection signal="pressed" from="Options" to="Options" method="_on_pressed"]
+[connection signal="pressed" from="Options2" to="Options2" method="_on_pressed"]
 [connection signal="button_down" from="Exit" to="Exit" method="_on_button_down"]
 [connection signal="button_up" from="Exit" to="Exit" method="_on_button_up"]

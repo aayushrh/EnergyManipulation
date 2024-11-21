@@ -95,6 +95,7 @@ theme_override_constants/separation = 20
 script = SubResource("GDScript_ypnes")
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0

@@ -21,6 +21,7 @@ func _on_magic_creation_pressed():
 
 func _on_input_change_pressed():
 	var inputChangeSystem = InputChangeSystem.instantiate()
+	inputChangeSystem._exitShown()
 	add_child(inputChangeSystem)
 
 func _on_stats_pressed():

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var lifetime = 0.5
+@export var lifetime = 0.25
 
 func _process(delta):
 	lifetime -= delta

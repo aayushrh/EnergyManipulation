@@ -109,7 +109,7 @@ func magic_check(delta):
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and (e.style == null or stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost()):
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and ((e.style == null and stored_energy >= e.initCost()) or (e.style != null and stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost())):
 				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()

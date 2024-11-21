@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://50hf6pckpwrn"]
+
+[ext_resource type="Script" path="res://World/UI/Back.gd" id="1_myd0u"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 56.0
+offset_right = -44.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "You can create a spell by going to the Magic Creation Menu located in the Pause menu which you can access by pressing Esc or whatever you pinded the \"Pause\" action to"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "To use a spell it need to have 2 components a type which you need a *Blast* spell card for and a binding which you can assign on the right hand side by pressing the question mark and the keybind"
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " Dash is double tap unles you bind it to somehting in the Input Manager in which case it is now holding said input"
+autowrap_mode = 3
+
+[node name="Back" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+offset_left = 15.0
+offset_top = 4.0
+offset_right = 99.392
+offset_bottom = 46.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 0
+bbcode_enabled = true
+text = "[url=something]<Back[/url]"
+scroll_active = false
+meta_underlined = false
+script = ExtResource("1_myd0u")
+
+[connection signal="meta_clicked" from="Back" to="Back" method="_on_meta_clicked"]

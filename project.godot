@@ -13,7 +13,9 @@ config_version=5
 config/name="EnergyManipulation"
 run/main_scene="res://World/Screens/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/image="res://Art/Untitled_8Changed.png"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1000
 
 [autoload]
 
