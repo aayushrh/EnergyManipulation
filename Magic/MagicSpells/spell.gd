@@ -83,7 +83,7 @@ func initCost():
 	else:
 		cost *= 2
 	if(Constants.isValid(style)):
-		cost *= 1.5
+		cost *= 1.25
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
 			"blast":
@@ -108,7 +108,7 @@ func contcost():
 	else:
 		cost *= 2
 	if(Constants.isValid(style)):
-		cost *= 1.5
+		cost *= 1.25
 	if(Constants.isValid(type)):
 		match(type.spellName.to_lower()):
 			"blast":
