@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
 [ext_resource type="Texture2D" uid="uid://qakb1qsi280l" path="res://Art/HurtBackground.png" id="4_51wdw"]
 [ext_resource type="Script" path="res://Effects/HurtBackground.gd" id="5_lab3i"]
-[ext_resource type="PackedScene" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
+[ext_resource type="PackedScene" uid="uid://cekec7pbvckd0" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 

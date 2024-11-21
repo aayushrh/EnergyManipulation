@@ -63,6 +63,7 @@ func _ready():
 		r -= 20 + i
 		if(r<0):
 			r = i+1
+			break
 	spell.attributes = Attributes.new(rng.randf_range(-.5,.5),rng.randf_range(-.5,.5),r)
 	spells.append(spell)
 	maxHealth = health
