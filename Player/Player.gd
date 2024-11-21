@@ -22,6 +22,7 @@ class_name Player
 @onready var GoodBlock = preload("res://Effects/GoodBlock.tscn")
 @onready var BadBlock = preload("res://Effects/BadBlock.tscn")
 @onready var EffectUI = preload("res://World/UI/EffectUI.tscn")
+@onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
 var type = 0
 var rng = RandomNumberGenerator.new()
@@ -108,7 +109,7 @@ func magic_check(delta):
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost():
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and (e.style == null or stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost()):
 				var shot = false
 				if(e.type != null and e.type.spellName.to_lower() == "blast"):
 					var blast = Blast.instantiate()
@@ -119,6 +120,10 @@ func magic_check(delta):
 					shot = true
 					casting = true
 					charging = true
+					var magicNameCallout = MagicNameCallout.instantiate()
+					magicNameCallout.position = Vector2(0, 60)
+					magicNameCallout._show(e)
+					add_child(magicNameCallout)
 					get_tree().current_scene.amountShot += e.attributes.amount
 				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
 					var explosion = Explosion.instantiate()

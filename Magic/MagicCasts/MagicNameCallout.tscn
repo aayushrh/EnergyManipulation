@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://qdnpqwjkqqbk"]
+
+[ext_resource type="Script" path="res://Magic/MagicCasts/MagicNameCallout.gd" id="1_a7qy6"]
+
+[node name="MagicNameCallout" type="Node2D"]
+script = ExtResource("1_a7qy6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -177.0
+offset_top = -52.0
+offset_right = 182.0
+offset_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 75
+bbcode_enabled = true
+text = "[b]FIREBALL[/b]"
+fit_content = true
+visible_characters_behavior = 3

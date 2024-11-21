@@ -61,6 +61,8 @@ func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):
 		body._hit(self)
 		if(spell.element != null and is_instance_valid(self)):
+			if(sender.type == 0):
+				get_tree().current_scene.amountHit += 1
 			if(effects != null):
 				for e in effects:
 					body.attachEffect(e)
@@ -70,16 +72,12 @@ func _on_area_2d_body_entered(body) -> void:
 				waterHit.scale = scale
 				waterHit.emitting = true
 				get_tree().current_scene.add_child(waterHit)
-				if(sender.type == 0):
-					get_tree().current_scene.amountHit += 1
 			elif(spell.element.spellName.to_lower() == "fire" and get_tree() != null) :
 				var fireHit = FireHit.instantiate()
 				fireHit.global_position = global_position
 				fireHit.scale = scale
 				fireHit.emitting = true
 				get_tree().current_scene.add_child(fireHit)
-				if(body.type == 0):
-					get_tree().current_scene.amountHit += 1
 		if(spell.style == null or spell.style.spellName.to_lower() != "monkey"):
 			queue_free()
 
