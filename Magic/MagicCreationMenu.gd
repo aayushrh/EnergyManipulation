@@ -19,13 +19,13 @@ func _changeSpell(nspell):
 
 func ifNullDefault(default, change, check):
 	if(check != null):
-		change.text = check.spellName
+		change.text = check.cardName
 	else:
 		change.text = default
 
 func _inputCard(card):
 	if selectedSpell != null:
-		if (card.type == 0 and selectedSpell.element == null) or (card.type == 1 and selectedSpell.style == null) or (card.type == 2 and selectedSpell.type == null):
+		if (card is ElementSpellCard and selectedSpell.element == null) or (card is StyleSpellCard and selectedSpell.style == null) or (card is TypeSpellCard and selectedSpell.type == null):
 			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
 			Global.spellList.remove_at(location)
@@ -39,7 +39,6 @@ func _inputCard(card):
 			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
 		else:
-			#Global.magicCards.append(card)
 			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
 			Global.spellList.remove_at(location)
@@ -73,10 +72,6 @@ func reset(nselected, changing, type):
 
 func control_invisible():
 	$Control.visible=false
-
-func _on_attribute_2_pressed():
-	selected = "Attribute"
-	_change(-1)
 
 func _process(delta):
 	if Input.is_action_just_pressed("Pause"):

@@ -13,12 +13,23 @@ var enemiesKilled = 0
 
 @export var player : CharacterBody2D
 @export var camera : Camera2D
+@export var testElementSpellCard : ElementSpellCard
+@export var testStyleSpellCard : StyleSpellCard
+@export var testTypeSpellCard : TypeSpellCard
+@export var allElementSpellCards : Array[ElementSpellCard]
+@export var allStyleSpellCards : Array[StyleSpellCard]
+@export var allTypeSpellCards : Array[TypeSpellCard]
 
 @onready var Indicator = preload("res://Effects/EnemyIndicator.tscn")
 
 func _ready():
-	Global.magicCards = [SpellCard.new(2, "Blast")]
-	Global.spellList = []
+	var spell = Spell.new("Fireball")
+	spell.element = testElementSpellCard
+	spell.style = testStyleSpellCard
+	spell.type = testTypeSpellCard
+	spell.binding = 69
+	Global.magicCards = []
+	Global.spellList = [spell]
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
 func _process(delta):

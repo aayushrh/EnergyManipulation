@@ -10,7 +10,7 @@ func _reload(typeShow):
 	for i in Global.magicCards:
 		if i.type == typeShow:
 			var button = MagicButton.instantiate()
-			button.get_child(0).text = i.spellName
+			button.get_child(0).text = i.cardName
 			button.card = i
 			button.magicMenu = magicMenu
 			add_child(button)

@@ -50,14 +50,12 @@ var stored_energy = 0
 
 
 func _ready():
+	print(agg)
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
 	var spell = Spell.new("firstSpell")
-	spell.type = SpellCard.new(2, "Blast")
-	if(rng.randi_range(0,1) == 0):
-		spell.element = SpellCard.new(0, "Water")
-	else:
-		spell.element = SpellCard.new(0, "Fire")
+	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
 	var r = rng.randi_range(1,210)
 	for i in range(19):
 		r -= 20 + i
@@ -109,7 +107,7 @@ func _move(delta):
 	if(cooldown <=0):
 		can_attack = true
 	if player != null:
-		if(castedIndex != -1 and (spells[castedIndex].type.spellName.to_lower() == "blast" or spells[castedIndex].type.spellName.to_lower() == "beam")):
+		if(castedIndex != -1 and spells[castedIndex].type.aimType == 0):
 			if(agg):
 				rotateToTarget(player.global_position, delta)
 			else:
@@ -188,29 +186,18 @@ func tactCheck(req):
 func magic_check(delta):
 	if(player!=null):
 		var track = -1
-		for e in spells:
+		for e:Spell in spells:
 			track += 1
 			if(!e.using):
 				e.cooldown -= delta
 			if(dodgeDir == 0 and e.cooldown < 0 and !casting):
-				if(e.type != null and e.type.spellName.to_lower() == "blast"):
-					castedIndex = track
-					blast = BlastTscn.instantiate()
-					blast.player = self
-					blast.setSpell(e)
-					get_tree().current_scene.add_child(blast)
-					e.resetCooldown(true)
-					casting = true
-				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
-					var explosion = Explosion.instantiate()
-					explosion.player = self
-					explosion.setSpell(e)
-					get_tree().current_scene.add_child(explosion)
-					e.resetCooldown(true)
+				blast = e._cast(self)
+				castedIndex = track
 				slow = true
 				ROTATIONSPEED /= 2
+				e.resetCooldown(true)
 
-func predictionrotate(player,delta):	
+func predictionrotate(player,delta):
 	if(blast!=null):
 		var a = pow(blast.getSpeed(),2)-player.velocity.distance_squared_to(Vector2.ZERO)
 		var b = -2*(((player.global_position.x-global_position.x)*player.velocity.x)+((player.global_position.y-global_position.y)*player.velocity.y))

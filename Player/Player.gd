@@ -103,40 +103,19 @@ func updateEnergy():
 
 func magic_check(delta):
 	var hit = false
-	for e in Global.spellList:
+	for e:Spell in Global.spellList:
 		if(!e.using):
 			e.cooldown -= delta
 		if e.binding != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
-			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and ((e.style == null and stored_energy >= e.initCost()) or (e.style != null and stored_energy - int(e.style.spellName.to_lower() == "horse")*stored_energy*.36 >= e.initCost())):
-				var shot = false
-				if(e.type != null and e.type.spellName.to_lower() == "blast"):
-					var blast = Blast.instantiate()
-					blast.player = self
-					blast.setSpell(e)
-					get_tree().current_scene.add_child(blast)
-					e.resetCooldown(true)
-					shot = true
-					casting = true
-					charging = true
-					var magicNameCallout = MagicNameCallout.instantiate()
-					magicNameCallout.position = Vector2(0, 60)
-					magicNameCallout._show(e)
-					add_child(magicNameCallout)
-					get_tree().current_scene.amountShot += e.attributes.amount
-				if(e.type != null and e.type.spellName.to_lower() == "explosion"):
-					var explosion = Explosion.instantiate()
-					explosion.player = self
-					explosion.setSpell(e)
-					get_tree().current_scene.add_child(explosion)
-					e.resetCooldown(true)
-					shot = true
-				if shot:
-					slow = true
-					ROTATIONSPEED /= 2
-					stored_energy -= e.initCost()
-					updateEnergy()
+			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
+				e._cast(self)
+				slow = true
+				ROTATIONSPEED /= 2
+				stored_energy -= e.initCost()
+				e.resetCooldown(true)
+				updateEnergy()
 	onLastTurn = hit
 
 func dash_check(delta):
@@ -233,8 +212,6 @@ func _hit(hitbox):
 	time_last_hit = time
 	$HitRegister.start(0.06125)
 	self.hitboxpos = hitbox.global_position
-	self.hitboxEffects = hitbox.effects
-	print(hitbox.effects[0])
 	#_hit_register(hitbox)
 
 func _dmgRed(time):
@@ -243,7 +220,8 @@ func _dmgRed(time):
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
 		for e in hitboxEffects:
-			removeEffects(e)
+			e._tick(100000)
+			#removeEffects(e)
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
@@ -251,7 +229,8 @@ func _dmgRed(time):
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
 		for e in hitboxEffects:
-			removeEffects(e)
+			e._tick(100000)
+			#removeEffects(e)
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
 	if(time < -0.04165 and time > -0.06125):
@@ -265,7 +244,8 @@ func _dmgRed(time):
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
 		for e in hitboxEffects:
-			removeEffects(e)
+			e._tick(100000)
+			#removeEffects(e)
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
@@ -273,7 +253,8 @@ func _dmgRed(time):
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
 		for e in hitboxEffects:
-			removeEffects(e)
+			e._tick(100000)
+			#removeEffects(e)
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):

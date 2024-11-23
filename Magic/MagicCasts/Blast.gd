@@ -1,5 +1,7 @@
 extends SpellCast
 
+signal done
+
 var direction = Vector2.ZERO
 var castingTimer = 0
 var chargeTimer = 0
@@ -12,12 +14,21 @@ var buttonLetGo = false
 var castingCost = 0
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
+@onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
 func setSpell(nspell):
+	print("eee")
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
+
+func _nameCallout():
+	pass
+	#var magicNameCallout = MagicNameCallout.instantiate()
+	#magicNameCallout.position = Vector2(0, 60)
+	#magicNameCallout._show(spell)
+	#player.add_child(magicNameCallout)
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
@@ -46,14 +57,17 @@ func _process(delta):
 				chargeTimer -= delta
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
+					done.emit()
+					_nameCallout()
 				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
 			else:
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
+					done.emit()
+					_nameCallout()
 			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 		else:
-			
 			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 			timer -= delta
 			if timer <= 0:
@@ -62,13 +76,14 @@ func _process(delta):
 					_shoot()
 					if timesShot >= spell.attributes.getAmount():
 						player.doneCasting()
-						if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
-							player.stored_energy += 0.36 * (spell.initCost() + castingCost)
+						#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
+							#player.stored_energy += 0.36 * (spell.initCost() + castingCost)
 						queue_free()
 						spell.resetCooldown(false)
 
 func letGo():
 	buttonLetGo = true
+	print("let go")
 
 func getSpeed():
 	return speed * spell.attributes.getPSpeed() * chargeMulti

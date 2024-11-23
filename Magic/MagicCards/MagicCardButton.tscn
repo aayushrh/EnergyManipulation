@@ -3,7 +3,6 @@
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rntnr"]
 [ext_resource type="Script" path="res://Magic/MagicCards/MagicCardButton.gd" id="1_yqehn"]
 
-
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(0, 40)
 script = ExtResource("1_yqehn")

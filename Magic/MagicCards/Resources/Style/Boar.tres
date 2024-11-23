@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StyleSpellCard" load_steps=4 format=3 uid="uid://fa5aq46y3a3k"]
+
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="1_ihdu4"]
+[ext_resource type="Script" path="res://Magic/MagicCards/StyleSpellCard.gd" id="1_trlus"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="2_bw3x0"]
+
+[resource]
+script = ExtResource("1_trlus")
+spellEffects = ExtResource("2_bw3x0")
+cardName = "Boar"
+cardDescription = "adds the stun effects to all of your spells or stuns the attacker"
+hitEffects = Array[String](["addStun"])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+color = Color(1, 0.74902, 0, 1)
+icon = ExtResource("1_ihdu4")
+cdMult = 1.5
+costMult = 1.25

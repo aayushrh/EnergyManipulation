@@ -1,14 +1,23 @@
-[gd_scene load_steps=13 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=22 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
+[ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Elements/Fire.tres" id="2_5nixq"]
+[ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Elements/Nature.tres" id="2_c5j3f"]
+[ext_resource type="Resource" uid="uid://fa5aq46y3a3k" path="res://Magic/MagicCards/Resources/Style/Boar.tres" id="3_losfs"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="4_5utis"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
+[ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="4_ov6f6"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
+[ext_resource type="Script" path="res://Magic/MagicCards/StyleSpellCard.gd" id="6_uyec6"]
 [ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
 [ext_resource type="PackedScene" uid="uid://bj4aovx2vn01h" path="res://World/UI/CardSelection.tscn" id="8_v2hr7"]
 [ext_resource type="Script" path="res://World/Wall.gd" id="9_4eups"]
+[ext_resource type="Script" path="res://Magic/MagicCards/TypeSpellCard.gd" id="9_d37x6"]
 [ext_resource type="Texture2D" uid="uid://di23s0ipx556c" path="res://Art/TX Tileset Grass.png" id="9_tvb2g"]
+[ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Elements/Water.tres" id="9_vavhn"]
 [ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
+[ext_resource type="Resource" uid="uid://dq0hukx4vjqg6" path="res://Magic/MagicCards/Resources/Style/Horse.tres" id="11_dq84m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("9_tvb2g")
@@ -279,6 +288,11 @@ size = Vector2(105, 3117)
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
+testElementSpellCard = ExtResource("2_c5j3f")
+testTypeSpellCard = ExtResource("4_ov6f6")
+allElementSpellCards = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f")])
+allStyleSpellCards = Array[ExtResource("6_uyec6")]([ExtResource("3_losfs"), ExtResource("11_dq84m")])
+allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(5, 5)
@@ -312,6 +326,7 @@ layout_mode = 2
 
 [node name="CardSelection" parent="CanvasLayer" node_paths=PackedStringArray("spawner") instance=ExtResource("8_v2hr7")]
 visible = false
+cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("3_losfs"), ExtResource("11_dq84m"), ExtResource("4_ov6f6")])
 spawner = NodePath("../../Spawner")
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]
