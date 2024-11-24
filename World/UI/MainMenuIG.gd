@@ -32,3 +32,6 @@ func _on_exit_pressed():
 	visible = false
 	Global.pause = false
 	get_tree().current_scene._reloadSpellList()
+
+func _on_check_button_pressed():
+	Global.particlesNotShowing = !Global.particlesNotShowing

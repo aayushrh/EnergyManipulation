@@ -5,6 +5,7 @@ var lastTSCN = ""
 
 var magicCards = []
 var spellList = []
+var particlesNotShowing = false
 
 func _change_tscn(file_location:String):
 	lastTSCN = get_tree().current_scene.scene_file_path

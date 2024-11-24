@@ -60,6 +60,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_wq8aw")
 text = "Stats"
 
+[node name="CheckButton" type="CheckButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wq8aw")
+text = "Particles not Showing?"
+
 [node name="Exit" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1077.0
@@ -71,4 +76,5 @@ text = "Exit"
 [connection signal="pressed" from="ColorRect/VBoxContainer/MagicCreation" to="." method="_on_magic_creation_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/InputChange" to="." method="_on_input_change_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/CheckButton" to="." method="_on_check_button_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

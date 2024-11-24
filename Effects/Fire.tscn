@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv7ctjy2t1vta"]
+[gd_scene load_steps=5 format=3 uid="uid://cv7ctjy2t1vta"]
 
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_8kiry"]
-[ext_resource type="Script" path="res://Effects/VFXIndentifier.gd" id="2_srgte"]
+[ext_resource type="Script" path="res://Effects/blastVisualChange.gd" id="2_ai1a2"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="3_j1d32"]
 
 [sub_resource type="Gradient" id="Gradient_fvdh6"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 0)
@@ -19,5 +20,11 @@ angle_max = 360.0
 scale_amount_min = 0.05
 scale_amount_max = 0.1
 color_ramp = SubResource("Gradient_fvdh6")
-script = ExtResource("2_srgte")
-vfxName = "Fire"
+script = ExtResource("2_ai1a2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(-0.999969, 1)
+scale = Vector2(0.6875, 0.667969)
+texture = ExtResource("3_j1d32")
