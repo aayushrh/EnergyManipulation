@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl7jjlssfx3fu"]
+
+[ext_resource type="Script" path="res://Effects/StandardVFXIndentifier.gd" id="1_b4psn"]
+[ext_resource type="Texture2D" uid="uid://eppnbhj3cbpm" path="res://Art/LightBlindness.png" id="2_6etud"]
+
+[node name="LightBlindness" type="Node2D"]
+script = ExtResource("1_b4psn")
+vfxName = "Light"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+offset_left = 538.0
+offset_top = -994.0
+offset_right = 2020.0
+offset_bottom = 1226.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -1608.0
+offset_top = -2557.0
+offset_right = 1235.0
+offset_bottom = -337.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -3393.0
+offset_top = -1344.0
+offset_right = -550.0
+offset_bottom = 876.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -1568.0
+offset_top = 306.0
+offset_right = 1275.0
+offset_bottom = 2526.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="BlindessTransparent" type="Sprite2D" parent="."]
+z_index = 100
+position = Vector2(0, -16)
+texture = ExtResource("2_6etud")

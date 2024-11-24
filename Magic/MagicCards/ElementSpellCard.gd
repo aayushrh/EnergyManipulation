@@ -19,8 +19,9 @@ var type = 0
 func callHitEffects(spellObj:SpellCasted, enemy):
 	var hitVFX = HitVFX.instantiate()
 	hitVFX.emitting = true
-	hitVFX.global_position = spellObj.global_position
-	spellObj.get_tree().current_scene.add_child(hitVFX)
+	hitVFX.position = spellObj.global_position
+	if spellObj.get_tree() != null:
+		spellObj.get_tree().current_scene.add_child(hitVFX)
 	for e in hitEffects:
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj, enemy)
@@ -29,7 +30,8 @@ func callOngoingEffects(spellObj:SpellCasted):
 	if OngoingVFX != null:
 		var ongoingVFX = OngoingVFX.instantiate()
 		ongoingVFX.global_position = spellObj.global_position
-		spellObj.get_tree().current_scene.add_child(ongoingVFX)
+		if spellObj.get_tree() != null:
+			spellObj.get_tree().current_scene.add_child(ongoingVFX)
 	for e in ongoingEffects:
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj)

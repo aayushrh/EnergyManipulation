@@ -8,7 +8,7 @@ func _reload(typeShow):
 	for i in get_children():
 		i.queue_free()
 	for i in Global.magicCards:
-		if i.type == typeShow:
+		if i != null and i.type == typeShow:
 			var button = MagicButton.instantiate()
 			button.get_child(0).text = i.cardName
 			button.card = i

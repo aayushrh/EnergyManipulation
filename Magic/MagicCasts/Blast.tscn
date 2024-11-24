@@ -10,3 +10,7 @@ script = ExtResource("1_hlb7q")
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.45098)
 texture = ExtResource("2_5mjti")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.439216)
+scale = Vector2(0.5, 0.5)

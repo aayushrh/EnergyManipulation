@@ -8,6 +8,7 @@ func _init(life):
 	lifetime = life
 	visual = load("res://Effects/Stunned.tscn")
 	icon = load("res://Art/stoned-skull.png")
+	effectName = "Stun"
 
 func _tick(entity, delta):
 	if !handledEffect:

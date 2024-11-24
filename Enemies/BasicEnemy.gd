@@ -50,13 +50,13 @@ var stored_energy = 0
 
 
 func _ready():
-	print(agg)
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+	spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
-	var r = rng.randi_range(1,210)
+	var r = rng.randi_range(1,20)
 	for i in range(19):
 		r -= 20 + i
 		if(r<0):

@@ -12,7 +12,7 @@ func _show(card):
 		$VBoxContainer/Label.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label2.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label3.add_theme_color_override("font_color", Color.BLACK)
-	$VBoxContainer/TextureRect.texture = card.icon
+	$TextureRect.texture = card.icon
 	$VBoxContainer/Label.text = card.cardName
 	$VBoxContainer/Label3.text = card.cardDescription
 	match(card.type):

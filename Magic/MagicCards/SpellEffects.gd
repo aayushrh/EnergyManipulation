@@ -6,17 +6,27 @@ func testHit(spellObj:SpellCasted, enemy):
 
 func addBurning(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var burning = Burning.new(3)
+		var burning = Burning.new(spellObj.spell.attributes.getPower() * 3)
 		enemy.attachEffect(burning)
 
 func addSoggy(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var soggy = Soggy.new(3)
+		var soggy = Soggy.new(spellObj.spell.attributes.getPower() * 3)
 		enemy.attachEffect(soggy)
 
 func addStun(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var stun = Stun.new(1.5)
+		var stun = Stun.new(spellObj.spell.attributes.getPower() * 1.5)
+		enemy.attachEffect(stun)
+
+func addLightBlindness(spellObj:SpellCasted, enemy):
+	if(enemy != null and !(enemy is BasicEnemy)):
+		var stun = LightBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		enemy.attachEffect(stun)
+
+func addDarkBlindness(spellObj:SpellCasted, enemy):
+	if(enemy != null and !(enemy is BasicEnemy)):
+		var stun = DarkBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
 		enemy.attachEffect(stun)
 
 func lifesteal(spellObj:SpellCasted, enemy):

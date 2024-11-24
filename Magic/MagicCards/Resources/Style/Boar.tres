@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StyleSpellCard" load_steps=4 format=3 uid="uid://fa5aq46y3a3k"]
 
-[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="1_ihdu4"]
+[ext_resource type="Texture2D" uid="uid://gfadr1fql6h1" path="res://Art/boar.png" id="1_40k2x"]
 [ext_resource type="Script" path="res://Magic/MagicCards/StyleSpellCard.gd" id="1_trlus"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="2_bw3x0"]
 
@@ -13,6 +13,6 @@ hitEffects = Array[String](["addStun"])
 ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
 color = Color(1, 0.74902, 0, 1)
-icon = ExtResource("1_ihdu4")
+icon = ExtResource("1_40k2x")
 cdMult = 1.5
 costMult = 1.25

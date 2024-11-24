@@ -47,6 +47,8 @@ var charging = false
 var hitboxpos = Vector2.ZERO
 var hitboxEffects = []
 var healing = false
+var effectsHaventChecked = []
+var blockTimer = 0
 
 func _ready():
 	updateEnergy()
@@ -55,6 +57,7 @@ func _ready():
 	health = MAXHEALTH
 
 func _process(delta):
+	blockTimer -= delta
 	time += delta
 	queue_redraw()
 	healing = false
@@ -68,9 +71,13 @@ func _process(delta):
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
 		_movement(delta)
+		_friction(delta)
 		attack()
 		dash_check(delta)
 		block()
+	elif pause and !Global.pause:
+		_effectsHandle(delta)
+		_friction(delta)
 	if(dashing):
 		var after = Afterimage.instantiate()
 		after.global_position = global_position
@@ -162,7 +169,7 @@ func dash(dir):
 		clicked = ""
 		blocking = false
 		$PlayerArt._unblock()
-		attachEffect(Dash.new(1))
+		attachEffect(Dash.new(1), false)
 
 func _shockwave():
 	var shockwave = Shockwave.instantiate()
@@ -189,13 +196,15 @@ func _effectsHandle(delta):
 	for e in effects:
 		e._tick(self, delta)
 
+func _friction(delta):
+	velocity *= pow(FRICTION,delta)
+
 func _movement(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.y = Input.get_axis("up", "down")
 	input_vector.x = Input.get_axis("left", "right")
 	input_vector = input_vector.normalized()
 	velocity += input_vector * ACCELERATION * delta
-	velocity *= pow(FRICTION,delta)
 	if(!blocking and !slow):
 		velocity = velocity.limit_length(TOPSPEED)
 	else:
@@ -212,25 +221,21 @@ func _hit(hitbox):
 	time_last_hit = time
 	$HitRegister.start(0.06125)
 	self.hitboxpos = hitbox.global_position
-	#_hit_register(hitbox)
+	_hit_register()
 
 func _dmgRed(time):
 	if(time < 0 and time > -0.02085):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
-		for e in hitboxEffects:
-			e._tick(100000)
-			#removeEffects(e)
+		blockTimer = 0.1
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
-		for e in hitboxEffects:
-			e._tick(100000)
-			#removeEffects(e)
+		blockTimer = 0.1
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
 	if(time < -0.04165 and time > -0.06125):
@@ -243,18 +248,18 @@ func _dmgRed(time):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
-		for e in hitboxEffects:
-			e._tick(100000)
-			#removeEffects(e)
+		print(effectsHaventChecked.size())
+		print(str(effects.size()) + " effects size")
+		blockTimer = 0.1
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
-		for e in hitboxEffects:
-			e._tick(100000)
-			#removeEffects(e)
+		print(effectsHaventChecked.size())
+		print(str(effects.size()) + " effects size")
+		blockTimer = 0.5
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
@@ -276,15 +281,15 @@ func _on_dashing_timer_timeout():
 	dashing = false
 
 func _hit_register():
-	print(health)
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
+	effectsHaventChecked = []
+	print(effects.size())
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10
 	health -= dmgTaken * (1-dmgRed)
-	print(dmgTaken)
 	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	if(health<0):
@@ -300,19 +305,24 @@ func updateHealth():
 	$CanvasLayer/HealthBar.size.x = health*20.0
 	HurtBackground._update(health)
 
-func attachEffect(effect):
-	var visual = effect.visual.instantiate()
-	add_child(visual)
-	vfx.append(visual)
-	effects.append(effect)
-	var effectUI = EffectUI.instantiate()
-	effectUI.initialize(effect)
-	$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+func attachEffect(effect, needsChecking=true):
+	if(blockTimer < 0):
+		var visual = effect.visual.instantiate()
+		add_child(visual)
+		vfx.append(visual)
+		effects.append(effect)
+		var effectUI = EffectUI.instantiate()
+		effectUI.initialize(effect)
+		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+		if needsChecking:
+			effectsHaventChecked.append(effect)
+		print(str(effects.size()) + "size")
 
 func removeEffects(effect):
 	for b in effects:
-		if(b == effect):
+		if(b.effectName == effect.effectName):
 			b._tick(self, 1000000)
+			break
 
 func _on_hit_register_timeout():
 	_hit_register()

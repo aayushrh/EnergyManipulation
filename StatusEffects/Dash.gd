@@ -7,6 +7,7 @@ func _init(life):
 	lifetime = life
 	visual = load("res://Effects/Tired.tscn")
 	icon = load("res://Art/sprint.png")
+	effectName = "Dash"
 
 func _tick(entity, delta):
 	lifetime -= delta

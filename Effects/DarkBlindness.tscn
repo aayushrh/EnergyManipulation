@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://chij0ue0l26s"]
+
+[ext_resource type="Script" path="res://Effects/StandardVFXIndentifier.gd" id="1_kvh83"]
+[ext_resource type="Texture2D" uid="uid://eppnbhj3cbpm" path="res://Art/LightBlindness.png" id="2_i6ima"]
+
+[node name="LightBlindness" type="Node2D"]
+script = ExtResource("1_kvh83")
+vfxName = "Dark"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+offset_left = 562.0
+offset_top = -707.0
+offset_right = 2044.0
+offset_bottom = 1513.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -1608.0
+offset_top = -2541.0
+offset_right = 1235.0
+offset_bottom = -321.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -3393.0
+offset_top = -1328.0
+offset_right = -550.0
+offset_bottom = 892.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -1568.0
+offset_top = 322.0
+offset_right = 1275.0
+offset_bottom = 2542.0
+color = Color(0, 0, 0, 1)
+
+[node name="BlindessTransparent" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 100
+texture = ExtResource("2_i6ima")

@@ -17,11 +17,17 @@ var castingCost = 0
 @onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
 func setSpell(nspell):
-	print("eee")
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
+	if(spell.style != null):
+		$Sprite2D.texture = spell.style.icon
+		$Sprite2D.scale = Vector2(0.3, 0.3)
+	if(spell.element != null):
+		$Icon.texture = spell.element.icon
+		$Icon.self_modulate = Color(spell.element.color, 0.5)
+		$Icon.scale = Vector2(0.3, 0.3)
 
 func _nameCallout():
 	pass
@@ -47,6 +53,7 @@ func _process(delta):
 	if !is_instance_valid(player):
 		queue_free()
 	if !Global.pause and is_instance_valid(player):
+		$Sprite2D.global_position = player.global_position + Vector2(0, -65)
 		if !shot:
 			direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
@@ -83,7 +90,6 @@ func _process(delta):
 
 func letGo():
 	buttonLetGo = true
-	print("let go")
 
 func getSpeed():
 	return speed * spell.attributes.getPSpeed() * chargeMulti

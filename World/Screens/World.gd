@@ -40,29 +40,32 @@ func _process(delta):
 		print("true")
 	for e in $Enemies.get_children():
 		var cameraPos = camera.get_screen_center_position()
+		var placed = false
 		if e.global_position.x > cameraPos.x + 1440/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x + 1440/2, cameraPos.y - 812/2)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x + 1440/2, cameraPos.y - 812/2) - Vector2(50, 0)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
-			if(indicator.global_position != Vector2.ZERO):
+			if(indicator.global_position != Vector2(-50, 0)):
 				get_tree().current_scene.add_child(indicator)
-		elif e.global_position.x < cameraPos.x - 1440/2:
+				placed = true
+		if !placed and e.global_position.x < cameraPos.x - 1440/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x - 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x - 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2) - Vector2(-50, 0)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
-			if(indicator.global_position != Vector2.ZERO):
+			if(indicator.global_position != Vector2(50, 0)):
 				get_tree().current_scene.add_child(indicator)
-		elif e.global_position.y > cameraPos.y + 812/2:
+				placed = true
+		if !placed and e.global_position.y > cameraPos.y + 812/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y + 812/2)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y + 812/2) - Vector2(0, 50)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
-			if(indicator.global_position != Vector2.ZERO):
+			if(indicator.global_position != Vector2(0, -50)):
 				get_tree().current_scene.add_child(indicator)
-		elif e.global_position.y < cameraPos.y - 812/2:
+		if !placed and e.global_position.y < cameraPos.y - 812/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y - 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y - 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2) - Vector2(0, -50)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
-			if(indicator.global_position != Vector2.ZERO):
+			if(indicator.global_position != Vector2(0, 50)):
 				get_tree().current_scene.add_child(indicator)
 
 func lineLine(x1, y1, x2, y2, x3, y3, x4, y4):
