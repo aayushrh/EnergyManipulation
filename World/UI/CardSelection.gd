@@ -29,11 +29,16 @@ func _ready():
 func _show():
 	Global.pause = true
 	visible = true
-	var randCard = cardsToShow[rng.randi_range(0, cardsToShow.size() - 1)]
+	var temp = cardsToShow.duplicate()
+	var rando = rng.randi_range(0, temp.size() - 1)
+	var randCard = temp[rando]
+	temp.remove_at(rando)
 	card1._show(randCard)
-	randCard = cardsToShow[rng.randi_range(0, cardsToShow.size() - 1)]
+	rando = rng.randi_range(0, temp.size() - 1)
+	randCard = temp[rando]
+	temp.remove_at(rando)
 	card2._show(randCard)
-	randCard = cardsToShow[rng.randi_range(0, cardsToShow.size() - 1)]
+	randCard = temp[rng.randi_range(0, temp.size() - 1)]
 	card3._show(randCard)
 
 func onSelectedCard(card):
