@@ -35,7 +35,7 @@ var stored_energy = 0
 @export var TOPSPEED = 200
 @export var ROTATIONSPEED = 10
 @export var Shockwave : PackedScene
-@export var dash_cd = 2.5
+@export var dash_cd = 5
 @export var dash_time = 0.1
 @export var block_cd = 1.0
 @export var caution_range = 300
@@ -52,10 +52,37 @@ var stored_energy = 0
 func _ready():
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
+	var num = rng.randi_range(0, 3)
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-	spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
+	match num:
+		0:
+			dash_cd = 2.5
+			spell.attributes = Attributes.new(0, rng.randf_range(-50,0),2)
+			spell.style = get_tree().current_scene.allStyleSpellCards[1]
+			TOPSPEED *= 2
+		1:
+			dash_cd = 10
+			spell.attributes = Attributes.new(0, rng.randf_range(0, 50), 1)
+			spell.style = get_tree().current_scene.allStyleSpellCards[0]
+		2:
+			dash_cd = 5
+			maxHealth *= 2
+			spell.attributes = Attributes.new(rng.randf_range(0, 50), 0, 1)
+		3:
+			dash_cd = 5
+			var spell2 = Spell.new("secondSpell")
+			spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+			spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
+			spell.attributes = Attributes.new(rng.randf_range(-50, 0), 0, 1)
+			spell2.attributes = Attributes.new(rng.randf_range(-50, 0), 0, 1)
+			spells.append(spell2)
+			
+	#var spell = Spell.new("firstSpell")
+	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+	#spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
+	#spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
 	var r = rng.randi_range(1,20)
 	for i in range(19):
 		r -= 20 + i
@@ -196,6 +223,7 @@ func magic_check(delta):
 				slow = true
 				ROTATIONSPEED /= 2
 				e.resetCooldown(true)
+				casting = true
 
 func predictionrotate(player,delta):
 	if(blast!=null):
@@ -213,6 +241,7 @@ func predictionrotate(player,delta):
 			blast.letGo()
 			blast = null
 			castedIndex = -1
+			casting = false
 	else:
 		pass#for beam in the future not now lol
 
