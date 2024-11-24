@@ -104,7 +104,7 @@ func _heal(delta):
 		healing = true
 		stored_energy -= delta * 100 * pow(2,(health/MAXHEALTH))
 		health += MAXHEALTH * delta/2.5
-		get_tree().current_scene.damageHealed += delta/10
+		get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
 	$CanvasLayer/EnergyBar.size.x = stored_energy*50
