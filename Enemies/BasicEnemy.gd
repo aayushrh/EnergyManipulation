@@ -26,6 +26,7 @@ var maxHealth = 0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 0
+var blinded = false
 
 @export var health = 5.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
@@ -58,22 +59,26 @@ func _ready():
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
 	match num:
-		0:
+		0: #Dashing dude
+			agg = true
 			dash_cd = 2.5
 			maxHealth = 2
 			spell.attributes = Attributes.new(0, rng.randf_range(-50,0),2)
 			spell.style = get_tree().current_scene.allStyleSpellCards[1]
 			TOPSPEED *= 2
-		1:
+		1: #Power dude
+			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 10
 			maxHealth = 2
 			spell.attributes = Attributes.new(0, rng.randf_range(0, 50), 1)
-			spell.style = get_tree().current_scene.allStyleSpellCards[0]
-		2:
+			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
+		2: #Healthy dude
+			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
 			maxHealth = 4
 			spell.attributes = Attributes.new(rng.randf_range(0, 50), 0, 1)
-		3:
+		3: # Wisdom dude
+			agg = false
 			dash_cd = 5
 			maxHealth = 2
 			var spell2 = Spell.new("secondSpell")
@@ -102,6 +107,10 @@ func _finishCharge():
 	ROTATIONSPEED *= 2
 
 func _process(delta):
+	#if blinded:
+		#$Area2D.monitoring = false
+	#else:
+		#$Area2D.monitoring = true
 	if(!Global.pause and !pause):
 		$Health.size.x = 80 * (health * 1.0)/(maxHealth*1.0)
 		queue_redraw()

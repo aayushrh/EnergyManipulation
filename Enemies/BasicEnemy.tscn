@@ -52,9 +52,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-visible = false
-position = Vector2(38, 235)
-polygon = PackedVector2Array(-559, -685, 487, -705, 487, 183, -567, 189)
+polygon = PackedVector2Array(-152, -350, 152, -350, 30, 0, -30, 0)
 
 [node name="dashing" type="Timer" parent="."]
 one_shot = true

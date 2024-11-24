@@ -20,7 +20,7 @@ func _ready():
 
 func _process(delta):
 	var spawn = rng.randi_range(0, 250)
-	if(spawn < 1 and spawned < floor(waveNumber/2) + 1):
+	if(spawn < 1 and spawned < floor(waveNumber/3) + 1):
 		var num = rng.randi_range(0, 3)
 		var spawnLoc = Vector2.ZERO
 		if(num == 0):
@@ -34,12 +34,12 @@ func _process(delta):
 		
 		var basicEnemy = BasicEnemy.instantiate()
 		basicEnemy.global_position = spawnLoc# + player.global_position
-		basicEnemy.agg = randi_range(0,1)==1
+		#basicEnemy.agg = randi_range(0,1)==1
 		basicEnemy.health = max(1, waveNumber/2)
 		enemyParent.add_child(basicEnemy)
 		spawned += 1
 	
-	if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/2) + 1:
+	if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/3) + 1:
 		readyToSpawn = true
 		if !emitted:
 			waveFinished.emit()
@@ -50,4 +50,3 @@ func _startNextWave():
 		spawned = 0
 		waveNumber += 1
 		emitted = false
-		print("ee")

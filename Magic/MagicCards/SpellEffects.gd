@@ -24,10 +24,16 @@ func addLightBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
 		var stun = LightBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
 		enemy.attachEffect(stun)
+	elif(enemy != null and enemy is BasicEnemy):
+		var stun = Blindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		enemy.attachEffect(stun)
 
 func addDarkBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
 		var stun = DarkBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		enemy.attachEffect(stun)
+	elif(enemy != null and enemy is BasicEnemy):
+		var stun = Blindness.new(spellObj.spell.attributes.getPower() * 1.5)
 		enemy.attachEffect(stun)
 
 func lifesteal(spellObj:SpellCasted, enemy):
