@@ -6,7 +6,7 @@ var handledEffect = false
 func _init(life):
 	lifetime = life
 	visual = load("res://Effects/DarkBlindness.tscn")
-	icon = load("res://Art/despair (1).png")
+	icon = load("res://Art/sight-disabled (1).png")
 	effectName = "Darkness"
 
 func _tick(entity, delta):
