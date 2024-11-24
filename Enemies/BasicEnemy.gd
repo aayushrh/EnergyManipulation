@@ -11,6 +11,7 @@ var nomove = false
 var dmgTaken = 0
 var time = 0
 var block = -1
+var blocking = false
 var rng = RandomNumberGenerator.new()
 var magic = []#player casted spell
 var spells = []# enemy casted spells
@@ -59,19 +60,22 @@ func _ready():
 	match num:
 		0:
 			dash_cd = 2.5
+			maxHealth = 2
 			spell.attributes = Attributes.new(0, rng.randf_range(-50,0),2)
 			spell.style = get_tree().current_scene.allStyleSpellCards[1]
 			TOPSPEED *= 2
 		1:
 			dash_cd = 10
+			maxHealth = 2
 			spell.attributes = Attributes.new(0, rng.randf_range(0, 50), 1)
 			spell.style = get_tree().current_scene.allStyleSpellCards[0]
 		2:
 			dash_cd = 5
-			maxHealth *= 2
+			maxHealth = 4
 			spell.attributes = Attributes.new(rng.randf_range(0, 50), 0, 1)
 		3:
 			dash_cd = 5
+			maxHealth = 2
 			var spell2 = Spell.new("secondSpell")
 			spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 			spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]

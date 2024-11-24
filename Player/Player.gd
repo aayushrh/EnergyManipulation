@@ -57,6 +57,7 @@ func _ready():
 	health = MAXHEALTH
 
 func _process(delta):
+	updateHealth()
 	blockTimer -= delta
 	time += delta
 	queue_redraw()
@@ -221,21 +222,25 @@ func _hit(hitbox):
 	time_last_hit = time
 	$HitRegister.start(0.06125)
 	self.hitboxpos = hitbox.global_position
-	_hit_register()
+	#_hit_register()
 
 func _dmgRed(time):
 	if(time < 0 and time > -0.02085):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
-		blockTimer = 0.1
+		#blockTimer = 0.1
+		for e in effectsHaventChecked:
+			removeEffects(e)
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
-		blockTimer = 0.1
+		#blockTimer = 0.1
+		for e in effectsHaventChecked:
+			removeEffects(e)
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
 	if(time < -0.04165 and time > -0.06125):
@@ -250,7 +255,9 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		print(effectsHaventChecked.size())
 		print(str(effects.size()) + " effects size")
-		blockTimer = 0.1
+		#blockTimer = 0.1
+		for e in effectsHaventChecked:
+			removeEffects(e)
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
@@ -259,7 +266,9 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(goodBlock)
 		print(effectsHaventChecked.size())
 		print(str(effects.size()) + " effects size")
-		blockTimer = 0.5
+		#blockTimer = 0.1
+		for e in effectsHaventChecked:
+			removeEffects(e)
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
@@ -282,8 +291,8 @@ func _on_dashing_timer_timeout():
 
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
+	print(str(time_last_hit-time_last_block))
 	effectsHaventChecked = []
-	print(effects.size())
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
@@ -306,17 +315,16 @@ func updateHealth():
 	HurtBackground._update(health)
 
 func attachEffect(effect, needsChecking=true):
-	if(blockTimer < 0):
-		var visual = effect.visual.instantiate()
-		add_child(visual)
-		vfx.append(visual)
-		effects.append(effect)
-		var effectUI = EffectUI.instantiate()
-		effectUI.initialize(effect)
-		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
-		if needsChecking:
-			effectsHaventChecked.append(effect)
-		print(str(effects.size()) + "size")
+	var visual = effect.visual.instantiate()
+	add_child(visual)
+	vfx.append(visual)
+	effects.append(effect)
+	var effectUI = EffectUI.instantiate()
+	effectUI.initialize(effect)
+	$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+	if needsChecking:
+		effectsHaventChecked.append(effect)
+	print(str(effects.size()) + "size")
 
 func removeEffects(effect):
 	for b in effects:

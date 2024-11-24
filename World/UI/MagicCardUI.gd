@@ -5,6 +5,7 @@ signal pressed(card)
 var c = null
 
 func _show(card):
+	c = card
 	var c = card.color
 	c.a = 0.5
 	$ColorRect.color = c

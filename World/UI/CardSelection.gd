@@ -38,6 +38,7 @@ func _show():
 
 func onSelectedCard(card):
 	Global.magicCards.append(card)
+	print(card)
 	_hide()
 
 func _hide():
