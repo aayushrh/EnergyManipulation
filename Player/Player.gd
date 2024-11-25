@@ -239,7 +239,7 @@ func dash(dir):
 		clicked = ""
 		blocking = false
 		$PlayerArt._unblock()
-		attachEffect(Dash.new(1), false)
+		#attachEffect(Dash.new(1), false)
 		dashCharges -= 1
 
 func _shockwave():
