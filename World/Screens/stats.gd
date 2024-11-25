@@ -3,7 +3,7 @@ extends Control
 
 func _ready():
 	var world = get_tree().current_scene
-	$ColorRect2/ScrollContainer/VBoxContainer/Label.text = "Spells Casted: " + str(world.spellsCasted)
+	$ColorRect2/ScrollContainer/VBoxContainer/Label17.text = "Spells Casted: " + str(world.spellsCasted)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label.text = "Amount Shot: " + str(world.amountShot)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label2.text = "Spells Hit: " + str(world.amountHit)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label12.text = "Multi Hits: " + str(world.multiHits)
