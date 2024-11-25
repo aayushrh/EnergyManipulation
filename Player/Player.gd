@@ -57,6 +57,7 @@ var effectsHaventChecked = []
 var blockTimer = 0
 var intel = 1.0
 var wisdom = 1.0
+var spellHit = null
 
 func _ready():
 	#updateEnergy()
@@ -261,6 +262,7 @@ func canDash():
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
+	spellHit = hitbox.spell
 	time_last_hit = time
 	$HitRegister.start(0.06125)
 	self.hitboxpos = hitbox.global_position
@@ -331,7 +333,8 @@ func _hit_register():
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
-	stored_energy += dmgTaken * dmgRed * 10 * wisdom
+	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
+	stored_energy += spellHit.initCost() * dmgRed * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	health -= dmgTaken * (1-dmgRed)
 	#updateEnergy()

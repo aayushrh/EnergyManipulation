@@ -63,16 +63,17 @@ func _process(delta):
 			elif chargeTimer >= 0:
 				#print(spell.contcost())
 				#print(delta/spell.getMaxPowerTime())
-				player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
-				castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
-				chargeTimer -= delta
-				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
-					shot = true
-					done.emit()
-					_nameCallout()
-					#print(castingCost)
-				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
-				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
+				if player.type == 1 or player.stored_energy > spell.contcost() * delta/spell.getMaxPowerTime():
+					player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
+					castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
+					chargeTimer -= delta
+					if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
+						shot = true
+						done.emit()
+						_nameCallout()
+						#print(castingCost)
+					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
+					scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
 			else:
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
