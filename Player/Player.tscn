@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
 [ext_resource type="Texture2D" uid="uid://qakb1qsi280l" path="res://Art/HurtBackground.png" id="4_51wdw"]
 [ext_resource type="Script" path="res://Effects/HurtBackground.gd" id="5_lab3i"]
-[ext_resource type="PackedScene" uid="uid://cekec7pbvckd0" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
+[ext_resource type="PackedScene" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
@@ -28,6 +28,13 @@ visible = false
 shape = SubResource("CircleShape2D_7140r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EnergyBar2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 90.0
+color = Color(0.337255, 0.337255, 0.337255, 1)
 
 [node name="HealthBar2" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0

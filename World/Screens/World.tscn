@@ -305,6 +305,10 @@ tile_set = SubResource("TileSet_1lq6q")
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
 ROTATIONSPEED = 20.0
 MAXHEALTH = 20.0
+MAXMANA = 500.0
+BARSPEED = 20.0
+HPBARMULT = 20.0
+ENERGYBARMULT = 1.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

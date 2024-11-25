@@ -10,6 +10,10 @@ class_name Player
 @export var DASHTIME : float
 @export var ROTATIONSPEED : float
 @export var MAXHEALTH : float
+@export var MAXMANA : float
+@export var BARSPEED : float
+@export var HPBARMULT : float
+@export var ENERGYBARMULT : float
 
 @export_group("Effects")
 @export var Shockwave : PackedScene
@@ -24,6 +28,7 @@ class_name Player
 @onready var EffectUI = preload("res://World/UI/EffectUI.tscn")
 @onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
+var base_top_speed = 0.0
 var type = 0
 var rng = RandomNumberGenerator.new()
 var clicked = ""
@@ -31,11 +36,13 @@ var timer = 120
 var dashing = false
 var blocking = false
 var time = 0
-var stored_energy = 10.0
+var stored_energy = 50.0 : set = _energy_change
+var mana = 0.0#display energy
 var dmgTaken = 0
 var time_last_block = -1
 var time_last_hit = 0
-var health = 0
+var health = 0.0 : set = _health_change
+var hp = 0.0#display hp
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
@@ -53,25 +60,32 @@ var intel = 1.0
 var wisdom = 1.0
 
 func _ready():
-	updateEnergy()
+	#updateEnergy()
 	$PlayerArt.hit.connect(_shockwave)
 	rotation_speed = ROTATIONSPEED
 	health = MAXHEALTH
+	stored_energy = MAXMANA
+	base_top_speed = TOPSPEED
 
 func _process(delta):
-	updateHealth()
+	if(hp != health * HPBARMULT):
+		updateHP(delta)
+	if(mana != stored_energy * ENERGYBARMULT):
+		updateMana(delta)
+	#updateHealth()
 	updateMaxHealth()
-	updateEnergy()
+	updateMaxEnergy()
+	#updateEnergy()
 	blockTimer -= delta
 	time += delta
 	queue_redraw()
 	healing = false
 	if((!Global.pause and !pause) and !dashing):
 		_heal(delta)
-		if(charging or healing):
-			updateEnergy()
-		if(healing):
-			updateHealth()
+		#if(charging or healing):
+			#updateEnergy()
+		#if(healing):
+			#updateHealth()
 		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
@@ -90,6 +104,26 @@ func _process(delta):
 		get_tree().current_scene.add_child(after)
 	if(!Global.pause): move_and_slide()
 
+func _health_change(newHP: float):
+	var change = newHP - health
+	if(change > 0):
+		health += change/pow(2,int(health/MAXHEALTH))
+	elif(change < 0):
+		health += change
+		if(health < 0):
+			Global._change_tscn("res://World/Screens/MainMenu.tscn")
+			Global.pause = false
+
+func _energy_change(newMANA: float):
+	var change = newMANA - stored_energy
+	if(change > 0):
+		stored_energy += change/pow(2,int(stored_energy/MAXMANA))
+	elif(change < 0):
+		stored_energy += change
+		if(stored_energy < 0):
+			stored_energy = 0
+
+
 func block():
 	if(Input.is_action_just_pressed("Block")):
 			$PlayerArt._block()
@@ -106,12 +140,12 @@ func _draw():
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
 		healing = true
-		stored_energy -= delta * 100 * pow(2,(health/MAXHEALTH))
+		stored_energy -= delta * 100
 		health += MAXHEALTH * delta/2.5
-		get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
+		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
-	$CanvasLayer/EnergyBar.size.x = stored_energy*50
+	$CanvasLayer/EnergyBar.size.x = mana
 
 func magic_check(delta):
 	var hit = false
@@ -127,7 +161,7 @@ func magic_check(delta):
 				ROTATIONSPEED /= 2
 				stored_energy -= e.initCost()
 				e.resetCooldown(true)
-				updateEnergy()
+				#updateEnergy()
 	onLastTurn = hit
 
 func dash_check(delta):
@@ -182,7 +216,7 @@ func _shockwave():
 	shockwave.rotation_degrees = rotation_degrees
 	shockwave.sender = self
 	shockwave.energy = 1
-	updateEnergy()
+	#updateEnergy()
 	get_tree().current_scene.add_child(shockwave)
 
 func attack():
@@ -297,21 +331,45 @@ func _hit_register():
 	health -= dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
-	if(health<0):
-		Global._change_tscn("res://World/Screens/MainMenu.tscn")
-		Global.pause = false
-	updateEnergy()
+	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
-	updateHealth()
+	#updateHealth()
 	time = 0
 	time_last_block = -1
 
+func updateMana(delta):
+	var bar_energy = stored_energy * ENERGYBARMULT
+	if(mana < bar_energy):
+		mana += maxf(BARSPEED / 100 * MAXMANA * ENERGYBARMULT * delta,abs(mana - bar_energy) * delta)
+		if(mana > bar_energy):
+			mana = bar_energy
+	else:
+		mana -= maxf(BARSPEED / 100 * MAXMANA * ENERGYBARMULT * delta,abs(mana - bar_energy) * delta)
+		if(mana < bar_energy):
+			mana = bar_energy
+	updateEnergy()
+
 func updateHealth():
-	$CanvasLayer/HealthBar.size.x = health*20.0
+	$CanvasLayer/HealthBar.size.x = hp
 	HurtBackground._update(health)
 
+func updateHP(delta):
+	var bar_health = health * HPBARMULT
+	if(hp < bar_health):
+		hp += maxf(BARSPEED / 100 * MAXHEALTH * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		if(hp > bar_health):
+			hp = bar_health
+	else:
+		hp -= maxf(BARSPEED / 100 * MAXHEALTH * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		if(hp < bar_health):
+			hp = bar_health
+	updateHealth()
+
 func updateMaxHealth():
-	$CanvasLayer/HealthBar2.size.x = MAXHEALTH*20.0
+	$CanvasLayer/HealthBar2.size.x = MAXHEALTH*HPBARMULT
+
+func updateMaxEnergy():
+	$CanvasLayer/EnergyBar2.size.x = MAXMANA*ENERGYBARMULT
 
 func attachEffect(effect, needsChecking=true):
 	if needsChecking:

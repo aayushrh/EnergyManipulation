@@ -12,7 +12,7 @@ func logWithBase(value, base): return log(value) / log(base)
 func _show():
 	Global.pause = true
 	visible = true
-	$ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label2.text = str(logWithBase(get_tree().current_scene.player.TOPSPEED/500, 1.2))
+	$ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label2.text = str(logWithBase(get_tree().current_scene.player.base_top_speed/500, 1.2))
 	$ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Label2.text = str((get_tree().current_scene.player.intel-1)/0.2)
 	$ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label2.text = str((get_tree().current_scene.player.wisdom-1)/0.2)
 	$ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/Label2.text = str(logWithBase(get_tree().current_scene.player.MAXHEALTH/20.0, 1.2))
@@ -35,6 +35,7 @@ func _on_wisdom_pressed():
 func _on_agility_pressed():
 	if visible:
 		get_tree().current_scene.player.TOPSPEED *= 1.2
+		get_tree().current_scene.player.base_top_speed *= 1.2
 		_hide()
 
 func _on_const_pressed():
