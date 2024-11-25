@@ -64,6 +64,10 @@ text = "Intelligence"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Label2" type="Label" parent="ColorRect2/VBoxContainer/ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
 [node name="Intel" type="Button" parent="ColorRect2/VBoxContainer/ColorRect/HBoxContainer"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -94,6 +98,10 @@ text = "Wisdom"
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
+layout_mode = 2
+text = "0"
 
 [node name="wisdom" type="Button" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
 custom_minimum_size = Vector2(35, 0)
@@ -126,6 +134,10 @@ text = "Agility"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Label2" type="Label" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
 [node name="agility" type="Button" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -156,6 +168,10 @@ text = "Constitution"
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer"]
+layout_mode = 2
+text = "0"
 
 [node name="const" type="Button" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer"]
 custom_minimum_size = Vector2(35, 0)

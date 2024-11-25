@@ -31,6 +31,7 @@ func _cast(player):
 		cast.player = player
 		var dupe = create()
 		cast.setSpell(dupe)
+		cast.global_position = player.global_position
 		player.get_tree().current_scene.add_child(cast)
 		cast.connect("done", _notUsing)
 		return cast

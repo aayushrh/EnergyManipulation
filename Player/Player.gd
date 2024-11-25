@@ -49,8 +49,8 @@ var hitboxEffects = []
 var healing = false
 var effectsHaventChecked = []
 var blockTimer = 0
-var intel = 1
-var wisdom = 1
+var intel = 1.0
+var wisdom = 1.0
 
 func _ready():
 	updateEnergy()
@@ -232,8 +232,7 @@ func _dmgRed(time):
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
-		for e in effectsHaventChecked:
-			removeEffects(e)
+		effectsHaventChecked = []
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
@@ -241,8 +240,7 @@ func _dmgRed(time):
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
-		for e in effectsHaventChecked:
-			removeEffects(e)
+		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
 	if(time < -0.04165 and time > -0.06125):
@@ -256,8 +254,7 @@ func _dmgRed(time):
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
-		for e in effectsHaventChecked:
-			removeEffects(e)
+		effectsHaventChecked = []
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
@@ -265,8 +262,7 @@ func _dmgRed(time):
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
-		for e in effectsHaventChecked:
-			removeEffects(e)
+		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
@@ -289,6 +285,7 @@ func _on_dashing_timer_timeout():
 
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
+	processHaventChecked()
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
@@ -312,15 +309,26 @@ func updateHealth():
 	HurtBackground._update(health)
 
 func attachEffect(effect, needsChecking=true):
-	var visual = effect.visual.instantiate()
-	add_child(visual)
-	vfx.append(visual)
-	effects.append(effect)
-	var effectUI = EffectUI.instantiate()
-	effectUI.initialize(effect)
-	$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 	if needsChecking:
 		effectsHaventChecked.append(effect)
+	else:
+		var visual = effect.visual.instantiate()
+		add_child(visual)
+		vfx.append(visual)
+		effects.append(effect)
+		var effectUI = EffectUI.instantiate()
+		effectUI.initialize(effect)
+		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+
+func processHaventChecked():
+	for e in effectsHaventChecked:
+		var visual = e.visual.instantiate()
+		add_child(visual)
+		vfx.append(visual)
+		effects.append(e)
+		var effectUI = EffectUI.instantiate()
+		effectUI.initialize(e)
+		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 
 func removeEffects(effect):
 	for b in effects:
