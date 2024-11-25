@@ -50,6 +50,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
+[node name="Label17" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Total Hits:"
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
