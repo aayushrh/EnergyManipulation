@@ -54,10 +54,13 @@ var pause = false
 var hitboxpos = Vector2.ZERO
 var hitboxEffects = []
 var effectsHaventChecked = []
-var blockTimer = 0
 var intel = 1.0
 var wisdom = 1.0
 var spellHit = null
+var blockCharges = 1
+var blockTimer = 2
+var dashCharges = 1
+var dashTimer = 2
 
 func _ready():
 	#updateEnergy()
@@ -73,10 +76,12 @@ func _process(delta):
 	updateMaxHealth()
 	updateMaxEnergy()
 	#updateEnergy()
-	blockTimer -= delta
+	#blockTimer -= delta
 	time += delta
 	queue_redraw()
 	if((!Global.isPaused() and !pause) and !dashing):
+		_blockCharging(delta)
+		_dashCharging(delta)
 		if(hp != health * HPBARMULT):
 			updateHP(delta)
 		if(mana != stored_energy * ENERGYBARMULT):
@@ -99,6 +104,26 @@ func _process(delta):
 		after.rotation_degrees = rotation_degrees
 		get_tree().current_scene.add_child(after)
 	if(!Global.isPaused()): move_and_slide()
+
+func _blockCharging(delta):
+	$CanvasLayer/Label.text = str(blockCharges)
+	$CanvasLayer/TextureProgressBar.value = blockTimer
+	if(blockTimer <= 0):
+		blockTimer = 2
+		blockCharges += 1
+		print(str(blockCharges) + "charges")
+	elif(blockCharges < 3 and blockTimer > 0):
+		blockTimer -= delta
+
+func _dashCharging(delta):
+	$CanvasLayer/Label2.text = str(dashCharges)
+	$CanvasLayer/TextureProgressBar2.value = dashTimer
+	if(dashTimer <= 0):
+		dashTimer = 3
+		dashCharges += 1
+		print(str(dashCharges) + "charges")
+	elif(dashCharges < 3 and dashTimer > 0):
+		dashTimer -= delta
 
 func _health_change(newHP: float):
 	var change = newHP - health
@@ -126,10 +151,11 @@ func _energy_change(newMANA: float):
 
 
 func block():
-	if(Input.is_action_just_pressed("Block")):
+	if(Input.is_action_just_pressed("Block") and blockCharges > 0):
 			$PlayerArt._block()
 			blocking = true
 			time_last_block = time
+			blockCharges -= 1
 	if(Input.is_action_just_released("Block") and blocking):
 		$PlayerArt._unblock()
 		blocking = false
@@ -206,7 +232,7 @@ func _doubleClickCheck(delta):
 			clicked = ""
 
 func dash(dir):
-	if(canDash()):
+	if(dashCharges > 0):#canDash()):
 		velocity = dir * DASHSPEED
 		dashing = true
 		$DashingTimer.start(DASHTIME)
@@ -214,6 +240,7 @@ func dash(dir):
 		blocking = false
 		$PlayerArt._unblock()
 		attachEffect(Dash.new(1), false)
+		dashCharges -= 1
 
 func _shockwave():
 	var shockwave = Shockwave.instantiate()
@@ -334,7 +361,7 @@ func _hit_register():
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
-	stored_energy += spellHit.initCost() * dmgRed * wisdom
+	stored_energy += spellHit.initCost() * dmgRed * 2 * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	health -= dmgTaken * (1-dmgRed)
 	#updateEnergy()

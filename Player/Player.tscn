@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://mpo3uyl0648p"]
+[gd_scene load_steps=10 format=3 uid="uid://mpo3uyl0648p"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
 [ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
 [ext_resource type="Texture2D" uid="uid://qakb1qsi280l" path="res://Art/HurtBackground.png" id="4_51wdw"]
 [ext_resource type="Script" path="res://Effects/HurtBackground.gd" id="5_lab3i"]
-[ext_resource type="PackedScene" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="7_1q3k6"]
+[ext_resource type="PackedScene" uid="uid://cekec7pbvckd0" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
@@ -94,6 +95,68 @@ theme_override_constants/separation = 10
 
 [node name="Control" parent="CanvasLayer/ScrollContainer/HBoxContainer" instance=ExtResource("7_2i676")]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 20.0
+offset_top = 528.0
+offset_right = 276.0
+offset_bottom = 784.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_1q3k6")
+expand_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+self_modulate = Color(0, 0.501961, 1, 1)
+offset_left = 20.0
+offset_top = 528.0
+offset_right = 276.0
+offset_bottom = 784.0
+scale = Vector2(0.25, 0.25)
+max_value = 2.0
+step = 0.01
+value = 1.0
+fill_mode = 5
+texture_progress = ExtResource("7_1q3k6")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 42.5
+offset_top = 537.0
+offset_right = 97.5
+offset_bottom = 582.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 116.0
+offset_top = 528.0
+offset_right = 372.0
+offset_bottom = 784.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_1q3k6")
+expand_mode = 2
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer"]
+self_modulate = Color(0, 0.501961, 1, 1)
+offset_left = 116.0
+offset_top = 528.0
+offset_right = 372.0
+offset_bottom = 784.0
+scale = Vector2(0.25, 0.25)
+max_value = 3.0
+step = 0.01
+value = 1.0
+fill_mode = 5
+texture_progress = ExtResource("7_1q3k6")
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 138.5
+offset_top = 537.0
+offset_right = 193.5
+offset_bottom = 582.0
+theme_override_font_sizes/font_size = 32
+text = "0"
 
 [node name="WeaponSlot" type="Node2D" parent="."]
 
