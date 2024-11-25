@@ -63,7 +63,7 @@ func _ready():
 	$PlayerArt.hit.connect(_shockwave)
 	rotation_speed = ROTATIONSPEED
 	health = MAXHEALTH
-	stored_energy = MAXMANA
+	stored_energy = MAXMANA/10
 	base_top_speed = TOPSPEED
 	get_tree().current_scene.damageHealed = 0
 
@@ -111,6 +111,7 @@ func _health_change(newHP: float):
 		if(health < 0):
 			Global._change_tscn("res://World/Screens/MainMenu.tscn")
 			Global.unPause()
+	$CanvasLayer/ActualHealthBar.size.x = health * HPBARMULT
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -120,6 +121,7 @@ func _energy_change(newMANA: float):
 		stored_energy += change
 		if(stored_energy < 0):
 			stored_energy = 0
+	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
 
 
 func block():
@@ -142,7 +144,11 @@ func _heal(delta):
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
-	$CanvasLayer/EnergyBar.size.x = mana
+	$CanvasLayer/EnergyBar.size.x = min(mana * 5, MAXMANA*ENERGYBARMULT)
+	if(mana * 5 > MAXMANA*ENERGYBARMULT):
+		$CanvasLayer/EnergyBar3.size.x = mana - MAXMANA*ENERGYBARMULT/5
+	else:
+		$CanvasLayer/EnergyBar3.size.x = 0
 
 func magic_check(delta):
 	var hit = false
