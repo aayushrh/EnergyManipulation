@@ -123,7 +123,7 @@ func _process(delta):
 		#$Area2D.monitoring = false
 	#else:
 		#$Area2D.monitoring = true
-	if(!Global.pause and !pause):
+	if(!Global.isPaused() and !pause):
 		if(health != hp):
 			updateHP(delta)
 		queue_redraw()
@@ -134,7 +134,7 @@ func _process(delta):
 			pass
 			_move(delta)
 		move_and_slide()
-	if(!Global.pause and pause):
+	if(!Global.isPaused and pause):
 		_effectsHandle(delta)
 
 func _health_change(newHP: float):

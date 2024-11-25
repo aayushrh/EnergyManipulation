@@ -38,7 +38,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("Pause") and !$CanvasLayer/MainMenu.visible:
 		$CanvasLayer/MainMenu._show()
-		Global.pause = true
+		Global.pause[0] = 1
 		$CanvasLayer/ScrollContainer/SpellListUI.reload()
 		print("true")
 	for e in $Enemies.get_children():

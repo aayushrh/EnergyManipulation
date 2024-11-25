@@ -54,7 +54,7 @@ func _shoot():
 func _process(delta):
 	if !is_instance_valid(player):
 		queue_free()
-	if !Global.pause and is_instance_valid(player):
+	if !Global.isPaused() and is_instance_valid(player):
 		$Sprite2D.global_position = player.global_position + Vector2(0, -65)
 		if !shot:
 			direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))

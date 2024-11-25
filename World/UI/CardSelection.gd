@@ -27,7 +27,7 @@ func _ready():
 	spawner.connect("waveFinished", _show)
 
 func _show():
-	Global.pause = true
+	Global.pause[1] = 1
 	visible = true
 	var temp = cardsToShow.duplicate()
 	var rando = rng.randi_range(0, temp.size() - 1)
@@ -42,11 +42,12 @@ func _show():
 	card3._show(randCard)
 
 func onSelectedCard(card):
-	Global.magicCards.append(card)
-	print(card)
-	_hide()
+	if(Global.pause[0] != 1):
+		Global.magicCards.append(card)
+		print(card)
+		_hide()
 
 func _hide():
-	Global.pause = false
+	Global.pause[1] = 0
 	visible = false
 	finishedSelecting.emit()

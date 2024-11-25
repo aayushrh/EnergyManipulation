@@ -30,7 +30,7 @@ func _process(delta):
 	if(spell.element != null):
 		spell.element.callOngoingEffects(self)
 	scale = Vector2(0.5, 0.5) * spell.attributes.getSize() * mult
-	if(Global.pause):
+	if(Global.isPaused()):
 		velocity = Vector2.ZERO
 	else:
 		velocity = nvel.normalized() * getSpeed()

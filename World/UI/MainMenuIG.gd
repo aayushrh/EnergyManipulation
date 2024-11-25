@@ -8,6 +8,7 @@ var timer = 0
 
 func _show():
 	visible = true
+	Global.pause[0] = 1
 	timer = 10
 
 func _process(delta):
@@ -30,7 +31,7 @@ func _on_stats_pressed():
 
 func _on_exit_pressed():
 	visible = false
-	Global.pause = false
+	Global.pause[0] = 0
 	get_tree().current_scene._reloadSpellList()
 
 func _on_check_button_pressed():

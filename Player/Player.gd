@@ -50,10 +50,9 @@ var effects = []
 var vfx = []
 var casting = false
 var pause = false
-var charging = false
+#var charging = false
 var hitboxpos = Vector2.ZERO
 var hitboxEffects = []
-var healing = false
 var effectsHaventChecked = []
 var blockTimer = 0
 var intel = 1.0
@@ -69,10 +68,6 @@ func _ready():
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
-	if(hp != health * HPBARMULT):
-		updateHP(delta)
-	if(mana != stored_energy * ENERGYBARMULT):
-		updateMana(delta)
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -80,13 +75,12 @@ func _process(delta):
 	blockTimer -= delta
 	time += delta
 	queue_redraw()
-	healing = false
-	if((!Global.pause and !pause) and !dashing):
+	if((!Global.isPaused() and !pause) and !dashing):
+		if(hp != health * HPBARMULT):
+			updateHP(delta)
+		if(mana != stored_energy * ENERGYBARMULT):
+			updateMana(delta)
 		_heal(delta)
-		#if(charging or healing):
-			#updateEnergy()
-		#if(healing):
-			#updateHealth()
 		_effectsHandle(delta)
 		magic_check(delta)
 		rotateToTarget(get_global_mouse_position(), delta)
@@ -95,7 +89,7 @@ func _process(delta):
 		attack()
 		dash_check(delta)
 		block()
-	elif pause and !Global.pause:
+	elif pause and !Global.isPaused():
 		_effectsHandle(delta)
 		_friction(delta)
 	if(dashing):
@@ -103,7 +97,7 @@ func _process(delta):
 		after.global_position = global_position
 		after.rotation_degrees = rotation_degrees
 		get_tree().current_scene.add_child(after)
-	if(!Global.pause): move_and_slide()
+	if(!Global.isPaused()): move_and_slide()
 
 func _health_change(newHP: float):
 	var change = newHP - health
@@ -116,7 +110,7 @@ func _health_change(newHP: float):
 		get_tree().current_scene.damageTaken -= change
 		if(health < 0):
 			Global._change_tscn("res://World/Screens/MainMenu.tscn")
-			Global.pause = false
+			Global.unPause()
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -143,7 +137,6 @@ func _draw():
 
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
-		healing = true
 		stored_energy -= delta * 100
 		health += MAXHEALTH * delta/2.5
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
@@ -316,7 +309,7 @@ func _dmgRed(time):
 	return 0
 	
 func doneCasting():
-	charging = false
+	#charging = false
 	slow = false
 	ROTATIONSPEED *= 2
 	casting = false
@@ -333,8 +326,8 @@ func _hit_register():
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10 * wisdom
-	health -= dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
+	health -= dmgTaken * (1-dmgRed)
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
 	#updateHealth()

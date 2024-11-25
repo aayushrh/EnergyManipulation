@@ -19,32 +19,33 @@ func _ready():
 	cardSelection.connect("finishedSelecting", _startNextWave)
 
 func _process(delta):
-	var spawn = rng.randi_range(0, 250)
-	if(spawn < 1 and spawned < floor(waveNumber/3) + 1):
-		var num = rng.randi_range(0, 3)
-		var spawnLoc = Vector2.ZERO
-		if(num == 0):
-			spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), 1000 + 10)
-		if(num == 1):
-			spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), -1000 - 10)
-		if(num == 2):
-			spawnLoc = Vector2(1500 + 10, rng.randf_range(-1000 - 10, 1000 + 10))
-		if(num == 3):
-			spawnLoc = Vector2(-1500 - 10, rng.randf_range(-1000 - 10, 1000 + 10))
+	if(!Global.isPaused()):
+		var spawn = rng.randi_range(0, 250)
+		if(spawn < 1 and spawned < floor(waveNumber/3) + 1):
+			var num = rng.randi_range(0, 3)
+			var spawnLoc = Vector2.ZERO
+			if(num == 0):
+				spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), 1000 + 10)
+			if(num == 1):
+				spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), -1000 - 10)
+			if(num == 2):
+				spawnLoc = Vector2(1500 + 10, rng.randf_range(-1000 - 10, 1000 + 10))
+			if(num == 3):
+				spawnLoc = Vector2(-1500 - 10, rng.randf_range(-1000 - 10, 1000 + 10))
+			
+			var basicEnemy = BasicEnemy.instantiate()
+			basicEnemy.global_position = spawnLoc# + player.global_position
+			#basicEnemy.agg = randi_range(0,1)==1
+			basicEnemy.health = max(1, waveNumber/2)
+			basicEnemy.cook = true
+			enemyParent.add_child(basicEnemy)
+			spawned += 1
 		
-		var basicEnemy = BasicEnemy.instantiate()
-		basicEnemy.global_position = spawnLoc# + player.global_position
-		#basicEnemy.agg = randi_range(0,1)==1
-		basicEnemy.health = max(1, waveNumber/2)
-		basicEnemy.cook = true
-		enemyParent.add_child(basicEnemy)
-		spawned += 1
-	
-	if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/3) + 1:
-		readyToSpawn = true
-		if !emitted:
-			waveFinished.emit()
-			emitted = true
+		if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/3) + 1:
+			readyToSpawn = true
+			if !emitted:
+				waveFinished.emit()
+				emitted = true
 
 func _startNextWave():
 	if readyToSpawn:
