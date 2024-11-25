@@ -49,6 +49,8 @@ var hitboxEffects = []
 var healing = false
 var effectsHaventChecked = []
 var blockTimer = 0
+var intel = 1
+var wisdom = 1
 
 func _ready():
 	updateEnergy()
@@ -114,7 +116,7 @@ func magic_check(delta):
 	for e:Spell in Global.spellList:
 		if(!e.using):
 			e.cooldown -= delta
-		if e.binding != null:
+		if e.binding != null and e.type != null:
 			if Input.is_key_pressed(e.binding):
 				hit = true
 			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
@@ -253,8 +255,6 @@ func _dmgRed(time):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(perfectBlock)
-		print(effectsHaventChecked.size())
-		print(str(effects.size()) + " effects size")
 		#blockTimer = 0.1
 		for e in effectsHaventChecked:
 			removeEffects(e)
@@ -264,8 +264,6 @@ func _dmgRed(time):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitboxpos
 		get_tree().current_scene.add_child(goodBlock)
-		print(effectsHaventChecked.size())
-		print(str(effects.size()) + " effects size")
 		#blockTimer = 0.1
 		for e in effectsHaventChecked:
 			removeEffects(e)
@@ -291,13 +289,12 @@ func _on_dashing_timer_timeout():
 
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
-	print(str(time_last_hit-time_last_block))
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
 	#print("dmg Reduction: " + str(dmgTaken - dmgTaken * (1-dmgRed)))
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
-	stored_energy += dmgTaken * dmgRed * 10
+	stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	health -= dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
@@ -324,7 +321,6 @@ func attachEffect(effect, needsChecking=true):
 	$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 	if needsChecking:
 		effectsHaventChecked.append(effect)
-	print(str(effects.size()) + "size")
 
 func removeEffects(effect):
 	for b in effects:

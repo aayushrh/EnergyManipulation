@@ -34,6 +34,9 @@ func _cast(player):
 		player.get_tree().current_scene.add_child(cast)
 		cast.connect("done", _notUsing)
 		return cast
+	else:
+		_notUsing()
+		cooldown = 0
 
 func _notUsing():
 	using = false

@@ -37,7 +37,7 @@ func _process(delta):
 	move_and_slide()
 
 func damageTaken(reciever):
-	return spell.attributes.getPower() * ((mult-1)/2+1)
+	return spell.attributes.getPower() * ((mult-1)/2+1) * sender.intel
 
 func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):

@@ -27,6 +27,7 @@ var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 0
 var blinded = false
+var intel = 1
 
 @export var health = 5.0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
@@ -54,38 +55,44 @@ var blinded = false
 func _ready():
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
-	var num = rng.randi_range(0, 3)
+	rng.randomize()
+	var num = rng.randi_range(0, 9)
+	rng.randomize()
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
 	match num:
-		0: #Dashing dude
+		0, 1, 2, 3: #Dashing dude
 			agg = true
-			dash_cd = 2.5
-			maxHealth = 2
-			spell.attributes = Attributes.new(0, rng.randf_range(-50,0),2)
+			dash_cd = 2
+			maxHealth = 3
+			rng.randomize()
+			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(-50,0),1)
 			spell.style = get_tree().current_scene.allStyleSpellCards[1]
-			TOPSPEED *= 2
-		1: #Power dude
-			agg = rng.randi_range(0, 1) == 0
-			dash_cd = 10
-			maxHealth = 2
-			spell.attributes = Attributes.new(0, rng.randf_range(0, 50), 1)
-			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
-		2: #Healthy dude
+			#TOPSPEED *= 2
+		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
 			maxHealth = 4
-			spell.attributes = Attributes.new(rng.randf_range(0, 50), 0, 1)
-		3: # Wisdom dude
+			rng.randomize()
+			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(0, 50), 1)
+			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
+		7, 8: #Healthy dude
+			agg = rng.randi_range(0, 1) == 0
+			dash_cd = 5
+			maxHealth = 8
+			rng.randomize()
+			spell.attributes = Attributes.new(rng.randf_range(0, 50), rng.randf_range(-10, 10), 1)
+		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
-			maxHealth = 2
+			maxHealth = 4
+			rng.randomize()
 			var spell2 = Spell.new("secondSpell")
 			spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 			spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
-			spell.attributes = Attributes.new(rng.randf_range(-50, 0), 0, 1)
-			spell2.attributes = Attributes.new(rng.randf_range(-50, 0), 0, 1)
+			spell.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
+			spell2.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
 			spells.append(spell2)
 			
 	#var spell = Spell.new("firstSpell")
@@ -100,7 +107,8 @@ func _ready():
 			break
 	#spell.attributes = Attributes.new(rng.randf_range(-50,50),rng.randf_range(-50,50),r)
 	spells.append(spell)
-	maxHealth = health
+	health = maxHealth
+	print(health)
 
 func _finishCharge():
 	slow = false
@@ -133,6 +141,7 @@ func _effectsHandle(delta):
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
+	print(dmgTaken)
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
 		un_block()
