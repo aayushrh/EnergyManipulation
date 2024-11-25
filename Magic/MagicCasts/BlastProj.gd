@@ -10,7 +10,7 @@ var effects = []
 var hit = -1
 
 func _setSpell(nspell):
-	scale = Vector2(0.5, 0.5) * nspell.attributes.getSize() * mult
+	scale = Vector2(0.5, 0.5) * nspell.getSize() * mult
 	spell = nspell
 
 func _setV(nvelocity):
@@ -20,7 +20,7 @@ func _setV(nvelocity):
 	rotation_degrees = atan2(velocity.y, velocity.x) * 180/PI
 
 func getSpeed():
-	return speed * spell.attributes.getPSpeed() * mult
+	return speed * spell.getPSpeed() * mult
 
 func _ready():
 	if(spell.element != null):
@@ -29,7 +29,7 @@ func _ready():
 func _process(delta):
 	if(spell.element != null):
 		spell.element.callOngoingEffects(self)
-	scale = Vector2(0.5, 0.5) * spell.attributes.getSize() * mult
+	scale = Vector2(0.5, 0.5) * spell.getSize() * mult
 	if(Global.isPaused()):
 		velocity = Vector2.ZERO
 	else:
@@ -37,7 +37,7 @@ func _process(delta):
 	move_and_slide()
 
 func damageTaken(reciever):
-	return spell.attributes.getPower() * ((mult-1)/2+1) * sender.intel
+	return spell.getPower() * ((mult-1)/2+1) * sender.intel
 
 func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):

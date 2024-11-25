@@ -20,3 +20,7 @@ color = Color(0.560784, 0, 0.843137, 1)
 icon = ExtResource("3_bjuol")
 cdMult = 2.0
 costMult = 1.0
+powerMult = 2.0
+attackSpeedMult = 0.5
+sizeMult = 1.0
+castingSpeedMult = 0.5

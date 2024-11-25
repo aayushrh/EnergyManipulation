@@ -6,39 +6,39 @@ func testHit(spellObj:SpellCasted, enemy):
 
 func addBurning(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var burning = Burning.new(spellObj.spell.attributes.getPower() * 3)
+		var burning = Burning.new(spellObj.spell.getPower() * 3)
 		enemy.attachEffect(burning)
 
 func addSoggy(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var soggy = Soggy.new(spellObj.spell.attributes.getPower() * 3)
+		var soggy = Soggy.new(spellObj.spell.getPower() * 3)
 		enemy.attachEffect(soggy)
 
 func addStun(spellObj:SpellCasted, enemy):
 	if(enemy != null):
-		var stun = Stun.new(spellObj.spell.attributes.getPower() * 1.5)
+		var stun = Stun.new(spellObj.spell.getPower() * 1.5)
 		enemy.attachEffect(stun)
 		enemy.blocking = false
 
 func addLightBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
-		var stun = LightBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		var stun = LightBlindness.new(spellObj.spell.getPower() * 1.5)
 		enemy.attachEffect(stun)
 	elif(enemy != null and enemy is BasicEnemy):
-		var stun = Blindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		var stun = Blindness.new(spellObj.spell.getPower() * 1.5)
 		enemy.attachEffect(stun)
 
 func addDarkBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
-		var stun = DarkBlindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		var stun = DarkBlindness.new(spellObj.spell.getPower() * 1.5)
 		enemy.attachEffect(stun)
 	elif(enemy != null and enemy is BasicEnemy):
-		var stun = Blindness.new(spellObj.spell.attributes.getPower() * 1.5)
+		var stun = Blindness.new(spellObj.spell.getPower() * 1.5)
 		enemy.attachEffect(stun)
 
 func lifesteal(spellObj:SpellCasted, enemy):
 	if(enemy.health > 0):
-		spellObj.sender.health += 0.1 * spellObj.spell.attributes.getPower()
+		spellObj.sender.health += 0.1 * spellObj.spell.getPower()
 	else:
 		spellObj.sender.health += 0.1 * enemy.health
 
