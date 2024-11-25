@@ -56,6 +56,7 @@ var hitboxEffects = []
 var effectsHaventChecked = []
 var intel = 1.0
 var wisdom = 1.0
+var comprehension = 1.0
 var spellHit = null
 var blockCharges = 1
 var blockTimer = 2
@@ -191,7 +192,7 @@ func magic_check(delta):
 				slow = true
 				ROTATIONSPEED /= 2
 				stored_energy -= e.initCost()
-				e.resetCooldown(true)
+				e.resetCooldown(true,pow(0.95,comprehension))
 				#updateEnergy()
 	onLastTurn = hit
 

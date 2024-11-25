@@ -92,7 +92,7 @@ func _process(delta):
 						#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
 							#player.stored_energy += 0.36 * (spell.initCost() + castingCost)
 						queue_free()
-						spell.resetCooldown(false)
+						spell._notUsing()
 
 func letGo():
 	buttonLetGo = true
