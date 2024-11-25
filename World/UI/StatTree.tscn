@@ -36,7 +36,7 @@ offset_right = -28.8
 offset_bottom = -16.2
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect2/VBoxContainer"]
@@ -179,7 +179,43 @@ custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 text = "+"
 
+[node name="ColorRect5" type="ColorRect" parent="ColorRect2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBoxContainer/ColorRect5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = -9.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
+layout_mode = 2
+text = "Constitution"
+
+[node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="const" type="Button" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "+"
+
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Intel" to="." method="_on_intel_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/wisdom" to="." method="_on_wisdom_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/agility" to="." method="_on_agility_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/const" to="." method="_on_const_pressed"]
+[connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/const" to="." method="_on_comp_pressed"]

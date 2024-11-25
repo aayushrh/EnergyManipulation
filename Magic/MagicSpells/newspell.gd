@@ -42,8 +42,8 @@ func _cast(player):
 func _notUsing():
 	using = false
 
-func resetCooldown(use):
-	cooldown = getcd()
+func resetCooldown(use, multi):
+	cooldown = getcd()*multi
 	using = use
 
 func getcd():

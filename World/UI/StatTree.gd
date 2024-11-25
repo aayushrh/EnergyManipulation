@@ -44,3 +44,9 @@ func _on_const_pressed():
 		get_tree().current_scene.player.MAXHEALTH *= 1.2
 		get_tree().current_scene.player.health *= 1.2
 		_hide()
+
+
+func _on_comp_pressed() -> void:
+	if visible and Global.pause[0] != 1:
+		get_tree().current_scene.player.comprehension += 0.2
+		_hide()
