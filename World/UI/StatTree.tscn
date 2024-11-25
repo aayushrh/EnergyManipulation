@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://World/UI/StatTree.gd" id="1_yqvef"]
 
 [node name="StatTree" type="Control"]
+z_index = -100
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
