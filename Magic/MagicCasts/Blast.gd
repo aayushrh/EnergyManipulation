@@ -61,6 +61,8 @@ func _process(delta):
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
+				#print(spell.contcost())
+				#print(delta/spell.getMaxPowerTime())
 				player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
 				castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
 				chargeTimer -= delta
@@ -68,6 +70,7 @@ func _process(delta):
 					shot = true
 					done.emit()
 					_nameCallout()
+					print(castingCost)
 				chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
 			else:

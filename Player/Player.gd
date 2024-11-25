@@ -60,6 +60,8 @@ func _ready():
 
 func _process(delta):
 	updateHealth()
+	updateMaxHealth()
+	updateEnergy()
 	blockTimer -= delta
 	time += delta
 	queue_redraw()
@@ -307,6 +309,9 @@ func _hit_register():
 func updateHealth():
 	$CanvasLayer/HealthBar.size.x = health*20.0
 	HurtBackground._update(health)
+
+func updateMaxHealth():
+	$CanvasLayer/HealthBar2.size.x = MAXHEALTH*20.0
 
 func attachEffect(effect, needsChecking=true):
 	if needsChecking:
