@@ -274,7 +274,7 @@ func magic_check(delta):
 				castedIndex = track
 				slow = true
 				ROTATIONSPEED /= 2
-				e.resetCooldown(true)
+				e.resetCooldown(true, 1)
 				casting = true
 
 func predictionrotate(player,delta):

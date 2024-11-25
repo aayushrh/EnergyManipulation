@@ -16,7 +16,8 @@ func _show():
 	$ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Label2.text = str((get_tree().current_scene.player.intel-1)/0.2)
 	$ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label2.text = str((get_tree().current_scene.player.wisdom-1)/0.2)
 	$ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/Label2.text = str(logWithBase(get_tree().current_scene.player.MAXHEALTH/20.0, 1.2))
-	
+	$ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label2.text = str((get_tree().current_scene.player.maxDashCharges-3)/0.5)
+
 func _hide():
 	if(Global.pause[0] != 1):
 		Global.pause[1] = 0
@@ -49,4 +50,5 @@ func _on_const_pressed():
 func _on_comp_pressed() -> void:
 	if visible and Global.pause[0] != 1:
 		get_tree().current_scene.player.comprehension += 0.2
+		get_tree().current_scene.player.maxDashCharges += 0.5
 		_hide()

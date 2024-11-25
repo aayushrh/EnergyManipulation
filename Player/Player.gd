@@ -62,6 +62,8 @@ var blockCharges = 1
 var blockTimer = 2
 var dashCharges = 1
 var dashTimer = 2
+var maxBlockCharges = 3
+var maxDashCharges = 3
 
 func _ready():
 	#updateEnergy()
@@ -113,7 +115,7 @@ func _blockCharging(delta):
 		blockTimer = 2
 		blockCharges += 1
 		print(str(blockCharges) + "charges")
-	elif(blockCharges < 3 and blockTimer > 0):
+	elif(blockCharges < maxBlockCharges and blockTimer > 0):
 		blockTimer -= delta
 
 func _dashCharging(delta):
@@ -123,7 +125,7 @@ func _dashCharging(delta):
 		dashTimer = 3
 		dashCharges += 1
 		print(str(dashCharges) + "charges")
-	elif(dashCharges < 3 and dashTimer > 0):
+	elif(dashCharges < maxDashCharges and dashTimer > 0):
 		dashTimer -= delta
 
 func _health_change(newHP: float):
