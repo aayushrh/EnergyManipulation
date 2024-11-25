@@ -14,6 +14,11 @@ class_name ElementSpellCard
 @export var icon : Texture2D
 @export var cdMult : float
 @export var costMult : float
+@export var powerMult : float
+@export var attackSpeedMult : float
+@export var sizeMult : float
+@export var castingSpeedMult : float
+
 var type = 0
 
 func callHitEffects(spellObj:SpellCasted, enemy):

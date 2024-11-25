@@ -20,7 +20,7 @@ func setSpell(nspell):
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
-	scale = Vector2(0.5, 0.5) * spell.attributes.getSize()
+	scale = Vector2(0.5, 0.5) * spell.getSize()
 	if(spell.style != null):
 		$Sprite2D.texture = spell.style.icon
 		$Sprite2D.scale = Vector2(0.3, 0.3)
@@ -48,7 +48,7 @@ func _shoot():
 	get_tree().current_scene.add_child(blastProj)
 	if player.type == 0:
 		get_tree().current_scene.amountShot += 1
-	timer = 0.1 * 1/spell.attributes.getASpeed()
+	timer = 0.1 * 1/spell.getASpeed()
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 
 func _process(delta):
@@ -83,10 +83,10 @@ func _process(delta):
 			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
 			timer -= delta
 			if timer <= 0:
-				if timesShot < spell.attributes.getAmount():
+				if timesShot < spell.getAmount():
 					timesShot+=1
 					_shoot()
-					if timesShot >= spell.attributes.getAmount():
+					if timesShot >= spell.getAmount():
 						player.doneCasting()
 						#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
 							#player.stored_energy += 0.36 * (spell.initCost() + castingCost)
@@ -97,4 +97,4 @@ func letGo():
 	buttonLetGo = true
 
 func getSpeed():
-	return speed * spell.attributes.getPSpeed() * chargeMulti
+	return speed * spell.getPSpeed() * chargeMulti

@@ -89,3 +89,26 @@ func contcost():
 	if(type != null):
 		cost *= type.contCostMult
 	return cost
+
+func getPower():
+	if(element != null):
+		return attributes.getPower() * element.powerMult
+	return attributes.getPower()
+
+func getPSpeed():
+	if(element != null):
+		return attributes.getPSpeed() * element.attackSpeedMult
+	return attributes.getPSpeed()
+
+func getASpeed():
+	if(element != null):
+		return attributes.getASpeed() * element.castingSpeedMult
+	return attributes.getASpeed()
+
+func getSize():
+	if(element != null):
+		return attributes.getSize() * element.sizeMult
+	return attributes.getSize()
+
+func getAmount():
+	return attributes.getAmount()

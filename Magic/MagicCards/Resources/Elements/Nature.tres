@@ -20,3 +20,7 @@ color = Color(0.286275, 1, 0.321569, 1)
 icon = ExtResource("3_52dln")
 cdMult = 2.0
 costMult = 1.0
+powerMult = 0.6
+attackSpeedMult = 1.0
+sizeMult = 1.2
+castingSpeedMult = 1.0
