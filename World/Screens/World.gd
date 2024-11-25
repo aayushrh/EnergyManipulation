@@ -2,9 +2,12 @@ extends Node2D
 
 var amountShot = 0
 var amountHit = 0
+var multiHits = 0
 var damageTaken = 0
 var damageBlocked = 0
 var damageHealed = 0
+var damageDealt = 0
+var spellsCasted = 0
 var perfectBlocks = 0
 var goodBlocks = 0
 var badBlocks = 0

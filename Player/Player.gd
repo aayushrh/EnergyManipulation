@@ -66,6 +66,7 @@ func _ready():
 	health = MAXHEALTH
 	stored_energy = MAXMANA
 	base_top_speed = TOPSPEED
+	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
 	if(hp != health * HPBARMULT):
@@ -107,9 +108,12 @@ func _process(delta):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		health += change/pow(2,int(health/MAXHEALTH))
+		change = change/pow(2,int(health/MAXHEALTH))
+		health += change
+		get_tree().current_scene.damageHealed += change
 	elif(change < 0):
 		health += change
+		get_tree().current_scene.damageTaken -= change
 		if(health < 0):
 			Global._change_tscn("res://World/Screens/MainMenu.tscn")
 			Global.pause = false
@@ -157,6 +161,7 @@ func magic_check(delta):
 				hit = true
 			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
 				e._cast(self)
+				get_tree().current_scene.spellsCasted += 1
 				slow = true
 				ROTATIONSPEED /= 2
 				stored_energy -= e.initCost()
@@ -329,7 +334,6 @@ func _hit_register():
 	#print("stored Energy increase: " + str(dmgTaken * (dmgRed)))
 	stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	health -= dmgTaken * (1-dmgRed)
-	get_tree().current_scene.damageTaken += dmgTaken * (1-dmgRed)
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0

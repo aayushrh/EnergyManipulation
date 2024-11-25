@@ -36,6 +36,7 @@ func _process(delta):
 		basicEnemy.global_position = spawnLoc# + player.global_position
 		#basicEnemy.agg = randi_range(0,1)==1
 		basicEnemy.health = max(1, waveNumber/2)
+		basicEnemy.cook = true
 		enemyParent.add_child(basicEnemy)
 		spawned += 1
 	

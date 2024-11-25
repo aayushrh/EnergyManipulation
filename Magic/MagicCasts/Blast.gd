@@ -9,7 +9,7 @@ var shot = false
 var timesShot = 0
 var timer = 0
 var chargeMulti = 1.0
-var speed = 1000
+var speed = 1000.0
 var buttonLetGo = false
 var castingCost = 0
 

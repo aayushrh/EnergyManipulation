@@ -7,7 +7,7 @@ var mult = 1
 var sender = null
 var nvel = Vector2.ZERO
 var effects = []
-
+var hit = -1
 
 func _setSpell(nspell):
 	scale = Vector2(0.5, 0.5) * nspell.attributes.getSize() * mult
@@ -43,8 +43,12 @@ func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):
 		body._hit(self)
 		if(spell.element != null and is_instance_valid(self)):
-			if(sender.type == 0):
-				get_tree().current_scene.amountHit += 1
+			if(sender.type == 0 and body.type == 1):
+				if(hit == -1):
+					get_tree().current_scene.amountHit += 1
+				else:
+					get_tree().current_scene.multiHits += 1
+				hit += 1
 			if(spell.element != null):
 				spell.element.callHitEffects(self, body)
 			if(spell.style != null):

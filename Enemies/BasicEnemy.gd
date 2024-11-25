@@ -28,8 +28,12 @@ var pause = false
 var stored_energy = 0
 var blinded = false
 var intel = 1
+var hp = 0.0
+var cook = false
 
-@export var health = 5.0
+@export var HPBARMULT = 80.0
+@export var BARSPEED = 20.0
+@export var health = 5.0 : set = _health_change
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
 @export var tact = 0 # chance to do smarter things
@@ -120,11 +124,9 @@ func _process(delta):
 	#else:
 		#$Area2D.monitoring = true
 	if(!Global.pause and !pause):
-		$Health.size.x = 80 * (health * 1.0)/(maxHealth*1.0)
+		if(health != hp):
+			updateHP(delta)
 		queue_redraw()
-		if(health <= 0):
-			queue_free()
-			get_tree().current_scene.enemiesKilled += 1
 		time+=delta
 		magic_check(delta)
 		_effectsHandle(delta)
@@ -134,6 +136,34 @@ func _process(delta):
 		move_and_slide()
 	if(!Global.pause and pause):
 		_effectsHandle(delta)
+
+func _health_change(newHP: float):
+	var change = newHP - health
+	if(change > 0):
+		change = change/pow(2,int(health/maxHealth))
+		health += change
+	elif(change < 0):
+		health += change
+		if (cook):
+			get_tree().current_scene.damageDealt -= change
+			if(health <= 0):
+				queue_free()
+				get_tree().current_scene.enemiesKilled += 1
+
+func updateHP(delta):
+	var bar_health = health * HPBARMULT
+	if(hp < bar_health):
+		hp += maxf(BARSPEED / 100 * maxHealth * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		if(hp > bar_health):
+			hp = bar_health
+	else:
+		hp -= maxf(BARSPEED / 100 * maxHealth * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		if(hp < bar_health):
+			hp = bar_health
+	updateHealth()
+
+func updateHealth():
+	$Health.size.x = (hp * 1.0)/(maxHealth*1.0)
 
 func _effectsHandle(delta):
 	for e in effects:
