@@ -20,7 +20,7 @@
 [ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Elements/Water.tres" id="9_vavhn"]
 [ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
 [ext_resource type="Resource" uid="uid://dq0hukx4vjqg6" path="res://Magic/MagicCards/Resources/Style/Horse.tres" id="11_dq84m"]
-[ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Elements/Default.tres" id="12_qtnuf"]
+[ext_resource type="Resource" path="res://Magic/MagicCards/Resources/Elements/Default.tres" id="12_qtnuf"]
 [ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]

@@ -14,8 +14,8 @@ class_name Player
 @export var BARSPEED : float
 @export var HPBARMULT : float
 @export var ENERGYBARMULT : float
-@export var DASHCD : float
-@export var BLOCKCD : float
+@export var DASHCD : float : set = set_dash_cd
+@export var BLOCKCD : float : set = set_block_cd
 @export_group("Effects")
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
@@ -75,8 +75,6 @@ func _ready():
 	stored_energy = MAXMANA/10
 	base_top_speed = TOPSPEED
 	get_tree().current_scene.damageHealed = 0
-	$CanvasLayer/TextureProgressBar.max_value = BLOCKCD
-	$CanvasLayer/TextureProgressBar2.max_value = DASHCD
 
 func _process(delta):
 	#updateHealth()
@@ -111,6 +109,15 @@ func _process(delta):
 		after.rotation_degrees = rotation_degrees
 		get_tree().current_scene.add_child(after)
 	if(!Global.isPaused()): move_and_slide()
+
+func set_dash_cd(f: float):
+	DASHCD = f
+	$CanvasLayer/TextureProgressBar2.max_value = DASHCD
+
+func set_block_cd(f: float):
+	BLOCKCD = f
+	$CanvasLayer/TextureProgressBar.max_value = BLOCKCD
+
 
 func _blockCharging(delta):
 	$CanvasLayer/Label.text = str(blockCharges)
