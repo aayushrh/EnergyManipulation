@@ -59,7 +59,6 @@ horizontal_alignment = 1
 
 [node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17" instance=ExtResource("2_eisr5")]
 position = Vector2(355.8, -2.8)
-text = "The amoutn of enemies that you spell hits"
 
 [node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip" index="0"]
 offset_left = -258.0
