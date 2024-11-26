@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=4 format=3 uid="uid://sjflt6hs06eu"]
+
+[ext_resource type="PackedScene" uid="uid://b00n10yi8h2iu" path="res://Effects/Normal.tscn" id="1_fvosi"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_uxdki"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_pqsr0"]
+
+[resource]
+script = ExtResource("1_uxdki")
+cardName = "Pure"
+cardDescription = ""
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+StartVFX = ExtResource("1_fvosi")
+color = Color(1, 1, 1, 1)
+icon = ExtResource("2_pqsr0")
+cdMult = 0.5
+costMult = 2.0
+powerMult = 0.8
+attackSpeedMult = 0.8
+sizeMult = 0.8
+castingSpeedMult = 0.8

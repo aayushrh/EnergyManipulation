@@ -22,11 +22,12 @@ class_name ElementSpellCard
 var type = 0
 
 func callHitEffects(spellObj:SpellCasted, enemy):
-	var hitVFX = HitVFX.instantiate()
-	hitVFX.emitting = true
-	hitVFX.position = spellObj.global_position
-	if spellObj.get_tree() != null:
-		spellObj.get_tree().current_scene.add_child(hitVFX)
+	if(HitVFX != null):
+		var hitVFX = HitVFX.instantiate()
+		hitVFX.emitting = true
+		hitVFX.position = spellObj.global_position
+		if spellObj.get_tree() != null:
+			spellObj.get_tree().current_scene.add_child(hitVFX)
 	for e in hitEffects:
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj, enemy)
