@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=26 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Elements/Water.tres" id="9_vavhn"]
 [ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
 [ext_resource type="Resource" uid="uid://dq0hukx4vjqg6" path="res://Magic/MagicCards/Resources/Style/Horse.tres" id="11_dq84m"]
+[ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Elements/Default.tres" id="12_qtnuf"]
 [ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
@@ -296,6 +297,7 @@ testTypeSpellCard = ExtResource("4_ov6f6")
 allElementSpellCards = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y")])
 allStyleSpellCards = Array[ExtResource("6_uyec6")]([ExtResource("3_losfs"), ExtResource("11_dq84m")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
+defaultElement = ExtResource("12_qtnuf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(5, 5)

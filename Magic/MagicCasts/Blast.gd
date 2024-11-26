@@ -74,6 +74,10 @@ func _process(delta):
 						#print(castingCost)
 					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 					scale = Vector2(0.5, 0.5) * spell.attributes.getSize()*chargeMulti
+				else:
+					shot = true
+					done.emit()
+					_nameCallout()
 			else:
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true

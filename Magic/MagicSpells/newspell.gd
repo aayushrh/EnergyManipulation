@@ -30,6 +30,8 @@ func _cast(player):
 		var cast = type.SpellObj.instantiate()
 		cast.player = player
 		var dupe = create()
+		if(dupe.element == null):
+			dupe.element = player.get_tree().current_scene.defaultElement
 		cast.setSpell(dupe)
 		cast.global_position = player.global_position
 		player.get_tree().current_scene.add_child(cast)
@@ -73,6 +75,8 @@ func initCost():
 	var cost = 1
 	if(element != null):
 		cost *= element.costMult
+	else:
+		cost *= 2
 	if(style != null):
 		cost *= style.costMult
 	if(type != null):

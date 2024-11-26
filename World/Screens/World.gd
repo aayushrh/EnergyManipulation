@@ -22,6 +22,7 @@ var enemiesKilled = 0
 @export var allElementSpellCards : Array[ElementSpellCard]
 @export var allStyleSpellCards : Array[StyleSpellCard]
 @export var allTypeSpellCards : Array[TypeSpellCard]
+@export var defaultElement : ElementSpellCard
 
 @onready var Indicator = preload("res://Effects/EnemyIndicator.tscn")
 
