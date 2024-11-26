@@ -13,6 +13,7 @@ var time = 0
 var block = -1
 var blocking = false
 var rng = RandomNumberGenerator.new()
+var detectMagic = []
 var magic = []#player casted spell
 var spells = []# enemy casted spells
 var castedIndex = -1
@@ -27,9 +28,11 @@ var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 0
 var blinded = false
+var reactionDelay = 0.0
 var intel = 1
 var hp = 0.0
-var cook = false
+var stage = 0
+var delt = 0
 
 @export var HPBARMULT = 80.0
 @export var BARSPEED = 20.0
@@ -57,6 +60,7 @@ var cook = false
 
 
 func _ready():
+	print(stage)
 	art.finishCharge.connect(_finishCharge)
 	art.hit.connect(_shockwave)
 	rng.randomize()
@@ -68,8 +72,10 @@ func _ready():
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
-			dash_cd = 2
-			maxHealth = 3
+			dash_cd = 2.5 / pow(1.05,stage)
+			maxHealth = 2 + stage/10
+			intel = 0.8 + stage/10
+			reactionDelay = randf_range(0.025,0.1)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(-50,0),1)
 			spell.style = get_tree().current_scene.allStyleSpellCards[1]
@@ -77,27 +83,34 @@ func _ready():
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			maxHealth = 4
+			maxHealth = 2 + stage/5
+			intel = 1 + stage/2.5
+			reactionDelay = randf_range(0.1,0.2)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(0, 50), 1)
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			maxHealth = 8
+			maxHealth = 4 + stage / 2
+			intel = 0.75 + stage/15
+			reactionDelay = randf_range(0.15,0.25)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(0, 50), rng.randf_range(-10, 10), 1)
 		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
-			maxHealth = 4
+			maxHealth = 2 + stage/5
+			intel = 0.75 + stage/10
+			reactionDelay = randf_range(0.025,0.05)
 			rng.randomize()
-			var spell2 = Spell.new("secondSpell")
-			spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-			spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
-			spell.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
-			spell2.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
-			spells.append(spell2)
+			for i in (int(stage/5) + 2):
+				var spell2 = Spell.new("Spell Number " + str(i))
+				spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+				spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
+				spell.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
+				spell2.attributes = Attributes.new(rng.randf_range(-50, 0), rng.randf_range(-10, 10), 1)
+				spells.append(spell2)
 			
 	#var spell = Spell.new("firstSpell")
 	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
@@ -118,12 +131,17 @@ func _finishCharge():
 	slow = false
 	ROTATIONSPEED *= 2
 
+#func _init(stag):
+#	stage = stag
+
 func _process(delta):
+	delt = delta
 	#if blinded:
 		#$Area2D.monitoring = false
 	#else:
 		#$Area2D.monitoring = true
 	if(!Global.isPaused() and !pause):
+		detectMagic = detectMagic.filter(runDelay)
 		if(health != hp):
 			updateHP(delta)
 		queue_redraw()
@@ -144,11 +162,13 @@ func _health_change(newHP: float):
 		health += change
 	elif(change < 0):
 		health += change
-		if (cook):
+		if (get_tree()!=null):
 			get_tree().current_scene.damageDealt -= change
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
+	$Health2.size.x = (health * HPBARMULT)/(maxHealth*1.0)
+
 
 func updateHP(delta):
 	var bar_health = health * HPBARMULT
@@ -228,6 +248,12 @@ func _punch():
 func _on_vision_body_entered(body):
 	player = body
 
+func runDelay(arr):
+	arr[1]-=delt
+	if(arr[1]<=0):
+		magic.append(arr[0])
+		return false
+	return true
 func _dmgRed(time):
 	if(time > 0 and time < 0.0417):
 		return 1
@@ -398,11 +424,14 @@ func _on_dash_cd_timeout() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
-		magic.append(area.get_parent())
+		
+		detectMagic.append([area.get_parent(),reactionDelay])
+		#magic.append(area.get_parent())
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(is_instance_valid(area.get_parent()) and area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
-		magic.append(area.get_parent())
+		#magic.append(area.get_parent())
+		pass
 
 func _on_dashing_timeout() -> void:
 	nomove = false

@@ -14,7 +14,8 @@ class_name Player
 @export var BARSPEED : float
 @export var HPBARMULT : float
 @export var ENERGYBARMULT : float
-
+@export var DASHCD : float
+@export var BLOCKCD : float
 @export_group("Effects")
 @export var Shockwave : PackedScene
 @export var Afterimage : PackedScene
@@ -43,6 +44,7 @@ var time_last_block = -1
 var time_last_hit = 0
 var health = 0.0 : set = _health_change
 var hp = 0.0#display hp
+var healing = 1.0
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
@@ -63,7 +65,7 @@ var blockTimer = 2
 var dashCharges = 1
 var dashTimer = 2
 var maxBlockCharges = 3
-var maxDashCharges = 3
+var maxDashCharges = 2.5
 
 func _ready():
 	#updateEnergy()
@@ -73,6 +75,8 @@ func _ready():
 	stored_energy = MAXMANA/10
 	base_top_speed = TOPSPEED
 	get_tree().current_scene.damageHealed = 0
+	$CanvasLayer/TextureProgressBar.max_value = BLOCKCD
+	$CanvasLayer/TextureProgressBar2.max_value = DASHCD
 
 func _process(delta):
 	#updateHealth()
@@ -112,7 +116,7 @@ func _blockCharging(delta):
 	$CanvasLayer/Label.text = str(blockCharges)
 	$CanvasLayer/TextureProgressBar.value = blockTimer
 	if(blockTimer <= 0):
-		blockTimer = 2
+		blockTimer = BLOCKCD
 		blockCharges += 1
 		print(str(blockCharges) + "charges")
 	elif(blockCharges < maxBlockCharges and blockTimer > 0):
@@ -122,7 +126,7 @@ func _dashCharging(delta):
 	$CanvasLayer/Label2.text = str(dashCharges)
 	$CanvasLayer/TextureProgressBar2.value = dashTimer
 	if(dashTimer <= 0):
-		dashTimer = 3
+		dashTimer = DASHCD
 		dashCharges += 1
 		print(str(dashCharges) + "charges")
 	elif(dashCharges < maxDashCharges and dashTimer > 0):
@@ -131,6 +135,7 @@ func _dashCharging(delta):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
+		change *= healing
 		change = change/pow(2,int(health/MAXHEALTH))
 		health += change
 		get_tree().current_scene.damageHealed += change
@@ -170,7 +175,7 @@ func _draw():
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
 		stored_energy -= delta * 100
-		health += MAXHEALTH * delta/2.5
+		health += 8 * delta
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
