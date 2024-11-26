@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj4lx0ojyrbmu"]
+[gd_scene load_steps=3 format=3 uid="uid://bj4lx0ojyrbmu"]
 
 [ext_resource type="Script" path="res://World/Screens/stats.gd" id="1_dmeo0"]
+[ext_resource type="PackedScene" uid="uid://r51ga47bbd3n" path="res://World/UI/Tooltip.tscn" id="2_eisr5"]
 
 [node name="Stats" type="Control"]
 layout_mode = 3
@@ -55,6 +56,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Total Hits:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+text = "The amoutn of enemies that you spell hits"
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip/ColorRect" index="0"]
+layout_mode = 0
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The maoutn of enemies your spells hit"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -162,3 +182,5 @@ offset_bottom = 70.0
 text = "EXIT"
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip"]
