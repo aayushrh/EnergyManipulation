@@ -60,12 +60,16 @@ func getcd():
 
 func getCastingTime():
 	var time = 1
+	if(element != null):
+		time *= 1/element.castingSpeedMult
 	if(type != null):
 		time *= type.castingTimeMult
 	return time
 
 func getMaxPowerTime():
 	var time = 1
+	if(element != null):
+		time *= 1/element.castingSpeedMult
 	if(type != null):
 		time *= type.maxPowerTimeMult
 	return time

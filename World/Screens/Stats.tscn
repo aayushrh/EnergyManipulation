@@ -65,11 +65,9 @@ offset_left = -258.0
 offset_top = 50.0
 offset_right = -42.0
 offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip/ColorRect" index="0"]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
 offset_right = 199.0
 offset_bottom = 62.0
 text = "The maoutn of enemies your spells hit"

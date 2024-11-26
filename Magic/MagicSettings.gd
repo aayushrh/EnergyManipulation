@@ -40,6 +40,8 @@ func _on_exit_pressed():
 	visible=false
 
 func _process(delta):
+	if(Input.is_action_just_pressed("Pause") and visible):
+		_on_exit_pressed()
 	if(Input.is_action_just_pressed("enter") and get_viewport().gui_get_focus_owner() == Name):
 		print("Gay")
 		var found = false
