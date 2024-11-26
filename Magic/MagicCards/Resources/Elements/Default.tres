@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b00n10yi8h2iu" path="res://Effects/Normal.tscn" id="1_fvosi"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_uxdki"]
-[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_pqsr0"]
+[ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="2_ws0ej"]
 
 [resource]
 script = ExtResource("1_uxdki")
@@ -13,7 +13,7 @@ ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
 StartVFX = ExtResource("1_fvosi")
 color = Color(1, 1, 1, 1)
-icon = ExtResource("2_pqsr0")
+icon = ExtResource("2_ws0ej")
 cdMult = 0.5
 costMult = 2.0
 powerMult = 0.8
