@@ -39,6 +39,8 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 func lifesteal(spellObj:SpellCasted, enemy):
 	if(enemy.health > 0):
 		spellObj.sender.health += 1 * spellObj.spell.getPower()
+	elif(enemy is Wall):
+		pass
 	else:
 		spellObj.sender.health += 1 * (enemy.health + spellObj.spell.getPower())
 
