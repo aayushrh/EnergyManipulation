@@ -30,7 +30,9 @@ func _process(delta):
 				found = true
 		if !found and nname.length() < 15:
 			adding = false
-			Global.spellList.append(Spell.new(nname))
+			var nspell = Spell.new(nname)
+			Global.spellList.append(nspell)
+			magicMenu._changeSpell(nspell)
 			textEdit.visible = false
 			textEdit.text = ""
 			reload()
