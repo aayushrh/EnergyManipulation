@@ -63,5 +63,5 @@ func _on_comp_pressed() -> void:
 		com += 1
 		get_tree().current_scene.player.comprehension *= 1.05
 		get_tree().current_scene.player.BLOCKCD /= 1.05
-		get_tree().current_scene.player.maxBlockCharges += 0.2
+		get_tree().current_scene.player.maxBlockCharges += 0.25
 		_hide()

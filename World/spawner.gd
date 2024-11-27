@@ -21,7 +21,8 @@ func _ready():
 func _process(delta):
 	if(!Global.isPaused()):
 		var spawn = rng.randi_range(0, 250)
-		if(spawn < 1 and spawned < floor(waveNumber/3) + 1):
+		if(spawn < 1 and spawned < ceil(sqrt(waveNumber + .25) - .5)):
+			print(str(ceil(sqrt(waveNumber + .25) - .5)) + " GAY")
 			var num = rng.randi_range(0, 3)
 			var spawnLoc = Vector2.ZERO
 			if(num == 0):
@@ -41,7 +42,7 @@ func _process(delta):
 			enemyParent.add_child(basicEnemy)
 			spawned += 1
 		
-		if enemyParent.get_children().size() <= 0 and spawned >= floor(waveNumber/3) + 1:
+		if enemyParent.get_children().size() <= 0 and spawned >= ceil(sqrt(waveNumber+.25) - .5):
 			readyToSpawn = true
 			if !emitted:
 				waveFinished.emit()
