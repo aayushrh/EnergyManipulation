@@ -317,6 +317,7 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
+		blockCharges += 1
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
@@ -339,6 +340,7 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
+		blockCharges += 1
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
