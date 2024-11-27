@@ -64,7 +64,7 @@ var blockCharges = 1
 var blockTimer = 2
 var dashCharges = 1
 var dashTimer = 2
-var maxBlockCharges = 3
+var maxBlockCharges = 2.25
 var maxDashCharges = 2.5
 
 func _ready():

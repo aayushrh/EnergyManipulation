@@ -69,13 +69,14 @@ func _ready():
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
+	var s = float(stage)
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
-			dash_cd = 2.5 / pow(1.05,stage)
-			MAXHEALTH = 2 + stage/10
-			intel = 0.8 + stage/10
-			reactionDelay = randf_range(0.025,0.1)
+			dash_cd = 2.5 / pow(1.05,s)
+			MAXHEALTH = 2 + s/20.0
+			intel = 0.8 + s/20.0
+			reactionDelay = randf_range(0.025,0.075)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(-50,0),1)
 			spell.style = get_tree().current_scene.allStyleSpellCards[1]
@@ -83,8 +84,8 @@ func _ready():
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			MAXHEALTH = 2 + stage/5
-			intel = 1 + stage/2.5
+			MAXHEALTH = 2 + s/10.0
+			intel = 1 + s/5.0
 			reactionDelay = randf_range(0.1,0.2)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(-10, 10), rng.randf_range(0, 50), 1)
@@ -92,17 +93,17 @@ func _ready():
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			MAXHEALTH = 4 + stage / 2
-			intel = 0.75 + stage/15
+			MAXHEALTH = 4 + s / 2.0
+			intel = 0.75 + s/25.0
 			reactionDelay = randf_range(0.15,0.25)
 			rng.randomize()
 			spell.attributes = Attributes.new(rng.randf_range(0, 50), rng.randf_range(-10, 10), 1)
 		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
-			MAXHEALTH = 2 + stage/5
-			intel = 0.75 + stage/10
-			reactionDelay = randf_range(0.025,0.05)
+			MAXHEALTH = 2 + s/5.0
+			intel = 0.75 + s/20.0
+			reactionDelay = randf_range(0.05,0.1)
 			rng.randomize()
 			for i in (int(floor(stage/5)) + 1):
 				var spell2 = Spell.new("Spell Number " + str(i))

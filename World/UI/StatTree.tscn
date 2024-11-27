@@ -236,7 +236,7 @@ text = "Comprehension"
 [node name="Label" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
 offset_right = 204.0
 offset_bottom = 49.0
-text = "Decreases your spell cooldown by 5% and increase your max block charges by 1 every 2 points"
+text = "Decreases your spell and block cooldown by 5% and increase your max block charges by 1 every 4 points"
 
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
 layout_mode = 2
