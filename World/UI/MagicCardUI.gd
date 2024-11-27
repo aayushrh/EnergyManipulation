@@ -33,8 +33,16 @@ func _show(card):
 			$VBoxContainer/Label7.text = "Size Multiplier: " + str(card.sizeMult)
 		1:
 			$VBoxContainer/Label2.text = "Style"
+			$VBoxContainer/Label4.visible = false
+			$VBoxContainer/Label5.visible = false
+			$VBoxContainer/Label6.visible = false
+			$VBoxContainer/Label7.visible = false
 		2:
 			$VBoxContainer/Label2.text = "Type"
+			$VBoxContainer/Label4.visible = false
+			$VBoxContainer/Label5.visible = false
+			$VBoxContainer/Label6.visible = false
+			$VBoxContainer/Label7.visible = false
 
 func _on_touch_screen_button_pressed():
 	pressed.emit(c)

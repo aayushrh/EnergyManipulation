@@ -25,5 +25,6 @@ offset_right = 200.0
 offset_bottom = 200.0
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 99
 offset_right = 200.0
 offset_bottom = 200.0
