@@ -3,7 +3,7 @@ extends Node2D
 @export var orphan = false
 
 func _ready():
-	$ColorRect/Label.position += Vector2(7, 9)
+	$ColorRect/Label.position = Vector2(7, 9)
 	$ColorRect.size = $ColorRect/Label.size + Vector2(14, 18)
 	$ColorRect3.size = $ColorRect/Label.size + Vector2(24, 28)
 	$ColorRect2.visible = false
