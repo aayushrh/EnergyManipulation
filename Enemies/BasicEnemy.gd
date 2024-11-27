@@ -69,7 +69,6 @@ func _ready():
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
-	num = 9
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
