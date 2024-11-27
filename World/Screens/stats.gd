@@ -5,11 +5,15 @@ func _ready():
 	var world = get_tree().current_scene
 	$ColorRect2/ScrollContainer/VBoxContainer/Label17.text = "Spells Casted: " + str(world.spellsCasted)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label.text = "Amount Shot: " + str(world.amountShot)
+	$ColorRect2/ScrollContainer/VBoxContainer/Label.visible = world.spellsCasted != world.amountShot
 	$ColorRect2/ScrollContainer/VBoxContainer/Label2.text = "Spells Hit: " + str(world.amountHit)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label12.text = "Multi Hits: " + str(world.multiHits)
+	$ColorRect2/ScrollContainer/VBoxContainer/Label12.visible = world.multiHits > 0
+	$ColorRect2/ScrollContainer/VBoxContainer/Label16.visible = world.multiHits > 0
 	$ColorRect2/ScrollContainer/VBoxContainer/Label16.text = "Total Hits: " + str(world.multiHits + world.amountHit)
 	if(world.amountShot > 0):
 		$ColorRect2/ScrollContainer/VBoxContainer/Label3.text = "Accuracy: " + roundString(float(world.amountHit)*100/(world.amountShot),0.1) + "%"
+	$ColorRect2/ScrollContainer/VBoxContainer/Label3.visible = world.amountShot > 0
 	$ColorRect2/ScrollContainer/VBoxContainer/Label13.text = "Damage Dealt: " + roundString(world.damageDealt,0.01)
 	if(world.damageDealt > 0):
 		$ColorRect2/ScrollContainer/VBoxContainer/Label14.text = "Average Damage per Hit: " + roundString(float(world.damageDealt)/(world.amountHit+world.multiHits),0.01)

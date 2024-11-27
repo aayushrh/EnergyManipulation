@@ -53,7 +53,7 @@ func _on_const_pressed():
 	if visible and Global.pause[0] != 1:
 		con += 1
 		get_tree().current_scene.player.MAXHEALTH *= 1.1
-		get_tree().current_scene.player.health *= 1.1
+		get_tree().current_scene.player.health *= 1.1/get_tree().current_scene.player.healing
 		get_tree().current_scene.player.healing *=1.05
 		_hide()
 
