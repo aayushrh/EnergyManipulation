@@ -54,7 +54,7 @@ theme_override_constants/separation = 20
 [node name="Label17" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Total Hits:"
+text = "Spells Casted:"
 horizontal_alignment = 1
 
 [node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17" instance=ExtResource("2_eisr5")]
@@ -70,7 +70,7 @@ color = Color(0.207843, 0.207843, 0.207843, 1)
 [node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip/ColorRect" index="0"]
 offset_right = 199.0
 offset_bottom = 62.0
-text = "The maoutn of enemies your spells hit"
+text = "The amount of spells that you have casted"
 
 [node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip" index="1"]
 offset_bottom = 44.0
@@ -81,11 +81,47 @@ theme_override_font_sizes/font_size = 25
 text = "Amount Shot:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of blasts that you shot"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label2" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Amount Hit:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label2" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label2/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label2/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of blasts that you hit"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label2/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label3" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -93,11 +129,47 @@ theme_override_font_sizes/font_size = 25
 text = "Accuracy: Unknown"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3/Tooltip/ColorRect" index="0"]
+offset_right = 228.0
+offset_bottom = 62.0
+text = "your accuracy aka     (amount Shot/amount Hit)"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label12" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Multi Hits: "
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label12" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label12/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label12/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of extra enemies hit in a single spell"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label12/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label16" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -105,11 +177,47 @@ theme_override_font_sizes/font_size = 25
 text = "Total Hits:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label16" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label16/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label16/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "Total amount of enemies hit with spells"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label16/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label13" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Damage Dealt: "
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label13" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label13/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label13/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of damage that you spells dealt"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label13/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label14" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -117,11 +225,47 @@ theme_override_font_sizes/font_size = 25
 text = "Average Damage per Hit: 0"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The average damage of your hits"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label15" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Average Damage per Spell: 0"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The average damage that each of your spells dealt"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label4" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -129,11 +273,47 @@ theme_override_font_sizes/font_size = 25
 text = "Damage Taken:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label4" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label4/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label4/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of damage you have taken this run"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label4/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label5" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Damage Blocked:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label5" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label5/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label5/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of damage you have blocked this run"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label5/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label6" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -141,11 +321,47 @@ theme_override_font_sizes/font_size = 25
 text = "Damage Healed:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label6" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label6/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label6/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of damage you have healed this run"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label6/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label7" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Perfect Blocks:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label7" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label7/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label7/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of perfect blocks that you have done"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label7/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label8" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -153,11 +369,47 @@ theme_override_font_sizes/font_size = 25
 text = "Good Blocks:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label8" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label8/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label8/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of good blocks you have done"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label8/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label9" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Bad Blocks:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label9" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label9/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label9/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of bad blocks you have done"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label9/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="Label10" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -165,11 +417,47 @@ theme_override_font_sizes/font_size = 25
 text = "No Blocks:"
 horizontal_alignment = 1
 
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label10" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label10/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label10/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "The amount of times you havent blocked an attack"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label10/Tooltip" index="1"]
+offset_bottom = 44.0
+
 [node name="Label11" type="Label" parent="ColorRect2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Enemies Killed:"
 horizontal_alignment = 1
+
+[node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label11" instance=ExtResource("2_eisr5")]
+position = Vector2(355.8, -2.8)
+
+[node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label11/Tooltip" index="0"]
+offset_left = -258.0
+offset_top = 50.0
+offset_right = -42.0
+offset_bottom = 123.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" parent="ColorRect2/ScrollContainer/VBoxContainer/Label11/Tooltip/ColorRect" index="0"]
+offset_right = 199.0
+offset_bottom = 62.0
+text = "Number of enemies killed"
+
+[node name="ColorRect2" parent="ColorRect2/ScrollContainer/VBoxContainer/Label11/Tooltip" index="1"]
+offset_bottom = 44.0
 
 [node name="ExitButton" type="Button" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -183,3 +471,19 @@ text = "EXIT"
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 
 [editable path="ColorRect2/ScrollContainer/VBoxContainer/Label17/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label2/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label3/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label12/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label16/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label13/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label14/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label15/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label4/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label5/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label6/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label7/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label8/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label9/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label10/Tooltip"]
+[editable path="ColorRect2/ScrollContainer/VBoxContainer/Label11/Tooltip"]
