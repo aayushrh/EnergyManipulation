@@ -107,7 +107,6 @@ position = Vector2(-1.5, 6.5)
 visible = false
 offset_right = 302.0
 offset_bottom = 66.0
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -147,7 +146,6 @@ offset_left = 56.0
 offset_top = -76.0
 offset_right = 326.0
 offset_bottom = 21.0
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -185,7 +183,6 @@ text = "Projectile Speed
 visible = false
 offset_right = 483.0
 offset_bottom = 30.0
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -224,7 +221,6 @@ offset_left = -210.5
 offset_top = 11.5
 offset_right = -209.5
 offset_bottom = 52.5
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -261,7 +257,6 @@ text = "Supreme
 
 [node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="0"]
 visible = false
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -295,7 +290,6 @@ offset_left = -282.5
 offset_top = -67.5
 offset_right = -281.5
 offset_bottom = -26.5
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -313,9 +307,6 @@ layout_mode = 2
 
 [node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind" instance=ExtResource("2_l42ht")]
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind/Tooltip" index="0"]
-color = Color(0.207843, 0.207843, 0.207843, 1)
-
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
@@ -329,9 +320,6 @@ layout_mode = 2
 text = "Remove"
 
 [node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion" instance=ExtResource("2_l42ht")]
-
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion/Tooltip" index="0"]
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -352,9 +340,6 @@ script = ExtResource("3_2vake")
 [node name="Tooltip" parent="." instance=ExtResource("2_l42ht")]
 position = Vector2(169.5, 147)
 orphan = true
-
-[node name="ColorRect" parent="Tooltip" index="0"]
-color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="Label" parent="Tooltip/ColorRect" index="0"]
 offset_left = 7.0
