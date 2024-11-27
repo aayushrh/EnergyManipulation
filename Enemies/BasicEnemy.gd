@@ -69,6 +69,7 @@ func _ready():
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	spell.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
+	num = 9
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
@@ -104,7 +105,7 @@ func _ready():
 			intel = 0.75 + stage/10
 			reactionDelay = randf_range(0.025,0.05)
 			rng.randomize()
-			for i in (int(stage/5) + 2):
+			for i in (int(floor(stage/5)) + 1):
 				var spell2 = Spell.new("Spell Number " + str(i))
 				spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 				spell2.element = get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)]
@@ -319,7 +320,7 @@ func predictionrotate(player,delta):
 			blast.letGo()
 			blast = null
 			castedIndex = -1
-			casting = false
+			#casting = false
 	else:
 		pass#for beam in the future not now lol
 
