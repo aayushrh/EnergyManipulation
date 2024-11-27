@@ -52,6 +52,13 @@ offset_top = 20.0
 offset_right = 420.0
 offset_bottom = 60.0
 
+[node name="HealthBar3" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 60.0
+color = Color(1, 1, 0, 1)
+
 [node name="ActualHealthBar" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0
 offset_top = 20.0

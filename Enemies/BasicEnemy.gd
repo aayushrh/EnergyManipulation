@@ -168,7 +168,8 @@ func _health_change(newHP: float):
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
-	$Health2.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
+	$Health2.size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
+	$Health3.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 
 
 func updateHP(delta):

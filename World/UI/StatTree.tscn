@@ -110,7 +110,7 @@ text = "Wisdom"
 [node name="Label" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
 offset_right = 204.0
 offset_bottom = 49.0
-text = "Increases the amount of energy you gain per block by 5% each point"
+text = "Increases the amount of energy you gain by 5% each point"
 
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
 layout_mode = 2
@@ -152,7 +152,7 @@ text = "Agility"
 [node name="Label" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
 offset_right = 204.0
 offset_bottom = 49.0
-text = "Increases your speed by 5% each point. Increases max dash charges by 1 every 2 points"
+text = "Increases your speed by 5% each point and decreases dash cooldown by 5%. Increases max dash charges by 1 every 2 points"
 
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer"]
 layout_mode = 2

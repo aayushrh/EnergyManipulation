@@ -71,6 +71,13 @@ offset_top = 30.0
 offset_right = -10.0
 offset_bottom = 40.0
 
+[node name="Health3" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 40.0
+color = Color(0, 1, 1, 1)
+
 [node name="Health2" type="ColorRect" parent="."]
 offset_left = -40.0
 offset_top = 30.0

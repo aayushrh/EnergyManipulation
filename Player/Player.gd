@@ -116,6 +116,7 @@ func set_dash_cd(f: float):
 
 func set_block_cd(f: float):
 	BLOCKCD = f
+	print(BLOCKCD)
 	$CanvasLayer/TextureProgressBar.max_value = BLOCKCD
 
 
@@ -152,7 +153,8 @@ func _health_change(newHP: float):
 		if(health < 0):
 			get_tree().current_scene.death()
 			Global.unPause()
-	$CanvasLayer/ActualHealthBar.size.x = health * HPBARMULT
+	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
+	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
