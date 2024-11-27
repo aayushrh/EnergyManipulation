@@ -150,7 +150,7 @@ func _health_change(newHP: float):
 		health += change
 		get_tree().current_scene.damageTaken -= change
 		if(health < 0):
-			Global._change_tscn("res://World/Screens/MainMenu.tscn")
+			get_tree().current_scene.death()
 			Global.unPause()
 	$CanvasLayer/ActualHealthBar.size.x = health * HPBARMULT
 

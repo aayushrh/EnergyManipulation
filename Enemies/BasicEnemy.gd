@@ -23,7 +23,7 @@ var dodgeDir = 0
 var moveDir = 0.0
 var blast = null
 var casting = false
-var maxHealth = 0
+var MAXHEALTH = 0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 0
@@ -73,7 +73,7 @@ func _ready():
 		0, 1, 2, 3: #Dashing dude
 			agg = true
 			dash_cd = 2.5 / pow(1.05,stage)
-			maxHealth = 2 + stage/10
+			MAXHEALTH = 2 + stage/10
 			intel = 0.8 + stage/10
 			reactionDelay = randf_range(0.025,0.1)
 			rng.randomize()
@@ -83,7 +83,7 @@ func _ready():
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			maxHealth = 2 + stage/5
+			MAXHEALTH = 2 + stage/5
 			intel = 1 + stage/2.5
 			reactionDelay = randf_range(0.1,0.2)
 			rng.randomize()
@@ -92,7 +92,7 @@ func _ready():
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
 			dash_cd = 5
-			maxHealth = 4 + stage / 2
+			MAXHEALTH = 4 + stage / 2
 			intel = 0.75 + stage/15
 			reactionDelay = randf_range(0.15,0.25)
 			rng.randomize()
@@ -100,7 +100,7 @@ func _ready():
 		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
-			maxHealth = 2 + stage/5
+			MAXHEALTH = 2 + stage/5
 			intel = 0.75 + stage/10
 			reactionDelay = randf_range(0.025,0.05)
 			rng.randomize()
@@ -124,7 +124,7 @@ func _ready():
 			break
 	#spell.attributes = Attributes.new(rng.randf_range(-50,50),rng.randf_range(-50,50),r)
 	spells.append(spell)
-	health = maxHealth
+	health = MAXHEALTH
 	print(health)
 
 func _finishCharge():
@@ -158,7 +158,7 @@ func _process(delta):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		change = change/pow(2,int(health/maxHealth))
+		change = change/pow(2,int(health/MAXHEALTH))
 		health += change
 	elif(change < 0):
 		health += change
@@ -167,23 +167,23 @@ func _health_change(newHP: float):
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
-	$Health2.size.x = (health * HPBARMULT)/(maxHealth*1.0)
+	$Health2.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 
 
 func updateHP(delta):
 	var bar_health = health * HPBARMULT
 	if(hp < bar_health):
-		hp += maxf(BARSPEED / 100 * maxHealth * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		hp += maxf(BARSPEED / 100 * MAXHEALTH * HPBARMULT * delta,abs(hp - bar_health)  * delta)
 		if(hp > bar_health):
 			hp = bar_health
 	else:
-		hp -= maxf(BARSPEED / 100 * maxHealth * HPBARMULT * delta,abs(hp - bar_health)  * delta)
+		hp -= maxf(BARSPEED / 100 * MAXHEALTH * HPBARMULT * delta,abs(hp - bar_health)  * delta)
 		if(hp < bar_health):
 			hp = bar_health
 	updateHealth()
 
 func updateHealth():
-	$Health.size.x = (hp * 1.0)/(maxHealth*1.0)
+	$Health.size.x = (hp * 1.0)/(MAXHEALTH*1.0)
 
 func _effectsHandle(delta):
 	for e in effects:

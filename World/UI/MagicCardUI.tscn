@@ -71,6 +71,38 @@ text = "Card Description"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="Label4" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_su88y")
+text = "Power Mulitplier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_su88y")
+text = "Cast Spd Multiplier:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_su88y")
+text = "Proj Spd Mulitplier:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_su88y")
+text = "Size Multiplier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
 position = Vector2(150, 250)
 shape = SubResource("RectangleShape2D_gtgs2")

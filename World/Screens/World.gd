@@ -84,3 +84,19 @@ func lineLine(x1, y1, x2, y2, x3, y3, x4, y4):
 
 func _reloadSpellList():
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
+
+func death():
+	Global.amountShot = amountShot
+	Global.amountHit = amountHit
+	Global.multiHits = multiHits
+	Global.damageTaken = damageTaken
+	Global.damageBlocked = damageBlocked
+	Global.damageHealed = damageHealed
+	Global.damageDealt = damageDealt
+	Global.spellsCasted = spellsCasted
+	Global.perfectBlocks = perfectBlocks
+	Global.goodBlocks = goodBlocks
+	Global.badBlocks = badBlocks
+	Global.noBlocks = noBlocks
+	Global.enemiesKilled = enemiesKilled
+	Global._change_tscn("res://World/Screens/FinalStats.tscn")

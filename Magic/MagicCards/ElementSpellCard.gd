@@ -8,6 +8,7 @@ class_name ElementSpellCard
 @export var ongoingEffects : Array[String]
 @export var startEffects : Array[String]
 @export var blockEffects : Array[String]
+@export var castingEffects : Array[String]
 @export var OngoingVFX : PackedScene
 @export var HitVFX : PackedScene
 @export var StartVFX : PackedScene
@@ -57,3 +58,8 @@ func callBlockEffects(dmgRed:float, spellObj:SpellCasted, enemy):
 	for e in blockEffects:
 		var callable = Callable(spellEffects, e)
 		callable.call(dmgRed, spellObj, enemy)
+
+func callCastingEffects(spellObj:SpellCast):
+	for e in castingEffects:
+		var callable = Callable(spellEffects, e)
+		callable.call(spellObj)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc6oqlnhotm1f"]
+[gd_scene load_steps=3 format=3 uid="uid://cc6oqlnhotm1f"]
 
 [ext_resource type="Script" path="res://World/UI/StatTree.gd" id="1_yqvef"]
+[ext_resource type="PackedScene" uid="uid://r51ga47bbd3n" path="res://World/UI/Tooltip.tscn" id="2_3610f"]
 
 [node name="StatTree" type="Control"]
 z_index = -100
@@ -62,6 +63,13 @@ alignment = 2
 layout_mode = 2
 text = "Intelligence"
 
+[node name="Tooltip" parent="ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Label" instance=ExtResource("2_3610f")]
+
+[node name="Label" parent="ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 204.0
+offset_bottom = 49.0
+text = "Increases power of your spells by 5% each point"
+
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -96,6 +104,13 @@ alignment = 2
 [node name="Label" type="Label" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
 layout_mode = 2
 text = "Wisdom"
+
+[node name="Tooltip" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label" instance=ExtResource("2_3610f")]
+
+[node name="Label" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 204.0
+offset_bottom = 49.0
+text = "Increases the amount of energy you gain per block by 5% each point"
 
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer"]
 layout_mode = 2
@@ -132,6 +147,13 @@ alignment = 2
 layout_mode = 2
 text = "Agility"
 
+[node name="Tooltip" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label" instance=ExtResource("2_3610f")]
+
+[node name="Label" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 204.0
+offset_bottom = 49.0
+text = "Increases your speed by 5% each point. Increases max dash charges by 1 every 2 points"
+
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -166,6 +188,13 @@ alignment = 2
 [node name="Label" type="Label" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer"]
 layout_mode = 2
 text = "Constitution"
+
+[node name="Tooltip" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/Label" instance=ExtResource("2_3610f")]
+
+[node name="Label" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 204.0
+offset_bottom = 49.0
+text = "Increases your max health and health by 5% each point"
 
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer"]
 layout_mode = 2
@@ -202,6 +231,13 @@ alignment = 2
 layout_mode = 2
 text = "Comprehension"
 
+[node name="Tooltip" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label" instance=ExtResource("2_3610f")]
+
+[node name="Label" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label/Tooltip/ColorRect" index="0"]
+offset_right = 204.0
+offset_bottom = 49.0
+text = "Decreases your spell cooldown by 5% and increase your max block charges by 1 every 2 points"
+
 [node name="Control" type="Control" parent="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -220,3 +256,9 @@ text = "+"
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/agility" to="." method="_on_agility_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/const" to="." method="_on_const_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/const" to="." method="_on_comp_pressed"]
+
+[editable path="ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Label/Tooltip"]
+[editable path="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/Label/Tooltip"]
+[editable path="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label/Tooltip"]
+[editable path="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/Label/Tooltip"]
+[editable path="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label/Tooltip"]

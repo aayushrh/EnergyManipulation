@@ -18,6 +18,7 @@ var castingCost = 0
 
 func setSpell(nspell):
 	spell = nspell
+	spell.element.callCastingEffects(self)
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.getSize()

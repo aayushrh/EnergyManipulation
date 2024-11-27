@@ -13,12 +13,24 @@ func _show(card):
 		$VBoxContainer/Label.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label2.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label3.add_theme_color_override("font_color", Color.BLACK)
+		$VBoxContainer/Label4.add_theme_color_override("font_color", Color.BLACK)
+		$VBoxContainer/Label5.add_theme_color_override("font_color", Color.BLACK)
+		$VBoxContainer/Label6.add_theme_color_override("font_color", Color.BLACK)
+		$VBoxContainer/Label7.add_theme_color_override("font_color", Color.BLACK)
 	$TextureRect.texture = card.icon
 	$VBoxContainer/Label.text = card.cardName
 	$VBoxContainer/Label3.text = card.cardDescription
 	match(card.type):
 		0:
 			$VBoxContainer/Label2.text = "Element"
+			$VBoxContainer/Label4.visible = true
+			$VBoxContainer/Label4.text = "Power Multiplier: " + str(card.powerMult)
+			$VBoxContainer/Label5.visible = true
+			$VBoxContainer/Label5.text = "Cast Spd Multiplier: " + str(card.castingSpeedMult)
+			$VBoxContainer/Label6.visible = true
+			$VBoxContainer/Label6.text = "Proj Spd Multiplier: " + str(card.attackSpeedMult)
+			$VBoxContainer/Label7.visible = true
+			$VBoxContainer/Label7.text = "Size Multiplier: " + str(card.sizeMult)
 		1:
 			$VBoxContainer/Label2.text = "Style"
 		2:

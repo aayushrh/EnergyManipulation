@@ -44,6 +44,9 @@ func lifesteal(spellObj:SpellCasted, enemy):
 	else:
 		spellObj.sender.health += 1 * (enemy.health + spellObj.spell.getPower())
 
+func takeHealth(spellObj:SpellCast):
+	spellObj.player.health -= 0.03 * spellObj.player.MAXHEALTH
+
 func giveBackHP(dmgRed, spellObj, enemy):
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 

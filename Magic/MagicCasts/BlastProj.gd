@@ -64,7 +64,7 @@ func _on_area_2d_body_entered(body) -> void:
 
 func _on_area_2d_area_entered(area):
 	var body = area.get_parent()
-	if(body is Blast and body.sender.type != sender.type):
+	if(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
 		if(body.spell.initCost() * body.mult * 1/body.spell.attributes.amount > spell.initCost() * mult * 1/spell.attributes.amount and is_instance_valid(self)):
 			queue_free()
 		elif(is_instance_valid(body)):

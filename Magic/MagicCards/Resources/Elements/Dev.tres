@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=4 format=3 uid="uid://stiffckq0jtp"]
+
+[ext_resource type="Texture2D" uid="uid://cqlqy6maiphbm" path="res://Art/pegasus.png" id="1_alac7"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_lx8pk"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="3_5mq0y"]
+
+[resource]
+script = ExtResource("1_lx8pk")
+spellEffects = ExtResource("3_5mq0y")
+cardName = "Dev"
+cardDescription = ""
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+color = Color(0, 0, 0, 1)
+icon = ExtResource("1_alac7")
+cdMult = 0.0
+costMult = 0.0
+powerMult = 100.0
+attackSpeedMult = 100.0
+sizeMult = 100.0
+castingSpeedMult = 100.0
