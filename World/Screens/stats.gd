@@ -23,6 +23,9 @@ func _ready():
 	$ColorRect2/ScrollContainer/VBoxContainer/Label10.text = "No Blocks: " + str(world.noBlocks)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label11.text = "Enemies Killed: " + str(world.enemiesKilled)
 
+func _show():
+	_ready()
+
 func roundString(a,b):
 	return str(snapped(a,b))
 

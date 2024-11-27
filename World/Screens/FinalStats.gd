@@ -29,6 +29,7 @@ func _ready():
 	badBlocks = Global.badBlocks
 	noBlocks = Global.noBlocks
 	enemiesKilled = Global.enemiesKilled
+	$Stats._show()
 
 func _process(delta):
 	if(get_child_count() == 0):
