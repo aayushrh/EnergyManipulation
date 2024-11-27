@@ -1,10 +1,9 @@
-[gd_scene load_steps=27 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=26 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Elements/Fire.tres" id="2_5nixq"]
 [ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Elements/Nature.tres" id="2_c5j3f"]
-[ext_resource type="Resource" uid="uid://stiffckq0jtp" path="res://Magic/MagicCards/Resources/Elements/Dev.tres" id="2_udo7e"]
 [ext_resource type="Resource" uid="uid://fa5aq46y3a3k" path="res://Magic/MagicCards/Resources/Style/Boar.tres" id="3_losfs"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="4_5utis"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
@@ -293,7 +292,6 @@ size = Vector2(105, 3117)
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testElementSpellCard = ExtResource("2_udo7e")
 testTypeSpellCard = ExtResource("4_ov6f6")
 allElementSpellCards = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y"), ExtResource("2_c5j3f")])
 allStyleSpellCards = Array[ExtResource("6_uyec6")]([ExtResource("3_losfs"), ExtResource("11_dq84m")])
@@ -313,7 +311,7 @@ BARSPEED = 5.0
 HPBARMULT = 20.0
 ENERGYBARMULT = 1.0
 DASHCD = 4.0
-BLOCKCD = 8.0
+BLOCKCD = 6.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
