@@ -11,6 +11,7 @@ func _ready():
 func _process(delta):
 	if(!orphan):
 		$ColorRect2.size = get_parent().size
+		$ColorRect2.global_position = get_parent().global_position
 	if(get_viewport().get_mouse_position().x > global_position.x and get_viewport().get_mouse_position().x < global_position.x + $ColorRect2.size.x and get_viewport().get_mouse_position().y > global_position.y and get_viewport().get_mouse_position().y < global_position.y + $ColorRect2.size.y):
 		_on_mouse_entered()
 	else:

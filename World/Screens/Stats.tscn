@@ -127,7 +127,7 @@ text = "Accuracy: Unknown"
 horizontal_alignment = 1
 
 [node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3" instance=ExtResource("2_eisr5")]
-position = Vector2(355.8, -2.8)
+position = Vector2(330.8, -2.8)
 
 [node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label3/Tooltip" index="0"]
 offset_left = -258.0
@@ -219,7 +219,7 @@ text = "Average Damage per Hit: 0"
 horizontal_alignment = 1
 
 [node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14" instance=ExtResource("2_eisr5")]
-position = Vector2(355.8, -2.8)
+position = Vector2(257.8, -2.8)
 
 [node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label14/Tooltip" index="0"]
 offset_left = -258.0
@@ -242,7 +242,7 @@ text = "Average Damage per Spell: 0"
 horizontal_alignment = 1
 
 [node name="Tooltip" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15" instance=ExtResource("2_eisr5")]
-position = Vector2(355.8, -2.8)
+position = Vector2(258.8, -2.8)
 
 [node name="ColorRect" parent="ColorRect2/ScrollContainer/VBoxContainer/Label15/Tooltip" index="0"]
 offset_left = -258.0
