@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://mpo3uyl0648p"]
+[gd_scene load_steps=12 format=3 uid="uid://mpo3uyl0648p"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_u8cgp"]
 [ext_resource type="PackedScene" uid="uid://bqvqepqd2f3sp" path="res://Player/playerArt.tscn" id="4_1ei8s"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://Effects/HurtBackground.gd" id="5_lab3i"]
 [ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="7_1q3k6"]
 [ext_resource type="PackedScene" uid="uid://cekec7pbvckd0" path="res://World/UI/EffectUI.tscn" id="7_2i676"]
+[ext_resource type="Texture2D" uid="uid://v47r7dr2hhgx" path="res://Art/sprint (1).png" id="8_458kv"]
 [ext_resource type="PackedScene" uid="uid://x7ruxh1dbsp6" path="res://Effects/punch_shockwave.tscn" id="9_613qk"]
+[ext_resource type="Texture2D" uid="uid://44sbbdccsmdc" path="res://Art/shield-echoes.png" id="9_qv7ws"]
 [ext_resource type="PackedScene" uid="uid://dj4sdy7sreyxa" path="res://Effects/afterimage.tscn" id="10_boodf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7140r"]
@@ -157,6 +159,18 @@ offset_right = 193.5
 offset_bottom = 582.0
 theme_override_font_sizes/font_size = 32
 text = "0"
+
+[node name="Sprint(1)" type="Sprite2D" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(146, 561)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("8_458kv")
+
+[node name="Shield-echoes" type="Sprite2D" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(49, 561)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_qv7ws")
 
 [node name="WeaponSlot" type="Node2D" parent="."]
 

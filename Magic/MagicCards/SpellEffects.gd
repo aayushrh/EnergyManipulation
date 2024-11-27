@@ -38,9 +38,12 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 
 func lifesteal(spellObj:SpellCasted, enemy):
 	if(enemy.health > 0):
-		spellObj.sender.health += 0.1 * spellObj.spell.getPower()
+		spellObj.sender.health += 1 * spellObj.spell.getPower()
 	else:
-		spellObj.sender.health += 0.1 * enemy.health
+		spellObj.sender.health += 1 * (enemy.health + spellObj.spell.getPower())
+
+func giveBackHP(dmgRed, spellObj, enemy):
+	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 
 func giveBackEnergy(spellObj:SpellCasted):
 	spellObj.player.stored_energy += 0.36 * (spellObj.spell.initCost() + spellObj.castingCost)

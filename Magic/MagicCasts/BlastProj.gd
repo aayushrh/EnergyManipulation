@@ -39,6 +39,13 @@ func _process(delta):
 func damageTaken(reciever):
 	return spell.getPower() * ((mult-1)/2+1) * sender.intel
 
+func clone():
+	var blast = Blast.new()
+	blast.global_position = global_position
+	blast.spell = spell
+	blast.sender = sender
+	return blast
+
 func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):
 		body._hit(self)

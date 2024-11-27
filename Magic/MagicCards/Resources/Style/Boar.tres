@@ -8,7 +8,7 @@
 script = ExtResource("1_trlus")
 spellEffects = ExtResource("2_bw3x0")
 cardName = "Boar"
-cardDescription = "adds the stun effects to all of your spells or stuns the attacker"
+cardDescription = "Adds the stun effects to all of your spells or stuns the attacker"
 hitEffects = Array[String](["addStun"])
 ongoingEffects = Array[String]([])
 startEffects = Array[String]([])

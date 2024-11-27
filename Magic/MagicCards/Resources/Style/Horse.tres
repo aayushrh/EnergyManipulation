@@ -8,7 +8,7 @@
 script = ExtResource("1_b1123")
 spellEffects = ExtResource("2_pwa6y")
 cardName = "Horse"
-cardDescription = "gives you back some of the mana that you used in the spell"
+cardDescription = "Gives you back some of the mana that you used in the spell"
 hitEffects = Array[String]([])
 ongoingEffects = Array[String]([])
 startEffects = Array[String](["giveBackEnergy"])

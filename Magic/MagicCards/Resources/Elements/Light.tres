@@ -10,7 +10,7 @@
 script = ExtResource("1_wvhh6")
 spellEffects = ExtResource("3_1hfpq")
 cardName = "Light"
-cardDescription = "Imbues the spell iwht the Light element and blinds the target"
+cardDescription = "Imbues the spell with the Light element and blinds the target"
 hitEffects = Array[String](["addLightBlindness"])
 ongoingEffects = Array[String]([])
 startEffects = Array[String]([])

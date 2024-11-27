@@ -53,7 +53,7 @@ var vfx = []
 var casting = false
 var pause = false
 #var charging = false
-var hitboxpos = Vector2.ZERO
+var hitbox = null
 var hitboxEffects = []
 var effectsHaventChecked = []
 var intel = 1.0
@@ -303,17 +303,17 @@ func canDash():
 	return true
 
 func _hit(hitbox):
+	self.hitbox = hitbox.clone()
 	dmgTaken = hitbox.damageTaken(self)
 	spellHit = hitbox.spell
 	time_last_hit = time
 	$HitRegister.start(0.06125)
-	self.hitboxpos = hitbox.global_position
 	#_hit_register()
 
 func _dmgRed(time):
 	if(time < 0 and time > -0.02085):
 		var perfectBlock = PerfectBlock.instantiate()
-		perfectBlock.global_position = hitboxpos
+		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
@@ -321,7 +321,7 @@ func _dmgRed(time):
 		return 1
 	if(time < -0.02085 and time > -0.04165):
 		var goodBlock = GoodBlock.instantiate()
-		goodBlock.global_position = hitboxpos
+		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
@@ -329,13 +329,13 @@ func _dmgRed(time):
 		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
 	if(time < -0.04165 and time > -0.06125):
 		var badBlock = BadBlock.instantiate()
-		badBlock.global_position = hitboxpos
+		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
 		return (-13.68 + 3.173*(abs(time)*200) + 0.02387*pow((abs(time)*200), 2))/100.0
 	if(time > 0 and time < 0.0417):
 		var perfectBlock = PerfectBlock.instantiate()
-		perfectBlock.global_position = hitboxpos
+		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
@@ -343,7 +343,7 @@ func _dmgRed(time):
 		return 1
 	if(time > 0.0417 and time < 0.0833):
 		var goodBlock = GoodBlock.instantiate()
-		goodBlock.global_position = hitboxpos
+		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
@@ -351,7 +351,7 @@ func _dmgRed(time):
 		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
 	if(time > 0.0833 and time < 0.125):
 		var badBlock = BadBlock.instantiate()
-		badBlock.global_position = hitboxpos
+		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
 		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
@@ -370,6 +370,7 @@ func _on_dashing_timer_timeout():
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	processHaventChecked()
+	spellHit.element.callBlockEffects(dmgRed, hitbox, self)
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))

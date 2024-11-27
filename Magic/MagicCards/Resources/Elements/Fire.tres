@@ -10,7 +10,7 @@
 script = ExtResource("3_dtym7")
 spellEffects = ExtResource("4_c6np5")
 cardName = "Fire"
-cardDescription = "Imbues the spell with firea nd attaches burning to the target once hit"
+cardDescription = "Imbues the spell with fire and attaches burning to the target once hit"
 hitEffects = Array[String](["addBurning"])
 ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
