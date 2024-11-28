@@ -19,6 +19,7 @@ var spells = []# enemy casted spells
 var castedIndex = -1
 var canDash = true
 var type = 1
+var fuck = false # fuck nature
 var dodgeDir = 0
 var moveDir = 0.0
 var blast = null
@@ -36,7 +37,7 @@ var delt = 0
 
 @export var HPBARMULT = 80.0
 @export var BARSPEED = 20.0
-@export var health = 5.0 : set = _health_change
+@export var health = 0.0 : set = _health_change
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
 @export var tact = 0 # chance to do smarter things
@@ -164,12 +165,14 @@ func _health_change(newHP: float):
 	elif(change < 0):
 		health += change
 		if (get_tree()!=null):
-			get_tree().current_scene.damageDealt -= change
+			if(!fuck):
+				get_tree().current_scene.damageDealt -= change
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
 	$Health2.size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
 	$Health3.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
+	fuck = false
 
 
 func updateHP(delta):

@@ -17,12 +17,12 @@ bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ahfbw")
-Title = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Title")
-Size = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed")
-Power = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed")
-Stealth = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme")
-Name = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Renaming")
-Keybind = NodePath("ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind")
+Title = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Title")
+Size = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed")
+Power = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed")
+Stealth = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme")
+Name = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Renaming")
+Keybind = NodePath("ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 0
@@ -54,35 +54,30 @@ mouse_filter = 2
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect2/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-scroll_horizontal_custom_step = 1199.13
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect2/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="Action List" type="VBoxContainer" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="Action List" type="VBoxContainer" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Title" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 text = "Placeholder Text Here"
 
-[node name="Renaming" type="TextEdit" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Renaming" type="TextEdit" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Size_CastingSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Size_CastingSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_hrwwd")
@@ -90,7 +85,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_axwco"
 min_value = -50.0
 max_value = 50.0
 
-[node name="Size_CastingSpeed2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed"]
+[node name="Size_CastingSpeed2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 offset_top = -12.5
@@ -100,27 +95,27 @@ theme_override_font_sizes/font_size = 20
 text = "Attack Speed
 "
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2" instance=ExtResource("2_l42ht")]
 position = Vector2(-1.5, 6.5)
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip" index="0"]
 visible = false
 offset_right = 302.0
 offset_bottom = 66.0
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip/ColorRect" index="0"]
 offset_right = 257.0
 offset_bottom = 127.0
 text = "Decreases spell casting time and charging time, up to 50%, at the cost of decreasing size, up to 50%.
 DOES NOT AFFECT COOLDOWN"
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip" index="1"]
 visible = false
 offset_top = -4.0
 offset_right = 132.0
 offset_bottom = 22.0
 
-[node name="Size_CastingSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed"]
+[node name="Size_CastingSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 6
@@ -136,26 +131,26 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Size"
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3" instance=ExtResource("2_l42ht")]
 position = Vector2(-3.5, 1.5)
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="0"]
 offset_left = 56.0
 offset_top = -76.0
 offset_right = 326.0
 offset_bottom = 21.0
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip/ColorRect" index="0"]
 offset_right = 252.0
 offset_bottom = 101.0
 text = "Increases the size of the spell, up to 50%, at the cost of decreasing attack speed, up to 50%."
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="1"]
 visible = false
 offset_right = 42.0
 offset_bottom = 22.0
 
-[node name="Power_ProjectileSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Power_ProjectileSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_hrwwd")
@@ -163,7 +158,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_axwco"
 min_value = -50.0
 max_value = 50.0
 
-[node name="Power_ProjectileSpeed2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
+[node name="Power_ProjectileSpeed2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 offset_top = -12.5
@@ -173,26 +168,26 @@ theme_override_font_sizes/font_size = 20
 text = "Projectile Speed
 "
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2" instance=ExtResource("2_l42ht")]
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip" index="0"]
 visible = false
 offset_right = 483.0
 offset_bottom = 30.0
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
 offset_right = 207.0
 offset_bottom = 84.0
 text = "Increases the speed of projectiles, up to 50%, at the cost of decreasing power, up to 50%."
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip" index="1"]
 visible = false
 offset_right = 158.0
 offset_bottom = 29.0
 
-[node name="Power_ProjectileSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
+[node name="Power_ProjectileSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 6
@@ -209,25 +204,25 @@ theme_override_font_sizes/font_size = 20
 text = "Power
 "
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3" instance=ExtResource("2_l42ht")]
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip" index="0"]
 visible = false
 offset_left = -210.5
 offset_top = 11.5
 offset_right = -209.5
 offset_bottom = 52.5
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip/ColorRect" index="0"]
 offset_bottom = 101.0
 text = "Increases the damage of spells, up to 50%, at the cost of decreasing projectile speed, up to 50%."
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip" index="1"]
 visible = false
 offset_right = 62.0
 offset_bottom = 26.0
 
-[node name="Amount_Supreme" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Amount_Supreme" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wo8ml")
@@ -236,7 +231,7 @@ min_value = 1.0
 max_value = 20.0
 value = 1.0
 
-[node name="Amount_Supreme2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme"]
+[node name="Amount_Supreme2" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 offset_top = -12.5
@@ -246,22 +241,22 @@ theme_override_font_sizes/font_size = 20
 text = "Supreme
 "
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2" instance=ExtResource("2_l42ht")]
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="0"]
 visible = false
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip/ColorRect" index="0"]
 offset_right = 293.0
 offset_bottom = 75.0
 text = "Keeps all stats(attack speed, size, projectile speed, power) at base value."
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="1"]
 visible = false
 offset_right = 38.0
 offset_bottom = 28.0
 
-[node name="Amount_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme"]
+[node name="Amount_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 1
@@ -274,43 +269,43 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "Amount"
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3" instance=ExtResource("2_l42ht")]
 
-[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="0"]
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="0"]
 offset_left = -282.5
 offset_top = -67.5
 offset_right = -281.5
 offset_bottom = -26.5
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip/ColorRect" index="0"]
 offset_right = 274.0
 offset_bottom = 127.0
 text = "Increases the amount of spells casted, up to 20, at the cost of decreasing most other stats.(attack speed, size, projectile speed, power)"
 
-[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="1"]
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="1"]
 visible = false
 
-[node name="Keybind" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Keybind" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind" instance=ExtResource("2_l42ht")]
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
 offset_right = 252.0
 offset_bottom = 32.0
 text = "Changes the keybind of the spell"
 
-[node name="Deletion" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List"]
+[node name="Deletion" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Remove"
 
-[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion" instance=ExtResource("2_l42ht")]
+[node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion" instance=ExtResource("2_l42ht")]
 
-[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion/Tooltip/ColorRect" index="0"]
+[node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
 offset_right = 143.0
@@ -341,16 +336,16 @@ text = "Renames the spell."
 offset_right = 813.0
 offset_bottom = 40.0
 
-[connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind" to="." method="_on_keybind_pressed"]
-[connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion" to="." method="_on_deletion_pressed"]
+[connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind" to="." method="_on_keybind_pressed"]
+[connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion" to="." method="_on_deletion_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Keybind/Tooltip"]
-[editable path="ColorRect2/PanelContainer/MarginContainer/ScrollContainer/MarginContainer/Action List/Deletion/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip"]
+[editable path="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip"]
 [editable path="Tooltip"]

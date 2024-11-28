@@ -18,6 +18,8 @@ func _ready():
 	if(world.damageDealt > 0):
 		$ColorRect2/ScrollContainer/VBoxContainer/Label14.text = "Average Damage per Hit: " + roundString(float(world.damageDealt)/(world.amountHit+world.multiHits),0.01)
 		$ColorRect2/ScrollContainer/VBoxContainer/Label15.text = "Average Damage per Spell: " + roundString(float(world.damageDealt)/(world.spellsCasted),0.01)
+	$ColorRect2/ScrollContainer/VBoxContainer/Label14.visible = world.amountHit>0
+	$ColorRect2/ScrollContainer/VBoxContainer/Label15.visible = world.spellsCasted>0
 	$ColorRect2/ScrollContainer/VBoxContainer/Label4.text = "Damage Taken: " + roundString(world.damageTaken,0.01)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label5.text = "Damage Blocked: " + roundString(world.damageBlocked,0.01)
 	$ColorRect2/ScrollContainer/VBoxContainer/Label6.text = "Damage Healed: " + roundString(world.damageHealed,0.01)
