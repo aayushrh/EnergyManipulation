@@ -115,6 +115,9 @@ offset_top = -4.0
 offset_right = 132.0
 offset_bottom = 22.0
 
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed2/Tooltip" index="2"]
+visible = false
+
 [node name="Size_CastingSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
@@ -135,6 +138,7 @@ text = "Size"
 position = Vector2(-3.5, 1.5)
 
 [node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="0"]
+visible = false
 offset_left = 56.0
 offset_top = -76.0
 offset_right = 326.0
@@ -149,6 +153,9 @@ text = "Increases the size of the spell, up to 50%, at the cost of decreasing at
 visible = false
 offset_right = 42.0
 offset_bottom = 22.0
+
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Size_CastingSpeed/Size_CastingSpeed3/Tooltip" index="2"]
+visible = false
 
 [node name="Power_ProjectileSpeed" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
@@ -187,6 +194,9 @@ visible = false
 offset_right = 158.0
 offset_bottom = 29.0
 
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed2/Tooltip" index="2"]
+visible = false
+
 [node name="Power_ProjectileSpeed3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
@@ -222,6 +232,9 @@ visible = false
 offset_right = 62.0
 offset_bottom = 26.0
 
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Power_ProjectileSpeed/Power_ProjectileSpeed3/Tooltip" index="2"]
+visible = false
+
 [node name="Amount_Supreme" type="HSlider" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -256,6 +269,9 @@ visible = false
 offset_right = 38.0
 offset_bottom = 28.0
 
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme2/Tooltip" index="2"]
+visible = false
+
 [node name="Amount_Supreme3" type="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
@@ -272,6 +288,7 @@ text = "Amount"
 [node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3" instance=ExtResource("2_l42ht")]
 
 [node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="0"]
+visible = false
 offset_left = -282.5
 offset_top = -67.5
 offset_right = -281.5
@@ -285,11 +302,17 @@ text = "Increases the amount of spells casted, up to 20, at the cost of decreasi
 [node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="1"]
 visible = false
 
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Amount_Supreme/Amount_Supreme3/Tooltip" index="2"]
+visible = false
+
 [node name="Keybind" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind" instance=ExtResource("2_l42ht")]
+
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip" index="0"]
+visible = false
 
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
@@ -298,6 +321,12 @@ offset_right = 252.0
 offset_bottom = 32.0
 text = "Changes the keybind of the spell"
 
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip" index="1"]
+visible = false
+
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind/Tooltip" index="2"]
+visible = false
+
 [node name="Deletion" type="Button" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -305,12 +334,21 @@ text = "Remove"
 
 [node name="Tooltip" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion" instance=ExtResource("2_l42ht")]
 
+[node name="ColorRect" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip" index="0"]
+visible = false
+
 [node name="Label" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
 offset_right = 143.0
 offset_bottom = 32.0
 text = "Removes the spell"
+
+[node name="ColorRect2" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip" index="1"]
+visible = false
+
+[node name="ColorRect3" parent="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion/Tooltip" index="2"]
+visible = false
 
 [node name="Exit" type="Button" parent="."]
 layout_mode = 0
@@ -325,6 +363,9 @@ script = ExtResource("3_2vake")
 position = Vector2(169.5, 147)
 orphan = true
 
+[node name="ColorRect" parent="Tooltip" index="0"]
+visible = false
+
 [node name="Label" parent="Tooltip/ColorRect" index="0"]
 offset_left = 7.0
 offset_top = 9.0
@@ -333,8 +374,12 @@ offset_bottom = 32.0
 text = "Renames the spell."
 
 [node name="ColorRect2" parent="Tooltip" index="1"]
+visible = false
 offset_right = 813.0
 offset_bottom = 40.0
+
+[node name="ColorRect3" parent="Tooltip" index="2"]
+visible = false
 
 [connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Keybind" to="." method="_on_keybind_pressed"]
 [connection signal="pressed" from="ColorRect2/PanelContainer/MarginContainer/MarginContainer/Action List/Deletion" to="." method="_on_deletion_pressed"]

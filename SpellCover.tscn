@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dspt0twvtj76f"]
+
+[ext_resource type="Script" path="res://spell_cover.gd" id="1_hxwof"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_uuwnd"]
+[ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="3_ad1sx"]
+
+[node name="Node2D" type="Control" node_paths=PackedStringArray("Title")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hxwof")
+Title = NodePath("Label")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 500.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 25.0
+offset_right = 251.0
+offset_bottom = 50.0
+rotation = -0.00135123
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_uuwnd")
+text = "Placeholder Text Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Type" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 180.0
+offset_right = 220.0
+offset_bottom = 320.0
+texture = ExtResource("3_ad1sx")
+expand_mode = 1

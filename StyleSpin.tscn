@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://7ecnpn1pxn8j"]
+
+[ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="1_llx0v"]
+[ext_resource type="Script" path="res://style_spin.gd" id="2_n3csq"]
+
+[node name="Node2D" type="CharacterBody2D"]
+script = ExtResource("2_n3csq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_llx0v")
+expand_mode = 1

@@ -3,7 +3,7 @@ extends Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if(randi_range(1,100) == 1):
+	if(randi_range(1,50) == 1):
 		text = "GTFO"
 
 

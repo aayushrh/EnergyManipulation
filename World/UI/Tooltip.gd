@@ -13,7 +13,7 @@ func _ready():
 	$ColorRect2.visible = false
 
 func _process(delta):
-	print(corner1)
+	#print(corner1)
 	if(!cooked):
 		kysgodot()
 		cooked = true
