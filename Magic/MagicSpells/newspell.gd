@@ -1,8 +1,8 @@
 extends Node
 class_name Spell
 
-var element : ElementSpellCard
-var style : StyleSpellCard
+var element : Array[ElementSpellCard]
+var style : Array[StyleSpellCard]
 var type : TypeSpellCard
 var spellName = ""
 var attributes = null
@@ -51,9 +51,11 @@ func resetCooldown(use, multi):
 func getcd():
 	var cd = 1
 	if(element != null):
-		cd *= element.cdMult
+		for i in element:
+			cd *= i.cdMult
 	if(style != null):
-		cd *= style.cdMult
+		for i in style:
+			cd *= i.cdMult
 	if(type != null):
 		cd *= type.cdMult
 	return cd
@@ -61,7 +63,8 @@ func getcd():
 func getCastingTime():
 	var time = 1
 	if(element != null):
-		time *= 1/element.castingSpeedMult
+		for i in element:
+			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.castingTimeMult
 	return time
@@ -69,7 +72,8 @@ func getCastingTime():
 func getMaxPowerTime():
 	var time = 1
 	if(element != null):
-		time *= 1/element.castingSpeedMult
+		for i in element:
+			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.maxPowerTimeMult
 	return time
@@ -78,11 +82,13 @@ func getMaxPowerTime():
 func initCost():
 	var cost = 1
 	if(element != null):
-		cost *= element.costMult
+		for i in element:
+			cost *= i.costMult
 	else:
 		cost *= 2
 	if(style != null):
-		cost *= style.costMult
+		for i in style:
+			cost *= i.costMult
 	if(type != null):
 		cost *= type.costMult
 	return cost
@@ -91,31 +97,45 @@ func initCost():
 func contcost():
 	var cost = 1
 	if(element != null):
-		cost *= element.costMult
+		for i in element:
+			cost *= i.costMult
 	if(style != null):
-		cost *= style.costMult
+		for i in style:
+			cost *= i.costMult
 	if(type != null):
 		cost *= type.contCostMult
 	return cost
 
 func getPower():
 	if(element != null):
-		return attributes.getPower() * element.powerMult
+		var power = attributes.getPower()
+		for i in element:
+			power *= i.powerMult
+		return power
 	return attributes.getPower()
 
 func getPSpeed():
 	if(element != null):
-		return attributes.getPSpeed() * element.attackSpeedMult
+		var pSpeed = attributes.getPSpeed()
+		for i in element:
+			pSpeed *= i.attackSpeedMult
+		return pSpeed
 	return attributes.getPSpeed()
 
 func getASpeed():
 	if(element != null):
-		return attributes.getASpeed() * element.castingSpeedMult
+		var cspeed = attributes.getASpeed()
+		for i in element:
+			cspeed *= i.castingSpeedMult
+		return cspeed
 	return attributes.getASpeed()
 
 func getSize():
 	if(element != null):
-		return attributes.getSize() * element.sizeMult
+		var size = attributes.getSize()
+		for i in element:
+			size *= i.sizeMult
+		return size
 	return attributes.getSize()
 
 func getAmount():

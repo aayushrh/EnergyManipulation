@@ -16,8 +16,8 @@ var enemiesKilled = 0
 
 @export var player : CharacterBody2D
 @export var camera : Camera2D
-@export var testElementSpellCard : ElementSpellCard
-@export var testStyleSpellCard : StyleSpellCard
+@export var testElementSpellCard : Array[ElementSpellCard]
+@export var testStyleSpellCard : Array[StyleSpellCard]
 @export var testTypeSpellCard : TypeSpellCard
 @export var allElementSpellCards : Array[ElementSpellCard]
 @export var allStyleSpellCards : Array[StyleSpellCard]

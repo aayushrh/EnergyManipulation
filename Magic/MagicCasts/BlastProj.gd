@@ -8,6 +8,9 @@ var sender = null
 var nvel = Vector2.ZERO
 var effects = []
 var hit = -1
+var art : Node2D
+
+var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
 func _setSpell(nspell):
 	scale = Vector2(0.5, 0.5) * nspell.getSize() * mult
@@ -23,12 +26,13 @@ func getSpeed():
 	return speed * spell.getPSpeed() * mult
 
 func _ready():
-	if(spell.element != null):
-		spell.element.callStartEffects(self)
+	art = $Art
+	for i in spell.element:
+		i.callStartEffects(self)
 
 func _process(delta):
-	if(spell.element != null):
-		spell.element.callOngoingEffects(self)
+	for i in spell.element:
+		i.callOngoingEffects(self)
 	scale = Vector2(0.5, 0.5) * spell.getSize() * mult
 	if(Global.isPaused()):
 		velocity = Vector2.ZERO
@@ -56,10 +60,10 @@ func _on_area_2d_body_entered(body) -> void:
 				else:
 					get_tree().current_scene.multiHits += 1
 				hit += 1
-			if(spell.element != null):
-				spell.element.callHitEffects(self, body)
-			if(spell.style != null):
-				spell.style.callHitEffects(self, body)
+			for i in spell.element:
+				i.callHitEffects(self, body)
+			for i in spell.style:
+				i.callHitEffects(self, body)
 		queue_free()
 
 func _on_area_2d_area_entered(area):
@@ -69,3 +73,7 @@ func _on_area_2d_area_entered(area):
 			queue_free()
 		elif(is_instance_valid(body)):
 			body.queue_free()
+	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
+		var blast = BlastProj.instantiate()
+		var nspell = Spell.new("newThing")
+		nspell.element.append_array(spell.element)

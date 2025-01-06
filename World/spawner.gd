@@ -19,7 +19,7 @@ func _ready():
 	cardSelection.connect("finishedSelecting", _startNextWave)
 
 func _process(delta):
-	if(!Global.isPaused()):
+	if(!Global.isPaused() and false):
 		var spawn = rng.randi_range(0, 250)
 		if(spawn < 1 and spawned < ceil(sqrt(waveNumber + .25) - .5)):
 			print(str(ceil(sqrt(waveNumber + .25) - .5)) + " GAY")

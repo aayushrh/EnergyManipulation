@@ -179,7 +179,7 @@ func block():
 
 func _draw():
 	if(blocking):
-		draw_arc(Vector2.ZERO, 50, -PI/4, -3*PI/4, 20, Color.WHITE, 5)
+		draw_arc(Vector2.ZERO, 50, 0, 2 * PI, 20, Color.WHITE, 5)
 
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
@@ -374,7 +374,8 @@ func _on_dashing_timer_timeout():
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	processHaventChecked()
-	spellHit.element.callBlockEffects(dmgRed, hitbox, self)
+	for i in spellHit.element:
+		i.callBlockEffects(dmgRed, hitbox, self)
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))

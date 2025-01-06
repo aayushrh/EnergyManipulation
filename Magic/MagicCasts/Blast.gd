@@ -18,16 +18,17 @@ var castingCost = 0
 
 func setSpell(nspell):
 	spell = nspell
-	spell.element.callCastingEffects(self)
+	for i in spell.element:
+		i.callCastingEffects(self)
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.getSize()
-	if(spell.style != null):
-		$Sprite2D.texture = spell.style.icon
+	if(spell.style.size() > 0):
+		$Sprite2D.texture = spell.style[0].icon
 		$Sprite2D.scale = Vector2(0.3, 0.3)
-	if(spell.element != null):
-		$Icon.texture = spell.element.icon
-		$Icon.self_modulate = Color(spell.element.color, 0.5)
+	if(spell.element.size() > 0):
+		$Icon.texture = spell.element[0].icon
+		$Icon.self_modulate = Color(spell.element[0].color, 0.5)
 		$Icon.scale = Vector2(0.3, 0.3)
 
 func _nameCallout():

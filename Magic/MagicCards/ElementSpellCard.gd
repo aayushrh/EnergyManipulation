@@ -49,7 +49,7 @@ func callStartEffects(spellObj:SpellCasted):
 		var startVFX = StartVFX.instantiate()
 		#startVFX.global_position = spellObj.global_position
 		startVFX.position = Vector2.ZERO
-		spellObj.add_child(startVFX)
+		spellObj.art.add_child(startVFX)
 	for e in startEffects:
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj)

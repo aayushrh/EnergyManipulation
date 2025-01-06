@@ -31,9 +31,9 @@ func _inputCard(card):
 			Global.spellList.remove_at(location)
 			match card.type:
 				0:
-					selectedSpell.element = card
+					selectedSpell.element.append(card)
 				1:
-					selectedSpell.style = card
+					selectedSpell.style.append(card)
 				2:
 					selectedSpell.type = card
 			Global.spellList.insert(location, selectedSpell)
@@ -79,13 +79,13 @@ func _process(delta):
 
 func _on_element_pressed():
 	if(reset("Element", selectedSpell.element, 0)):
-		selectedSpell.element = null
+		selectedSpell.element = []
 		_changeSpell(selectedSpell)
 		_change(0)
 
 func _on_style_pressed():
 	if(reset("Style", selectedSpell.style, 1)):
-		selectedSpell.style = null
+		selectedSpell.style = []
 		_changeSpell(selectedSpell)
 		_change(1)
 
