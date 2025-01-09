@@ -17,16 +17,17 @@ func on_open():
 	Title.text = spell.spellName
 	if(!spell.type):
 		return
-	if(spell.element):
-		$ColorRect.color = spell.element.color
+	if(spell.element.size() > 0):
+		$ColorRect.color = spell.element[0].color
 	else:
 		$ColorRect.color = Color(0.2,0.2,0.2)
 	$Type.texture = spell.type.icon
 	#for i in range(0,spell.): #change this after u make it so multi styles are supported lmao
 	if(spell.style):
 		var t = img.instantiate()
-		t.changeIcon(spell.style.icon)
-		t.changeColor(spell.style.color)
+		if(spell.style.size() > 0):
+			t.changeIcon(spell.style[0].icon)
+			t.changeColor(spell.style[0].color)
 		t.perpV = 50000
 		t.dist = 100
 		t.center = global_position + Vector2(150,250)

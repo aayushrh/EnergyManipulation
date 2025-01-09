@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://Magic/MagicCasts/BlastArt.gd" id="3_4jp24"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3xxi"]
+resource_local_to_scene = true
 radius = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfyfv"]
+resource_local_to_scene = true
 radius = 75.0
 
 [node name="BlastProj" type="CharacterBody2D"]

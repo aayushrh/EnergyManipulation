@@ -19,6 +19,9 @@ var enemiesKilled = 0
 @export var testElementSpellCard : Array[ElementSpellCard]
 @export var testStyleSpellCard : Array[StyleSpellCard]
 @export var testTypeSpellCard : TypeSpellCard
+@export var testElementSpellCard2 : Array[ElementSpellCard]
+@export var testStyleSpellCard2 : Array[StyleSpellCard]
+@export var testTypeSpellCard2 : TypeSpellCard
 @export var allElementSpellCards : Array[ElementSpellCard]
 @export var allStyleSpellCards : Array[StyleSpellCard]
 @export var allTypeSpellCards : Array[TypeSpellCard]
@@ -32,8 +35,13 @@ func _ready():
 	spell.style = testStyleSpellCard
 	spell.type = testTypeSpellCard
 	spell.binding = 69
+	var spell2 = Spell.new("Fireball2")
+	spell2.element = testElementSpellCard2
+	spell2.style = testStyleSpellCard2
+	spell2.type = testTypeSpellCard2
+	spell2.binding = 70
 	Global.magicCards = []
-	Global.spellList = [spell]
+	Global.spellList = [spell, spell2]
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
 func _process(delta):
