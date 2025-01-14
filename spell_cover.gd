@@ -14,31 +14,48 @@ var keybind = 0
 func on_open():
 	MagicMenu.dontLeave = true
 	spell = MagicMenu.selectedSpell
-	Title.text = spell.spellName
+	if(!spell):
+		return
 	if(!spell.type):
 		return
+	if(spell.spellName):
+		Title.text = spell.spellName
+	else:
+		Title.text = "Unnamed Spell"
 	if(spell.element):
-		$ColorRect.color = spell.element.color
+		var r = 0.0
+		var g = 0.0
+		var b = 0.0
+		for e in spell.element:
+			r += e.color.r
+			g += e.color.g
+			b += e.color.b
+		$ColorRect.color = Color(r/spell.element.size,g/spell.element.size,b/spell.element.size)
 	else:
 		$ColorRect.color = Color(0.2,0.2,0.2)
 	$Type.texture = spell.type.icon
 	#for i in range(0,spell.): #change this after u make it so multi styles are supported lmao
 	if(spell.style):
-		var t = img.instantiate()
-		t.changeIcon(spell.style.icon)
-		t.changeColor(spell.style.color)
-		t.perpV = 50000
-		t.dist = 100
-		t.center = global_position + Vector2(150,250)
-		t.name = "help"
-		add_child(t)
+		var n = 0
+		for s in spell.style:
+			var t = img.instantiate()
+			t.num = n
+			n += 1
+			t.changeIcon(s.icon)
+			t.changeColor(s.color)
+			t.amt = spell.style.size
+			t.perpV = 50000
+			t.dist = 100
+			t.center = global_position + Vector2(150, 250)
+			t.name = s.cardName
+			add_child(t)
 
 func _on_exit_pressed():
 	if(spell.style):
-		print("ATTEMPTED MURDER!!!! ON MY WATCH????")
-		$help.kill()
+		for s in spell.style:
+			get_node("./" + s.cardName).queue_free() 
 	MagicMenu.dontLeave = false
-	visible=false
+	visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

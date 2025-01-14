@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://b82qk5lssemgx"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_33wxy"]
+
+[resource]
+script = ExtResource("1_33wxy")
+Ltext = "Size"
+Rtext = "Cast. Spd."
+min = -50.0
+max = 50.0
+num = 0.0
+step = 1.0

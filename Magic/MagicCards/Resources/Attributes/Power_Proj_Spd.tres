@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://cdhj6qtyw15iu"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_1gawn"]
+
+[resource]
+script = ExtResource("1_1gawn")
+Ltext = "Power"
+Rtext = "Proj. Spd."
+min = -50.0
+max = 50.0
+num = 0.0

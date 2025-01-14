@@ -12,4 +12,5 @@ class_name TypeSpellCard
 @export var castingTimeMult : float
 @export var contCostMult : float
 @export var aimType : int
+@export var attribute : Array[AttributesWrapper]
 var type = 2

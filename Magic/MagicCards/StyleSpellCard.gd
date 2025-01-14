@@ -14,6 +14,7 @@ class_name StyleSpellCard
 @export var icon : Texture2D
 @export var cdMult : float
 @export var costMult : float
+@export var attribute : Array[AttributesWrapper]
 var type = 1
 
 func callHitEffects(spellObj:SpellCasted, enemy):
