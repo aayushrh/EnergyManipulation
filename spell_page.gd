@@ -1,7 +1,6 @@
 extends Control
 
-var card = null
-var page = 0
+var card : Array
 var spell: Spell
 @onready var slider = preload("res://Slider.tscn")
 
