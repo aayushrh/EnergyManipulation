@@ -35,6 +35,14 @@ func callHitEffects(spellObj:SpellCasted, enemy):
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj, enemy)
 
+func callVisualHitEffects(spellObj:SpellCasted):
+	if(HitVFX != null):
+		var hitVFX = HitVFX.instantiate()
+		hitVFX.emitting = true
+		hitVFX.position = spellObj.global_position
+		if spellObj.get_tree() != null:
+			spellObj.get_tree().current_scene.add_child(hitVFX)
+
 func callOngoingEffects(spellObj:SpellCasted):
 	if OngoingVFX != null:
 		var ongoingVFX = OngoingVFX.instantiate()

@@ -23,6 +23,6 @@ icon = ExtResource("3_ecoi4")
 cdMult = 1.0
 costMult = 1.0
 powerMult = 0.75
-attackSpeedMult = 2.0
+attackSpeedMult = 1.0
 sizeMult = 0.75
 castingSpeedMult = 2.0

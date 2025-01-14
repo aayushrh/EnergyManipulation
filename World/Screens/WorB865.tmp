@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=26 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -288,14 +288,11 @@ sources/0 = SubResource("TileSetAtlasSource_fpu2p")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6vus"]
 size = Vector2(105, 3117)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5x8ob"]
-radius = 37.5
-
 [node name="World" type="Node2D" node_paths=PackedStringArray("player", "camera")]
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testElementSpellCard = Array[ExtResource("4_5utis")]([ExtResource("7_6b0eb"), ExtResource("8_dkp5y")])
+testElementSpellCard = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("9_vavhn")])
 testStyleSpellCard = Array[ExtResource("6_uyec6")]([ExtResource("11_dq84m")])
 testTypeSpellCard = ExtResource("4_ov6f6")
 testElementSpellCard2 = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y")])
@@ -403,6 +400,3 @@ script = ExtResource("9_4eups")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(-3, -7.5)
 shape = SubResource("RectangleShape2D_g6vus")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5x8ob")

@@ -31,6 +31,10 @@ func on_open():
 			g += e.color.g
 			b += e.color.b
 		$ColorRect.color = Color(r/spell.element.size,g/spell.element.size,b/spell.element.size)
+
+	if(spell.element.size() > 0):
+		$ColorRect.color = spell.element[0].color
+
 	else:
 		$ColorRect.color = Color(0.2,0.2,0.2)
 	$Type.texture = spell.type.icon
@@ -49,6 +53,15 @@ func on_open():
 			t.center = global_position + Vector2(150, 250)
 			t.name = s.cardName
 			add_child(t)
+		var t = img.instantiate()
+		if(spell.style.size() > 0):
+			t.changeIcon(spell.style[0].icon)
+			t.changeColor(spell.style[0].color)
+		t.perpV = 50000
+		t.dist = 100
+		t.center = global_position + Vector2(150,250)
+		t.name = "help"
+		add_child(t)
 
 func _on_exit_pressed():
 	if(spell.style):
