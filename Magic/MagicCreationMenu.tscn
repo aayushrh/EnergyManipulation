@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellList.gd" id="4_xl77e"]
 [ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://Magic/MagicSpells/SpellButton.tscn" id="5_a46rx"]
 [ext_resource type="PackedScene" uid="uid://b8wqxa30xfo8m" path="res://Magic/MagicSettings.tscn" id="6_tqnvs"]
-[ext_resource type="PackedScene" path="res://SpellCover.tscn" id="7_enb07"]
+[ext_resource type="PackedScene" uid="uid://dspt0twvtj76f" path="res://SpellCover.tscn" id="7_enb07"]
 
 [node name="Magic" type="Control" node_paths=PackedStringArray("element", "type", "style", "cardList")]
 layout_mode = 3

@@ -1,6 +1,7 @@
 extends Control
 
-@onready var MagicCreation = preload("res://Magic/MagicCreationMenu.tscn")
+#@onready var MagicCreation = preload("res://Magic/MagicCreationMenu.tscn")
+@onready var MagicCreation = preload("res://SpellCreation.tscn")
 @onready var InputChangeSystem = preload("res://World/UI/input_change_system.tscn")
 @onready var Stats = preload("res://World/Screens/Stats.tscn")
 

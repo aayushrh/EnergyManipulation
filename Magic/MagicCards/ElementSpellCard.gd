@@ -20,7 +20,7 @@ class_name ElementSpellCard
 @export var attackSpeedMult : float
 @export var sizeMult : float
 @export var castingSpeedMult : float
-@export var attribute : Array[AttributesWrapper]
+@export var attribute : Array[Attributes]
 
 var type = 0
 

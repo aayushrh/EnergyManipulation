@@ -1,7 +1,9 @@
 extends Control
 
-var card : Array
+var card  = null
+var page = 0
 var spell: Spell
+var gay: Array[HBoxContainer]
 @onready var slider = preload("res://Slider.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -14,17 +16,71 @@ func _process(delta: float) -> void:
 
 func show_card(car):
 	$ColorRect2._show(car)
+	var counter = 0
 	for c in car.attribute:
+		var check = checkAttributeExistence(c)
+		if(!check):
+			check = AttributesWrapper.new(c)
+			spell.attributes.append(check)
+		cook(check.attr.Ltext,check.leftvalue / (check.attr.num - check.attr.min) * 100)
+		cook(check.attr.Rtext,check.rightvalue / (check.attr.num + check.attr.max) * 100)
 		var slide = slider.instantiate()
-		slide.attr = c
-		$HSlider.add_child(slide.attr)
-	
+		slide.value_changed.connect(diffNum)
+		slide.num = counter
+		slide.init(check)
+		$ColorRect/VScrollBar/VBoxContainer.add_child(slide)
+		
+		counter += 1
+	for g in gay:
+		$ColorRect/VScrollBar/VBoxContainer.add_child(g)
+
+func checkAttributeExistence(attribute):
+	for s in spell.attributes:
+		if(s.attr == attribute):
+			return s
+	return null
+
+func cook(txt, val):
+	var hbox = HBoxContainer.new()
+	var lab1 = Label.new()
+	var lab2 = Label.new()
+	lab1.horizontal_alignment = 0
+	lab1.text = txt
+	lab2.horizontal_alignment = 2
+	lab2.text = str(val) + "%"
+	lab2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hbox.add_child(lab1)
+	hbox.add_child(lab2)
+	gay.append(hbox)
 
 func change(num):
 	visible = true
-	if(page == num):
+	page = num
+	if(page == 0):
 		card = spell.type
-		show_card(card)
+	elif(page <= spell.element.size()):
+		card = spell.element[page-1]
+	elif(page <= spell.element.size() + spell.style.size()):
+		card = spell.style[page-1-spell.element.size()]
+	show_card(card)
+
+func diffNum(lval, rval, bval, at):
+	var num = at*2
+	if(lval>bval):
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(1, .2, .2))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(1, .2, .2))
+		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, 1, .2))
+		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, 1, .2))
+	elif(lval == bval):
+		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, .2, .2))
+		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, .2, .2))
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(.2, .2, .2))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(.2, .2, .2))
 	else:
-		visible = false
-		
+		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, 1, .2))
+		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, 1, .2))
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(1, .2, .2))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(1, .2, .2))
+	gay[num].get_child(1).text = str(lval) + "%"
+	gay[num + 1].get_child(1).text = str(rval) + "%"
+	

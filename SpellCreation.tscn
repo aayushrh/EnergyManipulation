@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://brbjl2x1wttyr"]
+
+[ext_resource type="PackedScene" uid="uid://dspt0twvtj76f" path="res://SpellCover.tscn" id="1_3fjte"]
+[ext_resource type="Script" path="res://spell_creation.gd" id="1_e0gr2"]
+[ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="2_nyfr5"]
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_e0gr2")
+cook = ExtResource("2_nyfr5")
+
+[node name="Cover" parent="." instance=ExtResource("1_3fjte")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 74.0
+offset_right = 576.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2

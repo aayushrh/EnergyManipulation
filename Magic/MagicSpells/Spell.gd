@@ -4,18 +4,21 @@ class_name Spell
 var element : Array[ElementSpellCard]
 var style : Array[StyleSpellCard]
 var type : TypeSpellCard
+var attributes: Array[AttributesWrapper]
 var spellName = ""
-var attributes = null
 var binding = null
 var cooldown = 0
 var using = false
+var power = 0.0
+var pSpeed = 0.0
+var size = 0.0
+var cSpeed = 0.0
 
 func create():
 	var newSpell = Spell.new(spellName)
 	newSpell.element = element
 	newSpell.style = style
 	newSpell.type = type
-	newSpell.attributes = attributes
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
 	newSpell.using = using
@@ -23,7 +26,6 @@ func create():
 
 func _init(namen):
 	spellName = namen
-	attributes = Attributes.new(0.0, 0.0, 1.0)
 
 func _cast(player):
 	if(type != null):
@@ -107,36 +109,29 @@ func contcost():
 	return cost
 
 func getPower():
+	var p = power
 	if(element != null):
-		var power = attributes.getPower()
 		for i in element:
-			power *= i.powerMult
-		return power
-	return attributes.getPower()
+			p *= i.powerMult
+	return p
 
 func getPSpeed():
+	var ps = pSpeed
 	if(element != null):
-		var pSpeed = attributes.getPSpeed()
 		for i in element:
-			pSpeed *= i.attackSpeedMult
-		return pSpeed
-	return attributes.getPSpeed()
+			ps *= i.attackSpeedMult
+	return ps
 
 func getASpeed():
+	var cs = cSpeed
 	if(element != null):
-		var cspeed = attributes.getASpeed()
 		for i in element:
-			cspeed *= i.castingSpeedMult
-		return cspeed
-	return attributes.getASpeed()
+			cs *= i.castingSpeedMult
+	return cs
 
 func getSize():
+	var s = size
 	if(element != null):
-		var size = attributes.getSize()
 		for i in element:
-			size *= i.sizeMult
-		return size
-	return attributes.getSize()
-
-func getAmount():
-	return attributes.getAmount()
+			s *= i.sizeMult
+	return s

@@ -1,2 +1,3 @@
 extends Node
-#why are you here
+
+var SCREEN_SIZE = Vector2(1152, 648)

@@ -13,7 +13,7 @@ func setSpell(nspell):
 	spell = nspell
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
-	scale = Vector2(1, 1) * spell.attributes.getSize()
+	scale = Vector2(1, 1) 
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
@@ -34,7 +34,7 @@ func _process(delta):
 			if !Input.is_key_pressed(spell.binding):
 				shot = true
 			chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
-			scale = Vector2(1, 1) * spell.attributes.getSize()*chargeMulti
+			scale = Vector2(1, 1) * chargeMulti
 		else:
 			if !Input.is_key_pressed(spell.binding):
 				shot = true
@@ -43,9 +43,7 @@ func _process(delta):
 		global_position = player.global_position 
 		timer -= delta
 		if timer < 0:
-			if timesShot < spell.attributes.getAmount():
-				timesShot+=1
-				_shoot()
-				if timesShot >= spell.attributes.getAmount():
-					player.doneCasting(false)
-					queue_free()
+			timesShot+=1
+			_shoot()
+			player.doneCasting(false)
+			queue_free()

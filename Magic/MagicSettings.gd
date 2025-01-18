@@ -30,7 +30,6 @@ func _on_exit_pressed():
 	MagicMenu.dontLeave = false
 	var location = Global.spellList.find(MagicMenu.selectedSpell)
 	Global.spellList.remove_at(location)
-	MagicMenu.selectedSpell.attributes = Attributes.new(Size.value,Power.value,Stealth.value)
 	MagicMenu.selectedSpell.spellName = Name.text
 	if keybind != 0:
 		MagicMenu.selectedSpell.binding = keybind
