@@ -1,10 +1,11 @@
 extends Control
+class_name SpellPage
 
 var card  = null
-var page = 0
 var spell: Spell
 var gay: Array[HBoxContainer]
 @onready var slider = preload("res://Slider.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _process(delta: float) -> void:
 	pass
 
 func show_card(car):
+	antihomo()
 	$ColorRect2._show(car)
 	var counter = 0
 	for c in car.attribute:
@@ -33,6 +35,11 @@ func show_card(car):
 		counter += 1
 	for g in gay:
 		$ColorRect/VScrollBar/VBoxContainer.add_child(g)
+
+func antihomo():
+	for i in $ColorRect/VScrollBar/VBoxContainer.get_children():
+		i.queue_free()
+	gay = []
 
 func checkAttributeExistence(attribute):
 	for s in spell.attributes:
@@ -55,13 +62,12 @@ func cook(txt, val):
 
 func change(num):
 	visible = true
-	page = num
-	if(page == 0):
+	if(num == 0):
 		card = spell.type
-	elif(page <= spell.element.size()):
-		card = spell.element[page-1]
-	elif(page <= spell.element.size() + spell.style.size()):
-		card = spell.style[page-1-spell.element.size()]
+	elif(num <= spell.element.size()):
+		card = spell.element[num-1]
+	elif(num <= spell.element.size() + spell.style.size()):
+		card = spell.style[num-1-spell.element.size()]
 	show_card(card)
 
 func diffNum(lval, rval, bval, at):

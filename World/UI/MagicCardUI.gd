@@ -6,10 +6,10 @@ var c = null
 
 func _show(card):
 	c = card
-	var c = card.color
-	c.a = 0.5
-	$ColorRect.color = c
-	if((c.r + c.b + c.g)/3.0 > 0.75):
+	var ca = card.color
+	ca.a = 0.5
+	$ColorRect.color = ca
+	if((ca.r + ca.b + ca.g)/3.0 > 0.75):
 		$VBoxContainer/Label.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label2.add_theme_color_override("font_color", Color.BLACK)
 		$VBoxContainer/Label3.add_theme_color_override("font_color", Color.BLACK)

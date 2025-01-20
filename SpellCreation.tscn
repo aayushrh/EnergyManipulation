@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://brbjl2x1wttyr"]
+[gd_scene load_steps=6 format=3 uid="uid://brbjl2x1wttyr"]
 
 [ext_resource type="PackedScene" uid="uid://dspt0twvtj76f" path="res://SpellCover.tscn" id="1_3fjte"]
 [ext_resource type="Script" path="res://spell_creation.gd" id="1_e0gr2"]
 [ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="2_nyfr5"]
+[ext_resource type="PackedScene" uid="uid://6fkqfg88g1ot" path="res://SpellPage.tscn" id="4_u4kc5"]
+[ext_resource type="PackedScene" uid="uid://1cc1r0xvus0m" path="res://TableOfContents.tscn" id="5_gwlde"]
 
-[node name="Node2D" type="Control"]
+[node name="SpellCreation" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
@@ -23,3 +25,15 @@ offset_right = 576.0
 offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TableOfContents" parent="." instance=ExtResource("5_gwlde")]
+offset_left = 276.0
+offset_top = 74.0
+offset_right = 276.0
+offset_bottom = 74.0
+
+[node name="SpellPage" parent="." instance=ExtResource("4_u4kc5")]
+offset_left = 276.0
+offset_top = 74.0
+offset_right = 276.0
+offset_bottom = 74.0

@@ -9,10 +9,10 @@ var spellName = ""
 var binding = null
 var cooldown = 0
 var using = false
-var power = 0.0
-var pSpeed = 0.0
-var size = 0.0
-var cSpeed = 0.0
+var power = 1.0
+var pSpeed = 1.0
+var size = 1.0
+var cSpeed = 1.0
 
 func create():
 	var newSpell = Spell.new(spellName)
@@ -135,3 +135,6 @@ func getSize():
 		for i in element:
 			s *= i.sizeMult
 	return s
+
+func getAmount():
+	return 1

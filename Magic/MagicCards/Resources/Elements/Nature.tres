@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=6 format=3 uid="uid://dghrkrrfamq1q"]
+[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=7 format=3 uid="uid://dghrkrrfamq1q"]
 
 [ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_440j2"]
 [ext_resource type="PackedScene" uid="uid://bmivs52c1g83s" path="res://Effects/NatureHit.tscn" id="1_e44tj"]
 [ext_resource type="PackedScene" uid="uid://eccmdvikfa5k" path="res://Effects/Nature.tscn" id="2_g6cbq"]
 [ext_resource type="Texture2D" uid="uid://cvbr570kuwjbf" path="res://Art/fruiting.png" id="3_52dln"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="3_llvtj"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="5_3ilme"]
 
 [resource]
@@ -24,5 +25,6 @@ cdMult = 1.0
 costMult = 1.0
 powerMult = 0.6
 attackSpeedMult = 1.0
-sizeMult = 1.2
+sizeMult = 0.8
 castingSpeedMult = 1.0
+attribute = Array[ExtResource("3_llvtj")]([])

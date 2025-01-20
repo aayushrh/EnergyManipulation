@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_uuwnd"]
 [ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="3_ad1sx"]
 
-[node name="Node2D" type="Control" node_paths=PackedStringArray("Title")]
+[node name="Cover" type="Control" node_paths=PackedStringArray("Title")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hxwof")

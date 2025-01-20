@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://spell_page.gd" id="1_t5ctq"]
 [ext_resource type="PackedScene" uid="uid://dprovuraroe3v" path="res://World/UI/MagicCardUI.tscn" id="4_ixuke"]
 
-[node name="Node2D" type="Control"]
+[node name="SpellPage" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_t5ctq")

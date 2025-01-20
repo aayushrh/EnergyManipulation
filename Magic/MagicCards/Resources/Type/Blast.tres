@@ -21,3 +21,4 @@ castingTimeMult = 0.5
 contCostMult = 3.0
 aimType = 0
 attribute = Array[ExtResource("2_1g2an")]([ExtResource("3_mhuq4"), ExtResource("4_a4885")])
+values = Array[String]([])

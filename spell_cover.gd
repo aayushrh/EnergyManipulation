@@ -13,7 +13,8 @@ var keybind = 0
 
 func on_open():
 	MagicMenu.dontLeave = true
-	spell = MagicMenu.selectedSpell
+	spell = Global.spellList[0]
+	#spell = MagicMenu.selectedSpell
 	if(!spell):
 		return
 	if(!spell.type):
@@ -51,10 +52,6 @@ func on_open():
 			add_child(t)
 
 func _on_exit_pressed():
-	if(spell.style):
-		for s in spell.style:
-			get_node(s.cardName).queue_free() 
-	MagicMenu.dontLeave = false
 	visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
