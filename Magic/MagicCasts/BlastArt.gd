@@ -15,6 +15,7 @@ func _process(delta):
 		else:
 			for i in range(num):
 				get_children()[i].position.y = sin(time*10 - (2*PI*i)/num) * ((150 * 0.5) - (75 * 0.5/num))#*(num/5)
+				#get_children()[i].position.x = cos(time*10 - (2*PI*i)/num) * (- (75 * 0.5/num))#*(num/5)
 				get_children()[i].z_index = (int)(cos(time*10 - (2*PI*i)/num) * 300/num + 200)
 				
 				print(get_children()[i].name + " zindex: " + str(get_children()[i].z_index))

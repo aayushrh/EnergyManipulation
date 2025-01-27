@@ -11,10 +11,16 @@ var spell: Spell
 var changing = false
 var keybind = 0
 
+var styl = []
+
 func on_open():
+	visible = true
+	for s in styl:
+		s.queue_free()
+	styl = []
 	MagicMenu.dontLeave = true
-	spell = Global.spellList[0]
-	#spell = MagicMenu.selectedSpell
+	#spell = Global.spellList[0]
+	spell = MagicMenu.selectedSpell
 	if(!spell):
 		return
 	if(!spell.type):
@@ -31,7 +37,7 @@ func on_open():
 			r += e.color.r
 			g += e.color.g
 			b += e.color.b
-		$ColorRect.color = Color(r/spell.element.size,g/spell.element.size,b/spell.element.size)
+		$ColorRect.color = Color(r/spell.element.size(),g/spell.element.size(),b/spell.element.size())
 	else:
 		$ColorRect.color = Color(0.2,0.2,0.2)
 	$Type.texture = spell.type.icon
@@ -44,14 +50,17 @@ func on_open():
 			n += 1
 			t.changeIcon(s.icon)
 			t.changeColor(s.color)
-			t.amt = spell.style.size
+			t.amt = spell.style.size()
 			t.perpV = 50000
 			t.dist = 100
 			t.center = global_position + Vector2(150, 250)
-			t.name = s.cardName
+			styl.append(t)
 			add_child(t)
 
 func _on_exit_pressed():
+	for s in styl:
+		s.queue_free()
+	styl = []
 	visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

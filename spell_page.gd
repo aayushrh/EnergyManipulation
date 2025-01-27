@@ -1,10 +1,16 @@
 extends Control
 class_name SpellPage
 
+signal noPageChange()
+
 var card  = null
 var spell: Spell
 var gay: Array[HBoxContainer]
 @onready var slider = preload("res://Slider.tscn")
+
+var RED = Color(1, .2, .2)
+var GREEN = Color(.2, 1, .2)
+var GREY = Color(1, 1, 1)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +34,7 @@ func show_card(car):
 		cook(check.attr.Rtext,check.rightvalue / (check.attr.num + check.attr.max) * 100)
 		var slide = slider.instantiate()
 		slide.value_changed.connect(diffNum)
+		slide.nuhuh.connect(nuhuh)
 		slide.num = counter
 		slide.init(check)
 		$ColorRect/VScrollBar/VBoxContainer.add_child(slide)
@@ -51,6 +58,8 @@ func cook(txt, val):
 	var hbox = HBoxContainer.new()
 	var lab1 = Label.new()
 	var lab2 = Label.new()
+	lab1.add_theme_font_override("font", load("res://Art/KodeMono-Regular.ttf"))
+	lab2.add_theme_font_override("font", load("res://Art/KodeMono-Regular.ttf"))
 	lab1.horizontal_alignment = 0
 	lab1.text = txt
 	lab2.horizontal_alignment = 2
@@ -70,23 +79,31 @@ func change(num):
 		card = spell.style[num-1-spell.element.size()]
 	show_card(card)
 
-func diffNum(lval, rval, bval, at):
+func gradient(c1: Color, c2: Color, blend: float):
+	var c = c1
+	c += (c2-c1)*blend
+	return c
+
+func diffNum(lval, rval, bval, grad, at):
+	
 	var num = at*2
 	if(lval>bval):
-		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(1, .2, .2))
-		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(1, .2, .2))
-		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, 1, .2))
-		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, 1, .2))
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num].get_child(0).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num].get_child(1).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
 	elif(lval == bval):
-		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, .2, .2))
-		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, .2, .2))
-		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(.2, .2, .2))
-		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(.2, .2, .2))
+		gay[num].get_child(0).set("theme_override_colors/font_color", GREY)
+		gay[num].get_child(1).set("theme_override_colors/font_color", GREY)
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", GREY)
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", GREY)
 	else:
-		gay[num].get_child(0).set("theme_override_colors/font_color", Color(.2, 1, .2))
-		gay[num].get_child(1).set("theme_override_colors/font_color", Color(.2, 1, .2))
-		gay[num + 1].get_child(0).set("theme_override_colors/font_color", Color(1, .2, .2))
-		gay[num + 1].get_child(1).set("theme_override_colors/font_color", Color(1, .2, .2))
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num].get_child(0).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
 	gay[num].get_child(1).text = str(lval) + "%"
 	gay[num + 1].get_child(1).text = str(rval) + "%"
-	
+
+func nuhuh():
+	noPageChange.emit()

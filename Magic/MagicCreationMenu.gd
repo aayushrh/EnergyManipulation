@@ -12,16 +12,8 @@ var dontLeave = false
 func _changeSpell(nspell):
 	$Control.visible = true
 	selectedSpell = nspell
-	ifNullDefault("Element", element, nspell.element)
-	ifNullDefault("Style", style, nspell.style)
-	ifNullDefault("Type", type, nspell.type)
 	$Control/CurrentSpell.text = selectedSpell.spellName
-
-func ifNullDefault(default, change, check):
-	if(check != null):
-		change.text = check.cardName
-	else:
-		change.text = default
+	$SpellCreation.reset()
 
 func _inputCard(card):
 	if selectedSpell != null:
@@ -96,8 +88,6 @@ func _on_spell_type_pressed():
 		_change(2)
 
 func _on_settings_pressed():
-	$MagicSettings.visible = true
-	$MagicSettings.on_open()
 	$Node2D.visible = true
 	$Node2D.on_open()
 

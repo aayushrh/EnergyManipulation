@@ -1,6 +1,7 @@
 extends Control
 
-signal value_changed(lval: float, rval: float, bval: float, num: int)
+signal value_changed(lval: float, rval: float, bval: float, gradient: float, num: int)
+signal nuhuh()
 var num = 0
 var attr = null
 var n = 0
@@ -24,4 +25,9 @@ func getNum():
 func _on_h_slider_value_changed(value: float) -> void:
 	var rightvalue = (value + 100)
 	var leftvalue = (100 - value)
-	value_changed.emit(leftvalue, rightvalue, n + 100, num)
+	var gradient = abs(value-(n))/($HSlider.max_value-n)
+	value_changed.emit(leftvalue, rightvalue, n + 100, gradient, num)
+
+
+func _on_h_slider_drag_started() -> void:
+	nuhuh.emit()

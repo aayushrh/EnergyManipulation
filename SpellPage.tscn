@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://6fkqfg88g1ot"]
+[gd_scene load_steps=4 format=3 uid="uid://6fkqfg88g1ot"]
 
 [ext_resource type="Script" path="res://spell_page.gd" id="1_t5ctq"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="3_elixk"]
 [ext_resource type="PackedScene" uid="uid://dprovuraroe3v" path="res://World/UI/MagicCardUI.tscn" id="4_ixuke"]
 
 [node name="SpellPage" type="Control"]
@@ -33,4 +34,5 @@ offset_bottom = 500.0
 layout_mode = 0
 offset_right = 328.0
 offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_elixk")
 horizontal_alignment = 2

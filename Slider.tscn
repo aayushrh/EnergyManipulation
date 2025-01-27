@@ -49,4 +49,6 @@ offset_bottom = -13.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="drag_started" from="HSlider" to="." method="_on_h_slider_drag_started"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
