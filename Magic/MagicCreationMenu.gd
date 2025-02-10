@@ -13,7 +13,12 @@ func _changeSpell(nspell):
 	#$Control.visible = true
 	selectedSpell = nspell
 	$Control/CurrentSpell.text = selectedSpell.spellName
-	$SpellCreation.reset()
+	if selectedSpell.type != null:
+		$SpellCreation.reset()
+		$NoShapeCard.visible = false
+	else:
+		$NoShapeCard.visible = true
+		$SpellCreation.visible = false
 
 func addCard(type):
 	_change(type)
@@ -24,17 +29,27 @@ func _finish():
 
 func _inputCard(card):
 	if selectedSpell != null:
-		var location = Global.spellList.find(selectedSpell)
-		Global.magicCards.remove_at(Global.magicCards.find(card))
-		Global.spellList.remove_at(location)
-		match card.type:
-			0:
-				selectedSpell.components.insert($SpellCreation.getCurrentPage(), card)
-			2:
-				selectedSpell.type = card
-		Global.spellList.insert(location, selectedSpell)
-		cardList._reload(card.type)
-		$SpellCreation.reload(true)
+		if $Category.text == "Shape":
+			var location = Global.spellList.find(selectedSpell)
+			Global.magicCards.remove_at(Global.magicCards.find(card))
+			Global.spellList.remove_at(location)
+			selectedSpell.type = card
+			Global.spellList.insert(location, selectedSpell)
+			_changeSpell(selectedSpell)
+			cardList._reload(card.type)
+			_finish()
+		else:
+			var location = Global.spellList.find(selectedSpell)
+			Global.magicCards.remove_at(Global.magicCards.find(card))
+			Global.spellList.remove_at(location)
+			match card.type:
+				0:
+					selectedSpell.components.insert($SpellCreation.getCurrentPage(), card)
+				2:
+					selectedSpell.type = card
+			Global.spellList.insert(location, selectedSpell)
+			cardList._reload(card.type)
+			$SpellCreation.reload(true)
 		
 		"""if (card is ElementSpellCard and selectedSpell.element == null) or (card is StyleSpellCard and selectedSpell.style == null) or (card is TypeSpellCard and selectedSpell.type == null):
 			var location = Global.spellList.find(selectedSpell)
@@ -124,3 +139,6 @@ func _on_exit_pressed():
 func _on_cancel_pressed():
 	$SpellCreation.cancel()
 	_finish()
+
+func _on_base_card_add_pressed():
+	addCard(2)

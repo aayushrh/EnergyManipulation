@@ -224,9 +224,9 @@ text = "Spells"
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 818.0
+offset_left = 884.0
 offset_top = 69.0
-offset_right = 1134.0
+offset_right = 1119.0
 offset_bottom = 110.0
 theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 30
@@ -252,6 +252,33 @@ offset_right = 75.0
 offset_bottom = 75.0
 text = "Exit"
 
+[node name="NoShapeCard" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 204.0
+offset_top = 79.0
+offset_right = 687.0
+offset_bottom = 464.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Label" type="Label" parent="NoShapeCard"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 54.0
+offset_right = 413.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("2_578rg")
+theme_override_font_sizes/font_size = 27
+text = "You need a Shape Card"
+
+[node name="BaseCardAdd" type="Button" parent="NoShapeCard"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 256.0
+offset_right = 316.0
+offset_bottom = 322.0
+text = "Attach Shape"
+
 [connection signal="pressed" from="Control/Element" to="." method="_on_element_pressed"]
 [connection signal="pressed" from="Control/Style" to="." method="_on_style_pressed"]
 [connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
@@ -259,3 +286,4 @@ text = "Exit"
 [connection signal="pressed" from="CardSelection/Control/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="NoShapeCard/BaseCardAdd" to="." method="_on_base_card_add_pressed"]
