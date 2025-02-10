@@ -26,10 +26,19 @@ func setSpell(nspell):
 	#if(spell.style.size() > 0):
 		#$Sprite2D.texture = spell.style[0].icon
 		#$Sprite2D.scale = Vector2(0.3, 0.3)
-	#if(spell.element.size() > 0):
-		#$Icon.texture = spell.element[0].icon
-		#$Icon.self_modulate = Color(spell.element[0].color, 0.5)
-		#$Icon.scale = Vector2(0.3, 0.3)
+	if(spell.type):
+		$Icon.texture = spell.type.icon
+		$Icon.self_modulate = Color(spell.type.color, 0.5)
+		$Icon.scale = Vector2(0.3, 0.3)
+	for i in range(spell.components.size()):
+		var icon = Sprite2D.new()
+		icon.texture = spell.components[i].icon
+		icon.self_modulate = Color(spell.components[i].color, 0.5)
+		icon.scale = Vector2(0.15, 0.15)
+		icon.position = Vector2(sin(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3, cos(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3)
+		print("this is i: " + str(i))
+		print(icon.position)
+		$Pivot.add_child(icon)
 
 func _nameCallout():
 	pass
@@ -53,7 +62,15 @@ func _shoot():
 	timer = 0.1 * 1/spell.getASpeed()
 	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
 
+func draw():
+	draw_arc($Icon.position, 256 * 0.3 * chargeMulti, 0, 2*PI, 50, Color.WHITE)
+	draw_circle(Vector2.ZERO, 256, Color.WHITE, false)
+
 func _process(delta):
+	queue_redraw()
+	$Pivot.rotate(PI/160)
+	for i in $Pivot.get_children():
+		i.rotate(-PI/160)
 	if !is_instance_valid(player):
 		queue_free()
 	if !Global.isPaused() and is_instance_valid(player):

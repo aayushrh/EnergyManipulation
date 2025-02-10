@@ -14,3 +14,5 @@ texture = ExtResource("2_5mjti")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.439216)
 scale = Vector2(0.5, 0.5)
+
+[node name="Pivot" type="Node2D" parent="."]
