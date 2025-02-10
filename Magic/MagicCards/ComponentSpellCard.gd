@@ -1,5 +1,11 @@
 extends Resource
-class_name ElementSpellCard
+class_name ComponentSpellCard
+
+enum{
+	ELEMENT,
+	AMOUNT,
+	CHARGING
+}
 
 @export var spellEffects : SpellEffects
 @export var cardName : String
@@ -21,6 +27,7 @@ class_name ElementSpellCard
 @export var sizeMult : float
 @export var castingSpeedMult : float
 @export var attribute : Array[Attributes]
+@export var isElement : bool
 
 var type = 0
 

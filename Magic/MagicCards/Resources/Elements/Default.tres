@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=4 format=3 uid="uid://sjflt6hs06eu"]
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://sjflt6hs06eu"]
 
 [ext_resource type="PackedScene" uid="uid://b00n10yi8h2iu" path="res://Effects/Normal.tscn" id="1_fvosi"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_uxdki"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="1_uxdki"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="2_3nmn4"]
 [ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="2_ws0ej"]
 
 [resource]
@@ -22,3 +23,5 @@ powerMult = 0.8
 attackSpeedMult = 0.8
 sizeMult = 0.8
 castingSpeedMult = 0.8
+attribute = Array[ExtResource("2_3nmn4")]([])
+isElement = true

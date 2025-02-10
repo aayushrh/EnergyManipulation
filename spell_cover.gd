@@ -37,11 +37,11 @@ func on_open():
 		Title.text = spell.spellName
 	else:
 		Title.text = "Unnamed Spell"
-	if(spell.element):
-		colorstrat_2()
+	#if(spell.element):
+		#colorstrat_2()
 	$Type.texture = spell.type.icon
 	#for i in range(0,spell.): #change this after u make it so multi styles are supported lmao
-	if(spell.style):
+	"""if(spell.style):
 		var n = 0
 		for s in spell.style:
 			var t = img.instantiate()
@@ -54,7 +54,7 @@ func on_open():
 			t.dist = 100
 			t.center = global_position + Vector2(150, 250)
 			things.append(t)
-			add_child(t)
+			add_child(t)"""
 
 func _on_exit_pressed():
 	for s in things:
@@ -66,9 +66,10 @@ func _on_exit_pressed():
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("Pause") and visible):
 		_on_exit_pressed()
-	if(spell):
-		colorchange(delta)
+	#if(spell):
+		#colorchange(delta)
 
+"""
 func colorstrat_1():
 	var i = spell.element.size()
 	for e in spell.element:
@@ -101,3 +102,5 @@ func colorchange(delta):
 			colorindex = (colorindex + 1) % spell.element.size()
 	else:
 		$ColorRect.color = Color(0.2, 0.2, 0.2)
+
+"""

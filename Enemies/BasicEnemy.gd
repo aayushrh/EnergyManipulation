@@ -69,7 +69,7 @@ func _ready():
 	rng.randomize()
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-	spell.element.append(get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)])
+	#spell.element.append(get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)])
 	var s = float(stage)
 	match num:
 		0, 1, 2, 3: #Dashing dude

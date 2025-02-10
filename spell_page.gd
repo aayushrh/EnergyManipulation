@@ -76,10 +76,8 @@ func change(num):
 	visible = true
 	if(num == 0):
 		card = spell.type
-	elif(num <= spell.element.size()):
-		card = spell.element[num-1]
-	elif(num <= spell.element.size() + spell.style.size()):
-		card = spell.style[num-1-spell.element.size()]
+	else:
+		card = spell.components[num-1]
 	show_card(card)
 
 func gradient(c1: Color, c2: Color, blend: float):

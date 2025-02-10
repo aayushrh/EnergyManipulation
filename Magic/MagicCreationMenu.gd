@@ -29,9 +29,7 @@ func _inputCard(card):
 		Global.spellList.remove_at(location)
 		match card.type:
 			0:
-				selectedSpell.element.insert($SpellCreation.getCurrentPage(), card)
-			1:
-				selectedSpell.style.insert($SpellCreation.getCurrentPage(), card)
+				selectedSpell.components.insert($SpellCreation.getCurrentPage(), card)
 			2:
 				selectedSpell.type = card
 		Global.spellList.insert(location, selectedSpell)

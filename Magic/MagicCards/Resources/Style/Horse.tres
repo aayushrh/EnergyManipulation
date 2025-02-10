@@ -1,20 +1,3 @@
-[gd_resource type="Resource" script_class="StyleSpellCard" load_steps=5 format=3 uid="uid://dq0hukx4vjqg6"]
-
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_a8klm"]
-[ext_resource type="Script" path="res://Magic/MagicCards/StyleSpellCard.gd" id="1_b1123"]
-[ext_resource type="Texture2D" uid="uid://cqlqy6maiphbm" path="res://Art/pegasus.png" id="1_e7aas"]
-[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="2_pwa6y"]
+[gd_resource type="Resource" format=3 uid="uid://dq0hukx4vjqg6"]
 
 [resource]
-script = ExtResource("1_b1123")
-spellEffects = ExtResource("2_pwa6y")
-cardName = "Horse"
-cardDescription = "Gives you back some of the mana that you used in the spell"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
-startEffects = Array[String](["giveBackEnergy"])
-color = Color(0.654311, 0.248933, 0, 1)
-icon = ExtResource("1_e7aas")
-cdMult = 1.5
-costMult = 1.25
-attribute = Array[ExtResource("1_a8klm")]([])

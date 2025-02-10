@@ -34,13 +34,17 @@ func getSpeed():
 
 func _ready():
 	art = $Art
-	for i in spell.element:
+	
+	if !spell.hasElement():
+		spell.components.append(Global.defaultElement)
+	
+	for i in spell.components:
 		i.callStartEffects(self)
 	#$CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
 	#$Area2D/CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
 
 func _process(delta):
-	for i in spell.element:
+	for i in spell.components:
 		i.callOngoingEffects(self)
 	if !setSize:
 		scale = Vector2(0.5, 0.5) * spell.getSize() * mult
@@ -65,16 +69,14 @@ func clone():
 func _on_area_2d_body_entered(body) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):
 		body._hit(self)
-		if(spell.element != null and is_instance_valid(self)):
+		if(spell.components != null and is_instance_valid(self)):
 			if(sender.type == 0 and body.type == 1):
 				if(hit == -1):
 					get_tree().current_scene.amountHit += 1
 				else:
 					get_tree().current_scene.multiHits += 1
 				hit += 1
-			for i in spell.element:
-				i.callHitEffects(self, body)
-			for i in spell.style:
+			for i in spell.components:
 				i.callHitEffects(self, body)
 		queue_free()
 
@@ -90,10 +92,8 @@ func _on_area_2d_area_entered(area):
 			var blast = BlastProj.instantiate()
 			var nspell = Spell.new("newThing")
 			blast.combined = true
-			nspell.element.append_array(spell.element)
-			nspell.element.append_array(body.spell.element)
-			nspell.style.append_array(spell.style)
-			nspell.style.append_array(body.spell.style)
+			nspell.components.append_array(spell.components)
+			nspell.components.append_array(body.spell.components)
 			nspell.type = spell.type
 			#blast.mult = body.mult + mult
 			blast._setSpell(nspell)
@@ -101,9 +101,9 @@ func _on_area_2d_area_entered(area):
 			blast._setV((body.velocity + velocity)/2)
 			blast.global_position = (global_position + body.global_position)/2
 			blast.sender = sender
-			for i in spell.element:
+			for i in spell.components:
 				i.callVisualHitEffects(self)
-			for i in body.spell.element:
+			for i in body.components:
 				i.callVisualHitEffects(body)
 			queue_free()
 			body.queue_free()

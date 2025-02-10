@@ -7,6 +7,8 @@ var magicCards = []
 var spellList = []
 var particlesNotShowing = false
 
+var defaultElement : ComponentSpellCard
+
 var amountShot = 0
 var amountHit = 0
 var multiHits = 0

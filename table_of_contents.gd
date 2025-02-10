@@ -15,13 +15,8 @@ func exist():
 	else:
 		cook("Typeless", 1, null)
 		
-	for s in spell.element.size():
-		cook(spell.element[s].cardName, s + 2, spell.element[s].color)
-	for s in spell.style.size():
-		cook(spell.style[s].cardName, s + spell.element.size() + 2, spell.style[s].color)
-	
-	
-
+	for s in spell.components.size():
+		cook(spell.components[s].cardName, s + 2, spell.components[s].color)
 
 func cook(txt, val, col):
 	var thing = TBFTOC.instantiate()

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=4 format=3 uid="uid://stiffckq0jtp"]
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://stiffckq0jtp"]
 
 [ext_resource type="Texture2D" uid="uid://cqlqy6maiphbm" path="res://Art/pegasus.png" id="1_alac7"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_lx8pk"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_jseax"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="1_lx8pk"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="3_5mq0y"]
 
 [resource]
@@ -13,6 +14,7 @@ hitEffects = Array[String]([])
 ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
 blockEffects = Array[String]([])
+castingEffects = Array[String]([])
 color = Color(0, 0, 0, 1)
 icon = ExtResource("1_alac7")
 cdMult = 0.0
@@ -21,3 +23,5 @@ powerMult = 100.0
 attackSpeedMult = 100.0
 sizeMult = 100.0
 castingSpeedMult = 100.0
+attribute = Array[ExtResource("1_jseax")]([])
+isElement = true

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=7 format=3 uid="uid://bgya6tyk2afhu"]
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=7 format=3 uid="uid://bgya6tyk2afhu"]
 
-[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_3ln5y"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="1_3ln5y"]
 [ext_resource type="PackedScene" uid="uid://cpepjqluuj1sb" path="res://Effects/DarkHit.tscn" id="1_vvbh2"]
 [ext_resource type="PackedScene" uid="uid://dk64bqccks40u" path="res://Effects/Dark.tscn" id="2_04cx0"]
 [ext_resource type="Texture2D" uid="uid://bhocviumadvp6" path="res://Art/moon.png" id="3_bjuol"]
@@ -28,3 +28,4 @@ attackSpeedMult = 0.4
 sizeMult = 1.333
 castingSpeedMult = 0.4
 attribute = Array[ExtResource("3_ofv0n")]([])
+isElement = true

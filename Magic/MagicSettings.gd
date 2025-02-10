@@ -58,10 +58,10 @@ func _on_deletion_pressed():
 	Global.spellList.remove_at(Global.spellList.find(MagicMenu.selectedSpell))
 	SpellList.reload()
 	MagicMenu.control_invisible()
-	if(MagicMenu.selectedSpell.element!=null):
-		Global.magicCards.append(MagicMenu.selectedSpell.element)
-	if(MagicMenu.selectedSpell.style!=null):
-		Global.magicCards.append(MagicMenu.selectedSpell.style)
+	#if(MagicMenu.selectedSpell.element!=null):
+		#Global.magicCards.append(MagicMenu.selectedSpell.element)
+	#if(MagicMenu.selectedSpell.style!=null):
+		#Global.magicCards.append(MagicMenu.selectedSpell.style)
 	if(MagicMenu.selectedSpell.type!=null):
 		Global.magicCards.append(MagicMenu.selectedSpell.type)
 	visible=false

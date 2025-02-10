@@ -1,8 +1,7 @@
 extends Node
 class_name Spell
 
-var element : Array[ElementSpellCard]
-var style : Array[StyleSpellCard]
+var components : Array[ComponentSpellCard]
 var type : TypeSpellCard
 var attributes: Array[AttributesWrapper]
 var spellName = ""
@@ -16,8 +15,7 @@ var cSpeed = 1.0
 
 func create():
 	var newSpell = Spell.new(spellName)
-	newSpell.element = element
-	newSpell.style = style
+	newSpell.components = components
 	newSpell.type = type
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
@@ -32,8 +30,8 @@ func _cast(player):
 		var cast = type.SpellObj.instantiate()
 		cast.player = player
 		var dupe = create()
-		if(dupe.element == null):
-			dupe.element = player.get_tree().current_scene.defaultElement
+		#if(dupe.element == null):
+			#dupe.element = player.get_tree().current_scene.defaultElement
 		cast.setSpell(dupe)
 		cast.global_position = player.global_position
 		player.get_tree().current_scene.add_child(cast)
@@ -52,11 +50,8 @@ func resetCooldown(use, multi):
 
 func getcd():
 	var cd = 1
-	if(element != null):
-		for i in element:
-			cd *= i.cdMult
-	if(style != null):
-		for i in style:
+	if(components != null):
+		for i in components:
 			cd *= i.cdMult
 	if(type != null):
 		cd *= type.cdMult
@@ -64,8 +59,8 @@ func getcd():
 
 func getCastingTime():
 	var time = 1
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.castingTimeMult
@@ -73,8 +68,8 @@ func getCastingTime():
 
 func getMaxPowerTime():
 	var time = 1
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.maxPowerTimeMult
@@ -83,13 +78,8 @@ func getMaxPowerTime():
 #perfect block = 10 mana
 func initCost():
 	var cost = 1
-	if(element != null):
-		for i in element:
-			cost *= i.costMult
-	else:
-		cost *= 2
-	if(style != null):
-		for i in style:
+	if(components != null):
+		for i in components:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.costMult
@@ -98,11 +88,8 @@ func initCost():
 #total cost for max charge expect for holdings
 func contcost():
 	var cost = 1
-	if(element != null):
-		for i in element:
-			cost *= i.costMult
-	if(style != null):
-		for i in style:
+	if(components != null):
+		for i in components:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.contCostMult
@@ -110,31 +97,37 @@ func contcost():
 
 func getPower():
 	var p = power
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			p *= i.powerMult
 	return p
 
 func getPSpeed():
 	var ps = pSpeed
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			ps *= i.attackSpeedMult
 	return ps
 
 func getASpeed():
 	var cs = cSpeed
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			cs *= i.castingSpeedMult
 	return cs
 
 func getSize():
 	var s = size
-	if(element != null):
-		for i in element:
+	if(components != null):
+		for i in components:
 			s *= i.sizeMult
 	return s
+
+func hasElement():
+	for i in components:
+		if i.isElement:
+			return true
+	return false
 
 func getAmount():
 	return 1

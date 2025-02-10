@@ -16,32 +16,28 @@ var enemiesKilled = 0
 
 @export var player : CharacterBody2D
 @export var camera : Camera2D
-@export var testElementSpellCard : Array[ElementSpellCard]
-@export var testStyleSpellCard : Array[StyleSpellCard]
+@export var testComponentSpellCard : Array[ComponentSpellCard]
 @export var testTypeSpellCard : TypeSpellCard
-@export var testElementSpellCard2 : Array[ElementSpellCard]
-@export var testStyleSpellCard2 : Array[StyleSpellCard]
+@export var testComponentSpellCard2 : Array[ComponentSpellCard]
 @export var testTypeSpellCard2 : TypeSpellCard
-@export var allElementSpellCards : Array[ElementSpellCard]
-@export var allStyleSpellCards : Array[StyleSpellCard]
+@export var allComponentSpellCards : Array[ComponentSpellCard]
 @export var allTypeSpellCards : Array[TypeSpellCard]
-@export var defaultElement : ElementSpellCard
+@export var defaultElement : ComponentSpellCard
 
 @onready var Indicator = preload("res://Effects/EnemyIndicator.tscn")
 
 func _ready():
 	var spell = Spell.new("Fireball")
-	spell.element = testElementSpellCard
-	spell.style = testStyleSpellCard
+	spell.components = testComponentSpellCard
 	spell.type = testTypeSpellCard
 	spell.binding = 69
 	var spell2 = Spell.new("Fireball2")
-	spell2.element = testElementSpellCard2
-	spell2.style = testStyleSpellCard2
+	spell2.components = testComponentSpellCard2
 	spell2.type = testTypeSpellCard2
 	spell2.binding = 70
-	Global.magicCards = testElementSpellCard
+	Global.magicCards = testComponentSpellCard
 	Global.spellList = [spell, spell2]
+	Global.defaultElement = defaultElement
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
 func _process(delta):

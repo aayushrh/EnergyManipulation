@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=7 format=3 uid="uid://bbvudeis28j5p"]
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=7 format=3 uid="uid://bbvudeis28j5p"]
 
 [ext_resource type="PackedScene" uid="uid://bnb3gukb2d87j" path="res://Effects/LightHit.tscn" id="1_ha30u"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="1_wvhh6"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="1_wvhh6"]
 [ext_resource type="PackedScene" uid="uid://6r5s1j4tbvng" path="res://Effects/Light.tscn" id="2_n7w0v"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="3_1hfpq"]
 [ext_resource type="Texture2D" uid="uid://dog1oshsp3r55" path="res://Art/polar-star.png" id="3_ecoi4"]
@@ -28,3 +28,4 @@ attackSpeedMult = 2.0
 sizeMult = 0.75
 castingSpeedMult = 2.0
 attribute = Array[ExtResource("3_n3rm8")]([])
+isElement = true
