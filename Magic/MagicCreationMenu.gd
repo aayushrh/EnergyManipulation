@@ -87,7 +87,7 @@ func _inputCard(card):
 func _change(num):
 	match num:
 		0:
-			$Category.text = "Element"
+			$Category.text = "Components"
 		1:
 			$Category.text = "Style"
 		2:
