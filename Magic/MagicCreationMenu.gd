@@ -10,26 +10,48 @@ var dontLeave = false
 @export var cardList : VBoxContainer
 
 func _changeSpell(nspell):
-	$Control.visible = true
+	#$Control.visible = true
 	selectedSpell = nspell
 	$Control/CurrentSpell.text = selectedSpell.spellName
 	$SpellCreation.reset()
 
+func addCard(type):
+	_change(type)
+	position.x = 350
+
+func _finish():
+	position.x = 0
+
 func _inputCard(card):
 	if selectedSpell != null:
-		if (card is ElementSpellCard and selectedSpell.element == null) or (card is StyleSpellCard and selectedSpell.style == null) or (card is TypeSpellCard and selectedSpell.type == null):
+		var location = Global.spellList.find(selectedSpell)
+		Global.magicCards.remove_at(Global.magicCards.find(card))
+		Global.spellList.remove_at(location)
+		match card.type:
+			0:
+				selectedSpell.element.insert($SpellCreation.getCurrentPage(), card)
+			1:
+				selectedSpell.style.insert($SpellCreation.getCurrentPage(), card)
+			2:
+				selectedSpell.type = card
+		Global.spellList.insert(location, selectedSpell)
+		cardList._reload(card.type)
+		$SpellCreation.reload(true)
+		
+		"""if (card is ElementSpellCard and selectedSpell.element == null) or (card is StyleSpellCard and selectedSpell.style == null) or (card is TypeSpellCard and selectedSpell.type == null):
 			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
 			Global.spellList.remove_at(location)
 			match card.type:
 				0:
-					selectedSpell.element.append(card)
+					selectedSpell.element.insert($SpellCreation.getCurrentPage(), card)
 				1:
-					selectedSpell.style.append(card)
+					selectedSpell.style.insert($SpellCreation.getCurrentPage(), card)
 				2:
 					selectedSpell.type = card
 			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
+			$SpellSelection.reload()
 		else:
 			var location = Global.spellList.find(selectedSpell)
 			Global.magicCards.remove_at(Global.magicCards.find(card))
@@ -47,10 +69,16 @@ func _inputCard(card):
 			Global.spellList.insert(location, selectedSpell)
 			cardList._reload(card.type)
 		_changeSpell(selectedSpell)
-		
+		"""
 
 func _change(num):
-	$Category.text = selected
+	match num:
+		0:
+			$Category.text = "Element"
+		1:
+			$Category.text = "Style"
+		2:
+			$Category.text = "Shape"
 	cardList._reload(num)
 
 func reset(nselected, changing, type):
@@ -94,3 +122,7 @@ func _on_settings_pressed():
 func _on_exit_pressed():
 	if(!dontLeave):
 		queue_free()
+
+func _on_cancel_pressed():
+	$SpellCreation.cancel()
+	_finish()

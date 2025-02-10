@@ -17,21 +17,64 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 426.0
-offset_top = 74.0
-offset_right = 426.0
-offset_bottom = 74.0
+offset_left = -150.0
+offset_top = -250.0
+offset_right = -150.0
+offset_bottom = -250.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TableOfContents" parent="." instance=ExtResource("5_gwlde")]
-offset_left = 276.0
-offset_top = 74.0
-offset_right = 276.0
-offset_bottom = 74.0
+offset_left = -300.0
+offset_top = -250.0
+offset_right = -300.0
+offset_bottom = -250.0
 
 [node name="SpellPage" parent="." instance=ExtResource("4_u4kc5")]
-offset_left = 276.0
-offset_top = 74.0
-offset_right = 276.0
-offset_bottom = 74.0
+offset_left = -300.0
+offset_top = -250.0
+offset_right = -300.0
+offset_bottom = -250.0
+
+[node name="AddRight" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 337.0
+offset_top = 75.0
+offset_right = 412.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 35
+text = "+"
+
+[node name="Right" type="Button" parent="."]
+layout_mode = 0
+offset_left = 337.0
+offset_top = -37.0
+offset_right = 412.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 35
+text = ">"
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 0
+offset_left = -412.5
+offset_top = -37.0
+offset_right = -337.5
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 35
+text = "<"
+
+[node name="Delete" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -37.0
+offset_top = 287.0
+offset_right = 38.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 35
+text = "-"
+
+[connection signal="pressed" from="AddRight" to="." method="_on_add_right_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

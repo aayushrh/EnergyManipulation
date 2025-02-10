@@ -91,7 +91,8 @@ text = "SETTINGS"
 
 [node name="CardSelection" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 350.0
+offset_left = -345.0
+offset_right = 5.0
 offset_bottom = 650.0
 color = Color(0.20871, 0.20871, 0.20871, 1)
 
@@ -107,6 +108,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -118,9 +120,17 @@ theme_override_constants/separation = 10
 script = ExtResource("3_d1bvh")
 magicMenu = NodePath("../../../..")
 
+[node name="Cancel" type="Button" parent="CardSelection/Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 517.0
+offset_right = 291.0
+offset_bottom = 553.0
+text = "CANCEL"
+
 [node name="SpellSelection" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 804.0
+offset_left = 870.0
 offset_top = -3.0
 offset_right = 1154.0
 offset_bottom = 647.0
@@ -131,7 +141,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 13.0
 offset_top = 76.0
-offset_right = 332.0
+offset_right = 253.0
 offset_bottom = 632.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="SpellSelection/Control"]
@@ -183,9 +193,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -401.0
+offset_left = -766.0
 offset_top = -309.0
-offset_right = -401.0
+offset_right = -742.0
 offset_bottom = -257.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -201,9 +211,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 331.0
+offset_left = 357.0
 offset_top = -309.0
-offset_right = 475.0
+offset_right = 501.0
 offset_bottom = -257.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -227,6 +237,10 @@ MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
 [node name="SpellCreation" parent="." node_paths=PackedStringArray("MagicMenu", "SpellList") instance=ExtResource("8_3dm7t")]
+offset_left = 441.0
+offset_top = 270.0
+offset_right = 441.0
+offset_bottom = 270.0
 MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
@@ -242,5 +256,6 @@ text = "Exit"
 [connection signal="pressed" from="Control/Style" to="." method="_on_style_pressed"]
 [connection signal="pressed" from="Control/SpellType" to="." method="_on_spell_type_pressed"]
 [connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CardSelection/Control/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="SpellSelection/Control/ScrollContainer/SpellList/AddButton" to="SpellSelection/Control/ScrollContainer/SpellList" method="_on_add_button_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

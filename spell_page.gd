@@ -23,25 +23,28 @@ func _process(delta: float) -> void:
 
 func show_card(car):
 	antihomo()
-	$ColorRect2._show(car)
-	var counter = 0
-	for c in car.attribute:
-		var check = checkAttributeExistence(c)
-		if(!check):
-			check = AttributesWrapper.new(c)
-			spell.attributes.append(check)
-		cook(check.attr.Ltext,check.leftvalue / (check.attr.num - check.attr.min) * 100)
-		cook(check.attr.Rtext,check.rightvalue / (check.attr.num + check.attr.max) * 100)
-		var slide = slider.instantiate()
-		slide.value_changed.connect(diffNum)
-		slide.nuhuh.connect(nuhuh)
-		slide.num = counter
-		slide.init(check)
-		$ColorRect/VScrollBar/VBoxContainer.add_child(slide)
-		
-		counter += 1
-	for g in gay:
-		$ColorRect/VScrollBar/VBoxContainer.add_child(g)
+	if car != null:
+		$ColorRect2._show(car)
+		var counter = 0
+		for c in car.attribute:
+			var check = checkAttributeExistence(c)
+			if(!check):
+				check = AttributesWrapper.new(c)
+				spell.attributes.append(check)
+			cook(check.attr.Ltext,check.leftvalue / (check.attr.num - check.attr.min) * 100)
+			cook(check.attr.Rtext,check.rightvalue / (check.attr.num + check.attr.max) * 100)
+			var slide = slider.instantiate()
+			slide.value_changed.connect(diffNum)
+			slide.nuhuh.connect(nuhuh)
+			slide.num = counter
+			slide.init(check)
+			$ColorRect/VScrollBar/VBoxContainer.add_child(slide)
+			
+			counter += 1
+		for g in gay:
+			$ColorRect/VScrollBar/VBoxContainer.add_child(g)
+	else:
+		$ColorRect3.visible = true
 
 func antihomo():
 	for i in $ColorRect/VScrollBar/VBoxContainer.get_children():

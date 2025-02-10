@@ -18,6 +18,8 @@ var colorindex = 0
 
 func on_open():
 	visible = true
+	colorindex = 0
+	colorval = 0.0
 	for s in things:
 		s.queue_free()
 	for a in elements:
@@ -85,14 +87,17 @@ func colorstrat_2():
 	$ColorRect.color = spell.element[0].color
 
 func colorchange(delta):
-	var cv = colorindex - 1
-	if(cv < 0):
-		cv = spell.element.size() - 1
-	if(colorval == 0):
-		$ColorRect.color = spell.element[cv].color
+	if spell.element.size() > 0 and visible:
+		var cv = colorindex - 1
+		if(cv < 0):
+			cv = spell.element.size() - 1
+		if(colorval == 0):
+			$ColorRect.color = spell.element[cv].color
+		else:
+			$ColorRect.color = spell.element[cv].color + (spell.element[colorindex].color-spell.element[cv].color) * colorval
+		colorval += delta * 0.5
+		if(colorval >= 1.0):
+			colorval = 0
+			colorindex = (colorindex + 1) % spell.element.size()
 	else:
-		$ColorRect.color = spell.element[cv].color + (spell.element[colorindex].color-spell.element[cv].color) * colorval
-	colorval += delta * 0.5
-	if(colorval >= 1.0):
-		colorval = 0
-		colorindex = (colorindex + 1) % spell.element.size()
+		$ColorRect.color = Color(0.2, 0.2, 0.2)

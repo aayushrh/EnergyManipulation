@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=6 format=3 uid="uid://cykjt4uf46qp0"]
+[gd_resource type="Resource" script_class="ElementSpellCard" load_steps=7 format=3 uid="uid://cykjt4uf46qp0"]
 
 [ext_resource type="PackedScene" uid="uid://4t10t75oom4y" path="res://Effects/FireHit.tscn" id="1_5xhal"]
 [ext_resource type="PackedScene" uid="uid://cv7ctjy2t1vta" path="res://Effects/Fire.tscn" id="2_1qnc8"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ElementSpellCard.gd" id="3_dtym7"]
 [ext_resource type="Texture2D" uid="uid://k38t2nurtyaw" path="res://Art/fire-zone.png" id="3_g8ubt"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="3_uevfr"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_c6np5"]
 
 [resource]
@@ -26,3 +27,4 @@ powerMult = 1.2
 attackSpeedMult = 0.8
 sizeMult = 1.0
 castingSpeedMult = 0.8
+attribute = Array[ExtResource("3_uevfr")]([])

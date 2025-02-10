@@ -40,7 +40,7 @@ func _ready():
 	spell2.style = testStyleSpellCard2
 	spell2.type = testTypeSpellCard2
 	spell2.binding = 70
-	Global.magicCards = []
+	Global.magicCards = testElementSpellCard
 	Global.spellList = [spell, spell2]
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 

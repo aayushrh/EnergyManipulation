@@ -36,3 +36,21 @@ offset_right = 328.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("3_elixk")
 horizontal_alignment = 2
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 300.0
+offset_bottom = 500.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="Label" type="Label" parent="ColorRect3"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 199.0
+offset_right = 172.0
+offset_bottom = 302.0
+theme_override_font_sizes/font_size = 75
+text = "+"
