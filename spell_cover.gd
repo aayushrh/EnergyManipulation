@@ -15,15 +15,18 @@ var things = []
 var elements = []
 var colorval = 0.0
 var colorindex = 0
+var colordelay = 0.0
+var MAXCOLORDELAY = 2.0
 
 func on_open():
 	visible = true
-	colorindex = 0
+	colorindex = 1
 	colorval = 0.0
+	colordelay = MAXCOLORDELAY
 	for s in things:
 		s.queue_free()
-	for a in elements:
-		a.queue_free()
+	#for a in elements:
+	#	a.queue_free()
 	elements = []
 	things = []
 	MagicMenu.dontLeave = true
@@ -37,24 +40,28 @@ func on_open():
 		Title.text = spell.spellName
 	else:
 		Title.text = "Unnamed Spell"
-	#if(spell.element):
-		#colorstrat_2()
 	$Type.texture = spell.type.icon
-	#for i in range(0,spell.): #change this after u make it so multi styles are supported lmao
-	"""if(spell.style):
+	if(spell.components):
 		var n = 0
-		for s in spell.style:
-			var t = img.instantiate()
-			t.num = n
-			n += 1
-			t.changeIcon(s.icon)
-			t.changeColor(s.color)
-			t.amt = spell.style.size()
-			t.perpV = 50000
-			t.dist = 100
-			t.center = global_position + Vector2(150, 250)
-			things.append(t)
-			add_child(t)"""
+		for s in spell.components:
+			if(s.isElement):
+				elements.append(s);
+			else:
+				var t = img.instantiate()
+				t.num = n
+				n += 1
+				t.changeIcon(s.icon)
+				t.changeColor(s.color)
+				#t.amt = spell.components.size()
+				t.perpV = 50000
+				t.dist = 100
+				t.center = global_position + Vector2(150, 250)
+				things.append(t)
+				add_child(t)
+		for s in things:
+			s.amt = things.size()
+	if(elements.size()>0):
+		colorstrat_2()
 
 func _on_exit_pressed():
 	for s in things:
@@ -66,10 +73,10 @@ func _on_exit_pressed():
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("Pause") and visible):
 		_on_exit_pressed()
-	#if(spell):
-		#colorchange(delta)
+	if(visible):
+		colorchange(delta)
 
-"""
+
 func colorstrat_1():
 	var i = spell.element.size()
 	for e in spell.element:
@@ -85,22 +92,24 @@ func colorstrat_1():
 		elements.append(progress)
 
 func colorstrat_2():
-	$ColorRect.color = spell.element[0].color
+	$ColorRect.color = elements[0].color
 
 func colorchange(delta):
-	if spell.element.size() > 0 and visible:
-		var cv = colorindex - 1
-		if(cv < 0):
-			cv = spell.element.size() - 1
-		if(colorval == 0):
-			$ColorRect.color = spell.element[cv].color
+	if elements.size() > 0:
+		if(colordelay >= 0):
+			colordelay -= delta
 		else:
-			$ColorRect.color = spell.element[cv].color + (spell.element[colorindex].color-spell.element[cv].color) * colorval
-		colorval += delta * 0.5
-		if(colorval >= 1.0):
-			colorval = 0
-			colorindex = (colorindex + 1) % spell.element.size()
+			var cv = colorindex - 1
+			if(cv < 0):
+				cv = elements.size() - 1
+			if(colorval == 0):
+				$ColorRect.color = elements[cv].color
+			else:
+				$ColorRect.color = elements[cv].color + (elements[colorindex].color-elements[cv].color) * colorval
+			colorval += delta * 0.5
+			if(colorval >= 1.0):
+				colordelay = MAXCOLORDELAY
+				colorval = 0
+				colorindex = (colorindex + 1) % elements.size()
 	else:
-		$ColorRect.color = Color(0.2, 0.2, 0.2)
-
-"""
+		$ColorRect.color = Color(0.4, 0.4, 0.4)
