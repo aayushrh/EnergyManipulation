@@ -103,7 +103,7 @@ func _on_area_2d_area_entered(area):
 			blast.sender = sender
 			for i in spell.components:
 				i.callVisualHitEffects(self)
-			for i in body.components:
+			for i in body.spell.components:
 				i.callVisualHitEffects(body)
 			queue_free()
 			body.queue_free()
