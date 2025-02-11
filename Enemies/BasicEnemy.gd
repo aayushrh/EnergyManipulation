@@ -69,7 +69,7 @@ func _ready():
 	rng.randomize()
 	var spell = Spell.new("firstSpell")
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-	#spell.element.append(get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)])
+	spell.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
 	var s = float(stage)
 	match num:
 		0, 1, 2, 3: #Dashing dude
@@ -78,7 +78,6 @@ func _ready():
 			MAXHEALTH = 2 + s/20.0
 			intel = 0.8 + s/20.0
 			reactionDelay = randf_range(0.025,0.075)
-			spell.style.append(get_tree().current_scene.allStyleSpellCards[1])
 			#TOPSPEED *= 2
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
@@ -103,7 +102,7 @@ func _ready():
 			for i in (int(floor(stage/5)) + 1):
 				var spell2 = Spell.new("Spell Number " + str(i))
 				spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-				spell2.element.append(get_tree().current_scene.allElementSpellCards[rng.randi_range(0, get_tree().current_scene.allElementSpellCards.size() - 1)])
+				spell2.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
 				spells.append(spell2)
 			
 	#var spell = Spell.new("firstSpell")
@@ -151,6 +150,7 @@ func _process(delta):
 
 func _health_change(newHP: float):
 	var change = newHP - health
+	print("This is change: " + str(change))
 	if(change > 0):
 		change = change/pow(2,int(health/MAXHEALTH))
 		health += change
@@ -188,12 +188,13 @@ func _effectsHandle(delta):
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken(self)
-	print(dmgTaken)
+	print("This is dmg:" + str(dmgTaken))
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
 		un_block()
 	else:
 		health -= dmgTaken
+		print("This is health sub:" + str(dmgTaken))
 	time = 0
 
 func _move(delta):

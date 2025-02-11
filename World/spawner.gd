@@ -19,7 +19,7 @@ func _ready():
 	cardSelection.connect("finishedSelecting", _startNextWave)
 
 func _process(delta):
-	if(!Global.isPaused() and false):
+	if(!Global.isPaused()):
 		var spawn = rng.randi_range(0, 250)
 		if(spawn < 1 and spawned < ceil(sqrt(waveNumber + .25) - .5)):
 			print(str(ceil(sqrt(waveNumber + .25) - .5)) + " GAY")
@@ -36,7 +36,7 @@ func _process(delta):
 			
 			var basicEnemy = BasicEnemy.instantiate()
 			basicEnemy.global_position = spawnLoc# + player.global_position
-			#basicEnemy.agg = randi_range(0,1)==1
+			basicEnemy.agg = randi_range(0,1)==1
 			#basicEnemy.health = max(1, waveNumber/2)
 			basicEnemy.stage = waveNumber
 			enemyParent.add_child(basicEnemy)

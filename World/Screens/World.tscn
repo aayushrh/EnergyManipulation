@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=24 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Elements/Fire.tres" id="2_5nixq"]
 [ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Elements/Nature.tres" id="2_c5j3f"]
-[ext_resource type="Resource" uid="uid://fa5aq46y3a3k" path="res://Magic/MagicCards/Resources/Style/Boar.tres" id="3_losfs"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="4_5utis"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="4_7sx84"]
 [ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="4_ov6f6"]
@@ -18,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://di23s0ipx556c" path="res://Art/TX Tileset Grass.png" id="9_tvb2g"]
 [ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Elements/Water.tres" id="9_vavhn"]
 [ext_resource type="Script" path="res://World/spawner.gd" id="9_vxjm2"]
-[ext_resource type="Resource" uid="uid://dq0hukx4vjqg6" path="res://Magic/MagicCards/Resources/Style/Horse.tres" id="11_dq84m"]
 [ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Elements/Default.tres" id="12_qtnuf"]
 [ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
 
@@ -298,6 +296,7 @@ testComponentSpellCard = Array[ExtResource("4_5utis")]([ExtResource("7_6b0eb"), 
 testTypeSpellCard = ExtResource("4_ov6f6")
 testComponentSpellCard2 = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f")])
 testTypeSpellCard2 = ExtResource("4_ov6f6")
+allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("7_6b0eb"), ExtResource("2_c5j3f"), ExtResource("9_vavhn")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
 defaultElement = ExtResource("12_qtnuf")
 
@@ -339,7 +338,7 @@ layout_mode = 2
 
 [node name="CardSelection" parent="CanvasLayer" node_paths=PackedStringArray("spawner") instance=ExtResource("8_v2hr7")]
 visible = false
-cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("3_losfs"), ExtResource("11_dq84m"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y")])
+cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y")])
 spawner = NodePath("../../Spawner")
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]

@@ -374,7 +374,7 @@ func _on_dashing_timer_timeout():
 func _hit_register():
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	processHaventChecked()
-	for i in spellHit.element:
+	for i in spellHit.components:
 		i.callBlockEffects(dmgRed, hitbox, self)
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
