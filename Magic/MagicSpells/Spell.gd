@@ -15,12 +15,14 @@ var cSpeed = 1.0
 
 func create():
 	var newSpell = Spell.new(spellName)
-	newSpell.components = components
+	for i in components:
+		newSpell.components.append(i)
 	newSpell.type = type
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
 	newSpell.using = using
-	newSpell.attributes = attributes
+	for i in attributes:
+		newSpell.attributes.append(i)
 	return newSpell
 
 func _init(namen):

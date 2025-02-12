@@ -54,7 +54,7 @@ func _shoot():
 	blastProj.sender = player
 	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
-	blastProj._setSpell(spell)
+	blastProj._setSpell(spell.create())
 	blastProj._setV(direction)
 	blastProj.castingCost = castingCost
 	get_tree().current_scene.add_child(blastProj)
