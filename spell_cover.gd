@@ -95,7 +95,7 @@ func colorstrat_2():
 	$ColorRect.color = elements[0].color
 
 func colorchange(delta):
-	if elements.size() > 0:
+	if elements.size() > 1:
 		if(colordelay >= 0):
 			colordelay -= delta
 		else:
@@ -111,5 +111,7 @@ func colorchange(delta):
 				colordelay = MAXCOLORDELAY
 				colorval = 0
 				colorindex = (colorindex + 1) % elements.size()
+	elif elements.size() == 1:
+		$ColorRect.color = elements[0].color
 	else:
 		$ColorRect.color = Color(0.4, 0.4, 0.4)
