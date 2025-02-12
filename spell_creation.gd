@@ -131,6 +131,8 @@ func reset():
 		$Cover.on_open()
 		$TableOfContents.visible = false
 		$SpellPage.visible = false
+		$AddRight.visible = false
+		$Delete.visible = false
 		pageNum = -1
 		updateMaxPages()
 		$TableOfContents.spell = spell

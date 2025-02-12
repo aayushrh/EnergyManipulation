@@ -74,12 +74,13 @@ func cook(txt, val):
 	gay.append(hbox)
 
 func change(num):
-	visible = true
-	if(num == 0):
-		card = spell.type
-	else:
-		card = spell.components[num-1]
-	show_card(card)
+	if(num >= 0):
+		visible = true
+		if(num == 0):
+			card = spell.type
+		else:
+			card = spell.components[num-1]
+		show_card(card)
 
 func gradient(c1: Color, c2: Color, blend: float):
 	var c = c1
