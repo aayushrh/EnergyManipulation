@@ -107,7 +107,7 @@ func _on_area_2d_area_entered(area):
 			nspell.components.append_array(spell.components)
 			nspell.components.append_array(body.spell.components)
 			nspell.type = spell.type
-			#blast.mult = body.mult + mult
+			blast.mult = body.mult + mult
 			blast._setSpell(nspell)
 			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.intel + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.intel)
 			blast._setSize(scale + body.scale)
