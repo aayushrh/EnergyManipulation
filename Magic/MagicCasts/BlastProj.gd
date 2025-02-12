@@ -11,6 +11,8 @@ var hit = -1
 var art : Node2D
 var combined = false
 var setSize = false
+var setPower = false
+var power = 0
 var castingCost = 0
 
 var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
@@ -25,6 +27,10 @@ func _setV(nvelocity):
 	velocity = nvelocity.normalized() * getSpeed()
 	v = velocity
 	rotation_degrees = atan2(velocity.y, velocity.x) * 180/PI
+
+func _setPower(p):
+	power = p
+	setPower = true
 
 func _setSize(size):
 	scale = size
@@ -61,7 +67,9 @@ func _process(delta):
 	move_and_slide()
 
 func damageTaken(reciever):
-	return spell.getPower() * ((mult-1)/2+1) * sender.intel
+	if !setPower:
+		return spell.getPower() * ((mult-1)/2+1) * sender.intel
+	return power
 
 func clone():
 	var blast = Blast.new()
@@ -101,6 +109,7 @@ func _on_area_2d_area_entered(area):
 			nspell.type = spell.type
 			#blast.mult = body.mult + mult
 			blast._setSpell(nspell)
+			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.intel + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.intel)
 			blast._setSize(scale + body.scale)
 			blast._setV((body.velocity + velocity)/2)
 			blast.global_position = (global_position + body.global_position)/2
