@@ -11,6 +11,7 @@ var hit = -1
 var art : Node2D
 var combined = false
 var setSize = false
+var castingCost = 0
 
 var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 var CombinedBlast = preload("res://Magic/MagicCasts/CombinedBlasts.tscn")

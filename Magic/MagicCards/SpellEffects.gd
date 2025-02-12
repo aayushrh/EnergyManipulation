@@ -55,7 +55,7 @@ func giveBackHP(dmgRed, spellObj, enemy):
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 
 func giveBackEnergy(spellObj:SpellCasted):
-	spellObj.player.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost)
+	spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost)
 
 func testOngo(spellObj:SpellCasted):
 	print("spell is ongoing")

@@ -56,6 +56,7 @@ func _shoot():
 	blastProj.global_position = global_position
 	blastProj._setSpell(spell)
 	blastProj._setV(direction)
+	blastProj.castingCost = castingCost
 	get_tree().current_scene.add_child(blastProj)
 	if player.type == 0:
 		get_tree().current_scene.amountShot += 1
