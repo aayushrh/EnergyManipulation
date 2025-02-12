@@ -101,7 +101,6 @@ pointing/emulate_touch_from_mouse=true
 
 2d/run_on_separate_thread=true
 2d/default_linear_damp=0.0
-2d/solver/solver_iterations=32
 
 [rendering]
 

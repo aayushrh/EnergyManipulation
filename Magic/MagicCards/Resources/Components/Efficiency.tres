@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://8m3sjm7j4nmo"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_iv0hf"]
+[ext_resource type="Texture2D" uid="uid://4m3p2rnjkl5u" path="res://Art/circle.png" id="2_18ie4"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_66f47"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_i8v8t"]
+
+[resource]
+script = ExtResource("2_66f47")
+spellEffects = ExtResource("4_i8v8t")
+cardName = "Efficiency"
+cardDescription = "Decreases the cost of the spell by 25%"
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String](["giveBackEnergy"])
+blockEffects = Array[String]([])
+castingEffects = Array[String]([])
+color = Color(1, 0.494118, 0, 1)
+icon = ExtResource("2_18ie4")
+cdMult = 1.0
+costMult = 1.0
+powerMult = 1.0
+attackSpeedMult = 1.0
+sizeMult = 1.0
+castingSpeedMult = 1.0
+attribute = Array[ExtResource("1_iv0hf")]([])
+isElement = false
