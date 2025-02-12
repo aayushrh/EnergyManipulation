@@ -20,6 +20,7 @@ func create():
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
 	newSpell.using = using
+	newSpell.attributes = attributes
 	return newSpell
 
 func _init(namen):
@@ -95,29 +96,38 @@ func contcost():
 		cost *= type.contCostMult
 	return cost
 
+func getAttr(name):
+	for i in attributes:
+		if(i.attr.Ltext == name):
+			return i.leftvalue
+		if(i.attr.Rtext == name):
+			return i.rightvalue
+	return 50
+
 func getPower():
-	var p = power
+	var p = (getAttr("Power") + 50.0)/100.0
+	print("Power is: " + str(p))
 	if(components != null):
 		for i in components:
 			p *= i.powerMult
 	return p
 
 func getPSpeed():
-	var ps = pSpeed
+	var ps = (getAttr("Proj. Spd.") + 50.0)/100.0
 	if(components != null):
 		for i in components:
 			ps *= i.attackSpeedMult
 	return ps
 
 func getASpeed():
-	var cs = cSpeed
+	var cs = (getAttr("Cast. Spd.") + 50.0)/100.0
 	if(components != null):
 		for i in components:
 			cs *= i.castingSpeedMult
 	return cs
 
 func getSize():
-	var s = size
+	var s = (getAttr("Size") + 50.0)/100.0
 	if(components != null):
 		for i in components:
 			s *= i.sizeMult

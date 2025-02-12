@@ -26,6 +26,7 @@ func show_card(car):
 	if car != null:
 		$ColorRect2._show(car)
 		var counter = 0
+		card = car
 		for c in car.attribute:
 			var check = checkAttributeExistence(c)
 			if(!check):
@@ -105,6 +106,11 @@ func diffNum(lval, rval, bval, grad, at):
 		gay[num].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
 	gay[num].get_child(1).text = str(lval) + "%"
 	gay[num + 1].get_child(1).text = str(rval) + "%"
+	
+	print("setting somethign to lval: " + str(rval))
+	print("setting somethign to lvalue: " + str((rval-50) * (card.attribute[at].num + card.attribute[at].max)/50))
+	
+	get_parent().updateAttr(lval, rval, card.attribute[at])
 
 func nuhuh():
 	noPageChange.emit()

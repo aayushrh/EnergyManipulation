@@ -99,6 +99,14 @@ func updateMaxPages():
 		maxPages += 1
 	maxPages += spell.components.size()
 
+func updateAttr(lvalue, rvalue, at):
+	for i in spell.attributes:
+		if i.attr == at:
+			i.leftvalue = (lvalue-50) * (at.num - at.min)/50
+			i.rightvalue = (rvalue-50) * (at.num + at.max)/50
+	MagicMenu.selectedSpell = spell
+	MagicMenu.reloadSpell()
+
 func change_page(val):
 	pageNum = val
 	$SpellPage.change(val - 1)

@@ -29,7 +29,7 @@ func on_open():
 	#	a.queue_free()
 	elements = []
 	things = []
-	MagicMenu.dontLeave = true
+	#MagicMenu.dontLeave = true
 	#spell = Global.spellList[0]
 	spell = MagicMenu.selectedSpell
 	if(!spell):

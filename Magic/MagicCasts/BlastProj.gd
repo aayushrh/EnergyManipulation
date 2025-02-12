@@ -32,6 +32,9 @@ func _setSize(size):
 func getSpeed():
 	return speed * spell.getPSpeed() * mult
 
+func _integrate_forces(state):
+	velocity = v
+
 func _ready():
 	art = $Art
 	

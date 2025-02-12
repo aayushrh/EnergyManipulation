@@ -27,6 +27,11 @@ func addCard(type):
 func _finish():
 	position.x = 0
 
+func reloadSpell():
+	var location = Global.spellList.find(selectedSpell)
+	Global.spellList.remove_at(location)
+	Global.spellList.insert(location, selectedSpell)
+
 func _inputCard(card):
 	if selectedSpell != null:
 		if $Category.text == "Shape":
