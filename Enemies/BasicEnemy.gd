@@ -24,6 +24,8 @@ var dodgeDir = 0
 var moveDir = 0.0
 var blast = null
 var casting = false
+var healing = 1.0
+var bonusHealBlock = false
 var MAXHEALTH = 0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
@@ -157,6 +159,8 @@ func _health_change(newHP: float):
 	var change = newHP - health
 	print("This is change: " + str(change))
 	if(change > 0):
+		if(!bonusHealBlock):
+			change = change * healing
 		change = change/pow(2,int(health/MAXHEALTH))
 		health += change
 	elif(change < 0):

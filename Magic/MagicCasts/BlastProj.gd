@@ -47,7 +47,6 @@ func _ready():
 	
 	if !spell.hasElement():
 		spell.components.append(Global.defaultElement)
-	
 	for i in spell.components:
 		i.callStartEffects(self)
 	#$CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()

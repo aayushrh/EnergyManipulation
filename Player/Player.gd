@@ -45,6 +45,7 @@ var time_last_hit = 0
 var health = 0.0 : set = _health_change
 var hp = 0.0#display hp
 var healing = 1.0
+var bonusHealBlock = false
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
@@ -143,7 +144,8 @@ func _dashCharging(delta):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		change *= healing
+		if(!bonusHealBlock):
+			change *= healing
 		change = change/pow(2,int(health/MAXHEALTH))
 		health += change
 		get_tree().current_scene.damageHealed += change

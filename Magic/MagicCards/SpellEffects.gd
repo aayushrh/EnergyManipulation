@@ -37,20 +37,24 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 		enemy.attachEffect(stun)
 
 func lifesteal(spellObj:SpellCasted, enemy):
+	if(enemy is Wall):
+		return
+	spellObj.sender.bonusHealBlock = true
+	spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
+	spellObj.sender.bonusHealBlock = false
 	if(enemy.health > 0):
-		spellObj.sender.health += 1 * spellObj.spell.getPower() * spellObj.mult
-	elif(enemy is Wall):
-		pass
+		spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
 	else:
-		spellObj.sender.health += 1 * (enemy.health + spellObj.damageTaken(null)) * spellObj.mult
+		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken(null)) * spellObj.mult
 
 func takeHealth(spellObj:SpellCasted):
 	if(spellObj.sender is BasicEnemy):
 		spellObj.sender.fuck = true
-	if(spellObj.sender.health > 0.15 * spellObj.spell.getPower() * spellObj.mult):
-		spellObj.sender.health -= 0.15 * spellObj.spell.getPower() * spellObj.mult
-	else:
-		spellObj.sender.health = 0.001
+	if(!spellObj.combined):
+		if(spellObj.sender.health > 0.5 * spellObj.spell.getPower() * spellObj.mult):
+			spellObj.sender.health -= 0.5 * spellObj.spell.getPower() * spellObj.mult
+		else:
+			spellObj.sender.health = 0.001
 	
 
 func giveBackHP(dmgRed, spellObj, enemy):
