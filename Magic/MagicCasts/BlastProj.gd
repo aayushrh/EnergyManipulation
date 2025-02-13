@@ -63,7 +63,7 @@ func _process(delta):
 	if(Global.isPaused()):
 		velocity = Vector2.ZERO
 	else:
-		velocity = nvel.normalized() * getSpeed()
+		velocity = v
 	move_and_slide()
 
 func damageTaken(reciever):
@@ -111,7 +111,7 @@ func _on_area_2d_area_entered(area):
 			blast._setSpell(nspell)
 			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.intel + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.intel)
 			blast._setSize(scale + body.scale)
-			blast._setV((body.velocity + velocity)/2)
+			blast._setV((body.velocity + velocity) * 0.5)
 			blast.global_position = (global_position + body.global_position)/2
 			blast.sender = sender
 			for i in spell.components:
