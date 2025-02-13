@@ -28,16 +28,16 @@ func create():
 func _init(namen):
 	spellName = namen
 
-func _cast(player):
+func _cast(sender):
 	if(type != null):
 		var cast = type.SpellObj.instantiate()
-		cast.player = player
+		cast.sender = sender
 		var dupe = create()
 		#if(dupe.element == null):
-			#dupe.element = player.get_tree().current_scene.defaultElement
+			#dupe.element = sender.get_tree().current_scene.defaultElement
 		cast.setSpell(dupe)
-		cast.global_position = player.global_position
-		player.get_tree().current_scene.add_child(cast)
+		cast.global_position = sender.global_position
+		sender.get_tree().current_scene.add_child(cast)
 		cast.connect("done", _notUsing)
 		return cast
 	else:

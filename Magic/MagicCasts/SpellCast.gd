@@ -3,7 +3,7 @@ class_name SpellCast
 
 var spell : Spell
 var holding = true
-var player = null
+var sender = null
 
 func _on_release():
 	holding = false

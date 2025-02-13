@@ -44,23 +44,23 @@ func _nameCallout():
 	#var magicNameCallout = MagicNameCallout.instantiate()
 	#magicNameCallout.position = Vector2(0, 60)
 	#magicNameCallout._show(spell)
-	#player.add_child(magicNameCallout)
+	#sender.add_child(magicNameCallout)
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
 	var blastProj = BlastProj.instantiate()
 	blastProj.speed = speed
-	blastProj.sender = player
+	blastProj.sender = sender
 	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
 	blastProj._setSpell(spell.create())
 	blastProj._setV(direction)
 	blastProj.castingCost = castingCost
 	get_tree().current_scene.add_child(blastProj)
-	if player.type == 0:
+	if sender.type == 0:
 		get_tree().current_scene.amountShot += 1
 	timer = 0.1 * 1/spell.getASpeed()
-	direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
+	direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 
 func draw():
 	draw_arc($Icon.position, 256 * 0.3 * chargeMulti, 0, 2*PI, 50, Color.WHITE)
@@ -71,19 +71,19 @@ func _process(delta):
 	$Pivot.rotate(PI/160)
 	for i in $Pivot.get_children():
 		i.rotate(-PI/160)
-	if !is_instance_valid(player):
+	if !is_instance_valid(sender):
 		queue_free()
-	if !Global.isPaused() and is_instance_valid(player):
-		$Sprite2D.global_position = player.global_position + Vector2(0, -65)
+	if !Global.isPaused() and is_instance_valid(sender):
+		$Sprite2D.global_position = sender.global_position + Vector2(0, -65)
 		if !shot:
-			direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
+			direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
 				#print(spell.contcost())
 				#print(delta/spell.getMaxPowerTime())
-				if player.type == 1 or player.stored_energy > spell.contcost() * delta/spell.getMaxPowerTime():
-					player.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
+				if sender.type == 1 or sender.stored_energy > spell.contcost() * delta/spell.getMaxPowerTime():
+					sender.stored_energy -= spell.contcost() * delta/spell.getMaxPowerTime()
 					castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
 					chargeTimer -= delta
 					if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
@@ -102,18 +102,18 @@ func _process(delta):
 					shot = true
 					done.emit()
 					_nameCallout()
-			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
+			global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
 		else:
-			global_position = player.global_position + Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2)) * 100
+			global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
 			timer -= delta
 			if timer <= 0:
 				if timesShot < spell.getAmount():
 					timesShot+=1
 					_shoot()
 					if timesShot >= spell.getAmount():
-						player.doneCasting()
+						sender.doneCasting()
 						#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
-							#player.stored_energy += 0.36 * (spell.initCost() + castingCost)
+							#sender.stored_energy += 0.36 * (spell.initCost() + castingCost)
 						queue_free()
 						spell._notUsing()
 

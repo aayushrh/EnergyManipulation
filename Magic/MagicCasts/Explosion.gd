@@ -17,7 +17,7 @@ func setSpell(nspell):
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
-	#direction = Vector2(cos(player.rotation_degrees * PI/180 - PI/2), sin(player.rotation_degrees * PI/180 - PI/2))
+	#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 	var explosionCast = ExplosionCast.instantiate()
 	explosionCast.mult = chargeMulti
 	explosionCast.global_position = global_position
@@ -38,12 +38,12 @@ func _process(delta):
 		else:
 			if !Input.is_key_pressed(spell.binding):
 				shot = true
-		global_position = player.global_position 
+		global_position = sender.global_position 
 	else:
-		global_position = player.global_position 
+		global_position = sender.global_position 
 		timer -= delta
 		if timer < 0:
 			timesShot+=1
 			_shoot()
-			player.doneCasting(false)
+			sender.doneCasting(false)
 			queue_free()
