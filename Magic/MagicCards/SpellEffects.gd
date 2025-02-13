@@ -47,7 +47,11 @@ func lifesteal(spellObj:SpellCasted, enemy):
 func takeHealth(spellObj:SpellCasted):
 	if(spellObj.sender is BasicEnemy):
 		spellObj.sender.fuck = true
-	spellObj.sender.health -= 0.15 * spellObj.spell.getPower() * spellObj.mult
+	if(spellObj.sender.health > 0.15 * spellObj.spell.getPower() * spellObj.mult):
+		spellObj.sender.health -= 0.15 * spellObj.spell.getPower() * spellObj.mult
+	else:
+		spellObj.sender.health = 0.001
+	
 
 func giveBackHP(dmgRed, spellObj, enemy):
 	print("YEs")
