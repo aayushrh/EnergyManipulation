@@ -53,7 +53,7 @@ func _ready():
 	#$CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
 	#$Area2D/CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
 
-func _process(delta):
+func _physics_process(delta):
 	for i in spell.components:
 		i.callOngoingEffects(self)
 	if !setSize:
