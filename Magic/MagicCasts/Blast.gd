@@ -36,7 +36,6 @@ func setSpell(nspell):
 		icon.self_modulate = Color(spell.components[i].color, 0.5)
 		icon.scale = Vector2(0.15, 0.15)
 		icon.position = Vector2(sin(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3, cos(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3)
-		print("this is i: " + str(i))
 		print(icon.position)
 		$Pivot.add_child(icon)
 

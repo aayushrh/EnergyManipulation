@@ -59,7 +59,6 @@ func _physics_process(delta):
 	if !setSize:
 		scale = Vector2(0.5, 0.5) * spell.getSize() * mult
 	$Art.processed = true
-	print("Blast scale x: " + str(scale.x))
 	if(Global.isPaused()):
 		velocity = Vector2.ZERO
 	else:
@@ -111,7 +110,7 @@ func _on_area_2d_area_entered(area):
 			blast._setSpell(nspell)
 			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.intel + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.intel)
 			blast._setSize(scale + body.scale)
-			blast._setV((body.velocity + velocity) * 0.5)
+			blast._setV((body.velocity.normalized() + velocity.normalized()) * 0.5 * (velocity.length() + body.velocity.length())/2)
 			blast.global_position = (global_position + body.global_position)/2
 			blast.sender = sender
 			for i in spell.components:
