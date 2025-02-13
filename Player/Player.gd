@@ -76,7 +76,7 @@ func _ready():
 	base_top_speed = TOPSPEED
 	get_tree().current_scene.damageHealed = 0
 
-func _process(delta):
+func _physics_process(delta):
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()

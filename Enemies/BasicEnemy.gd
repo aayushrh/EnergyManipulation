@@ -132,7 +132,7 @@ func _finishCharge():
 #func _init(stag):
 #	stage = stag
 
-func _process(delta):
+func _physics_process(delta):
 	delt = delta
 	#if blinded:
 		#$Area2D.monitoring = false
