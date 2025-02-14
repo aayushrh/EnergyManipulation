@@ -44,6 +44,6 @@ color = Color(1, 0.976471, 0.00784314, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="BlindessTransparent" type="Sprite2D" parent="."]
-z_index = 100
+z_index = 4095
 position = Vector2(0, -16)
 texture = ExtResource("2_6etud")
