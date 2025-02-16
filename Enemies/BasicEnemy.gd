@@ -19,6 +19,8 @@ var spells = []# enemy casted spells
 var castedIndex = -1
 var canDash = true
 var type = 1
+var wisdom = 1.0
+var gainingEnergy = false
 var fuck = false # fuck nature
 var dodgeDir = 0
 var moveDir = 0.0
@@ -27,22 +29,24 @@ var casting = false
 var healing = 1.0
 var bonusHealBlock = false
 var MAXHEALTH = 0
+var MAXMANA = 100.0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
-var stored_energy = 0
+var stored_energy = 100 : set = _energy_change
 var blinded = false
 var reactionDelay = 0.0
 var intel = 1
 var hp = 0.0
 var stage = 0
 var delt = 0
+var prediction = false
 
 @export var HPBARMULT = 80.0
 @export var BARSPEED = 20.0
 @export var health = 0.0 : set = _health_change
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
-@export var tact = 0 # chance to do smarter things
+@export var tact = 100 - int(agg)*75 # chance to do smarter things
 @export var DASHSPEED = 5000
 @export var cooldownAttack = 1.0
 @export var TOPSPEED = 200
@@ -148,7 +152,13 @@ func _physics_process(delta):
 		time+=delta
 		magic_check(delta)
 		_effectsHandle(delta)
-		if(!nomove):
+		if(stored_energy == 0 && blast):
+			blast.letGo()
+			blast = null
+			castedIndex = -1
+		if(stored_energy < MAXMANA/4 || gainingEnergy and blast == null):
+			energyGain(delta)
+		elif(!nomove):
 			pass
 			_move(delta)
 		move_and_slide()
@@ -161,7 +171,12 @@ func _health_change(newHP: float):
 	if(change > 0):
 		if(!bonusHealBlock):
 			change = change * healing
-		change = change/pow(2,int(health/MAXHEALTH))
+		while(change/pow(2,floor(health/MAXHEALTH)) > MAXHEALTH * floor(health/MAXHEALTH + 1) - health):
+			var chamt = MAXHEALTH * floor(health/MAXHEALTH + 1) - health
+			change -= chamt * pow(2,floor(health/MAXHEALTH))
+			health += chamt
+			get_tree().current_scene.damageHealed += chamt
+		change = change/pow(2,floor(health/MAXHEALTH))
 		health += change
 	elif(change < 0):
 		health += change
@@ -175,6 +190,20 @@ func _health_change(newHP: float):
 	$Health3.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 	fuck = false
 
+func _energy_change(newMANA: float):
+	var change = newMANA - stored_energy
+	if(change > 0):
+		while(change/pow(2,floor(stored_energy/MAXMANA)) > MAXMANA * floor(stored_energy/MAXMANA + 1) - stored_energy):
+			var chamt = MAXMANA * floor(stored_energy/MAXMANA + 1) - stored_energy
+			change -= chamt * pow(2,floor(stored_energy/MAXMANA))
+			stored_energy += chamt
+			get_tree().current_scene.damageHealed += chamt
+		stored_energy += change/pow(2,floor(stored_energy/MAXMANA))
+	elif(change < 0):
+		stored_energy += change
+		if(stored_energy < 0):
+			stored_energy = 0
+	#$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
 
 func updateHP(delta):
 	var bar_health = health * HPBARMULT
@@ -214,8 +243,12 @@ func _move(delta):
 		can_attack = true
 	if player != null:
 		if(castedIndex != -1 and spells[castedIndex].type.aimType == 0):
-			if(agg):
+			if(prediction):
 				rotateToTarget(player.global_position, delta)
+				if(blast and (blast.chargeTimer <= 0 or global_position.distance_to(player.global_position)<300)):
+					blast.letGo()
+					blast = null
+					castedIndex = -1
 			else:
 				predictionrotate(player, delta)
 		else:
@@ -236,7 +269,7 @@ func _move(delta):
 		awareness(delta)
 		if(agg):
 			aggro(player, delta)
-			if(blast != null and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<100)):
+			if(blast and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<300)):
 				blast.letGo()
 				blast = null
 				castedIndex = -1
@@ -253,7 +286,8 @@ func _punch():
 	art._startPunch()
 
 func _on_vision_body_entered(body):
-	player = body
+	if!(body is Wall):
+		player = body
 
 func runDelay(arr):
 	arr[1]-=delt
@@ -302,8 +336,10 @@ func magic_check(delta):
 			track += 1
 			if(!e.using):
 				e.cooldown -= delta
-			if(dodgeDir == 0 and e.cooldown < 0 and !casting):
+			if(dodgeDir == 0 and e.cooldown < 0 and !casting and stored_energy > e.initCost() and !gainingEnergy):
 				blast = e._cast(self)
+				prediction = tactCheck(50)
+				stored_energy -= e.initCost()
 				castedIndex = track
 				slow = true
 				ROTATIONSPEED /= 2
@@ -369,6 +405,17 @@ func un_block():
 	block = -1
 	slow = false
 
+func energyGain(delta):
+	print("Energy: " + str(stored_energy))
+	gainingEnergy = stored_energy < MAXMANA
+	stored_energy += delta * wisdom * 25
+	velocity -= $SoftBody.getVector() * TOPSPEED * delta
+	if(velocity.length()>1000):
+		velocity *= 1000.0/velocity.length()
+	velocity *= pow(0.80,delta)
+	if(velocity.length() < 10):
+		velocity = Vector2.ZERO
+
 func perp_vector(vect):
 	if(rng.randi_range(0,1)==1):
 		return Vector2(vect.y,-vect.x)
@@ -401,15 +448,17 @@ func awareness(delta):
 		if(help.size()>=blockOrFlight):
 			if(block == -1):
 				if(canDash):
-					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
+					dash(avgDir(help))
+					"if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
 						do_block()
 					else:
-						dash(avgDir(help))
+						dash(avgDir(help))"
 				else:
-					if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,TOPSPEED)):
+					"if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,TOPSPEED)):
 						do_block()
 					else:
-						velocity = avgDir(help) * TOPSPEED
+						velocity = avgDir(help) * TOPSPEED"
+					velocity = avgDir(help) * TOPSPEED
 		elif(block == -1):
 			if(canDash):
 				dash(perp_vector(avgDir(help)))

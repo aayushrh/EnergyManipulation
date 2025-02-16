@@ -125,7 +125,7 @@ func _blockCharging(delta):
 	$CanvasLayer/Label.text = str(blockCharges)
 	$CanvasLayer/TextureProgressBar.value = blockTimer
 	if(blockTimer <= 0):
-		blockTimer = BLOCKCD
+		blockTimer += BLOCKCD
 		blockCharges += 1
 		print(str(blockCharges) + "charges")
 	elif(blockCharges < maxBlockCharges and blockTimer > 0):
@@ -135,7 +135,7 @@ func _dashCharging(delta):
 	$CanvasLayer/Label2.text = str(dashCharges)
 	$CanvasLayer/TextureProgressBar2.value = dashTimer
 	if(dashTimer <= 0):
-		dashTimer = DASHCD
+		dashTimer += DASHCD
 		dashCharges += 1
 		print(str(dashCharges) + "charges")
 	elif(dashCharges < maxDashCharges and dashTimer > 0):
@@ -146,7 +146,12 @@ func _health_change(newHP: float):
 	if(change > 0):
 		if(!bonusHealBlock):
 			change *= healing
-		change = change/pow(2,int(health/MAXHEALTH))
+		while(change/pow(2,floor(health/MAXHEALTH)) > MAXHEALTH * floor(health/MAXHEALTH + 1) - health):
+			var chamt = MAXHEALTH * floor(health/MAXHEALTH + 1) - health
+			change -= chamt * pow(2,floor(health/MAXHEALTH))
+			health += chamt
+			get_tree().current_scene.damageHealed += chamt
+		change = change/pow(2,floor(health/MAXHEALTH))
 		health += change
 		get_tree().current_scene.damageHealed += change
 	elif(change < 0):
@@ -161,7 +166,12 @@ func _health_change(newHP: float):
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
 	if(change > 0):
-		stored_energy += change/pow(2,int(stored_energy/MAXMANA))
+		while(change/pow(2,floor(stored_energy/MAXMANA)) > MAXMANA * floor(stored_energy/MAXMANA + 1) - stored_energy):
+			var chamt = MAXMANA * floor(stored_energy/MAXMANA + 1) - stored_energy
+			change -= chamt * pow(2,floor(stored_energy/MAXMANA))
+			stored_energy += chamt
+			get_tree().current_scene.damageHealed += chamt
+		stored_energy += change/pow(2,floor(stored_energy/MAXHEALTH))
 	elif(change < 0):
 		stored_energy += change
 		if(stored_energy < 0):
@@ -185,8 +195,11 @@ func _draw():
 
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
-		stored_energy -= delta * 100
-		health += 8 * delta
+		var v = healing / (log(velocity.length_squared()/1) + 1)
+		if(velocity.length_squared() < 1):
+			v = healing
+		stored_energy -= delta * 25 * v
+		health += 4 * delta * v
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
@@ -321,7 +334,7 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
-		blockCharges += 1
+		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time < -0.02085 and time > -0.04165):
@@ -344,7 +357,7 @@ func _dmgRed(time):
 		get_tree().current_scene.add_child(perfectBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
-		blockCharges += 1
+		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
 	if(time > 0.0417 and time < 0.0833):
