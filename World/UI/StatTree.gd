@@ -39,6 +39,7 @@ func _on_wisdom_pressed():
 	if visible and Global.pause[0] != 1:
 		wis += 1
 		get_tree().current_scene.player.wisdom *= 1.05
+		get_tree().current_scene.player.MAXMANA *= 1.1
 		_hide()
 
 func _on_agility_pressed():
