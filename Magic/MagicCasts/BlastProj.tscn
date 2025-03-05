@@ -10,11 +10,11 @@ radius = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfyfv"]
 resource_local_to_scene = true
-radius = 75.0
+radius = 93.1933
 
 [node name="BlastProj" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_cbhg2")
 metadata/_edit_horizontal_guides_ = [-255.0]
 

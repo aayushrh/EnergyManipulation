@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="SpellEffects" load_steps=2 format=3 uid="uid://cewcbihcpnife"]
+[gd_resource type="Resource" script_class="SpellEffects" load_steps=3 format=3 uid="uid://cewcbihcpnife"]
 
 [ext_resource type="Script" path="res://Magic/MagicCards/SpellEffects.gd" id="1_8en5q"]
+[ext_resource type="PackedScene" uid="uid://b7achmtdheu5u" path="res://Effects/Vortex.tscn" id="1_62ypw"]
 
 [resource]
 script = ExtResource("1_8en5q")
+VortexScene = ExtResource("1_62ypw")

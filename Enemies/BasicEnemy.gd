@@ -220,12 +220,25 @@ func _move(delta):
 				predictionrotate(player, delta)
 		else:
 			rotateToTarget(player.global_position, delta)
+			
+		var inputV = Vector2.ZERO
+		
 		if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
-			velocity = (player.global_position - global_position).normalized() * TOPSPEED
+			inputV = (player.global_position - global_position).normalized()
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
-			velocity = (player.global_position - global_position).normalized() * -TOPSPEED
-		else:
-			pass
+			inputV = (player.global_position - global_position).normalized() * -1
+		
+		velocity += inputV
+		
+		if velocity.length() > TOPSPEED:
+			velocity = velocity.normalized() * TOPSPEED
+		
+		#if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
+			#velocity = (player.global_position - global_position).normalized() * TOPSPEED
+		#elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
+			#velocity = (player.global_position - global_position).normalized() * -TOPSPEED
+		#else:
+			#pass
 			#if(moveDir == 0):
 			#	moveDir = rng.randi_range(0,1)*2-1
 			#elif(rng.randi_range(0,10000)==1):

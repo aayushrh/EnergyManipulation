@@ -106,6 +106,10 @@ func getAttr(name):
 			return i.rightvalue
 	return 50
 
+func getAttrScaled(name):
+	var n = (getAttr("Power") + 50.0)/100.0
+	return n
+
 func getPower():
 	var p = (getAttr("Power") + 50.0)/100.0
 	print("Power is: " + str(p))

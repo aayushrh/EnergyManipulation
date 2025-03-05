@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7achmtdheu5u"]
+
+[ext_resource type="Script" path="res://Effects/vortex.gd" id="1_c42ul"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1yd07"]
+radius = 644.653
+
+[node name="Vortex" type="Node2D"]
+script = ExtResource("1_c42ul")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1yd07")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

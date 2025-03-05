@@ -1,6 +1,8 @@
 extends Resource
 class_name SpellEffects
 
+@export var VortexScene : PackedScene
+
 func testHit(spellObj:SpellCasted, enemy):
 	print("hit enemy with spell")
 
@@ -55,10 +57,13 @@ func takeHealth(spellObj:SpellCasted):
 			spellObj.sender.health -= 0.5 * spellObj.spell.getPower() * spellObj.mult
 		else:
 			spellObj.sender.health = 0.001
-	
+
+func addVortex(spellObj:SpellCasted):
+	var vortex = VortexScene.instantiate()
+	vortex._setSpell(spellObj.spell, spellObj.sender.type)
+	spellObj.add_child(vortex)
 
 func giveBackHP(dmgRed, spellObj, enemy):
-	print("YEs")
 	if(spellObj.sender is BasicEnemy):
 		spellObj.sender.fuck = true
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
