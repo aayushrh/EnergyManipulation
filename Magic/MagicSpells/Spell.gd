@@ -146,4 +146,7 @@ func hasElement():
 	return false
 
 func getAmount():
-	return 1
+	var a = getAttr("Amount")
+	if a == 50:
+		a = 1
+	return a

@@ -71,5 +71,9 @@ func giveBackHP(dmgRed, spellObj, enemy):
 func giveBackEnergy(spellObj:SpellCasted):
 	spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost)
 
+func changePosToMouse(spellObj: SpellCast):
+	spellObj.setStartingLoc(spellObj.getMousePos())
+	print(spellObj.getMousePos())
+
 func testOngo(spellObj:SpellCasted):
 	print("spell is ongoing")

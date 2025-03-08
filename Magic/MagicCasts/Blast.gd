@@ -12,14 +12,16 @@ var chargeMulti = 1.0
 var speed = 1000.0
 var buttonLetGo = false
 var castingCost = 0
+var startingLocation = Vector2.ZERO
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 @onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
+func getMousePos():
+	return get_global_mouse_position()
+
 func setSpell(nspell):
 	spell = nspell
-	for i in spell.components:
-		i.callCastingEffects(self)
 	castingTimer = spell.getCastingTime()
 	chargeTimer = spell.getMaxPowerTime()
 	scale = Vector2(0.5, 0.5) * spell.getSize()
@@ -38,6 +40,14 @@ func setSpell(nspell):
 		icon.position = Vector2(sin(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3, cos(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3)
 		print(icon.position)
 		$Pivot.add_child(icon)
+
+func _ready():
+	if spell != null:
+		for i in spell.components:
+			i.callCastingEffects(self)
+
+func setStartingLoc(pos):
+	startingLocation = pos
 
 func _nameCallout():
 	pass
@@ -60,13 +70,27 @@ func _shoot():
 	if sender.type == 0:
 		get_tree().current_scene.amountShot += 1
 	timer = 0.1 * 1/spell.getASpeed()
-	direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
+	if startingLocation == Vector2.ZERO:
+		direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
+	else:
+		var diff = startingLocation - get_global_mouse_position()
+		var angle = atan2(diff.y, diff.x)
+		direction = Vector2(cos(angle + PI), sin(angle + PI))
+		
+	#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 
 func draw():
 	draw_arc($Icon.position, 256 * 0.3 * chargeMulti, 0, 2*PI, 50, Color.WHITE)
 	draw_circle(Vector2.ZERO, 256, Color.WHITE, false)
 
 func _process(delta):
+	
+	if startingLocation != Vector2.ZERO:
+		$Ethan.global_position = startingLocation
+		$Ethan.global_scale = Vector2(0.25, 0.25)
+	else:
+		$Ethan.visible = false
+	
 	queue_redraw()
 	$Pivot.rotate(PI/160)
 	for i in $Pivot.get_children():
@@ -74,9 +98,15 @@ func _process(delta):
 	if !is_instance_valid(sender):
 		queue_free()
 	if !Global.isPaused() and is_instance_valid(sender):
-		$Sprite2D.global_position = sender.global_position + Vector2(0, -65)
+		$Sprite2D.global_position = global_position + Vector2(0, -65)
 		if !shot:
-			direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
+			if startingLocation == Vector2.ZERO:
+				direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
+			else:
+				var diff = startingLocation - get_global_mouse_position()
+				var angle = atan2(diff.y, diff.x)
+				direction = Vector2(cos(angle + PI), sin(angle + PI))
+			#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
 			elif chargeTimer >= 0:
@@ -102,9 +132,19 @@ func _process(delta):
 					shot = true
 					done.emit()
 					_nameCallout()
-			global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
+			if startingLocation == Vector2.ZERO:
+				global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
+			else:
+				var diff = startingLocation - get_global_mouse_position()
+				var angle = atan2(diff.y, diff.x)
+				global_position = startingLocation + Vector2(cos(angle + PI), sin(angle + PI)) * 100
 		else:
-			global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
+			if startingLocation == Vector2.ZERO:
+				global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
+			else:
+				var diff = startingLocation - get_global_mouse_position()
+				var angle = atan2(diff.y, diff.x)
+				global_position = startingLocation + Vector2(cos(angle + PI), sin(angle + PI)) * 100
 			timer -= delta
 			if timer <= 0:
 				if timesShot < spell.getAmount():
