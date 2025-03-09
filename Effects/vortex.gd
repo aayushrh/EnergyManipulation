@@ -35,4 +35,6 @@ func _on_area_2d_body_exited(body):
 func _on_timer_timeout():
 	for i in bodiesIn:
 		if !(i is Blast):
-			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 0.25
+			print(i.health)
+			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 0.1 * 0.1
+			print(i.health)
