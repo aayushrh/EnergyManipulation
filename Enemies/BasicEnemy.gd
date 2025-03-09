@@ -130,7 +130,11 @@ func _ready():
 	for i in (spellcount):
 		var spell2 = Spell.new("Spell Number " + str(i))
 		spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-		spell2.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
+		var isElement = false
+		while(!isElement):
+			var newCard = get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)]
+			isElement = newCard.isElement
+			spell2.components.append(newCard)
 		spells.append(spell2)
 	#var spell = Spell.new("firstSpell")
 	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
