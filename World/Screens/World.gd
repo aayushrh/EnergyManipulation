@@ -31,14 +31,14 @@ func _ready():
 	spell.components = testComponentSpellCard
 	spell.type = testTypeSpellCard
 	spell.binding = 69
-	var spell2 = Spell.new("Fireball2")
-	spell2.components = testComponentSpellCard2
-	spell2.type = testTypeSpellCard2
-	spell2.binding = 70
+	#var spell2 = Spell.new("Fireball2")
+	#spell2.components = testComponentSpellCard2
+	#spell2.type = testTypeSpellCard2
+	#spell2.binding = 70
 	#Global.magicCards = testComponentSpellCard
 	Global.magicCards.append(testTypeSpellCard)
 	print(Global.magicCards)
-	Global.spellList = [spell, spell2]
+	Global.spellList = [spell]#, spell2]
 	Global.defaultElement = defaultElement
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 

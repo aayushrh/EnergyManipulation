@@ -147,6 +147,7 @@ func _physics_process(delta):
 		#$Area2D.monitoring = false
 	#else:
 		#$Area2D.monitoring = true
+		
 	if(!Global.isPaused() and !pause):
 		detectMagic = detectMagic.filter(runDelay)
 		if(health != hp):

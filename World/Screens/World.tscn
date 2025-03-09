@@ -296,11 +296,9 @@ radius = 37.5
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testComponentSpellCard = Array[ExtResource("4_5utis")]([ExtResource("7_6b0eb"), ExtResource("9_7j7bf"), ExtResource("5_3gf8k")])
 testTypeSpellCard = ExtResource("4_ov6f6")
-testComponentSpellCard2 = Array[ExtResource("4_5utis")]([ExtResource("2_5nixq"), ExtResource("2_c5j3f"), ExtResource("8_dkp5y"), ExtResource("9_dhoch")])
 testTypeSpellCard2 = ExtResource("4_ov6f6")
-allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("7_6b0eb"), ExtResource("2_c5j3f"), ExtResource("9_vavhn"), ExtResource("9_7j7bf"), ExtResource("10_i3moq")])
+allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("7_6b0eb"), ExtResource("2_c5j3f"), ExtResource("9_vavhn"), ExtResource("9_7j7bf"), ExtResource("10_i3moq"), ExtResource("9_dhoch"), ExtResource("5_3gf8k")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
 defaultElement = ExtResource("12_qtnuf")
 
@@ -310,6 +308,8 @@ tile_map_data = PackedByteArray("AADt//P/AAAAAAQAAADt//T/AAAAAAAAAADt//X/AAAAAAE
 tile_set = SubResource("TileSet_1lq6q")
 
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
+collision_layer = 9
+collision_mask = 9
 ROTATIONSPEED = 20.0
 MAXHEALTH = 20.0
 MAXMANA = 500.0
@@ -370,6 +370,8 @@ position_smoothing_enabled = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(1578, -6)
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("9_4eups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -378,6 +380,8 @@ shape = SubResource("RectangleShape2D_g6vus")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(-1567, -3)
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("9_4eups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
@@ -387,6 +391,8 @@ shape = SubResource("RectangleShape2D_g6vus")
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2(6, -1086)
 rotation = 1.5708
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("9_4eups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
@@ -396,6 +402,8 @@ shape = SubResource("RectangleShape2D_g6vus")
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2(12, 1095)
 rotation = 1.5708
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("9_4eups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
