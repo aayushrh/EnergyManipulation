@@ -40,5 +40,5 @@ func _on_timer_timeout():
 	for i in bodiesIn:
 		if !(i is Blast):
 			print(i.health)
-			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 0.1 * 0.1
+			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 * 0.1
 			print(i.health)
