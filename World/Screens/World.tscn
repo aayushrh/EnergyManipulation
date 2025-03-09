@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="4_ov6f6"]
 [ext_resource type="Resource" uid="uid://vj56ldubctv8" path="res://Magic/MagicCards/Resources/Components/Placed.tres" id="5_3gf8k"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
-[ext_resource type="Resource" uid="uid://cyg8d0qh30y25" path="res://Magic/MagicCards/Resources/Components/Unbound.tres" id="5_xkefl"]
+[ext_resource type="Resource" path="res://Magic/MagicCards/Resources/Components/Unbound.tres" id="5_xkefl"]
 [ext_resource type="Resource" uid="uid://bbvudeis28j5p" path="res://Magic/MagicCards/Resources/Components/Light.tres" id="7_6b0eb"]
 [ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
 [ext_resource type="Resource" uid="uid://bgya6tyk2afhu" path="res://Magic/MagicCards/Resources/Components/Dark.tres" id="8_dkp5y"]
