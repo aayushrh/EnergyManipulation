@@ -26,13 +26,13 @@ func _process(delta):
 			var num = rng.randi_range(0, 3)
 			var spawnLoc = Vector2.ZERO
 			if(num == 0):
-				spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), 1000 + 10)
+				spawnLoc = Vector2(rng.randf_range(-1400, 1400), 950)
 			if(num == 1):
-				spawnLoc = Vector2(rng.randf_range(-1500 - 10, 1500 + 10), -1000 - 10)
+				spawnLoc = Vector2(rng.randf_range(-1400, 1400), -950)
 			if(num == 2):
-				spawnLoc = Vector2(1500 + 10, rng.randf_range(-1000 - 10, 1000 + 10))
+				spawnLoc = Vector2(1400, rng.randf_range(-950, 950))
 			if(num == 3):
-				spawnLoc = Vector2(-1500 - 10, rng.randf_range(-1000 - 10, 1000 + 10))
+				spawnLoc = Vector2(-1400, rng.randf_range(-950, 950))
 			
 			var basicEnemy = BasicEnemy.instantiate()
 			basicEnemy.global_position = spawnLoc# + player.global_position

@@ -12,7 +12,7 @@ func _setSpell(nspell, ntype):
 	
 func _process(delta):
 	if spell != null:
-		var suctionPower = spell.getAttrScaled("Suction Power") * 50
+		var suctionPower = spell.getAttrScaled("Suction Power") * 25
 		print("Suction power is: " + str(suctionPower))
 		
 		for i in bodiesIn:
@@ -32,4 +32,4 @@ func _on_area_2d_body_exited(body):
 func _on_timer_timeout():
 	for i in bodiesIn:
 		if !(i is Blast):
-			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage")
+			i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 0.25
