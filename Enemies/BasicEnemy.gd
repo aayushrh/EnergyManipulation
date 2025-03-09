@@ -154,6 +154,7 @@ func _physics_process(delta):
 		detectMagic = detectMagic.filter(runDelay)
 		if(health != hp):
 			updateHP(delta)
+		if(mana != stored_energy):
 			updateMana(delta)
 		queue_redraw()
 		time+=delta
