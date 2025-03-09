@@ -24,4 +24,5 @@ attackSpeedMult = 1.0
 sizeMult = 1.0
 castingSpeedMult = 1.0
 attribute = Array[ExtResource("1_28dgm")]([])
+clashingAdvantage = 1.0
 isElement = false

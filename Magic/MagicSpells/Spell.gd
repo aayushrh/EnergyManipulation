@@ -108,7 +108,7 @@ func getAttr(name):
 	return 50
 
 func getAttrScaled(name):
-	var n = (getAttr("Power") + 50.0)/100.0
+	var n = (getAttr(name) + 50.0)/100.0
 	return n
 
 func getPower():
