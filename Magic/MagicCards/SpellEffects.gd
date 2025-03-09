@@ -67,7 +67,7 @@ func addVortex(spellObj:SpellCasted):
 	spellObj.add_child(vortex)
 
 func giveBackHP(dmgRed, spellObj, enemy):
-	if(spellObj.sender is BasicEnemy):
+	if(is_instance_valid(spellObj) and spellObj.sender is BasicEnemy):
 		spellObj.sender.fuck = true
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 
