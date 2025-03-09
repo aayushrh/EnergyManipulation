@@ -218,11 +218,11 @@ func magic_check(delta):
 			if Input.is_key_pressed(e.binding):
 				hit = true
 			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
-				e._cast(self)
+				var blast = e._cast(self)
 				get_tree().current_scene.spellsCasted += 1
-				slow = true
 				ROTATIONSPEED /= 2
 				stored_energy -= e.initCost()
+				slow = blast.slow
 				e.resetCooldown(true,pow(0.95,comprehension))
 				#updateEnergy()
 	onLastTurn = hit

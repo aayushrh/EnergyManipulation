@@ -12,6 +12,7 @@ var power = 1.0
 var pSpeed = 1.0
 var size = 1.0
 var cSpeed = 1.0
+var slow = true
 
 func create():
 	var newSpell = Spell.new(spellName)
@@ -52,7 +53,7 @@ func resetCooldown(use, multi):
 	using = use
 
 func getcd():
-	var cd = 1
+	var cd = 3
 	if(components != null):
 		for i in components:
 			cd *= i.cdMult
@@ -70,7 +71,7 @@ func getCastingTime():
 	return time
 
 func getMaxPowerTime():
-	var time = 1
+	var time = 1.25
 	if(components != null):
 		for i in components:
 			time *= 1/i.castingSpeedMult

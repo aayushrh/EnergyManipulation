@@ -12,6 +12,7 @@ var chargeMulti = 1.0
 var speed = 1000.0
 var buttonLetGo = false
 var castingCost = 0
+var slow = true
 var startingLocation = Vector2.ZERO
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")

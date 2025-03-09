@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://cyg8d0qh30y25"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_jlk4q"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_67e2k"]
+[ext_resource type="Texture2D" uid="uid://np0r1pb6l1gh" path="res://Art/sprint.png" id="2_ws8ek"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_016sv"]
+
+[resource]
+script = ExtResource("2_67e2k")
+spellEffects = ExtResource("4_016sv")
+cardName = "Unbound"
+cardDescription = "You get freedom of movement when casting spell"
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+castingEffects = Array[String](["unbound"])
+color = Color(0, 0, 0, 1)
+icon = ExtResource("2_ws8ek")
+cdMult = 1.2
+costMult = 1.2
+powerMult = 1.0
+attackSpeedMult = 1.0
+sizeMult = 1.0
+castingSpeedMult = 1.0
+attribute = Array[ExtResource("1_jlk4q")]([])
+clashingAdvantage = 1.0
+isElement = false

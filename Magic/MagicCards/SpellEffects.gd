@@ -58,6 +58,9 @@ func takeHealth(spellObj:SpellCasted):
 		else:
 			spellObj.sender.health = 0.001
 
+func unbound(spellObj:SpellCast):
+	spellObj.slow = false
+
 func addVortex(spellObj:SpellCasted):
 	var vortex = VortexScene.instantiate()
 	vortex._setSpell(spellObj.spell, spellObj.sender.type)

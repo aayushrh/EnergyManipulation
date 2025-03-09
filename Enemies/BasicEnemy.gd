@@ -87,6 +87,7 @@ func _ready():
 	healthbar = HealthBar.instantiate()
 	healthbar.myParent = self
 	get_tree().current_scene.add_child(healthbar)
+	var spellcount = 2
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
@@ -95,6 +96,7 @@ func _ready():
 			intel = 0.8 + s/20.0
 			reactionDelay = randf_range(0.025,0.075)
 			wisdom = 0.5 + s/50
+			spellcount += floor(s/6)
 			#TOPSPEED *= 2
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
@@ -103,6 +105,7 @@ func _ready():
 			intel = 1 + s/5.0
 			reactionDelay = randf_range(0.1,0.2)
 			wisdom = 0.5 + s/100
+			spellcount = 1 + floor(s/10)
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
@@ -111,6 +114,7 @@ func _ready():
 			intel = 0.75 + s/25.0
 			reactionDelay = randf_range(0.15,0.25)
 			wisdom = 1 + s/100
+			spellcount += floor(s/8)
 		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
@@ -118,14 +122,16 @@ func _ready():
 			intel = 0.75 + s/20.0
 			reactionDelay = randf_range(0.05,0.1)
 			wisdom = 2 + s/2
-			"""rng.randomize()
-			for i in (int(floor(stage/5)) + 1):
-				var spell2 = Spell.new("Spell Number " + str(i))
-				spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
-				spell2.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
-				spells.append(spell2)"""
+			spellcount += floor(s/3)
+			
 	stored_energy *= wisdom
 	MAXMANA *= wisdom
+	rng.randomize()
+	for i in (spellcount):
+		var spell2 = Spell.new("Spell Number " + str(i))
+		spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
+		spell2.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
+		spells.append(spell2)
 	#var spell = Spell.new("firstSpell")
 	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	#spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
