@@ -3,8 +3,7 @@ extends Node2D
 var myParent
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -22,5 +21,9 @@ func get_actual_health():
 func get_animation_health():
 	return $animation
 
+func get_animation_energy():
+	return $animation_energy
+
 func set_energy(energy):
 	$actual_energy.value = energy
+	print(energy)

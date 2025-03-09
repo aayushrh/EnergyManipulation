@@ -33,6 +33,7 @@ var MAXMANA = 100.0
 var agg = false#(randi_range(0,1)==0)
 var pause = false
 var stored_energy = 100 : set = _energy_change
+var mana = stored_energy
 var blinded = false
 var reactionDelay = 0.0
 var intel = 1
@@ -72,6 +73,7 @@ func _ready():
 	art.finishCharge.connect(_finishCharge)
 	healthbar = HealthBar.instantiate()
 	healthbar.myParent = self
+	healthbar
 	get_tree().current_scene.add_child(healthbar)
 	rng.randomize()
 	var num = rng.randi_range(0, 9)
@@ -152,6 +154,7 @@ func _physics_process(delta):
 		detectMagic = detectMagic.filter(runDelay)
 		if(health != hp):
 			updateHP(delta)
+			updateMana(delta)
 		queue_redraw()
 		time+=delta
 		magic_check(delta)
@@ -208,6 +211,21 @@ func _energy_change(newMANA: float):
 		if(stored_energy < 0):
 			stored_energy = 0
 	healthbar.set_energy(stored_energy)
+
+func updateMana(delta):
+	var bar_energy = stored_energy
+	if(mana < bar_energy):
+		mana += maxf(BARSPEED / 100 * MAXMANA * delta,abs(mana - bar_energy) * delta)
+		if(mana > bar_energy):
+			mana = bar_energy
+	else:
+		mana -= maxf(BARSPEED / 100 * MAXMANA * delta,abs(mana - bar_energy) * delta)
+		if(mana < bar_energy):
+			mana = bar_energy
+	updateEnergy()
+
+func updateEnergy():
+	healthbar.get_animation_energy().value = mana
 
 func updateHP(delta):
 	var bar_health = health * HPBARMULT
@@ -423,15 +441,9 @@ func un_block():
 	slow = false
 
 func energyGain(delta):
-	print("Energy: " + str(stored_energy))
 	gainingEnergy = stored_energy < MAXMANA
 	stored_energy += delta * wisdom * 25
-	velocity -= $SoftBody.getVector() * TOPSPEED * delta
-	if(velocity.length()>1000):
-		velocity *= 1000.0/velocity.length()
-	velocity *= pow(0.80,delta)
-	if(velocity.length() < 10):
-		velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 
 func perp_vector(vect):
 	if(rng.randi_range(0,1)==1):
