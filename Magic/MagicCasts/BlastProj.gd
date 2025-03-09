@@ -98,7 +98,7 @@ func _on_area_2d_area_entered(area):
 		elif(is_instance_valid(body)):
 			body.queue_free()
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type:
-		if(body.global_position.x + body.global_position.y < global_position.x + global_position.y and !body.combined and !combined):
+		if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
 			var blast = BlastProj.instantiate()
 			var nspell = Spell.new("newThing")
 			blast.combined = true
