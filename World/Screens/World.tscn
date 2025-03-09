@@ -308,7 +308,6 @@ tile_map_data = PackedByteArray("AADt//P/AAAAAAQAAADt//T/AAAAAAAAAADt//X/AAAAAAE
 tile_set = SubResource("TileSet_1lq6q")
 
 [node name="Player" parent="." instance=ExtResource("1_s7tpg")]
-collision_layer = 9
 collision_mask = 9
 ROTATIONSPEED = 20.0
 MAXHEALTH = 20.0
