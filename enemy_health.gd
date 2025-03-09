@@ -21,3 +21,6 @@ func get_actual_health():
 
 func get_animation_health():
 	return $animation
+
+func set_energy(energy):
+	$actual_energy.value = energy

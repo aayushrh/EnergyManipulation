@@ -206,7 +206,7 @@ func _energy_change(newMANA: float):
 		stored_energy += change
 		if(stored_energy < 0):
 			stored_energy = 0
-	#$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
+	healthbar.set_energy(stored_energy)
 
 func updateHP(delta):
 	var bar_health = health * HPBARMULT
