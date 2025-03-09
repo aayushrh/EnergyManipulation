@@ -156,3 +156,4 @@ func getClashingAdvantage():
 	if(components != null):
 		for i in components:
 			c *= i.clashingAdvantage
+	return c
