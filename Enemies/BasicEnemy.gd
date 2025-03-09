@@ -19,6 +19,7 @@ var spells = []# enemy casted spells
 var castedIndex = -1
 var canDash = true
 var type = 1
+var nomoveinput = false
 var wisdom = 1.0
 var gainingEnergy = false
 var fuck = false # fuck nature
@@ -29,10 +30,10 @@ var casting = false
 var healing = 1.0
 var bonusHealBlock = false
 var MAXHEALTH = 0
-var MAXMANA = 100.0
+var MAXMANA = 10.0 : set = _max_mana_change
 var agg = false#(randi_range(0,1)==0)
 var pause = false
-var stored_energy = 100 : set = _energy_change
+var stored_energy = 10.0 : set = _energy_change
 var mana = stored_energy
 var blinded = false
 var reactionDelay = 0.0
@@ -71,10 +72,6 @@ var healthbar = null
 func _ready():
 	print(stage)
 	art.finishCharge.connect(_finishCharge)
-	healthbar = HealthBar.instantiate()
-	healthbar.myParent = self
-	healthbar
-	get_tree().current_scene.add_child(healthbar)
 	rng.randomize()
 	var num = rng.randi_range(0, 9)
 	rng.randomize()
@@ -87,6 +84,9 @@ func _ready():
 			break
 		
 	var s = float(stage)
+	healthbar = HealthBar.instantiate()
+	healthbar.myParent = self
+	get_tree().current_scene.add_child(healthbar)
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
@@ -94,6 +94,7 @@ func _ready():
 			MAXHEALTH = 2 + s/20.0
 			intel = 0.8 + s/20.0
 			reactionDelay = randf_range(0.025,0.075)
+			wisdom = 0.5 + s/50
 			#TOPSPEED *= 2
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
@@ -101,6 +102,7 @@ func _ready():
 			MAXHEALTH = 2 + s/10.0
 			intel = 1 + s/5.0
 			reactionDelay = randf_range(0.1,0.2)
+			wisdom = 0.5 + s/100
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
@@ -108,19 +110,22 @@ func _ready():
 			MAXHEALTH = 4 + s / 2.0
 			intel = 0.75 + s/25.0
 			reactionDelay = randf_range(0.15,0.25)
+			wisdom = 1 + s/100
 		9: # Wisdom dude
 			agg = false
 			dash_cd = 5
 			MAXHEALTH = 2 + s/5.0
 			intel = 0.75 + s/20.0
 			reactionDelay = randf_range(0.05,0.1)
-			rng.randomize()
+			wisdom = 2 + s/2
+			"""rng.randomize()
 			for i in (int(floor(stage/5)) + 1):
 				var spell2 = Spell.new("Spell Number " + str(i))
 				spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 				spell2.components.append(get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)])
-				spells.append(spell2)
-			
+				spells.append(spell2)"""
+	stored_energy *= wisdom
+	MAXMANA *= wisdom
 	#var spell = Spell.new("firstSpell")
 	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	#spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
@@ -164,14 +169,17 @@ func _physics_process(delta):
 			blast.letGo()
 			blast = null
 			castedIndex = -1
-		if(stored_energy < MAXMANA/4 || gainingEnergy and blast == null):
+		if(blast == null and (stored_energy < MAXMANA/4 or stored_energy < spells[0].initCost() or gainingEnergy)):
 			energyGain(delta)
-		elif(!nomove):
-			pass
+		if(!nomove):
 			_move(delta)
 		move_and_slide()
 	if(!Global.isPaused and pause):
 		_effectsHandle(delta)
+
+func _max_mana_change(newMax: float):
+	healthbar.update_maxMana(newMax)
+	MAXMANA = newMax
 
 func _health_change(newHP: float):
 	var change = newHP - health
@@ -285,8 +293,8 @@ func _move(delta):
 			inputV = (player.global_position - global_position).normalized()
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			inputV = (player.global_position - global_position).normalized() * -1
-		
-		velocity += inputV * 20
+		if(!nomoveinput):
+			velocity += inputV * 20
 		
 		#if velocity.length() > TOPSPEED:
 			#velocity = velocity.normalized() * TOPSPEED
@@ -445,8 +453,7 @@ func un_block():
 
 func energyGain(delta):
 	gainingEnergy = stored_energy < MAXMANA
-	stored_energy += delta * wisdom * 25
-	velocity = Vector2.ZERO
+	stored_energy += delta * wisdom * 10
 
 func perp_vector(vect):
 	if(rng.randi_range(0,1)==1):

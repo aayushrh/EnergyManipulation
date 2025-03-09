@@ -30,5 +30,8 @@ func get_animation_energy():
 
 func set_energy(energy):
 	$Node2D/actual_energy.value = energy
-	print("energy is: " + str(energy))
 	timer = 1
+
+func update_maxMana(maxMana):
+	$Node2D/animation_energy.max_value = maxMana
+	$Node2D/actual_energy.max_value = maxMana
