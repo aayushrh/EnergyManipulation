@@ -56,7 +56,7 @@ var healthbar = null
 @export var ROTATIONSPEED = 10
 @export var Shockwave : PackedScene
 @export var dash_cd = 5
-@export var dash_time = 0.05
+@export var dash_time = 0.01
 @export var block_cd = 1.0
 @export var caution_range = 300
 @export var min_range = 300 - 50*int(agg)
@@ -441,6 +441,7 @@ func dash(dir):
 	canDash = false
 	$dashing.start(dash_time)
 	$dash_cd.start(dash_cd+dash_time)
+	print("dash")
 
 func do_block():
 	pass

@@ -13,12 +13,16 @@ func _setSpell(nspell, ntype):
 func _process(delta):
 	if spell != null:
 		var suctionPower = spell.getAttrScaled("Suction Power") * 50
-		print("Suction power is: " + str(suctionPower))
 		
+		var hasV = false
 		for i in bodiesIn:
+			for j in i.get_children():
+				if j is Vortex:
+					hasV = true
+			
 			if i is Blast:
-				i.v -= (i.global_position - global_position).normalized() * suctionPower * 5.0
-			elif i is CharacterBody2D:
+				i.v -= (i.global_position - global_position).normalized() * suctionPower
+			elif i is CharacterBody2D and !hasV:
 				if !i.slow:
 					i.velocity -= (i.global_position - global_position).normalized() * suctionPower
 				else:
