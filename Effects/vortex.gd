@@ -22,11 +22,11 @@ func _process(delta):
 				i.velocity -= (i.global_position - global_position).normalized() * suctionPower
 
 func _on_area_2d_body_entered(body):
-	if (body is Blast and body.sender.type != type) or (!(body is Blast) and body.type != type and body != get_parent()):
+	if (body is Blast and is_instance_valid(body.sender) and body.sender.type != type) or (!(body is Blast) and is_instance_valid(body) and body.type != type and body != get_parent()):
 		bodiesIn.append(body)
 
 func _on_area_2d_body_exited(body):
-	if (body is Blast and body.sender.type != type) or (!(body is Blast) and body.type != type and body != get_parent()):
+	if (body is Blast and is_instance_valid(body.sender) and body.sender.type != type) or (!(body is Blast) and is_instance_valid(body) and body.type != type and body != get_parent()):
 		bodiesIn.remove_at(bodiesIn.find(body))
 
 func _on_timer_timeout():

@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch5dwer6goph4"]
+
+[ext_resource type="Script" path="res://enemy_health.gd" id="1_qu4wa"]
+
+[node name="enemy_health" type="Node2D"]
+script = ExtResource("1_qu4wa")
+
+[node name="HpBG" type="ColorRect" parent="."]
+layout_direction = 1
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="animation" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 40.0
+
+[node name="over" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 40.0
+color = Color(0, 1, 1, 1)
+
+[node name="actual" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 40.0
+color = Color(0, 1, 0, 1)

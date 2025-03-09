@@ -40,6 +40,7 @@ var hp = 0.0
 var stage = 0
 var delt = 0
 var prediction = false
+var healthbar = null
 
 @export var HPBARMULT = 80.0
 @export var BARSPEED = 20.0
@@ -64,12 +65,14 @@ var prediction = false
 
 @onready var BlastTscn = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
-
+@onready var HealthBar = preload("res://enemy_health.tscn")
 
 func _ready():
 	print(stage)
 	art.finishCharge.connect(_finishCharge)
-	art.hit.connect(_shockwave)
+	healthbar = HealthBar.instantiate()
+	healthbar.myParent = self
+	get_tree().current_scene.add_child(healthbar)
 	rng.randomize()
 	var num = rng.randi_range(0, 9)
 	rng.randomize()
@@ -186,8 +189,8 @@ func _health_change(newHP: float):
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
-	$Health2.size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
-	$Health3.size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
+	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
+	healthbar.get_over_health().size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 	fuck = false
 
 func _energy_change(newMANA: float):
@@ -218,7 +221,7 @@ func updateHP(delta):
 	updateHealth()
 
 func updateHealth():
-	$Health.size.x = (hp * 1.0)/(MAXHEALTH*1.0)
+	healthbar.get_animation_health().size.x = (hp * 1.0)/(MAXHEALTH*1.0)
 
 func _effectsHandle(delta):
 	for e in effects:
