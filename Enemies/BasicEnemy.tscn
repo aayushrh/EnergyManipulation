@@ -57,34 +57,6 @@ polygon = PackedVector2Array(-152, -350, 152, -350, 30, 0, -30, 0)
 [node name="dashing" type="Timer" parent="."]
 one_shot = true
 
-[node name="HpBG" type="ColorRect" parent="."]
-layout_direction = 1
-offset_left = -40.0
-offset_top = 30.0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 0, 0, 1)
-
-[node name="Health" type="ColorRect" parent="."]
-offset_left = -40.0
-offset_top = 30.0
-offset_right = -10.0
-offset_bottom = 40.0
-
-[node name="Health3" type="ColorRect" parent="."]
-offset_left = -40.0
-offset_top = 30.0
-offset_right = -10.0
-offset_bottom = 40.0
-color = Color(0, 1, 1, 1)
-
-[node name="Health2" type="ColorRect" parent="."]
-offset_left = -40.0
-offset_top = 30.0
-offset_right = -10.0
-offset_bottom = 40.0
-color = Color(0, 1, 0, 1)
-
 [connection signal="timeout" from="block_cd" to="." method="_on_block_cd_timeout"]
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
 [connection signal="body_entered" from="SoftBody" to="SoftBody" method="_on_body_entered"]
