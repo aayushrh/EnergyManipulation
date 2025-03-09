@@ -28,4 +28,5 @@ attackSpeedMult = 2.0
 sizeMult = 0.7
 castingSpeedMult = 2.0
 attribute = Array[ExtResource("3_n3rm8")]([])
+clashingAdvantage = 0.5
 isElement = true
