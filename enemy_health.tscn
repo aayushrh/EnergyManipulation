@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch5dwer6goph4"]
+[gd_scene load_steps=3 format=3 uid="uid://ckihhxnm3nq5o"]
 
 [ext_resource type="Script" path="res://enemy_health.gd" id="1_qu4wa"]
 [ext_resource type="Texture2D" uid="uid://cwlwgwfdfwlh0" path="res://Art/BOTW.png" id="2_32f2b"]

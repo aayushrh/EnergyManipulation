@@ -150,3 +150,9 @@ func getAmount():
 	if a == 50:
 		a = 1
 	return a
+
+func getClashingAdvantage():
+	var c = 1
+	if(components != null):
+		for i in components:
+			c *= i.clashingAdvantage
