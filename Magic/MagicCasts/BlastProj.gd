@@ -37,7 +37,7 @@ func _setSize(size):
 	setSize = true
 
 func getSpeed():
-	return speed * spell.getPSpeed() * mult
+	return speed * spell.getPSpeed() #* mult
 
 func _integrate_forces(state):
 	velocity = v

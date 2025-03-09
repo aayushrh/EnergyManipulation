@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch5dwer6goph4"]
+[gd_scene load_steps=3 format=3 uid="uid://ckihhxnm3nq5o"]
 
 [ext_resource type="Script" path="res://enemy_health.gd" id="1_qu4wa"]
 [ext_resource type="Texture2D" uid="uid://cwlwgwfdfwlh0" path="res://Art/BOTW.png" id="2_32f2b"]
@@ -34,13 +34,15 @@ offset_right = -10.0
 offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
 
-[node name="Botw" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Botw" type="Sprite2D" parent="Node2D"]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 0.490196)
 position = Vector2(75, 34)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_32f2b")
 
-[node name="animation_energy" type="TextureProgressBar" parent="."]
+[node name="animation_energy" type="TextureProgressBar" parent="Node2D"]
 self_modulate = Color(0.45098, 0, 1, 1)
 offset_left = 43.0
 offset_top = 2.0
@@ -51,7 +53,7 @@ value = 30.0
 fill_mode = 5
 texture_progress = ExtResource("2_32f2b")
 
-[node name="actual_energy" type="TextureProgressBar" parent="."]
+[node name="actual_energy" type="TextureProgressBar" parent="Node2D"]
 self_modulate = Color(0.45098, 1, 1, 1)
 offset_left = 43.0
 offset_top = 2.0

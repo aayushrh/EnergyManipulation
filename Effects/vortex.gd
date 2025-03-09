@@ -12,14 +12,17 @@ func _setSpell(nspell, ntype):
 	
 func _process(delta):
 	if spell != null:
-		var suctionPower = spell.getAttrScaled("Suction Power") * 25
+		var suctionPower = spell.getAttrScaled("Suction Power") * 50
 		print("Suction power is: " + str(suctionPower))
 		
 		for i in bodiesIn:
 			if i is Blast:
 				i.v -= (i.global_position - global_position).normalized() * suctionPower * 5.0
 			elif i is CharacterBody2D:
-				i.velocity -= (i.global_position - global_position).normalized() * suctionPower
+				if !i.slow:
+					i.velocity -= (i.global_position - global_position).normalized() * suctionPower
+				else:
+					i.velocity -= 2 * (i.global_position - global_position).normalized() * suctionPower
 
 func _on_area_2d_body_entered(body):
 	if (body is Blast and is_instance_valid(body.sender) and body.sender.type != type) or (!(body is Blast) and is_instance_valid(body) and body.type != type and body != get_parent()):

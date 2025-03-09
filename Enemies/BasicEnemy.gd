@@ -259,6 +259,8 @@ func _hit(hitbox):
 	time = 0
 
 func _move(delta):
+	velocity *= 0.9
+	
 	var softBodyPush = $SoftBody.getVector()
 	
 	cooldown -= delta
@@ -284,10 +286,10 @@ func _move(delta):
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			inputV = (player.global_position - global_position).normalized() * -1
 		
-		velocity += inputV
+		velocity += inputV * 20
 		
-		if velocity.length() > TOPSPEED:
-			velocity = velocity.normalized() * TOPSPEED
+		#if velocity.length() > TOPSPEED:
+			#velocity = velocity.normalized() * TOPSPEED
 		
 		#if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
 			#velocity = (player.global_position - global_position).normalized() * TOPSPEED
