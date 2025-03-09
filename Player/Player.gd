@@ -196,10 +196,10 @@ func _draw():
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
 		var v = healing / (log(velocity.length_squared()/1) + 1)
-		if(velocity.length_squared() < 1):
+		if(velocity.length_squared() < 10):
 			v = healing
-		stored_energy -= delta * 25 * v
-		health += 4 * delta * v
+		stored_energy -= delta * 30 * v
+		health += 5 * delta * v
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 
 func updateEnergy():
