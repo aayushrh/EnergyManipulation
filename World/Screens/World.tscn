@@ -341,7 +341,7 @@ layout_mode = 2
 
 [node name="CardSelection" parent="CanvasLayer" node_paths=PackedStringArray("spawner") instance=ExtResource("8_v2hr7")]
 visible = false
-cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y"), ExtResource("10_i3moq"), ExtResource("9_7j7bf"), ExtResource("9_dhoch"), ExtResource("5_3gf8k")])
+cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y"), ExtResource("10_i3moq"), ExtResource("9_7j7bf"), ExtResource("9_dhoch"), ExtResource("5_3gf8k"), ExtResource("5_xkefl")])
 spawner = NodePath("../../Spawner")
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]
