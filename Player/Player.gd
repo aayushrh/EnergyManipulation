@@ -77,7 +77,8 @@ func _ready():
 	base_top_speed = TOPSPEED
 	get_tree().current_scene.damageHealed = 0
 
-func _physics_process(delta):
+func _process(delta):
+	print(1/delta)
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -303,15 +304,18 @@ func _friction(delta):
 	velocity *= pow(FRICTION,delta)
 
 func _movement(delta):
+	var newVel = velocity
 	var input_vector = Vector2.ZERO
 	input_vector.y = Input.get_axis("up", "down")
 	input_vector.x = Input.get_axis("left", "right")
 	input_vector = input_vector.normalized()
-	velocity += input_vector * ACCELERATION * delta
+	newVel += input_vector * ACCELERATION * delta
 	if(!blocking and !slow):
-		velocity = velocity.limit_length(TOPSPEED)
+		newVel = newVel.limit_length(TOPSPEED)
 	else:
-		velocity = velocity.limit_length(TOPSPEED/2)
+		newVel = newVel.limit_length(TOPSPEED/2)
+	
+	velocity = newVel
 
 func canDash():
 	for e in effects:
@@ -328,7 +332,9 @@ func _hit(hitbox):
 	#_hit_register()
 
 func _dmgRed(time):
-	if(time < 0 and time > -0.02085):
+	var mod = 1.5
+	
+	if(time < 0 and time > -0.02085 * mod):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
@@ -337,21 +343,21 @@ func _dmgRed(time):
 		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
-	if(time < -0.02085 and time > -0.04165):
+	if(time < -0.02085 * mod and time > -0.04165 * mod):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
-		return (((0.0833 - abs(time)*2)/(0.0416)) * 0.15) + 0.85
-	if(time < -0.04165 and time > -0.06125):
+		return (((0.0833 - abs(time/mod)*2)/(0.0416)) * 0.15) + 0.85
+	if(time < -0.04165 * mod and time > -0.06125 * mod):
 		var badBlock = BadBlock.instantiate()
 		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
-		return (-13.68 + 3.173*(abs(time)*200) + 0.02387*pow((abs(time)*200), 2))/100.0
-	if(time > 0 and time < 0.0417):
+		return (-13.68 + 3.173*(abs(time/mod)*200) + 0.02387*pow((abs(time/mod)*200), 2))/100.0
+	if(time > 0 and time < 0.0417 * mod):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
@@ -360,20 +366,20 @@ func _dmgRed(time):
 		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
-	if(time > 0.0417 and time < 0.0833):
+	if(time > 0.0417 * mod and time < 0.0833 * mod):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
-		return (((0.0833 - time)/(0.0416)) * 0.15) + 0.85
-	if(time > 0.0833 and time < 0.125):
+		return (((0.0833 - time/mod)/(0.0416)) * 0.15) + 0.85
+	if(time > 0.0833 * mod and time < 0.125 * mod):
 		var badBlock = BadBlock.instantiate()
 		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
-		return (-13.68 + 3.173*(time*100) + 0.02387*pow((time*100), 2))/100.0
+		return (-13.68 + 3.173*(time/mod*100) + 0.02387*pow((time/mod*100), 2))/100.0
 	get_tree().current_scene.noBlocks += 1
 	return 0
 	

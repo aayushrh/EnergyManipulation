@@ -43,6 +43,9 @@ func _ready():
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
 func _process(delta):
+	
+	$CanvasLayer/Label.text = "FPS: " + str(round(1/delta))
+	
 	if Input.is_action_just_pressed("Pause") and !$CanvasLayer/MainMenu.visible:
 		$CanvasLayer/MainMenu._show()
 		Global.pause[0] = 1
