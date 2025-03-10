@@ -123,7 +123,9 @@ func _ready():
 			reactionDelay = randf_range(0.05,0.1)
 			wisdom = 2 + s/2
 			spellcount += floor(s/3)
-			
+	
+	print("spellcount is: " + str(spellcount))
+	
 	stored_energy *= wisdom
 	MAXMANA *= wisdom
 	rng.randomize()

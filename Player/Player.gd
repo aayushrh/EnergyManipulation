@@ -78,7 +78,6 @@ func _ready():
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
-	print(1/delta)
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
