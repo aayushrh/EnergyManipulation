@@ -196,15 +196,19 @@ func _draw():
 
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
-		var v = healing / (log(velocity.length_squared()/1) + 1)
-		if(velocity.length_squared() < 10):
+		var v = healing / (log(velocity.length_squared()/100)/log(10) + 1)
+		if(velocity.length_squared() < 100):
 			v = healing
-		stored_energy -= delta * 15 * v * healScale
-		health += 2.5 * delta * v * healScale
-		healScale *= pow(1.01,delta)
+			healScale *= pow(1.1,delta)
+		elif(healScale > 1):
+			healScale *= pow(0.75, delta)
+		stored_energy -= delta * 6 * healScale * pow(v, 0.99)
+		health += delta * v * healScale
+		
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
-	else:
-		healScale = 1
+	elif(healScale > 1):
+		healScale *= pow(0.5, delta)
+		
 
 func updateEnergy():
 	$CanvasLayer/EnergyBar.size.x = min(mana * 5, MAXMANA*ENERGYBARMULT)

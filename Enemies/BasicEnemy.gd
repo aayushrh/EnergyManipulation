@@ -56,7 +56,7 @@ var chargeTime = 0
 @export var ROTATIONSPEED = 10
 @export var Shockwave : PackedScene
 @export var dash_cd = 5
-@export var dash_time = 0.01
+@export var dash_time = 0.1
 @export var block_cd = 1.0
 @export var caution_range = 300
 @export var min_range = 300 - 50*int(agg)
@@ -305,7 +305,8 @@ func _move(delta):
 			inputV = (player.global_position - global_position).normalized()
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			inputV = (player.global_position - global_position).normalized() * -1
-		if(!nomoveinput):
+		if(!nomoveinput and !$Charging.emitting):
+			print($Charging.emitting)
 			velocity += inputV * 20
 		
 		#if velocity.length() > TOPSPEED:
@@ -466,6 +467,7 @@ func un_block():
 
 func energyGain(delta):
 	$Charging.emitting = stored_energy < MAXMANA
+
 	stored_energy += delta * wisdom * 0.05 * pow(chargeTime,2)
 	chargeTime += delta
 	if(!$Charging.emitting):
@@ -546,6 +548,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_dashing_timeout() -> void:
 	nomove = false
+	velocity /= DASHSPEED
 
 func attachEffect(effect):
 	var visual = effect.visual.instantiate()
