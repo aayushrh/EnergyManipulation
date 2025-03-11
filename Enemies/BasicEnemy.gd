@@ -21,7 +21,6 @@ var canDash = true
 var type = 1
 var nomoveinput = false
 var wisdom = 1.0
-var gainingEnergy = false
 var fuck = false # fuck nature
 var dodgeDir = 0
 var moveDir = 0.0
@@ -30,10 +29,10 @@ var casting = false
 var healing = 1.0
 var bonusHealBlock = false
 var MAXHEALTH = 0
-var MAXMANA = 10.0 : set = _max_mana_change
+var MAXMANA = 100.0 : set = _max_mana_change
 var agg = false#(randi_range(0,1)==0)
 var pause = false
-var stored_energy = 10.0 : set = _energy_change
+var stored_energy = MAXMANA : set = _energy_change
 var mana = stored_energy
 var blinded = false
 var reactionDelay = 0.0
@@ -43,6 +42,7 @@ var stage = 0
 var delt = 0
 var prediction = false
 var healthbar = null
+var chargeTime = 0
 
 @export var HPBARMULT = 80.0
 @export var BARSPEED = 20.0
@@ -181,7 +181,7 @@ func _physics_process(delta):
 			blast.letGo()
 			blast = null
 			castedIndex = -1
-		if(blast == null and (stored_energy < MAXMANA/4 or stored_energy < spells[0].initCost() or gainingEnergy)):
+		if(blast == null and (stored_energy < MAXMANA/4 or stored_energy < spells[0].initCost() or $Charging.emitting)):
 			energyGain(delta)
 		if(!nomove):
 			_move(delta)
@@ -394,7 +394,7 @@ func magic_check(delta):
 			track += 1
 			if(!e.using):
 				e.cooldown -= delta
-			if(dodgeDir == 0 and e.cooldown < 0 and !casting and stored_energy > e.initCost() and !gainingEnergy):
+			if(dodgeDir == 0 and e.cooldown < 0 and !casting and stored_energy > e.initCost() and !$Charging.emitting):
 				blast = e._cast(self)
 				prediction = tactCheck(50)
 				stored_energy -= e.initCost()
@@ -465,8 +465,11 @@ func un_block():
 	slow = false
 
 func energyGain(delta):
-	gainingEnergy = stored_energy < MAXMANA
-	stored_energy += delta * wisdom * 10
+	$Charging.emitting = stored_energy < MAXMANA
+	stored_energy += delta * wisdom * 0.05 * pow(chargeTime,2)
+	chargeTime += delta
+	if(!$Charging.emitting):
+		chargeTime = 0
 
 func perp_vector(vect):
 	if(rng.randi_range(0,1)==1):

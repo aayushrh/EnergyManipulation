@@ -45,6 +45,7 @@ var time_last_hit = 0
 var health = 0.0 : set = _health_change
 var hp = 0.0#display hp
 var healing = 1.0
+var healScale = 1.0
 var bonusHealBlock = false
 var slow = false
 var rotation_speed = 0
@@ -198,9 +199,12 @@ func _heal(delta):
 		var v = healing / (log(velocity.length_squared()/1) + 1)
 		if(velocity.length_squared() < 10):
 			v = healing
-		stored_energy -= delta * 30 * v
-		health += 5 * delta * v
+		stored_energy -= delta * 15 * v * healScale
+		health += 2.5 * delta * v * healScale
+		healScale *= pow(1.01,delta)
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
+	else:
+		healScale = 1
 
 func updateEnergy():
 	$CanvasLayer/EnergyBar.size.x = min(mana * 5, MAXMANA*ENERGYBARMULT)
