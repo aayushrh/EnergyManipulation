@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cekec7pbvckd0"]
+[gd_scene load_steps=6 format=3 uid="uid://cekec7pbvckd0"]
 
 [ext_resource type="Script" path="res://World/UI/EffectUI.gd" id="1_wy0x1"]
 [ext_resource type="Texture2D" uid="uid://np0r1pb6l1gh" path="res://Art/sprint.png" id="2_o4evp"]
 [ext_resource type="Texture2D" uid="uid://ct2fjkf2ml1ep" path="res://Art/Aayush.png" id="2_u4cuo"]
 [ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="3_xen2r"]
+[ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="5_pymvx"]
 
 [node name="Control" type="Control"]
 custom_minimum_size = Vector2(64, 64)
@@ -27,3 +28,13 @@ fill_mode = 5
 nine_patch_stretch = true
 texture_under = ExtResource("2_u4cuo")
 texture_progress = ExtResource("3_xen2r")
+
+[node name="stack" type="Label" parent="."]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 24.0
+offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_pymvx")
+horizontal_alignment = 1

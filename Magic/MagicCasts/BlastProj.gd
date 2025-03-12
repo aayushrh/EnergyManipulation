@@ -66,7 +66,7 @@ func _physics_process(delta):
 
 func damageTaken(reciever):
 	if !setPower:
-		return spell.getPower() * ((mult-1)/2+1) * sender.intel
+		return spell.getPower() * ((mult-1)/2+1) * sender.getIntel()
 	return power
 
 func clone():
@@ -107,7 +107,7 @@ func _on_area_2d_area_entered(area):
 			nspell.type = spell.type
 			blast.mult = body.mult + mult
 			blast._setSpell(nspell)
-			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.intel + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.intel)
+			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.getIntel() + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.getIntel())
 			blast._setSize(scale + body.scale)
 			blast._setV((body.velocity.normalized() + velocity.normalized()) * 0.5 * (velocity.length() + body.velocity.length())/2)
 			blast.global_position = (global_position + body.global_position)/2

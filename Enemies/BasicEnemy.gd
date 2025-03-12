@@ -550,6 +550,9 @@ func _on_dashing_timeout() -> void:
 	nomove = false
 	velocity /= DASHSPEED*2
 
+func getIntel():
+	return intel
+
 func attachEffect(effect):
 	var visual = effect.visual.instantiate()
 	add_child(visual)

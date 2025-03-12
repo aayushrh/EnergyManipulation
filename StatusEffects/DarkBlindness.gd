@@ -3,16 +3,21 @@ class_name DarkBlindness
 
 var handledEffect = false
 var stack = 1
+var updatedStack = 1
+
 func _init(life):
+	stackable = true
 	lifetime = life
 	visual = load("res://Effects/DarkBlindness.tscn")
 	icon = load("res://Art/sight-disabled (1).png")
 	effectName = "Darkness"
 
 func _tick(entity, delta):
-	#if !handledEffect:
-		#entity.TOPSPEED /= 2
-		#handledEffect = true
+	if(updatedStack != stack):
+		for i in entity.vfx:
+			if i.vfxName.to_lower() == "dark":
+				i.stack = stack
+				updatedStack = stack
 	lifetime -= delta
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))

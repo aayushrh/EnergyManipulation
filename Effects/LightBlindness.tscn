@@ -7,43 +7,42 @@
 script = ExtResource("1_b4psn")
 vfxName = "Light"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 4095
-offset_left = 538.0
-offset_top = -994.0
-offset_right = 2020.0
-offset_bottom = 1226.0
-color = Color(1, 0.976471, 0.00784314, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 4095
-offset_left = -1608.0
-offset_top = -2557.0
-offset_right = 1235.0
-offset_bottom = -337.0
+offset_left = -3419.0
+offset_top = -2544.0
+offset_right = 3419.0
+offset_bottom = -324.0
 color = Color(1, 0.976471, 0.00784314, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 z_index = 4095
-offset_left = -3393.0
-offset_top = -1344.0
-offset_right = -550.0
-offset_bottom = 876.0
-color = Color(1, 0.976471, 0.00784314, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect4" type="ColorRect" parent="."]
-z_index = 4095
-offset_left = -1568.0
-offset_top = 306.0
-offset_right = 1275.0
-offset_bottom = 2526.0
+offset_left = -3419.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = 324.0
 color = Color(1, 0.976471, 0.00784314, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="BlindessTransparent" type="Sprite2D" parent="."]
 z_index = 4095
-position = Vector2(0, -16)
 texture = ExtResource("2_6etud")
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+z_index = 4095
+offset_left = 576.0
+offset_top = -324.0
+offset_right = 3419.0
+offset_bottom = 324.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+z_index = 4095
+offset_left = -3419.0
+offset_top = 324.0
+offset_right = 3419.0
+offset_bottom = 2544.0
+color = Color(1, 0.976471, 0.00784314, 1)
+metadata/_edit_use_anchors_ = true

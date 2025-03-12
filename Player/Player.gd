@@ -470,8 +470,7 @@ func attachEffect(effect, needsChecking=true):
 func processHaventChecked():
 	for e in effectsHaventChecked:
 		if(e is LightBlindness and searchLight() != -1):
-			effects[searchLight()].lifetime += e.lifetime
-			effects[searchLight()].stack += 1
+			effects[searchLight()].lifeTimeStack.append(e.lifetime)
 			print(str(effects[searchLight()].stack) + "stacks")
 			return
 		elif(e is DarkBlindness and searchDark() != -1):
@@ -501,6 +500,11 @@ func searchDark():
 			return i
 		i += 1
 	return - 1
+
+func getIntel():
+	if searchDark() != -1:
+		return ((intel / effects[searchDark()].stack) + intel) * 0.5
+	return intel
 
 func removeEffects(effect):
 	for b in effects:

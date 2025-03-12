@@ -9,8 +9,10 @@ func initialize(effect):
 
 func _process(delta):
 	if(effect != null and effect.lifetime > 0):
+		if(effect.stackable):
+			$stack.text = str(effect.stack)
+		if(effect.lifetime > $TextureProgressBar.value + 0.01):
+			$TextureProgressBar.max_value = effect.lifetime
 		$TextureProgressBar.value = effect.lifetime
-		if($TextureProgressBar.value > $TextureProgressBar.max_value):
-			$TextureProgressBar.max_value = $TextureProgressBar.value
 	else:
 		queue_free()
