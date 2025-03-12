@@ -24,19 +24,19 @@ func addStun(spellObj:SpellCasted, enemy):
 
 func addLightBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
-		var stun = LightBlindness.new(spellObj.spell.getPower() * 1.5)
-		enemy.attachEffect(stun)
+		var blind = LightBlindness.new(spellObj.spell.getPower() * 100.5)
+		enemy.attachEffect(blind)
 	elif(enemy != null and enemy is BasicEnemy):
-		var stun = Blindness.new(spellObj.spell.getPower() * 1.5)
-		enemy.attachEffect(stun)
+		var blind = Blindness.new(spellObj.spell.getPower() * 1.5)
+		enemy.attachEffect(blind)
 
 func addDarkBlindness(spellObj:SpellCasted, enemy):
 	if(enemy != null and !(enemy is BasicEnemy)):
-		var stun = DarkBlindness.new(spellObj.spell.getPower() * 1.5)
-		enemy.attachEffect(stun)
+		var blind = DarkBlindness.new(spellObj.spell.getPower() * 1.5)
+		enemy.attachEffect(blind)
 	elif(enemy != null and enemy is BasicEnemy):
-		var stun = Blindness.new(spellObj.spell.getPower() * 1.5)
-		enemy.attachEffect(stun)
+		var blind = Blindness.new(spellObj.spell.getPower() * 1.5)
+		enemy.attachEffect(blind)
 
 func lifesteal(spellObj:SpellCasted, enemy):
 	if(enemy is Wall):
@@ -48,6 +48,11 @@ func lifesteal(spellObj:SpellCasted, enemy):
 		spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
 	else:
 		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken(null)) * spellObj.mult
+
+func lightStack(dmgRed, spellObj:SpellCasted, enemy):
+	if(enemy is Player and enemy.searchLight() != -1):
+		enemy.health -= 0.05 * (spellObj.spell.getPower() - dmgRed) * spellObj.mult * enemy.effects[enemy.searchLight()].stack
+	
 
 func takeHealth(spellObj:SpellCasted):
 	if(spellObj.sender is BasicEnemy):

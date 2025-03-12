@@ -2,6 +2,7 @@ extends Effects
 class_name LightBlindness
 
 var handledEffect = false
+var stack = 1
 
 func _init(life):
 	lifetime = life

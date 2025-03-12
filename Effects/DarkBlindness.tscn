@@ -14,6 +14,7 @@ offset_top = -707.0
 offset_right = 2044.0
 offset_bottom = 1513.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 4096
@@ -22,6 +23,7 @@ offset_top = -2541.0
 offset_right = 1235.0
 offset_bottom = -321.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 z_index = 4096
@@ -30,6 +32,7 @@ offset_top = -1328.0
 offset_right = -550.0
 offset_bottom = 892.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="."]
 z_index = 4096
@@ -38,6 +41,7 @@ offset_top = 322.0
 offset_right = 1275.0
 offset_bottom = 2542.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="BlindessTransparent" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)

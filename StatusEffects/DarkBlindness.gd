@@ -2,7 +2,7 @@ extends Effects
 class_name DarkBlindness
 
 var handledEffect = false
-
+var stack = 1
 func _init(life):
 	lifetime = life
 	visual = load("res://Effects/DarkBlindness.tscn")

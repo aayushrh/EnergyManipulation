@@ -400,6 +400,8 @@ func _on_dashing_timer_timeout():
 	dashing = false
 
 func _hit_register():
+	if(!is_instance_valid(self)):
+		return
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	processHaventChecked()
 	for i in spellHit.components:
@@ -467,6 +469,15 @@ func attachEffect(effect, needsChecking=true):
 
 func processHaventChecked():
 	for e in effectsHaventChecked:
+		if(e is LightBlindness and searchLight() != -1):
+			effects[searchLight()].lifetime += e.lifetime
+			effects[searchLight()].stack += 1
+			print(str(effects[searchLight()].stack) + "stacks")
+			return
+		elif(e is DarkBlindness and searchDark() != -1):
+			effects[searchDark()].lifetime += e.lifetime
+			effects[searchDark()].stack += 1
+			return
 		var visual = e.visual.instantiate()
 		add_child(visual)
 		vfx.append(visual)
@@ -474,6 +485,22 @@ func processHaventChecked():
 		var effectUI = EffectUI.instantiate()
 		effectUI.initialize(e)
 		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+
+func searchLight():
+	var i = 0
+	for e in effects:
+		if e is LightBlindness:
+			return i
+		i += 1
+	return - 1
+
+func searchDark():
+	var i = 0
+	for e in effects:
+		if e is DarkBlindness:
+			return i
+		i += 1
+	return - 1
 
 func removeEffects(effect):
 	for b in effects:

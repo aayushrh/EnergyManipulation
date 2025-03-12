@@ -50,7 +50,7 @@ var chargeTime = 0
 @export var checkAngle = 45 # angle checked for things that will be going towards them
 @export var blockOrFlight = 2 # how many will have to be going for it to block
 @export var tact = 100 - int(agg)*75 # chance to do smarter things
-@export var DASHSPEED = 5000
+@export var DASHSPEED = 2500
 @export var cooldownAttack = 1.0
 @export var TOPSPEED = 200
 @export var ROTATIONSPEED = 10
@@ -548,7 +548,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_dashing_timeout() -> void:
 	nomove = false
-	velocity /= DASHSPEED
+	velocity /= DASHSPEED*2
 
 func attachEffect(effect):
 	var visual = effect.visual.instantiate()
