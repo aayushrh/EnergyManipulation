@@ -400,7 +400,7 @@ func _on_dashing_timer_timeout():
 	dashing = false
 
 func _hit_register():
-	if(!is_instance_valid(self)):
+	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):
 		return
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
 	processHaventChecked()
@@ -474,8 +474,7 @@ func processHaventChecked():
 			print(str(effects[searchLight()].stack) + "stacks")
 			return
 		elif(e is DarkBlindness and searchDark() != -1):
-			effects[searchDark()].lifetime += e.lifetime
-			effects[searchDark()].stack += 1
+			effects[searchDark()].lifeTimeStack.append(e.lifetime)
 			return
 		var visual = e.visual.instantiate()
 		add_child(visual)
@@ -503,7 +502,7 @@ func searchDark():
 
 func getIntel():
 	if searchDark() != -1:
-		return ((intel / effects[searchDark()].stack) + intel) * 0.5
+		return ((intel * pow(.95,effects[searchDark()].stack)) + intel) * 0.5
 	return intel
 
 func removeEffects(effect):

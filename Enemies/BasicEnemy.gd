@@ -274,6 +274,8 @@ func _hit(hitbox):
 		health -= dmgTaken*(1-_dmgRed(time-block))
 		un_block()
 	else:
+		for i in hitbox.spell.components:
+			i.callBlockEffects(0, hitbox, self)
 		health -= dmgTaken
 		print("This is health sub:" + str(dmgTaken))
 	time = 0
@@ -529,6 +531,22 @@ func awareness(delta):
 	#if(help.size() == 0 and player != null and player.casting):
 	#	velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 
+func searchLight():
+	var i = 0
+	for e in effects:
+		if e is LightBlindness:
+			return i
+		i += 1
+	return - 1
+
+func searchDark():
+	var i = 0
+	for e in effects:
+		if e is DarkBlindness:
+			return i
+		i += 1
+	return - 1
+
 func _on_block_cd_timeout() -> void:
 	un_block()
 
@@ -551,6 +569,8 @@ func _on_dashing_timeout() -> void:
 	velocity /= DASHSPEED*2
 
 func getIntel():
+	if searchDark() != -1:
+		return ((intel * pow(.95,effects[searchDark()].stack)) + intel) * 0.5
 	return intel
 
 func attachEffect(effect):

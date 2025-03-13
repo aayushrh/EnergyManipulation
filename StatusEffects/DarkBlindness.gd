@@ -3,7 +3,7 @@ class_name DarkBlindness
 
 var handledEffect = false
 var stack = 1
-var updatedStack = 1
+var lifeTimeStack = []
 
 func _init(life):
 	stackable = true
@@ -13,17 +13,21 @@ func _init(life):
 	effectName = "Darkness"
 
 func _tick(entity, delta):
-	if(updatedStack != stack):
+	if(stack != lifeTimeStack.size() + 1):
 		for i in entity.vfx:
 			if i.vfxName.to_lower() == "dark":
+				stack = lifeTimeStack.size() + 1
 				i.stack = stack
-				updatedStack = stack
 	lifetime -= delta
 	if lifetime <= 0:
-		entity.effects.remove_at(entity.effects.find(self))
-		for i in entity.vfx:
-			if i.vfxName.to_lower() == "dark":
-				entity.vfx.remove_at(entity.vfx.find(i))
-				i.queue_free()
-				break
+		if(lifeTimeStack.size() == 0):
+			entity.effects.remove_at(entity.effects.find(self))
+			for i in entity.vfx:
+				if i.vfxName.to_lower() == "dark":
+					entity.vfx.remove_at(entity.vfx.find(i))
+					i.queue_free()
+					break
+		else:
+			lifetime = lifeTimeStack[0]
+			lifeTimeStack.remove_at(0)
 		#entity.TOPSPEED *= 2
