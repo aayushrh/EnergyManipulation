@@ -13,13 +13,12 @@ resource_local_to_scene = true
 radius = 93.1933
 
 [node name="BlastProj" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_cbhg2")
 metadata/_edit_horizontal_guides_ = [-255.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -2)
 shape = SubResource("CircleShape2D_i3xxi")
 
 [node name="Icon" type="Sprite2D" parent="."]

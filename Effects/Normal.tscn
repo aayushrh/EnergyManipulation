@@ -3,6 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_074wd"]
 
 [node name="Normal" type="Sprite2D"]
-position = Vector2(0, 2)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_074wd")
