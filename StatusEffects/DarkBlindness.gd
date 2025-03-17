@@ -11,6 +11,7 @@ func _init(life):
 	visual = load("res://Effects/DarkBlindness.tscn")
 	icon = load("res://Art/sight-disabled (1).png")
 	effectName = "Darkness"
+	enemyShows = false
 
 func _tick(entity, delta):
 	if(stack != lifeTimeStack.size() + 1):

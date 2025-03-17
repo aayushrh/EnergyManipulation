@@ -6,6 +6,7 @@ class_name Effects
 @export var icon : CompressedTexture2D
 @export var effectName : String
 @export var stackable = false
+@export var enemyShows = true
 
 func _tick(entity, delta):
 	pass

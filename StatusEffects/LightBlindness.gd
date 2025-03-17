@@ -11,6 +11,7 @@ func _init(life):
 	visual = load("res://Effects/LightBlindness.tscn")
 	icon = load("res://Art/sight-disabled.png")
 	effectName = "Light"
+	enemyShows = false
 
 func _tick(entity, delta):
 	#if !handledEffect:
