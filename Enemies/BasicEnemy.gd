@@ -574,7 +574,8 @@ func getIntel():
 	return intel
 
 func attachEffect(effect):
-	var visual = effect.visual.instantiate()
-	add_child(visual)
-	vfx.append(visual)
+	if effect.enemyShows:
+		var visual = effect.visual.instantiate()
+		add_child(visual)
+		vfx.append(visual)
 	effects.append(effect)
