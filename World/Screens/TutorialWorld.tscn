@@ -5,17 +5,17 @@
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_a50p2"]
 [ext_resource type="Resource" uid="uid://4fshb01775ox" path="res://Magic/MagicCards/Resources/Components/TutorialMagic.tres" id="3_rtkrx"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="10_3wmpt"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_w.png" id="11_su0yc"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_a.png" id="12_6gwtt"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_s.png" id="13_2wjnj"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_d.png" id="14_a0f06"]
+[ext_resource type="Texture2D" uid="uid://bqxet0k0e2dwr" path="res://Art/KeyboardIcons/keyboard_87.png" id="11_t1mqx"]
+[ext_resource type="Texture2D" uid="uid://c1h5v6qgynsdn" path="res://Art/KeyboardIcons/keyboard_65.png" id="12_25a78"]
+[ext_resource type="Texture2D" uid="uid://c51qwesjfqm6n" path="res://Art/KeyboardIcons/keyboard_83.png" id="13_cmvj0"]
+[ext_resource type="Texture2D" uid="uid://cbpp4il837uvt" path="res://Art/KeyboardIcons/keyboard_68.png" id="14_fso6r"]
 [ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Components/Default.tres" id="14_jwfqg"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_q.png" id="15_67amn"]
+[ext_resource type="Texture2D" uid="uid://bkg01slbmmhma" path="res://Art/KeyboardIcons/keyboard_81.png" id="15_0ryvv"]
 [ext_resource type="Texture2D" uid="uid://di23s0ipx556c" path="res://Art/TX Tileset Grass.png" id="15_287je"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_e.png" id="16_jbdpv"]
+[ext_resource type="Texture2D" uid="uid://dcwed7xwb3n1c" path="res://Art/KeyboardIcons/keyboard_69.png" id="16_d1d2x"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="16_payol"]
+[ext_resource type="Texture2D" uid="uid://cerg4l8gx5obf" path="res://Art/KeyboardIcons/keyboard_4194305.png" id="17_hi0xq"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/SpellListUI.gd" id="17_sxd5u"]
-[ext_resource type="Texture2D" path="res://Art/KeyboardIcons/keyboard_escape.png" id="17_uuonm"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="18_086pn"]
 [ext_resource type="PackedScene" uid="uid://mftwnimortsx" path="res://Enemies/Sentry.tscn" id="19_o6nyb"]
 [ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="21_524gx"]
@@ -376,19 +376,19 @@ autowrap_mode = 2
 
 [node name="KeyboardW" type="Sprite2D" parent="CanvasLayer/MovementTip"]
 position = Vector2(218, 185)
-texture = ExtResource("11_su0yc")
+texture = ExtResource("11_t1mqx")
 
 [node name="KeyboardA" type="Sprite2D" parent="CanvasLayer/MovementTip"]
 position = Vector2(158, 245)
-texture = ExtResource("12_6gwtt")
+texture = ExtResource("12_25a78")
 
 [node name="KeyboardS" type="Sprite2D" parent="CanvasLayer/MovementTip"]
 position = Vector2(218, 245)
-texture = ExtResource("13_2wjnj")
+texture = ExtResource("13_cmvj0")
 
 [node name="KeyboardD" type="Sprite2D" parent="CanvasLayer/MovementTip"]
 position = Vector2(278, 245)
-texture = ExtResource("14_a0f06")
+texture = ExtResource("14_fso6r")
 
 [node name="MovementTip" type="Button" parent="CanvasLayer/MovementTip"]
 layout_mode = 0
@@ -423,19 +423,19 @@ autowrap_mode = 2
 
 [node name="KeyboardW" type="Sprite2D" parent="CanvasLayer/DashTip"]
 position = Vector2(214, 243)
-texture = ExtResource("11_su0yc")
+texture = ExtResource("11_t1mqx")
 
 [node name="KeyboardA" type="Sprite2D" parent="CanvasLayer/DashTip"]
 position = Vector2(154, 303)
-texture = ExtResource("12_6gwtt")
+texture = ExtResource("12_25a78")
 
 [node name="KeyboardS" type="Sprite2D" parent="CanvasLayer/DashTip"]
 position = Vector2(214, 303)
-texture = ExtResource("13_2wjnj")
+texture = ExtResource("13_cmvj0")
 
 [node name="KeyboardD" type="Sprite2D" parent="CanvasLayer/DashTip"]
 position = Vector2(274, 303)
-texture = ExtResource("14_a0f06")
+texture = ExtResource("14_fso6r")
 
 [node name="DashTip" type="Button" parent="CanvasLayer/DashTip"]
 layout_mode = 0
@@ -481,7 +481,7 @@ text = "ALRIGHTY"
 [node name="KeyboardQ" type="Sprite2D" parent="CanvasLayer/BlockTip"]
 position = Vector2(214, 208)
 scale = Vector2(2.03906, 2.03125)
-texture = ExtResource("15_67amn")
+texture = ExtResource("15_0ryvv")
 
 [node name="MagicTip" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -517,7 +517,7 @@ text = "ALRIGHTY"
 [node name="KeyboardE" type="Sprite2D" parent="CanvasLayer/MagicTip"]
 position = Vector2(220, 280)
 scale = Vector2(2.32813, 2.48438)
-texture = ExtResource("16_jbdpv")
+texture = ExtResource("16_d1d2x")
 
 [node name="PauseTip" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -553,7 +553,7 @@ text = "ALRIGHTY"
 [node name="KeyboardEscape" type="Sprite2D" parent="CanvasLayer/PauseTip"]
 position = Vector2(219, 210)
 scale = Vector2(2.23438, 2.13281)
-texture = ExtResource("17_uuonm")
+texture = ExtResource("17_hi0xq")
 
 [node name="MagicCreationTip" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -620,7 +620,7 @@ text = "ALRIGHTY"
 [node name="KeyboardQ" type="Sprite2D" parent="CanvasLayer/PerfectBlockTip"]
 position = Vector2(214, 208)
 scale = Vector2(2.03906, 2.03125)
-texture = ExtResource("15_67amn")
+texture = ExtResource("15_0ryvv")
 
 [node name="DoneTip" type="ColorRect" parent="CanvasLayer"]
 visible = false
