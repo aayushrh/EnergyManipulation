@@ -80,6 +80,9 @@ func _ready():
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
+	if(Input.is_action_just_pressed("SwitchWeapons")):
+		attachEffect(DarkBlindness.new(999))
+		processHaventChecked()
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -418,6 +421,8 @@ func _hit_register():
 	processHaventChecked()
 	for i in spellHit.components:
 		i.callBlockEffects(dmgRed, hitbox, self)
+	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):
+		return
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
@@ -514,7 +519,7 @@ func searchDark():
 
 func getIntel():
 	if searchDark() != -1:
-		return ((intel * pow(.95,effects[searchDark()].stack)) + intel) * 0.5
+		return (intel * pow(.95,effects[searchDark()].stack))
 	return intel
 
 func removeEffects(effect):

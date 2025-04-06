@@ -582,7 +582,7 @@ func _on_dashing_timeout() -> void:
 
 func getIntel():
 	if searchDark() != -1:
-		return ((intel * pow(.95,effects[searchDark()].stack)) + intel) * 0.5
+		return (intel * pow(.95,effects[searchDark()].stack))
 	return intel
 
 func attachEffect(effect):
