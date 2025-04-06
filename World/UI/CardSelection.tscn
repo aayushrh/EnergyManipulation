@@ -31,9 +31,12 @@ alignment = 1
 
 [node name="ColorRect2" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
 layout_mode = 2
+hover = true
 
 [node name="ColorRect3" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
 layout_mode = 2
+hover = true
 
 [node name="ColorRect4" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
 layout_mode = 2
+hover = true

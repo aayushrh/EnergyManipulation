@@ -5,6 +5,8 @@ signal pressed(card)
 var c = null
 var target = 0
 
+@export var hover = false
+
 func _show(card):
 	c = card
 	var ca = card.color
@@ -46,7 +48,8 @@ func _show(card):
 			$VBoxContainer/Label7.visible = false
 
 func _process(delta):
-	position.y = lerpf(position.y, target, 0.1)
+	if hover:
+		position.y = lerpf(position.y, target, 0.1)
 
 func _on_touch_screen_button_pressed():
 	pressed.emit(c)

@@ -14,7 +14,7 @@ func _initialize():
 		#$HBoxContainer/Button.text = "?"
 		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_any.png")
 	else:
-		load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
+		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
 		#$HBoxContainer/Button.text = (char)(spell.binding)
 
 func _on_pressed():
