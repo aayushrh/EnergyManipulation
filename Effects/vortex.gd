@@ -15,7 +15,7 @@ func _setSpell(nspell, ntype):
 	type = ntype
 	
 func _process(delta):
-	if spell != null:
+	if spell != null and !Global.isPaused():
 		var suctionPower = spell.getAttrScaled("Suction Power") * 50
 		
 		var hasV = false

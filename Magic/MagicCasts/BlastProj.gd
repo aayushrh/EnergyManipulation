@@ -95,6 +95,12 @@ func _on_area_2d_area_entered(area : Area2D):
 			blast.combined = true
 			nspell.components.append_array(spell.components)
 			nspell.components.append_array(body.spell.components)
+			var j = 0
+			while j < nspell.components.size():
+				if nspell.components[j] == Global.defaultElement:
+					nspell.components.remove_at(j)
+					j -= 1
+				j += 1
 			nspell.type = spell.type
 			blast.mult = body.mult + mult
 			blast._setSpell(nspell)
