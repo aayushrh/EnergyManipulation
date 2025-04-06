@@ -58,7 +58,7 @@ var pause = false
 #var charging = false
 var hitbox = null
 var hitboxEffects = []
-var effectsHaventChecked = []
+var effectsHaventChecked : Array[Effects] = []
 var intel = 1.0
 var wisdom = 1.0
 var comprehension = 1.0
@@ -80,9 +80,6 @@ func _ready():
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
-	if(Input.is_action_just_pressed("SwitchWeapons")):
-		attachEffect(DarkBlindness.new(999))
-		processHaventChecked()
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -489,10 +486,10 @@ func processHaventChecked():
 		if(e is LightBlindness and searchLight() != -1):
 			effects[searchLight()].lifeTimeStack.append(e.lifetime)
 			print(str(effects[searchLight()].stack) + "stacks")
-			return
-		elif(e is DarkBlindness and searchDark() != -1):
+			continue
+		if(e is DarkBlindness and searchDark() != -1):
 			effects[searchDark()].lifeTimeStack.append(e.lifetime)
-			return
+			continue
 		var visual = e.visual.instantiate()
 		add_child(visual)
 		vfx.append(visual)
@@ -500,6 +497,7 @@ func processHaventChecked():
 		var effectUI = EffectUI.instantiate()
 		effectUI.initialize(e)
 		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
+	effectsHaventChecked = []
 
 func searchLight():
 	var i = 0
