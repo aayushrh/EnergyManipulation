@@ -1,12 +1,12 @@
 extends StaticBody2D
 class_name Wall
 
-var type = 3
-var health = 0
-var blocking = false
+var type : int = 3
+var health : float = 0
+var blocking : bool = false
 
-func _hit(other):
+func _hit(_other : SpellCasted) -> void:
 	pass
 
-func attachEffect(effect):
+func attachEffect(_effect : Effects) -> void:
 	pass

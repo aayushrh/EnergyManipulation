@@ -15,7 +15,6 @@ var list = {
 	\"LEFT\" : \"left\",
 	\"DOWN\" : \"down\",
 	\"RIGHT\" : \"right\",
-	\"PUNCH/ATTACK\" : \"Hit\",
 	\"BLOCK\" : \"Block\",
 	\"DASH\" : \"Dash\",
 	\"PAUSE\" : \"Pause\",
@@ -27,10 +26,11 @@ func _ready():
 		var inputButton = InputButton.instantiate()
 		inputButton.action = list[i]
 		var inputLabel = inputButton.find_child(\"Input\")
-		var actionLabel = inputButton.find_child(\"Action\")
+		var actionLabel = inputButton.find_child(\"TextureRect\")
 		inputLabel.text = i
 		if(InputMap.action_get_events(list[i]).size() > 0):
-			actionLabel.text = InputMap.action_get_events(list[i])[0].as_text().trim_suffix(\"(Physical)\")
+			print(i + \": \" + str(InputMap.action_get_events(list[i])[0].keycode))
+			actionLabel.texture = load(\"res://Art/KeyboardIcons/keyboard_\" + str(InputMap.action_get_events(list[i])[0].keycode) + \".png\")
 		add_child(inputButton)
 "
 

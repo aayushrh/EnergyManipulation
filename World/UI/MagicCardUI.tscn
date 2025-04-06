@@ -9,6 +9,8 @@ size = Vector2(300, 500)
 
 [node name="ColorRect" type="ColorRect"]
 custom_minimum_size = Vector2(300, 500)
+offset_right = 300.0
+offset_bottom = 500.0
 color = Color(0.192157, 0.192157, 0.192157, 1)
 script = ExtResource("1_jto60")
 
@@ -107,4 +109,6 @@ autowrap_mode = 2
 position = Vector2(150, 250)
 shape = SubResource("RectangleShape2D_gtgs2")
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]

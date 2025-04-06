@@ -3,6 +3,7 @@ extends ColorRect
 signal pressed(card)
 
 var c = null
+var target = 0
 
 func _show(card):
 	c = card
@@ -44,5 +45,14 @@ func _show(card):
 			$VBoxContainer/Label6.visible = false
 			$VBoxContainer/Label7.visible = false
 
+func _process(delta):
+	position.y = lerpf(position.y, target, 0.1)
+
 func _on_touch_screen_button_pressed():
 	pressed.emit(c)
+
+func _on_mouse_entered():
+	target = -40
+
+func _on_mouse_exited():
+	target = 0

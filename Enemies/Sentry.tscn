@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://mftwnimortsx"]
+
+[ext_resource type="Script" path="res://Enemies/Sentry.gd" id="1_xr7fb"]
+[ext_resource type="Script" path="res://Effects/SoftBody.gd" id="3_7xsl1"]
+[ext_resource type="PackedScene" uid="uid://bfugmqkrscero" path="res://Enemies/enemyArt.tscn" id="4_rr4w5"]
+[ext_resource type="PackedScene" uid="uid://bjdxvwof6staf" path="res://Effects/charging.tscn" id="5_plyyp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7svlq"]
+radius = 3412.65
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nw1a5"]
+radius = 25.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nt3qm"]
+radius = 46.0
+
+[node name="Sentry" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 10
+script = ExtResource("1_xr7fb")
+
+[node name="block_cd" type="Timer" parent="."]
+one_shot = true
+
+[node name="Vision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+visible = false
+shape = SubResource("CircleShape2D_7svlq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_nw1a5")
+
+[node name="SoftBody" type="Area2D" parent="."]
+script = ExtResource("3_7xsl1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftBody"]
+visible = false
+shape = SubResource("CircleShape2D_nt3qm")
+
+[node name="EnemyArt" parent="." instance=ExtResource("4_rr4w5")]
+
+[node name="dash_cd" type="Timer" parent="."]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-152, -350, 152, -350, 30, 0, -30, 0)
+
+[node name="dashing" type="Timer" parent="."]
+one_shot = true
+
+[node name="Charging" parent="." instance=ExtResource("5_plyyp")]
+
+[connection signal="timeout" from="block_cd" to="." method="_on_block_cd_timeout"]
+[connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
+[connection signal="body_entered" from="SoftBody" to="SoftBody" method="_on_body_entered"]
+[connection signal="body_exited" from="SoftBody" to="SoftBody" method="_on_body_exited"]
+[connection signal="timeout" from="dash_cd" to="." method="_on_dash_cd_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="dashing" to="." method="_on_dashing_timeout"]

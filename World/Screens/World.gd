@@ -31,14 +31,13 @@ func _ready():
 	spell.components = testComponentSpellCard
 	spell.type = testTypeSpellCard
 	spell.binding = 69
-	#var spell2 = Spell.new("Fireball2")
-	#spell2.components = testComponentSpellCard2
-	#spell2.type = testTypeSpellCard2
-	#spell2.binding = 70
+	var spell2 = Spell.new("Fireball2")
+	spell2.components = testComponentSpellCard2
+	spell2.type = testTypeSpellCard2
+	spell2.binding = 69
 	#Global.magicCards = testComponentSpellCard
-	Global.magicCards.append(testTypeSpellCard)
-	print(Global.magicCards)
-	Global.spellList = [spell]#, spell2]
+	#Global.magicCards.append(testTypeSpellCard)
+	Global.spellList = [spell, spell2]
 	Global.defaultElement = defaultElement
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
@@ -70,13 +69,13 @@ func _process(delta):
 				placed = true
 		if !placed and e.global_position.y > cameraPos.y + 812/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y + 812/2, cameraPos.x - 1440/2, cameraPos.y + 812/2) - Vector2(0, 50)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2.0, cameraPos.y + 812/2.0, cameraPos.x - 1440/2.0, cameraPos.y + 812/2.0) - Vector2(0, 50)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
 			if(indicator.global_position != Vector2(0, -50)):
 				get_tree().current_scene.add_child(indicator)
 		if !placed and e.global_position.y < cameraPos.y - 812/2:
 			var indicator = Indicator.instantiate()
-			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2, cameraPos.y - 812/2, cameraPos.x - 1440/2, cameraPos.y - 812/2) - Vector2(0, -50)
+			indicator.global_position = lineLine(player.global_position.x, player.global_position.y, e.global_position.x, e.global_position.y, cameraPos.x + 1440/2.0, cameraPos.y - 812/2.0, cameraPos.x - 1440/2.0, cameraPos.y - 812/2.0) - Vector2(0, -50)
 			indicator.rotation_degrees = 180/PI * atan2(e.global_position.y - indicator.global_position.y, e.global_position.x - indicator.global_position.x)
 			if(indicator.global_position != Vector2(0, 50)):
 				get_tree().current_scene.add_child(indicator)

@@ -1,9 +1,9 @@
 extends Resource
 class_name Attributes
 
-@export var Ltext = ""
-@export var Rtext = ""
-@export var min = 0.0
-@export var max = 0.0
-@export var num = 0.0
-@export var step = 1.0
+@export var Ltext : String = "" 
+@export var Rtext : String = "" 
+@export var min : float = 0.0
+@export var max : float = 0.0
+@export var num : float = 0.0
+@export var step : float = 1.0

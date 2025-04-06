@@ -9,9 +9,9 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_tgtyl")
-card1 = NodePath("HBoxContainer/ColorRect")
-card2 = NodePath("HBoxContainer/ColorRect2")
-card3 = NodePath("HBoxContainer/ColorRect3")
+card1 = NodePath("HBoxContainer/ColorRect2")
+card2 = NodePath("HBoxContainer/ColorRect3")
+card3 = NodePath("HBoxContainer/ColorRect4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1152, 648)
@@ -29,11 +29,11 @@ offset_bottom = 574.0
 theme_override_constants/separation = 75
 alignment = 1
 
-[node name="ColorRect" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
-layout_mode = 2
-
 [node name="ColorRect2" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
 layout_mode = 2
 
 [node name="ColorRect3" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
+layout_mode = 2
+
+[node name="ColorRect4" parent="HBoxContainer" instance=ExtResource("2_8pnqq")]
 layout_mode = 2

@@ -4,36 +4,32 @@ class_name Spell
 var components : Array[ComponentSpellCard]
 var type : TypeSpellCard
 var attributes: Array[AttributesWrapper]
-var spellName = ""
-var binding = null
-var cooldown = 0
-var using = false
-var power = 1.0
-var pSpeed = 1.0
-var size = 1.0
-var cSpeed = 1.0
-var slow = true
+var spellName : String = ""
+var binding : int = -1
+var cooldown : float = 0
+var using : bool = false
+var slow : bool = true
 
-func create():
-	var newSpell = Spell.new(spellName)
-	for i in components:
+func create() -> Spell:
+	var newSpell : Spell = Spell.new(spellName)
+	for i : ComponentSpellCard in components:
 		newSpell.components.append(i)
 	newSpell.type = type
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
 	newSpell.using = using
-	for i in attributes:
+	for i:AttributesWrapper in attributes:
 		newSpell.attributes.append(i)
 	return newSpell
 
-func _init(namen):
+func _init(namen:String) -> void:
 	spellName = namen
 
-func _cast(sender):
+func _cast(sender:CharacterBody2D) -> SpellCast:
 	if(type != null):
-		var cast = type.SpellObj.instantiate()
+		var cast : SpellCast = type.SpellObj.instantiate()
 		cast.sender = sender
-		var dupe = create()
+		var dupe : Spell = create()
 		#if(dupe.element == null):
 			#dupe.element = sender.get_tree().current_scene.defaultElement
 		cast.setSpell(dupe)
@@ -44,117 +40,118 @@ func _cast(sender):
 	else:
 		_notUsing()
 		cooldown = 0
+		return null
 
-func _notUsing():
+func _notUsing() -> void:
 	using = false
 
-func resetCooldown(use, multi):
+func resetCooldown(use:bool, multi:float) -> void:
 	cooldown = getcd()*multi
 	using = use
 
-func getcd():
-	var cd = 3
+func getcd() -> float:
+	var cd : float = 3
 	if(components != null):
-		for i in components:
+		for i : ComponentSpellCard in components:
 			cd *= i.cdMult
 	if(type != null):
 		cd *= type.cdMult
 	return cd
 
-func getCastingTime():
-	var time = 1
+func getCastingTime() -> float:
+	var time : float = 1
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.castingTimeMult
 	return time
 
-func getMaxPowerTime():
-	var time = 1.25
+func getMaxPowerTime() -> float:
+	var time : float = 1.25
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.maxPowerTimeMult
 	return time
 
 #perfect block = 10 mana
-func initCost():
-	var cost = 1
+func initCost() -> float:
+	var cost : float = 1
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.costMult
 	return cost
 
 #total cost for max charge expect for holdings
-func contcost():
-	var cost = 1
+func contcost() -> float:
+	var cost: float = 1
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.contCostMult
 	return cost
 
-func getAttr(name):
-	for i in attributes:
-		if(i.attr.Ltext == name):
+func getAttr(nname : String) -> float:
+	for i:AttributesWrapper in attributes:
+		if(i.attr.Ltext == nname):
 			return i.leftvalue
-		if(i.attr.Rtext == name):
+		if(i.attr.Rtext == nname):
 			return i.rightvalue
 	return 50
 
-func getAttrScaled(name):
-	var n = (getAttr(name) + 50.0)/100.0
+func getAttrScaled(nname : String) -> float:
+	var n : float = (getAttr(nname) + 50.0)/100.0
 	return n
 
-func getPower():
-	var p = (getAttr("Power") + 50.0)/100.0
+func getPower() -> float:
+	var p : float = (getAttr("Power") + 50.0)/100.0
 	print("Power is: " + str(p))
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			p *= i.powerMult
 	return p
 
-func getPSpeed():
+func getPSpeed() -> float:
 	var ps = (getAttr("Proj. Spd.") + 50.0)/100.0
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			ps *= i.attackSpeedMult
 	return ps
 
-func getASpeed():
+func getASpeed() -> float:
 	var cs = (getAttr("Cast. Spd.") + 50.0)/100.0
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			cs *= i.castingSpeedMult
 	return cs
 
-func getSize():
+func getSize() -> float:
 	var s = (getAttr("Size") + 50.0)/100.0
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			s *= i.sizeMult
 	return s
 
-func hasElement():
-	for i in components:
+func hasElement() -> bool:
+	for i:ComponentSpellCard in components:
 		if i.isElement:
 			return true
 	return false
 
-func getAmount():
+func getAmount() -> float:
 	var a = getAttr("Amount")
 	if a == 50:
 		a = 1
 	return a
 
-func getClashingAdvantage():
+func getClashingAdvantage() -> float:
 	var c = 1
 	if(components != null):
-		for i in components:
+		for i:ComponentSpellCard in components:
 			c *= i.clashingAdvantage
 	return c

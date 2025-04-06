@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=6 format=3 uid="uid://4fshb01775ox"]
+
+[ext_resource type="PackedScene" uid="uid://4t10t75oom4y" path="res://Effects/FireHit.tscn" id="1_5vnir"]
+[ext_resource type="PackedScene" uid="uid://cv7ctjy2t1vta" path="res://Effects/Fire.tscn" id="2_humia"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="3_545fx"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="4_2my5u"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="4_mdk25"]
+
+[resource]
+script = ExtResource("4_mdk25")
+cardName = ""
+cardDescription = ""
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+castingEffects = Array[String]([])
+HitVFX = ExtResource("1_5vnir")
+StartVFX = ExtResource("2_humia")
+color = Color(0, 0, 0, 1)
+icon = ExtResource("4_2my5u")
+cdMult = 0.1
+costMult = 1.0
+powerMult = 0.0
+attackSpeedMult = 1.0
+sizeMult = 1.0
+castingSpeedMult = 5.0
+attribute = Array[ExtResource("3_545fx")]([])
+clashingAdvantage = 1.0
+isElement = true

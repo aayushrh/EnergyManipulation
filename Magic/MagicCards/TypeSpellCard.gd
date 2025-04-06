@@ -14,4 +14,4 @@ class_name TypeSpellCard
 @export var aimType : int
 @export var attribute : Array[Attributes]
 @export var values : Array[String]
-var type = 2
+var type : int = 2

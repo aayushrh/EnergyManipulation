@@ -68,6 +68,7 @@ var chargeTime = 0
 @onready var BlastTscn = preload("res://Magic/MagicCasts/Blast.tscn")
 @onready var Explosion = preload("res://Magic/MagicCasts/Explosion.tscn")
 @onready var HealthBar = preload("res://enemy_health.tscn")
+@onready var DamageNum = preload("res://Effects/DamageNum.tscn")
 
 func _ready():
 	print(stage)
@@ -87,14 +88,14 @@ func _ready():
 	healthbar = HealthBar.instantiate()
 	healthbar.myParent = self
 	get_tree().current_scene.add_child(healthbar)
-	var spellcount = 2
+	var spellcount = 0
 	match num:
 		0, 1, 2, 3: #Dashing dude
 			agg = true
 			dash_cd = 2.5 / pow(1.05,s)
 			MAXHEALTH = 2 + s/20.0
 			intel = 0.8 + s/20.0
-			reactionDelay = randf_range(0.025,0.075)
+			reactionDelay = randf_range(0.105,0.150)
 			wisdom = 0.5 + s/50
 			spellcount += floor(s/6)
 			#TOPSPEED *= 2
@@ -103,7 +104,7 @@ func _ready():
 			dash_cd = 5
 			MAXHEALTH = 2 + s/10.0
 			intel = 1 + s/5.0
-			reactionDelay = randf_range(0.1,0.2)
+			reactionDelay = randf_range(0.2,0.3)
 			wisdom = 0.5 + s/100
 			spellcount = 1 + floor(s/10)
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
@@ -112,7 +113,7 @@ func _ready():
 			dash_cd = 5
 			MAXHEALTH = 4 + s / 2.0
 			intel = 0.75 + s/25.0
-			reactionDelay = randf_range(0.15,0.25)
+			reactionDelay = randf_range(0.4,0.5)
 			wisdom = 1 + s/100
 			spellcount += floor(s/8)
 		9: # Wisdom dude
@@ -120,16 +121,18 @@ func _ready():
 			dash_cd = 5
 			MAXHEALTH = 2 + s/5.0
 			intel = 0.75 + s/20.0
-			reactionDelay = randf_range(0.05,0.1)
+			reactionDelay = randf_range(0.175,0.200)
 			wisdom = 2 + s/2
 			spellcount += floor(s/3)
+	
+	reactionDelay /= 2
 	
 	print("spellcount is: " + str(spellcount))
 	
 	stored_energy *= wisdom
 	MAXMANA *= wisdom
 	rng.randomize()
-	for i in (spellcount):
+	for i in (max(1, spellcount)):
 		var spell2 = Spell.new("Spell Number " + str(i))
 		spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 		var isElement = false
@@ -214,6 +217,10 @@ func _health_change(newHP: float):
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
+		var damageNum = DamageNum.instantiate()
+		damageNum.global_position = global_position + Vector2(50, -50)
+		damageNum._displayNum(change, false)
+		get_tree().current_scene.add_child(damageNum)
 	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
 	healthbar.get_over_health().size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 	fuck = false
@@ -268,7 +275,7 @@ func _effectsHandle(delta):
 		e._tick(self, delta)
 
 func _hit(hitbox):
-	dmgTaken = hitbox.damageTaken(self)
+	dmgTaken = hitbox.damageTaken()
 	print("This is dmg:" + str(dmgTaken))
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
@@ -292,7 +299,7 @@ func _move(delta):
 		if(castedIndex != -1 and spells[castedIndex].type.aimType == 0):
 			if(prediction):
 				rotateToTarget(player.global_position, delta)
-				if(blast and (blast.chargeTimer <= 0 or global_position.distance_to(player.global_position)<300)):
+				if(blast != null and is_instance_valid(blast) and (blast.chargeTimer <= 0 or global_position.distance_to(player.global_position)<300)):
 					blast.letGo()
 					blast = null
 					castedIndex = -1
@@ -330,11 +337,13 @@ func _move(delta):
 		awareness(delta)
 		if(agg):
 			aggro(player, delta)
-			if(blast and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<300)):
+			if(blast != null and is_instance_valid(blast) and ((!canDash and !nomove) or global_position.distance_to(player.global_position)<300)):
 				blast.letGo()
 				blast = null
 				castedIndex = -1
 		velocity -= softBodyPush * TOPSPEED
+		if softBodyPush != Vector2.ZERO:
+			print("softbody: " + str(softBodyPush))
 		if(slow):
 			velocity = velocity * 0.5
 
@@ -527,7 +536,8 @@ func awareness(delta):
 						dodgeDir = int((avgDir(help)-avgVelo(help)).angle()>0)*2-1
 					#else:
 					#	dodgeDir = rng.randi_range(0,1)*2-1
-				velocity = set_perp_vector(avgDir(help),dodgeDir>0) * TOPSPEED
+				#velocity = Vector2.ZERO
+				velocity += set_perp_vector(avgDir(help),dodgeDir>0).normalized()# * TOPSPEED
 	#if(help.size() == 0 and player != null and player.casting):
 	#	velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 
@@ -552,6 +562,7 @@ func _on_block_cd_timeout() -> void:
 
 func _on_dash_cd_timeout() -> void:
 	canDash = true
+	print("finishDash")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
@@ -566,7 +577,8 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_dashing_timeout() -> void:
 	nomove = false
-	velocity /= DASHSPEED*2
+	velocity = Vector2.ZERO
+	print("dash is done")
 
 func getIntel():
 	if searchDark() != -1:

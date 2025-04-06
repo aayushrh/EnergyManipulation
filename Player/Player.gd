@@ -28,6 +28,7 @@ class_name Player
 @onready var BadBlock = preload("res://Effects/BadBlock.tscn")
 @onready var EffectUI = preload("res://World/UI/EffectUI.tscn")
 @onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
+@onready var DamageNum = preload("res://Effects/DamageNum.tscn")
 
 var base_top_speed = 0.0
 var type = 0
@@ -105,12 +106,18 @@ func _process(delta):
 	elif pause and !Global.isPaused():
 		_effectsHandle(delta)
 		_friction(delta)
+		$PlayerArt._unblock()
+		blocking = false
 	if(dashing):
 		var after = Afterimage.instantiate()
 		after.global_position = global_position
 		after.rotation_degrees = rotation_degrees
 		get_tree().current_scene.add_child(after)
-	if(!Global.isPaused()): move_and_slide()
+	if(!Global.isPaused() and velocity != Vector2.ZERO): move_and_slide()
+	
+	if(Global.isPaused()):
+		$PlayerArt._unblock()
+		blocking = false
 
 func set_dash_cd(f: float):
 	DASHCD = f
@@ -161,6 +168,11 @@ func _health_change(newHP: float):
 		if(health < 0):
 			get_tree().current_scene.death()
 			Global.unPause()
+	if get_tree() != null:
+		var damageNum = DamageNum.instantiate()
+		damageNum.global_position = global_position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
+		damageNum._displayNum(change, true)
+		get_tree().current_scene.add_child(damageNum)
 	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
 	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
 
@@ -332,16 +344,16 @@ func canDash():
 
 func _hit(hitbox):
 	self.hitbox = hitbox.clone()
-	dmgTaken = hitbox.damageTaken(self)
+	dmgTaken = hitbox.damageTaken()
 	spellHit = hitbox.spell
 	time_last_hit = time
 	$HitRegister.start(0.06125)
 	#_hit_register()
 
-func _dmgRed(time):
+func _dmgRed(blockTime):
 	var mod = 1.5
 	
-	if(time < 0 and time > -0.02085 * mod):
+	if(blockTime < 0 and blockTime > -0.02085 * mod):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
@@ -350,21 +362,21 @@ func _dmgRed(time):
 		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
-	if(time < -0.02085 * mod and time > -0.04165 * mod):
+	if(blockTime < -0.02085 * mod and blockTime > -0.04165 * mod):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
-		return (((0.0833 - abs(time/mod)*2)/(0.0416)) * 0.15) + 0.85
-	if(time < -0.04165 * mod and time > -0.06125 * mod):
+		return (((0.0833 - abs(blockTime/mod)*2)/(0.0416)) * 0.15) + 0.85
+	if(blockTime < -0.04165 * mod and blockTime > -0.06125 * mod):
 		var badBlock = BadBlock.instantiate()
 		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
-		return (-13.68 + 3.173*(abs(time/mod)*200) + 0.02387*pow((abs(time/mod)*200), 2))/100.0
-	if(time > 0 and time < 0.0417 * mod):
+		return (-13.68 + 3.173*(abs(blockTime/mod)*200) + 0.02387*pow((abs(blockTime/mod)*200), 2))/100.0
+	if(blockTime > 0 and blockTime < 0.0417 * mod):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
@@ -373,20 +385,20 @@ func _dmgRed(time):
 		blockTimer -= BLOCKCD*0.5
 		get_tree().current_scene.perfectBlocks += 1
 		return 1
-	if(time > 0.0417 * mod and time < 0.0833 * mod):
+	if(blockTime > 0.0417 * mod and blockTime < 0.0833 * mod):
 		var goodBlock = GoodBlock.instantiate()
 		goodBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(goodBlock)
 		#blockTimer = 0.1
 		effectsHaventChecked = []
 		get_tree().current_scene.goodBlocks += 1
-		return (((0.0833 - time/mod)/(0.0416)) * 0.15) + 0.85
-	if(time > 0.0833 * mod and time < 0.125 * mod):
+		return (((0.0833 - blockTime/mod)/(0.0416)) * 0.15) + 0.85
+	if(blockTime > 0.0833 * mod and blockTime < 0.125 * mod):
 		var badBlock = BadBlock.instantiate()
 		badBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(badBlock)
 		get_tree().current_scene.badBlocks += 1
-		return (-13.68 + 3.173*(time/mod*100) + 0.02387*pow((time/mod*100), 2))/100.0
+		return (-13.68 + 3.173*(blockTime/mod*100) + 0.02387*pow((blockTime/mod*100), 2))/100.0
 	get_tree().current_scene.noBlocks += 1
 	return 0
 	

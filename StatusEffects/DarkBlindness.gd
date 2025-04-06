@@ -1,11 +1,11 @@
 extends Effects
 class_name DarkBlindness
 
-var handledEffect = false
-var stack = 1
-var lifeTimeStack = []
+var handledEffect : bool = false
+var stack : int = 1
+var lifeTimeStack : Array[float] = []
 
-func _init(life):
+func _init(life : float) -> void:
 	stackable = true
 	lifetime = life
 	visual = load("res://Effects/DarkBlindness.tscn")
@@ -13,9 +13,9 @@ func _init(life):
 	effectName = "Darkness"
 	enemyShows = false
 
-func _tick(entity, delta):
+func _tick(entity : Node2D, delta : float) -> void:
 	if(stack != lifeTimeStack.size() + 1):
-		for i in entity.vfx:
+		for i : Node2D in entity.vfx:
 			if i.vfxName.to_lower() == "dark":
 				stack = lifeTimeStack.size() + 1
 				i.stack = stack
@@ -23,7 +23,7 @@ func _tick(entity, delta):
 	if lifetime <= 0:
 		if(lifeTimeStack.size() == 0):
 			entity.effects.remove_at(entity.effects.find(self))
-			for i in entity.vfx:
+			for i : Node2D in entity.vfx:
 				if i.vfxName.to_lower() == "dark":
 					entity.vfx.remove_at(entity.vfx.find(i))
 					i.queue_free()

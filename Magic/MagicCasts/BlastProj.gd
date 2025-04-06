@@ -1,59 +1,50 @@
 extends SpellCasted
 class_name Blast
 
-var v = Vector2.ZERO
-var speed = 1000
-var mult = 1
-var sender = null
-var nvel = Vector2.ZERO
-var effects = []
-var hit = -1
+var v : Vector2 = Vector2.ZERO
+var speed : float = 1000
+var mult : float = 1
+var sender : CharacterBody2D = null
+var hit : int = -1
 var art : Node2D
-var combined = false
-var setSize = false
-var setPower = false
-var power = 0
-var castingCost = 0
+var setSize : bool = false
+var setPower : bool = false
+var power : float = 0
+var castingCost : float = 0
+var combined : bool = false
 
 var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
-var CombinedBlast = preload("res://Magic/MagicCasts/CombinedBlasts.tscn")
 
-func _setSpell(nspell):
+func _setSpell(nspell : Spell) -> void:
 	scale = Vector2(0.5, 0.5) * nspell.getSize() * mult
 	spell = nspell
 
-func _setV(nvelocity):
-	nvel = nvelocity
+func _setV(nvelocity : Vector2) -> void:
 	velocity = nvelocity.normalized() * getSpeed()
 	v = velocity
 	rotation_degrees = atan2(velocity.y, velocity.x) * 180/PI
 
-func _setPower(p):
+func _setPower(p : float) -> void:
 	power = p
 	setPower = true
 
-func _setSize(size):
+func _setSize(size : Vector2) -> void:
 	scale = size
 	setSize = true
 
-func getSpeed():
+func getSpeed() -> float:
 	return speed * spell.getPSpeed() #* mult
 
-func _integrate_forces(state):
-	velocity = v
-
-func _ready():
+func _ready() -> void:
 	art = $Art
 	
 	if !spell.hasElement():
 		spell.components.append(Global.defaultElement)
-	for i in spell.components:
+	for i : ComponentSpellCard in spell.components:
 		i.callStartEffects(self)
-	#$CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
-	#$Area2D/CollisionShape2D.shape.radius = 75 * mult * 0.8 * spell.getSize()
 
-func _physics_process(delta):
-	for i in spell.components:
+func _physics_process(_delta : float) -> void:
+	for i : ComponentSpellCard in spell.components:
 		i.callOngoingEffects(self)
 	if !setSize:
 		scale = Vector2(0.5, 0.5) * spell.getSize() * mult
@@ -64,19 +55,19 @@ func _physics_process(delta):
 		velocity = v
 	move_and_slide()
 
-func damageTaken(reciever):
+func damageTaken() -> float:
 	if !setPower:
-		return spell.getPower() * ((mult-1)/2+1) * sender.getIntel()
+		return spell.getPower() * ((mult-1)/2.0+1) * sender.getIntel()
 	return power
 
-func clone():
+func clone() -> Blast:
 	var blast = Blast.new()
 	blast.global_position = global_position
 	blast.spell = spell
 	blast.sender = sender
 	return blast
 
-func _on_area_2d_body_entered(body) -> void:
+func _on_area_2d_body_entered(body : Node2D) -> void:
 	if is_instance_valid(body) and is_instance_valid(sender) and !(body.type == sender.type):
 		body._hit(self)
 		if(spell.components != null and is_instance_valid(self)):
@@ -90,7 +81,7 @@ func _on_area_2d_body_entered(body) -> void:
 				i.callHitEffects(self, body)
 		queue_free()
 
-func _on_area_2d_area_entered(area):
+func _on_area_2d_area_entered(area : Area2D):
 	var body = area.get_parent()
 	if(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
 		if(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  > spell.initCost() * mult * spell.getClashingAdvantage()  and is_instance_valid(self)):
@@ -112,9 +103,9 @@ func _on_area_2d_area_entered(area):
 			blast._setV((body.velocity.normalized() + velocity.normalized()) * 0.5 * (velocity.length() + body.velocity.length())/2)
 			blast.global_position = (global_position + body.global_position)/2
 			blast.sender = sender
-			for i in spell.components:
+			for i : ComponentSpellCard in spell.components:
 				i.callVisualHitEffects(self)
-			for i in body.spell.components:
+			for i : ComponentSpellCard in body.spell.components:
 				i.callVisualHitEffects(body)
 			queue_free()
 			body.queue_free()

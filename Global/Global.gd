@@ -22,6 +22,7 @@ var goodBlocks = 0
 var badBlocks = 0
 var noBlocks = 0
 var enemiesKilled = 0
+var hasDoneTutorial = false
 
 func unPause():
 	for i in pause.size():
