@@ -47,7 +47,7 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy.health > 0):
 		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() - dmgRed) * spellObj.mult
 	else:
-		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken(null) - dmgRed) * spellObj.mult
+		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() - dmgRed) * spellObj.mult
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall):
