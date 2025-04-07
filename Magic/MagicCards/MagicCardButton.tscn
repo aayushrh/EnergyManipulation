@@ -1,17 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1ih3khnb752"]
+[gd_scene load_steps=4 format=3 uid="uid://b1ih3khnb752"]
 
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rntnr"]
 [ext_resource type="Script" path="res://Magic/MagicCards/MagicCardButton.gd" id="1_yqehn"]
+[ext_resource type="Texture2D" uid="uid://gfadr1fql6h1" path="res://Art/boar.png" id="2_oov5a"]
 
 [node name="Button" type="Button"]
+modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(0, 40)
+offset_right = 85.0
+offset_bottom = 40.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.329412)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 0.329412)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 0.329412)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.329412)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.329412)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.329412)
+theme_override_fonts/font = ExtResource("1_rntnr")
+theme_override_font_sizes/font_size = 24
+text = "FIRE"
+icon = ExtResource("2_oov5a")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("1_yqehn")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("1_rntnr")
 theme_override_font_sizes/font_size = 32
+text = "Fire"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
