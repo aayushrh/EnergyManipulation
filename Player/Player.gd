@@ -59,7 +59,7 @@ var pause = false
 var hitbox = null
 var hitboxEffects = []
 var effectsHaventChecked : Array[Effects] = []
-var intel = 1.0
+var intel = 1.0# * 10000000
 var wisdom = 1.0
 var comprehension = 1.0
 var spellHit = null
@@ -168,13 +168,16 @@ func _health_change(newHP: float):
 		if(health < 0):
 			get_tree().current_scene.death()
 			Global.unPause()
+	display_dmg(change)
+	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
+	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
+
+func display_dmg(change):
 	if get_tree() != null:
 		var damageNum = DamageNum.instantiate()
 		damageNum.global_position = global_position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
 		damageNum._displayNum(change, true)
 		get_tree().current_scene.add_child(damageNum)
-	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
-	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -497,7 +500,6 @@ func processHaventChecked():
 		var effectUI = EffectUI.instantiate()
 		effectUI.initialize(e)
 		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
-	effectsHaventChecked = []
 
 func searchLight():
 	var i = 0
