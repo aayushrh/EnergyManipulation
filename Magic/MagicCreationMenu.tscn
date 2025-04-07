@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bllickk0pk5b8"]
+[gd_scene load_steps=14 format=3 uid="uid://bllickk0pk5b8"]
 
 [ext_resource type="Script" path="res://Magic/MagicCreationMenu.gd" id="1_ovg3u"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="2_578rg"]
@@ -7,6 +7,122 @@
 [ext_resource type="PackedScene" uid="uid://dqatyjcy8scuy" path="res://Magic/MagicSpells/SpellButton.tscn" id="5_a46rx"]
 [ext_resource type="PackedScene" uid="uid://dspt0twvtj76f" path="res://SpellCover.tscn" id="7_enb07"]
 [ext_resource type="PackedScene" uid="uid://brbjl2x1wttyr" path="res://SpellCreation.tscn" id="8_3dm7t"]
+[ext_resource type="PackedScene" uid="uid://dprovuraroe3v" path="res://World/UI/MagicCardUI.tscn" id="8_pnt21"]
+[ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="9_ul3cl"]
+
+[sub_resource type="Animation" id="Animation_hx0fs"]
+resource_name = "BookUp"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpellCreation:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(441, 322), Vector2(441, -291)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NoShapeCard:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(204, 79), Vector2(204, -482)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NoSpellCard:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(195, 151), Vector2(195, -428)]
+}
+
+[sub_resource type="Animation" id="Animation_eakmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpellCreation:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(441, 332)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NoShapeCard:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(204, 79)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NoSpellCard:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(195, 151)]
+}
+
+[sub_resource type="Animation" id="Animation_ic5bk"]
+resource_name = "MoveLeft"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(350, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kd07"]
+_data = {
+"BookUp": SubResource("Animation_hx0fs"),
+"MoveLeft": SubResource("Animation_ic5bk"),
+"RESET": SubResource("Animation_eakmp")
+}
 
 [node name="Magic" type="Control" node_paths=PackedStringArray("element", "type", "style", "cardList")]
 layout_mode = 3
@@ -237,10 +353,11 @@ MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
 [node name="SpellCreation" parent="." node_paths=PackedStringArray("MagicMenu", "SpellList") instance=ExtResource("8_3dm7t")]
+visible = false
 offset_left = 441.0
-offset_top = 270.0
+offset_top = 322.0
 offset_right = 441.0
-offset_bottom = 270.0
+offset_bottom = 322.0
 MagicMenu = NodePath("..")
 SpellList = NodePath("../SpellSelection/Control/ScrollContainer/SpellList")
 
@@ -264,20 +381,54 @@ color = Color(0.4, 0.4, 0.4, 1)
 [node name="Label" type="Label" parent="NoShapeCard"]
 layout_mode = 0
 offset_left = 73.0
-offset_top = 54.0
+offset_top = 25.0
 offset_right = 413.0
-offset_bottom = 90.0
+offset_bottom = 61.0
 theme_override_fonts/font = ExtResource("2_578rg")
 theme_override_font_sizes/font_size = 27
 text = "You need a Shape Card"
 
 [node name="BaseCardAdd" type="Button" parent="NoShapeCard"]
 layout_mode = 0
-offset_left = 176.0
-offset_top = 256.0
-offset_right = 316.0
-offset_bottom = 322.0
+offset_left = 166.0
+offset_top = 295.0
+offset_right = 306.0
+offset_bottom = 361.0
 text = "Attach Shape"
+
+[node name="ColorRect2" parent="NoShapeCard" instance=ExtResource("8_pnt21")]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 73.0
+offset_right = 475.0
+offset_bottom = 573.0
+scale = Vector2(0.4, 0.4)
+cardToShow = ExtResource("9_ul3cl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2kd07")
+}
+
+[node name="NoSpellCard" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 151.0
+offset_right = 713.0
+offset_bottom = 440.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Label" type="Label" parent="NoSpellCard"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 59.0
+offset_right = 495.0
+offset_bottom = 196.0
+theme_override_fonts/font = ExtResource("2_578rg")
+theme_override_font_sizes/font_size = 52
+text = "No Spell is currently shown"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="pressed" from="Control/Element" to="." method="_on_element_pressed"]
 [connection signal="pressed" from="Control/Style" to="." method="_on_style_pressed"]

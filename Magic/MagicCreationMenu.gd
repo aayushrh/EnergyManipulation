@@ -12,6 +12,9 @@ var dontLeave = false
 func _changeSpell(nspell):
 	#$Control.visible = true
 	selectedSpell = nspell
+	$AnimationPlayer.play("BookUp")
+	await $AnimationPlayer.animation_finished
+	$NoSpellCard.visible = false
 	$Control/CurrentSpell.text = selectedSpell.spellName
 	if selectedSpell.type != null:
 		$SpellCreation.reset()
@@ -19,12 +22,15 @@ func _changeSpell(nspell):
 	else:
 		$NoShapeCard.visible = true
 		$SpellCreation.visible = false
+	$AnimationPlayer.play_backwards("BookUp")
 
 func addCard(type):
 	_change(type)
-	position.x = 350
+	$AnimationPlayer.play("MoveLeft")
+	#position.x = 350
 
 func _finish():
+	$AnimationPlayer.play_backwards("MoveLeft")
 	position.x = 0
 
 func reloadSpell():

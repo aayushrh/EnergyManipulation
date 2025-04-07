@@ -11,7 +11,10 @@ func _reload(typeShow):
 		print(i.type)
 		if i != null and i.type == typeShow:
 			var button = MagicButton.instantiate()
-			button.get_child(0).text = i.cardName
+			button.text = i.cardName
+			button.icon = i.icon
+			button.modulate = i.color
+			#button.get_child(0).text = i.cardName
 			button.card = i
 			button.magicMenu = magicMenu
 			add_child(button)

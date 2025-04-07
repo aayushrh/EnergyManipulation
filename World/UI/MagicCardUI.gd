@@ -6,6 +6,7 @@ var c = null
 var target = 0
 
 @export var hover = false
+@export var cardToShow : Resource
 
 func _show(card):
 	c = card
@@ -46,6 +47,10 @@ func _show(card):
 			$VBoxContainer/Label5.visible = false
 			$VBoxContainer/Label6.visible = false
 			$VBoxContainer/Label7.visible = false
+
+func _ready():
+	if cardToShow != null:
+		_show(cardToShow)
 
 func _process(delta):
 	if hover:
