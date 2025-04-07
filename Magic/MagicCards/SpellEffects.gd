@@ -6,15 +6,15 @@ class_name SpellEffects
 func testHit(spellObj:SpellCasted, enemy):
 	print("hit enemy with spell")
 
-func addBurning(spellObj:SpellCasted, enemy):
-	if(enemy != null):
-		var burning = Burning.new(spellObj.spell.getPower() * 3)
-		enemy.attachEffect(burning)
+func addBurning(dmgRed, spellObj:SpellCasted, enemy):
+	if(enemy != null && dmgRed < spellObj.spell.getPower()):
+		var burning = Burning.new((spellObj.spell.getPower() - dmgRed)/spellObj.spell.getPower() * 3, spellObj.spell.getPower())
+		enemy.attachEffect(burning, false)
 
-func addSoggy(spellObj:SpellCasted, enemy):
-	if(enemy != null):
-		var soggy = Soggy.new(spellObj.spell.getPower() * 3)
-		enemy.attachEffect(soggy)
+func addSoggy(dmgRed, spellObj:SpellCasted, enemy):
+	if(enemy != null && dmgRed < spellObj.spell.getPower()):
+		var soggy = Soggy.new((spellObj.spell.getPower() - dmgRed) * 3)
+		enemy.attachEffect(soggy, false)
 
 func addStun(spellObj:SpellCasted, enemy):
 	if(enemy != null):
@@ -39,7 +39,7 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 		enemy.attachEffect(blind)"""
 
 func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
-	if(enemy is Wall):
+	if(is_instance_valid(spellObj.sender) || enemy is Wall || dmgRed >= spellObj.spell.getPower()):
 		return
 	spellObj.sender.bonusHealBlock = true
 	spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult

@@ -585,7 +585,7 @@ func getIntel():
 		return (intel * pow(.95,effects[searchDark()].stack))
 	return intel
 
-func attachEffect(effect):
+func attachEffect(effect, check = true):
 	if effect.enemyShows:
 		var visual = effect.visual.instantiate()
 		add_child(visual)
