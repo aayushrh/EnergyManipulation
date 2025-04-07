@@ -30,8 +30,9 @@ func addCard(type):
 	#position.x = 350
 
 func _finish():
-	$AnimationPlayer.play_backwards("MoveLeft")
-	position.x = 0
+	if position.x == 350:
+		$AnimationPlayer.play_backwards("MoveLeft")
+	#position.x = 0
 
 func reloadSpell():
 	var location = Global.spellList.find(selectedSpell)

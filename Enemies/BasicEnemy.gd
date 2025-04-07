@@ -218,7 +218,7 @@ func _health_change(newHP: float):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
 		var damageNum = DamageNum.instantiate()
-		damageNum.global_position = global_position + Vector2(50, -50)
+		damageNum.global_position = global_position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
 		damageNum._displayNum(change, false)
 		get_tree().current_scene.add_child(damageNum)
 	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)

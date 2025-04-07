@@ -28,7 +28,7 @@ func _process(delta):
 		for i in Global.spellList:
 			if(nname == i.spellName):
 				found = true
-		if !found and nname.length() < 15:
+		if !found and nname.length() < 9:
 			adding = false
 			var nspell = Spell.new(nname)
 			Global.spellList.append(nspell)

@@ -5,7 +5,11 @@ var initSize = 0
 
 func _initialize():
 	$Label.text = spell.spellName
-	$Label2/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
+	if spell.binding == null or spell.binding == -1:
+		$Label2/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_any_outline.png")
+	else:
+		$Label2/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
+	
 	#$Label2.text = (char)(spell.binding)
 
 func _process(delta):

@@ -10,10 +10,11 @@ var changeToDontLeave = false
 func _initialize():
 	$HBoxContainer/Button.visible = true
 	nameText.text = spell.spellName
-	if(spell.binding == null):
+	if(spell.binding == null or spell.binding == -1):
 		#$HBoxContainer/Button.text = "?"
-		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_any.png")
+		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_any_outline.png")
 	else:
+		print(spell.binding)
 		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
 		#$HBoxContainer/Button.text = (char)(spell.binding)
 
