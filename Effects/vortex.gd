@@ -49,7 +49,7 @@ func _process(delta):
 				i.v -= (i.global_position - global_position).normalized() * suctionPower
 			else:
 				if i is CharacterBody2D and !hasV:
-					i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 * delta / pow(i.global_position.distance_to(global_position),0.5)
+					i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 * delta / max(pow(i.global_position.distance_to(global_position) / spell.getSize() * 10,0.25),0.5)
 					if !i.slow:
 						i.velocity -= (i.global_position - global_position).normalized() * suctionPower
 					else:

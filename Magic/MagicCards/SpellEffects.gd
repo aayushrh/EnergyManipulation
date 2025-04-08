@@ -7,13 +7,13 @@ func testHit(spellObj:SpellCasted, enemy):
 	print("hit enemy with spell")
 
 func addBurning(dmgRed, spellObj:SpellCasted, enemy):
-	if(enemy != null && dmgRed < spellObj.spell.getPower()):
-		var burning = Burning.new((spellObj.spell.getPower() - dmgRed)/spellObj.spell.getPower() * 3, spellObj.spell.getPower())
+	if(enemy != null && dmgRed < 1):
+		var burning = Burning.new((spellObj.spell.getPower() * (1.0 - dmgRed))/spellObj.spell.getPower() * 2.5, spellObj.spell.getPower())
 		enemy.attachEffect(burning, false)
 
 func addSoggy(dmgRed, spellObj:SpellCasted, enemy):
-	if(enemy != null && dmgRed < spellObj.spell.getPower()):
-		var soggy = Soggy.new((spellObj.spell.getPower() - dmgRed) * 3)
+	if(enemy != null && dmgRed < 1):
+		var soggy = Soggy.new((spellObj.spell.getPower() * (1.0 - dmgRed)) * 3)
 		enemy.attachEffect(soggy, false)
 
 func addStun(spellObj:SpellCasted, enemy):
@@ -39,21 +39,21 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 		enemy.attachEffect(blind)"""
 
 func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
-	if(!is_instance_valid(spellObj.sender) || enemy is Wall || dmgRed >= spellObj.spell.getPower()):
+	if(!is_instance_valid(spellObj.sender) || enemy is Wall || dmgRed >= 1):
 		return
 	spellObj.sender.bonusHealBlock = true
 	spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
 	spellObj.sender.bonusHealBlock = false
 	if(enemy.health > 0):
-		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() - dmgRed) * spellObj.mult
+		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult
 	else:
-		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() - dmgRed) * spellObj.mult
+		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
-	if(enemy is Wall):
+	if(enemy is Wall || dmgRed >= 1):
 		return
 	if(enemy.searchLight() != -1):
-		enemy.health -= 0.05 * (spellObj.spell.getPower() - dmgRed) * spellObj.mult * enemy.effects[enemy.searchLight()].stack
+		enemy.health -= 0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchLight()].stack
 	
 
 func takeHealth(spellObj:SpellCasted):
