@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7achmtdheu5u"]
+[gd_scene load_steps=6 format=3 uid="uid://b7achmtdheu5u"]
 
 [ext_resource type="Script" path="res://Effects/vortex.gd" id="1_c42ul"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="3_hs5sb"]
+[ext_resource type="Texture2D" uid="uid://cn1k6twx27xmp" path="res://Art/vortex (1).png" id="3_xuw2m"]
+[ext_resource type="Texture2D" uid="uid://dg1jfkaulxkqm" path="res://Art/vortex (2).png" id="4_qgnh0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1yd07"]
 radius = 381.064
@@ -18,6 +21,23 @@ shape = SubResource("CircleShape2D_1yd07")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="TrueWhiteCircle" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0.262745)
+scale = Vector2(3, 3)
+texture = ExtResource("3_hs5sb")
+
+[node name="Vortex(1)" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0.337255)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_xuw2m")
+
+[node name="Vortex(2)" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.439216)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_qgnh0")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

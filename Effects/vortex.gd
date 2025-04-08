@@ -6,15 +6,36 @@ var type = 0
 var tickRate = 0.05
 
 var bodiesIn = []
+var rng = RandomNumberGenerator.new()
+
+@onready var VortexEffect = preload("res://Effects/vortex_effect.tscn")
 
 func _init() -> void:
 	pass
+
+#func _ready():
+	#for i in range(rng.randi_range(10, 20)):
+		#var randPos = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized() * rng.randf_range(0, 300)
+		#var vortexE = VortexEffect.instantiate()
+		#vortexE.parent = self
+		#vortexE.global_position = global_position + randPos
+		#get_tree().current_scene.add_child(vortexE)
 
 func _setSpell(nspell, ntype):
 	spell = nspell
 	type = ntype
 	
 func _process(delta):
+	
+	#for i in range(rng.randi_range(0, 1)):
+		#var randPos = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized() * rng.randf_range(300, 381)
+		#var vortexE = VortexEffect.instantiate()
+		#vortexE.parent = self
+		#vortexE.global_position = global_position + randPos
+		#get_tree().current_scene.add_child(vortexE)
+	
+	rotation_degrees += 180 * delta
+	
 	if spell != null and !Global.isPaused():
 		var suctionPower = spell.getAttrScaled("Suction Power") * 50
 		
