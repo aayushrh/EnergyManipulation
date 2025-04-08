@@ -1,7 +1,10 @@
 extends Node2D
 
+var setAnimSpeed = 1
+
 func _displayNum(num : float, player : bool) -> void:
 	var numb = num
+	$AnimationPlayer.speed_scale = 1
 	if num != 0:
 		if num > 0:
 			$Label.set("theme_override_colors/font_color", Color(0, 1, 0))
@@ -13,6 +16,8 @@ func _displayNum(num : float, player : bool) -> void:
 			else:
 				$Label.set("theme_override_colors/font_color", Color(1, 1, 1))
 			$Label.scale = Vector2(min(max(-num, 0.4), 0.75), min(max(-num, 0.4), 0.75))
+		#setAnimSpeed = min(max((0.25)/numb,0.05), 2)
+		#$Timer.start(0.05)
 		$AnimationPlayer.speed_scale = min(max((0.25)/numb,0.05), 2)
 		if numb >= 0.1:
 			$Label.text = str(ceil(numb * 10))
@@ -26,3 +31,6 @@ func _ready():
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
+
+func _on_timer_timeout():
+	$AnimationPlayer.speed_scale = setAnimSpeed
