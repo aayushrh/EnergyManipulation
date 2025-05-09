@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7n1s2fb77tim"]
+[gd_scene load_steps=7 format=3 uid="uid://b7n1s2fb77tim"]
 
 [ext_resource type="Script" path="res://Magic/MagicCasts/BlastProj.gd" id="1_cbhg2"]
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="2_o26kl"]
 [ext_resource type="Script" path="res://Magic/MagicCasts/BlastArt.gd" id="3_4jp24"]
+[ext_resource type="Script" path="res://Magic/MagicCasts/hit_box_spawner.gd" id="4_27qq2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i3xxi"]
-resource_local_to_scene = true
-radius = 22.2036
+[sub_resource type="CircleShape2D" id="CircleShape2D_52nd6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfyfv"]
 resource_local_to_scene = true
@@ -19,7 +18,7 @@ script = ExtResource("1_cbhg2")
 metadata/_edit_horizontal_guides_ = [-255.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i3xxi")
+shape = SubResource("CircleShape2D_52nd6")
 
 [node name="Icon" type="Sprite2D" parent="."]
 visible = false
@@ -32,9 +31,13 @@ collision_mask = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_dfyfv")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Art" type="Node2D" parent="."]
 script = ExtResource("3_4jp24")
+
+[node name="HitBoxSpawner" type="Node2D" parent="."]
+script = ExtResource("4_27qq2")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
