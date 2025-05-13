@@ -10,7 +10,8 @@ func _setSpell(nspell):
 	spell = nspell
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	scale = Vector2(1, 1) * spell.attributes.getSize() * mult
-	lifetime -= 1
+	lifetime -= delta
 	if(lifetime < 0):
 		queue_free()

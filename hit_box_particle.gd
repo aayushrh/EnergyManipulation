@@ -14,20 +14,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	delta *= Global.getTimeScale()
 	closest_colors()
 	timer -= delta
 	if(timer <= 0):
 		timer2 -= delta
-		circle()
+		circle(delta)
 		$TrueWhiteCircle.self_modulate.a += delta*0.5
 		if(timer2 <= 0):
 			queue_free()
 	else:
-		self.position+=dir
+		self.position+=dir*120*delta
 	
 
-func circle():
-	position = position.rotated(PI*0.1)
+func circle(delta):
+	position = position.rotated(PI*6*delta)
 	
 	
 

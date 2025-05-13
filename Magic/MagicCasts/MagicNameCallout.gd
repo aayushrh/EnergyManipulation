@@ -3,6 +3,7 @@ extends Node2D
 @export var lifetime = 0.25
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	lifetime -= delta
 	if(lifetime < 0):
 		queue_free()

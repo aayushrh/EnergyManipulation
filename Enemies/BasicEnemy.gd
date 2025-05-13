@@ -164,6 +164,7 @@ func _finishCharge():
 #	stage = stag
 
 func _physics_process(delta):
+	delta *= Global.getTimeScale()
 	delt = delta
 	#if blinded:
 		#$Area2D.monitoring = false
@@ -288,7 +289,7 @@ func _hit(hitbox):
 	time = 0
 
 func _move(delta):
-	velocity *= 0.9
+	velocity *= pow(0.9,delta*120)
 	
 	var softBodyPush = $SoftBody.getVector()
 	
@@ -344,6 +345,7 @@ func _move(delta):
 		velocity -= softBodyPush * TOPSPEED
 		if softBodyPush != Vector2.ZERO:
 			print("softbody: " + str(softBodyPush))
+		velocity *= Global.getTimeScale()
 		if(slow):
 			velocity = velocity * 0.5
 

@@ -80,6 +80,7 @@ func _ready():
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -333,9 +334,9 @@ func _movement(delta):
 	input_vector = input_vector.normalized()
 	newVel += input_vector * ACCELERATION * delta
 	if(!blocking and !slow):
-		newVel = newVel.limit_length(TOPSPEED)
+		newVel = newVel.limit_length(TOPSPEED * Global.getTimeScale())
 	else:
-		newVel = newVel.limit_length(TOPSPEED/2)
+		newVel = newVel.limit_length(TOPSPEED / 2 * Global.getTimeScale())
 	
 	velocity = newVel
 

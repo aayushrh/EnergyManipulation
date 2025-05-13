@@ -26,7 +26,7 @@ func _setSpell(nspell, ntype):
 	type = ntype
 	
 func _process(delta):
-	
+	delta *= Global.getTimeScale()
 	#for i in range(rng.randi_range(0, 1)):
 		#var randPos = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized() * rng.randf_range(300, 381)
 		#var vortexE = VortexEffect.instantiate()

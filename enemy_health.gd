@@ -9,6 +9,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	delta *= Global.getTimeScale()
 	timer -= delta
 	if(!is_instance_valid(myParent)):
 		queue_free()

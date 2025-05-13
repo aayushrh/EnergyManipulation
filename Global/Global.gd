@@ -7,6 +7,8 @@ var magicCards = []
 var spellList = []
 var particlesNotShowing = false
 
+var timeScale = 1
+
 var defaultElement : ComponentSpellCard
 
 var amountShot = 0
@@ -37,3 +39,8 @@ func _change_tscn(file_location:String):
 	lastTSCN = get_tree().current_scene.scene_file_path
 	get_tree().change_scene_to_file(file_location)
 	print(lastTSCN)
+	
+func getTimeScale():
+	if(isPaused()):
+		return 0
+	return timeScale

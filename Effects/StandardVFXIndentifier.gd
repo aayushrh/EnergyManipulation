@@ -12,6 +12,7 @@ func _init():
 	baseScale = self.scale
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	self.modulate = Color(1,1,1,0.75*min(stack/maxStack,1) + 0.25)
 	time += delta
 	self.scale = baseScale * (3 * max(0, (maxStack-stack)/maxStack) + 1)

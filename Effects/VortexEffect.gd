@@ -9,8 +9,9 @@ func _ready():
 		queue_free()
 
 func _physics_process(delta):
+	delta *= Global.getTimeScale()
 	if is_instance_valid(parent):
-		velocity = (parent.global_position - global_position).normalized() * 5000
+		velocity = (parent.global_position - global_position).normalized() * 5000 * delta#might be wrong
 		if (parent.global_position - global_position).length() < 25:
 			queue_free()
 		move_and_slide()

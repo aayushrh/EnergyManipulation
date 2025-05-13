@@ -10,7 +10,7 @@
 script = ExtResource("2_wo8yl")
 spellEffects = ExtResource("5_sjd8h")
 cardName = "Vortex"
-cardDescription = "spawns a vortex around you spell that pulsl enemies/projectiles in and damages them, at the cost of half the damage"
+cardDescription = "spawns a vortex around your spell that pulls enemies and projectiles in and damages them, at the cost of half the damage"
 hitEffects = Array[String]([])
 ongoingEffects = Array[String]([])
 startEffects = Array[String](["addVortex"])

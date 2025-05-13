@@ -8,4 +8,5 @@ func _ready():
 	scale.y = scale.x# * 3
 
 func _process(delta):
-	position += v * 10
+	delta *= Global.getTimeScale()
+	position += v * 1200 * delta

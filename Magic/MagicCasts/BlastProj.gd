@@ -44,15 +44,13 @@ func _ready() -> void:
 		i.callStartEffects(self)
 
 func _physics_process(_delta : float) -> void:
+	_delta *= Global.getTimeScale()
 	for i : ComponentSpellCard in spell.components:
 		i.callOngoingEffects(self)
 	if !setSize:
 		scale = Vector2(0.5, 0.5) * spell.getSize() * mult
 	$Art.processed = true
-	if(Global.isPaused()):
-		velocity = Vector2.ZERO
-	else:
-		velocity = v
+	velocity = v * Global.getTimeScale()
 	move_and_slide()
 
 func damageTaken() -> float:

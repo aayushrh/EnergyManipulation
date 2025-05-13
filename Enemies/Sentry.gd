@@ -87,6 +87,7 @@ func _finishCharge():
 	ROTATIONSPEED *= 2
 
 func _physics_process(delta):
+	delta *= Global.getTimeScale()
 	delt = delta
 	if(!Global.isPaused() and !pause):
 		if(health != hp):

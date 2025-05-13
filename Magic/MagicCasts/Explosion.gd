@@ -26,6 +26,7 @@ func _shoot():
 	timer = 0.1
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	if !shot:
 		if (castingTimer >= 0 ):
 			castingTimer -= delta

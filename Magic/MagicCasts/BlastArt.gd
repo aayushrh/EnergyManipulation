@@ -8,6 +8,7 @@ var processed = false
 
 
 func _process(delta):
+	delta *= Global.getTimeScale()
 	time += delta
 	
 	if processed:

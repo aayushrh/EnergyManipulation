@@ -85,7 +85,7 @@ func draw():
 	draw_circle(Vector2.ZERO, 256, Color.WHITE, false)
 
 func _process(delta):
-	
+	delta *= Global.getTimeScale()
 	if startingLocation != Vector2.ZERO:
 		$Ethan.global_position = startingLocation
 		$Ethan.global_scale = Vector2(0.25, 0.25)
