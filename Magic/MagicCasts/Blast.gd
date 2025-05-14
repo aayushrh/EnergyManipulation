@@ -93,9 +93,9 @@ func _process(delta):
 		$Ethan.visible = false
 	
 	queue_redraw()
-	$Pivot.rotate(PI/160)
+	$Pivot.rotate(PI/160*delta*120.0)
 	for i in $Pivot.get_children():
-		i.rotate(-PI/160)
+		i.rotate(-PI/160*delta*120.0)
 	if !is_instance_valid(sender):
 		queue_free()
 	if !Global.isPaused() and is_instance_valid(sender):
