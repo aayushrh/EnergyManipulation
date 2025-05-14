@@ -1,7 +1,8 @@
 extends CPUParticles2D
 
 func _process(delta):
-	speed_scale = Global.getTimeScale()
+	delta *= Global.getTimeScale()
+	speed_scale = delta * 120
 	if(Global.particlesNotShowing):
 		$Sprite2D.visible = true
 	else:

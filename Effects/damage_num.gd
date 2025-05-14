@@ -4,7 +4,6 @@ var setAnimSpeed = 1
 
 func _displayNum(num : float, player : bool) -> void:
 	var numb = num
-	$AnimationPlayer.speed_scale = 1
 	if num != 0:
 		if num > 0:
 			$Label.set("theme_override_colors/font_color", Color(0, 1, 0))
@@ -28,9 +27,15 @@ func _displayNum(num : float, player : bool) -> void:
 
 func _ready():
 	$AnimationPlayer.play("InandOut")
+	
+func _process(delta: float) -> void:
+	delta *= Global.getTimeScale()
+	setAnimSpeed = delta * 120
+	$AnimationPlayer.speed_scale = setAnimSpeed
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
 
 func _on_timer_timeout():
-	$AnimationPlayer.speed_scale = setAnimSpeed
+	pass
+	#$AnimationPlayer.speed_scale = setAnimSpeed
