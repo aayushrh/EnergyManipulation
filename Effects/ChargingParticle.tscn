@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://6y8mwjedceom"]
 
-[ext_resource type="Texture2D" uid="uid://cs2e0etrfiiuv" path="res://Art/BOTWV2.png" id="1_y811x"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="1_dg6hq"]
 [ext_resource type="Script" path="res://Effects/ChargingParticle.gd" id="2_hpw26"]
 
 [node name="Node2D" type="Sprite2D"]
 self_modulate = Color(0, 1, 1, 1)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_y811x")
+texture = ExtResource("1_dg6hq")
 script = ExtResource("2_hpw26")

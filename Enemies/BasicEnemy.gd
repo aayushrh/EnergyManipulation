@@ -166,6 +166,7 @@ func _finishCharge():
 func _physics_process(delta):
 	delta *= Global.getTimeScale()
 	delt = delta
+	energyGain(delta)
 	#if blinded:
 		#$Area2D.monitoring = false
 	#else:
