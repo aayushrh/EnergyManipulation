@@ -16,13 +16,13 @@ var elements = []
 var colorval = 0.0
 var colorindex = 0
 var colordelay = 0.0
-var MAXCOLORDELAY = 2.0
+var MAXCOLORDELAY = 1.0
+var colorSpeed = 1.0
 
 func on_open():
 	visible = true
 	colorindex = 1
 	colorval = 0.0
-	colordelay = MAXCOLORDELAY
 	for s in things:
 		s.queue_free()
 	#for a in elements:
@@ -62,6 +62,9 @@ func on_open():
 			s.amt = things.size()
 	if(elements.size()>0):
 		colorstrat_2()
+		colorSpeed = pow(elements.size(),0.1)
+		MAXCOLORDELAY/= colorSpeed
+		colordelay = MAXCOLORDELAY/0.5
 
 func _on_exit_pressed():
 	for s in things:
@@ -106,7 +109,7 @@ func colorchange(delta):
 				$ColorRect.color = elements[cv].color
 			else:
 				$ColorRect.color = elements[cv].color + (elements[colorindex].color-elements[cv].color) * colorval
-			colorval += delta * 0.5
+			colorval += delta * 0.5 * colorSpeed
 			if(colorval >= 1.0):
 				colordelay = MAXCOLORDELAY
 				colorval = 0

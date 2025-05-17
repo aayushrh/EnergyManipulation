@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgyl1iaquh2ph"]
+[gd_scene load_steps=3 format=3 uid="uid://t6odlw45en3j"]
 
 [ext_resource type="Script" path="res://Effects/VortexEffect.gd" id="1_l444y"]
 [ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_ajy0l"]
