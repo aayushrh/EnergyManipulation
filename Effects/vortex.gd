@@ -64,7 +64,7 @@ func _process(delta):
 				if i is CharacterBody2D and !hasV:
 					timer -= delta
 					if(timer <= 0):
-						i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 / max(pow(i.global_position.distance_to(global_position) / spell.getSize() * 10,0.25),0.5)/6
+						i.health -= spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 / max(pow(i.global_position.distance_to(global_position) / spell.getSize() * 10,0.5),0.5)/6
 						timer = tickRate
 					if !i.slow:
 						i.velocity -= (i.global_position - global_position).normalized() * suctionPower

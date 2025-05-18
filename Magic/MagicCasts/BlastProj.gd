@@ -12,6 +12,7 @@ var setPower : bool = false
 var power : float = 0
 var castingCost : float = 0
 var combined : bool = false
+var lifetime = 100.0
 
 var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -45,6 +46,9 @@ func _ready() -> void:
 
 func _physics_process(_delta : float) -> void:
 	_delta *= Global.getTimeScale()
+	lifetime -= _delta
+	if(lifetime<0):
+		queue_free()
 	for i : ComponentSpellCard in spell.components:
 		i.callOngoingEffects(self)
 	if !setSize:
@@ -82,9 +86,23 @@ func _on_area_2d_body_entered(body : Node2D) -> void:
 func _on_area_2d_area_entered(area : Area2D):
 	var body = area.get_parent()
 	if(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
-		if(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  > spell.initCost() * mult * spell.getClashingAdvantage()  and is_instance_valid(self)):
+		if(abs(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  - spell.initCost() * mult * spell.getClashingAdvantage()) > (spell.initCost() * mult * spell.getClashingAdvantage() + body.spell.initCost() * body.mult * body.spell.getClashingAdvantage())/16):
+			if(is_instance_valid(body)):
+				
+				for i : ComponentSpellCard in body.spell.components:
+					i.callVisualHitEffects(body)
+				body.queue_free()
+			if(is_instance_valid(self)):
+				for i : ComponentSpellCard in spell.components:
+					i.callVisualHitEffects(self)
+				queue_free()
+		elif(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  > spell.initCost() * mult * spell.getClashingAdvantage()  and is_instance_valid(self)):
+			for i : ComponentSpellCard in spell.components:
+				i.callVisualHitEffects(self)
 			queue_free()
 		elif(is_instance_valid(body)):
+			for i : ComponentSpellCard in body.spell.components:
+				i.callVisualHitEffects(body)
 			body.queue_free()
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type:
 		if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
