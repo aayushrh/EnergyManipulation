@@ -7,7 +7,7 @@ var magicCards = []
 var spellList = []
 var particlesNotShowing = false
 
-var timeScale = 1
+var timeScale = 1.0
 
 var defaultElement : ComponentSpellCard
 

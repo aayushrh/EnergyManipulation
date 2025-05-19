@@ -47,7 +47,7 @@ func _process(delta):
 		for s in spell.components:
 			if(s.isElement):
 				elements.append(s);
-	rotation_degrees += 180 * delta
+	rotation_degrees -= 180 * delta
 	color_change(delta)
 	if spell != null and !Global.isPaused():
 		var suctionPower = spell.getAttrScaled("Suction Power") * 50

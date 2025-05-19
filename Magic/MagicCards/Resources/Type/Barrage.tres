@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="TypeSpellCard" load_steps=7 format=3 uid="uid://beg00d1bfprlu"]
+
+[ext_resource type="PackedScene" uid="uid://ler3tg2q13h0" path="res://Magic/MagicCasts/Barrage.tscn" id="1_ocgww"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="2_fsi4y"]
+[ext_resource type="Resource" uid="uid://cdhj6qtyw15iu" path="res://Magic/MagicCards/Resources/Attributes/Power_Proj_Spd.tres" id="3_x3qj3"]
+[ext_resource type="Resource" uid="uid://b82qk5lssemgx" path="res://Magic/MagicCards/Resources/Attributes/Size_Cast_Spd.tres" id="4_pgnem"]
+[ext_resource type="Texture2D" uid="uid://dbcqh272dk2xl" path="res://Art/Barrage.png" id="5_otehp"]
+[ext_resource type="Script" path="res://Magic/MagicCards/TypeSpellCard.gd" id="6_uucdc"]
+
+[resource]
+script = ExtResource("6_uucdc")
+cardName = "Barrage"
+cardDescription = "Continously conjures blasts in the direction the player is facing"
+SpellObj = ExtResource("1_ocgww")
+color = Color(1, 1, 1, 1)
+icon = ExtResource("5_otehp")
+cdMult = 10.0
+costMult = 2.5
+maxPowerTimeMult = 1.5
+castingTimeMult = 1.0
+contCostMult = -1.0
+aimType = 0
+attribute = Array[ExtResource("2_fsi4y")]([ExtResource("3_x3qj3"), ExtResource("4_pgnem")])
+values = Array[String]([])

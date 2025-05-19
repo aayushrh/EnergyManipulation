@@ -13,6 +13,7 @@ var power : float = 0
 var castingCost : float = 0
 var combined : bool = false
 var lifetime = 100.0
+var fuse = true
 
 var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -105,30 +106,31 @@ func _on_area_2d_area_entered(area : Area2D):
 				i.callVisualHitEffects(body)
 			body.queue_free()
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type:
-		if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
-			var blast = BlastProj.instantiate()
-			var nspell = Spell.new("newThing")
-			blast.combined = true
-			nspell.components.append_array(spell.components)
-			nspell.components.append_array(body.spell.components)
-			var j = 0
-			while j < nspell.components.size():
-				if nspell.components[j] == Global.defaultElement:
-					nspell.components.remove_at(j)
-					j -= 1
-				j += 1
-			nspell.type = spell.type
-			blast.mult = body.mult + mult
-			blast._setSpell(nspell)
-			blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.getIntel() + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.getIntel())
-			blast._setSize(scale + body.scale)
-			blast._setV((body.velocity.normalized() + velocity.normalized()) * 0.5 * (velocity.length() + body.velocity.length())/2)
-			blast.global_position = (global_position + body.global_position)/2
-			blast.sender = sender
-			for i : ComponentSpellCard in spell.components:
-				i.callVisualHitEffects(self)
-			for i : ComponentSpellCard in body.spell.components:
-				i.callVisualHitEffects(body)
-			queue_free()
-			body.queue_free()
-			get_tree().current_scene.add_child(blast)
+		if(body.fuse && fuse):
+			if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
+				var blast = BlastProj.instantiate()
+				var nspell = Spell.new("newThing")
+				blast.combined = true
+				nspell.components.append_array(spell.components)
+				nspell.components.append_array(body.spell.components)
+				var j = 0
+				while j < nspell.components.size():
+					if nspell.components[j] == Global.defaultElement:
+						nspell.components.remove_at(j)
+						j -= 1
+					j += 1
+				nspell.type = spell.type
+				blast.mult = body.mult + mult
+				blast._setSpell(nspell)
+				blast._setPower(spell.getPower() * ((mult-1)/2+1) * sender.getIntel() + body.spell.getPower() * ((body.mult-1)/2+1) * body.sender.getIntel())
+				blast._setSize(scale + body.scale)
+				blast._setV((body.velocity.normalized() + velocity.normalized()) * 0.5 * (velocity.length() + body.velocity.length())/2)
+				blast.global_position = (global_position + body.global_position)/2
+				blast.sender = sender
+				for i : ComponentSpellCard in spell.components:
+					i.callVisualHitEffects(self)
+				for i : ComponentSpellCard in body.spell.components:
+					i.callVisualHitEffects(body)
+				queue_free()
+				body.queue_free()
+				get_tree().current_scene.add_child(blast)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://0yitol7oi1fw"]
+[gd_scene load_steps=31 format=4 uid="uid://0yitol7oi1fw"]
 
 [ext_resource type="Script" path="res://World/Screens/TutorialWorld.gd" id="1_738rp"]
 [ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="2_d0dsv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dsvsnjbntmnj3" path="res://Magic/MagicCards/Resources/Components/Vortex.tres" id="3_im7qu"]
 [ext_resource type="Resource" uid="uid://4fshb01775ox" path="res://Magic/MagicCards/Resources/Components/TutorialMagic.tres" id="3_rtkrx"]
 [ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Components/Fire.tres" id="4_6ghdk"]
+[ext_resource type="Resource" uid="uid://beg00d1bfprlu" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="5_dayqc"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="6_fpkp6"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="10_3wmpt"]
 [ext_resource type="Texture2D" uid="uid://bqxet0k0e2dwr" path="res://Art/KeyboardIcons/keyboard_87.png" id="11_t1mqx"]
@@ -1444,7 +1445,7 @@ size = Vector2(83.0001, 1422)
 position = Vector2(0, -8)
 script = ExtResource("1_738rp")
 testComponentSpellCard = Array[ExtResource("3_a50p2")]([ExtResource("3_im7qu"), ExtResource("4_6ghdk")])
-testTypeSpellCard = ExtResource("2_d0dsv")
+testTypeSpellCard = ExtResource("5_dayqc")
 tutorialElement = ExtResource("3_rtkrx")
 defaultElement = ExtResource("14_jwfqg")
 player = NodePath("Player")
