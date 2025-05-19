@@ -69,6 +69,7 @@ var dashCharges = 1
 var dashTimer = 2
 var maxBlockCharges = 2.25
 var maxDashCharges = 2.5
+var dashTimed = -1
 
 func _ready():
 	#updateEnergy()
@@ -81,6 +82,14 @@ func _ready():
 
 func _process(delta):
 	delta *= Global.getTimeScale()
+	
+	if dashTimed > 0:
+		dashTimed -= delta
+		velocity = velocity.normalized() * DASHSPEED * Global.getTimeScale()
+		if dashTimed < 0:
+			dashTimed = -1
+			_on_dashing_timer_timeout()
+	
 	#updateHealth()
 	updateMaxHealth()
 	updateMaxEnergy()
@@ -283,7 +292,8 @@ func _doubleClickCheck(delta):
 			clicked = justClicked
 			timer = 0.25
 	if clicked != "" :
-		timer -= delta
+		if Global.getTimeScale() != 0:
+			timer -= delta/Global.getTimeScale()
 		if timer <= 0:
 			clicked = ""
 
@@ -291,7 +301,8 @@ func dash(dir):
 	if(dashCharges > 0):#canDash()):
 		velocity = dir * DASHSPEED
 		dashing = true
-		$DashingTimer.start(DASHTIME)
+		dashTimed = DASHTIME
+		#$DashingTimer.start(DASHTIME)
 		clicked = ""
 		blocking = false
 		$PlayerArt._unblock()
@@ -325,6 +336,7 @@ func _effectsHandle(delta):
 
 func _friction(delta):
 	velocity *= pow(FRICTION,delta)
+	print(FRICTION)
 
 func _movement(delta):
 	var newVel = velocity

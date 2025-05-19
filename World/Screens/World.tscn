@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=32 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -25,6 +25,7 @@
 [ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Components/Default.tres" id="12_qtnuf"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="16_rxmm3"]
 [ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
+[ext_resource type="Script" path="res://World/Screens/test.gd" id="26_n8u7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("9_tvb2g")
@@ -1567,3 +1568,6 @@ shape = SubResource("RectangleShape2D_g6vus")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5x8ob")
+
+[node name="Test" type="Node2D" parent="."]
+script = ExtResource("26_n8u7l")

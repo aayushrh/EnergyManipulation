@@ -59,6 +59,17 @@ func _nameCallout():
 
 func _shoot():
 	#print(spell.attributes.getPSpeed())
+	
+	if sender.stored_energy < spell.initCost():
+		sender.doneCasting()
+		#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
+			#sender.stored_energy += 0.36 * (spell.initCost() + castingCost)
+		queue_free()
+		spell._notUsing()
+	else:
+		sender.stored_energy -= spell.initCost()
+		castingCost += spell.initCost()
+	
 	var blastProj = BlastProj.instantiate()
 	blastProj.speed = speed * (50.0 + rng.randf_range(-chargeMulti,chargeMulti))/50.0
 	blastProj.sender = sender
@@ -103,11 +114,13 @@ func _process(delta):
 		i.rotate(-PI/160*delta*120.0)
 	if !is_instance_valid(sender):
 		queue_free()
+		sender.doneCasting()
 	if !Global.isPaused() and is_instance_valid(sender):
 		if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 			done.emit()
 			_nameCallout()
 			queue_free()
+			sender.doneCasting()
 			spell._notUsing()
 		$Sprite2D.global_position = global_position + Vector2(0, -65)
 		updateDirection()

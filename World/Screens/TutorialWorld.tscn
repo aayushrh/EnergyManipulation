@@ -5,8 +5,7 @@
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_a50p2"]
 [ext_resource type="Resource" uid="uid://dsvsnjbntmnj3" path="res://Magic/MagicCards/Resources/Components/Vortex.tres" id="3_im7qu"]
 [ext_resource type="Resource" uid="uid://4fshb01775ox" path="res://Magic/MagicCards/Resources/Components/TutorialMagic.tres" id="3_rtkrx"]
-[ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Components/Fire.tres" id="4_6ghdk"]
-[ext_resource type="Resource" uid="uid://beg00d1bfprlu" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="5_dayqc"]
+[ext_resource type="Resource" uid="uid://b1gdj8tmrpw10" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="5_dayqc"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="6_fpkp6"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="10_3wmpt"]
 [ext_resource type="Texture2D" uid="uid://bqxet0k0e2dwr" path="res://Art/KeyboardIcons/keyboard_87.png" id="11_t1mqx"]
@@ -24,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://mftwnimortsx" path="res://Enemies/Sentry.tscn" id="19_o6nyb"]
 [ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="21_524gx"]
 [ext_resource type="Script" path="res://World/Wall.gd" id="24_ecdqs"]
+[ext_resource type="Script" path="res://World/Screens/test.gd" id="24_j7yop"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("15_287je")
@@ -1444,7 +1444,7 @@ size = Vector2(83.0001, 1422)
 [node name="TutorialWorld" type="Node2D" node_paths=PackedStringArray("player")]
 position = Vector2(0, -8)
 script = ExtResource("1_738rp")
-testComponentSpellCard = Array[ExtResource("3_a50p2")]([ExtResource("3_im7qu"), ExtResource("4_6ghdk")])
+testComponentSpellCard = Array[ExtResource("3_a50p2")]([ExtResource("3_im7qu"), ExtResource("3_rtkrx")])
 testTypeSpellCard = ExtResource("5_dayqc")
 tutorialElement = ExtResource("3_rtkrx")
 defaultElement = ExtResource("14_jwfqg")
@@ -1860,6 +1860,9 @@ position = Vector2(-13, -442)
 rotation = -3.13419
 testShapeCard = ExtResource("2_d0dsv")
 componentCards = Array[ExtResource("3_a50p2")]([ExtResource("3_rtkrx")])
+
+[node name="Test" type="Node2D" parent="."]
+script = ExtResource("24_j7yop")
 
 [connection signal="button_down" from="CanvasLayer/MovementTip/MovementTip" to="." method="_on_movement_tip_button_down"]
 [connection signal="button_down" from="CanvasLayer/DashTip/DashTip" to="." method="_on_dash_tip_button_down"]

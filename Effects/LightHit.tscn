@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnb3gukb2d87j"]
+[gd_scene load_steps=3 format=3 uid="uid://bnb3gukb2d87j"]
 
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_dhhtg"]
+[ext_resource type="Script" path="res://Effects/hitParticleTimeSlow.gd" id="2_v4mlt"]
 
 [node name="LightHit" type="CPUParticles2D"]
 emitting = false
@@ -20,3 +21,4 @@ scale_amount_max = 0.1
 color = Color(1, 1, 0.286275, 1)
 hue_variation_min = 0.36
 hue_variation_max = 0.36
+script = ExtResource("2_v4mlt")
