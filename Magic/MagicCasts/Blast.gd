@@ -4,6 +4,7 @@ signal done
 
 var direction = Vector2.ZERO
 var castingTimer = 0
+var totalChargeTime = 0
 var chargeTimer = 0
 var shot = false
 var timesShot = 0
@@ -23,9 +24,11 @@ func getMousePos():
 
 func setSpell(nspell):
 	spell = nspell
-	castingTimer = spell.getCastingTime()
+	totalChargeTime = spell.getCastingTime()
+	castingTimer = totalChargeTime
 	chargeTimer = spell.getMaxPowerTime()
-	scale = Vector2(0.5, 0.5) * spell.getSize()
+	#scale = Vector2(0.5, 0.5) * spell.getSize()
+	scale = Vector2(0.5, 0.5) * spell.getSize() * _castingAnimationCalc(castingTimer,totalChargeTime)
 	#if(spell.style.size() > 0):
 		#$Sprite2D.texture = spell.style[0].icon
 		#$Sprite2D.scale = Vector2(0.3, 0.3)
@@ -110,6 +113,7 @@ func _process(delta):
 			#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
+				scale = Vector2(0.5, 0.5) * spell.getSize() * _castingAnimationCalc(castingTimer,totalChargeTime)
 			elif chargeTimer >= 0:
 				#print(spell.contcost())
 				#print(delta/spell.getMaxPowerTime())

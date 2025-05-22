@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="TypeSpellCard" load_steps=7 format=3 uid="uid://b1gdj8tmrpw10"]
+[gd_resource type="Resource" script_class="TypeSpellCard" load_steps=7 format=3 uid="uid://beg00d1bfprlu"]
 
-[ext_resource type="PackedScene" uid="uid://bc7c1tw7i2phq" path="res://Magic/MagicCasts/Barrage.tscn" id="1_ocgww"]
+[ext_resource type="PackedScene" uid="uid://ler3tg2q13h0" path="res://Magic/MagicCasts/Barrage.tscn" id="1_ocgww"]
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="2_fsi4y"]
 [ext_resource type="Resource" uid="uid://cdhj6qtyw15iu" path="res://Magic/MagicCards/Resources/Attributes/Power_Proj_Spd.tres" id="3_x3qj3"]
 [ext_resource type="Resource" uid="uid://b82qk5lssemgx" path="res://Magic/MagicCards/Resources/Attributes/Size_Cast_Spd.tres" id="4_pgnem"]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_a50p2"]
 [ext_resource type="Resource" uid="uid://dsvsnjbntmnj3" path="res://Magic/MagicCards/Resources/Components/Vortex.tres" id="3_im7qu"]
 [ext_resource type="Resource" uid="uid://4fshb01775ox" path="res://Magic/MagicCards/Resources/Components/TutorialMagic.tres" id="3_rtkrx"]
-[ext_resource type="Resource" uid="uid://b1gdj8tmrpw10" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="5_dayqc"]
+[ext_resource type="Resource" uid="uid://beg00d1bfprlu" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="5_dayqc"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="6_fpkp6"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="10_3wmpt"]
 [ext_resource type="Texture2D" uid="uid://bqxet0k0e2dwr" path="res://Art/KeyboardIcons/keyboard_87.png" id="11_t1mqx"]
