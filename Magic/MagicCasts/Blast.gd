@@ -126,8 +126,8 @@ func _process(delta):
 						done.emit()
 						_nameCallout()
 						#print(castingCost)
-					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 					scale = Vector2(0.5, 0.5) * spell.getSize()*chargeMulti
+					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				else:
 					shot = true
 					done.emit()

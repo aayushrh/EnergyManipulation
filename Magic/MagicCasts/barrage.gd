@@ -139,8 +139,8 @@ func _process(delta):
 				#castingCost += spell.contcost() * delta/spell.getMaxPowerTime()
 				chargeTimer -= delta
 					#print(castingCost)
-				chargeMulti *= pow(pow(1.25,delta),1/spell.getMaxPowerTime())
 				scale = Vector2(0.5, 0.5) * spell.getSize()*pow(chargeMulti,0.5)
+				chargeMulti *= pow(pow(1.25,delta),1/spell.getMaxPowerTime())
 			timer -= delta
 			if timer <= 0:
 				_shoot()
