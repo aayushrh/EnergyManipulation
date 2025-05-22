@@ -9,6 +9,8 @@ var setPower : bool = false
 var mult : float = 1
 var art : Node2D
 var exploded : bool = false
+var explosionTimer : float = 0
+var combined : bool = false
 
 func _setSpell(nspell : Spell) -> void:
 	spell = nspell
@@ -32,10 +34,13 @@ func _ready() -> void:
 		spell.components.append(Global.defaultElement)
 	for i : ComponentSpellCard in spell.components:
 		i.callStartEffects(self)
+	$Art.redy()
+	explosionTimer = 0.2
 
-	# Trigger explosion after a short delay
-	await get_tree().create_timer(getDelay()).timeout
-	explode()
+func _process(delta):
+	explosionTimer -= delta * Global.getTimeScale()
+	if explosionTimer < 0:
+		explode()
 
 func explode() -> void:
 	if exploded: return
@@ -61,12 +66,16 @@ func explode() -> void:
 	'''
 	
 	var bodies = $Area2D.get_overlapping_bodies()
+	
+	for i : ComponentSpellCard in spell.components:
+		i.callVisualHitEffects(self)
+	
 	for body in bodies:
 		if is_instance_valid(body) and body.has_method("_hit"):
 			if body != sender and body.type != sender.type:
 				body._hit(self)
 				for i : ComponentSpellCard in spell.components:
-					i.callHitEffects(self, body)
+					i.callNonVisualHitEffects(self, body)
 	
 	# Cleanup
 	queue_free()

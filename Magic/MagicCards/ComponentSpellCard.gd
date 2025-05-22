@@ -43,6 +43,11 @@ func callHitEffects(spellObj:SpellCasted, enemy):
 		var callable = Callable(spellEffects, e)
 		callable.call(spellObj, enemy)
 
+func callNonVisualHitEffects(spellObj:SpellCasted, enemy):
+	for e in hitEffects:
+		var callable = Callable(spellEffects, e)
+		callable.call(spellObj, enemy)
+
 func callVisualHitEffects(spellObj:SpellCasted):
 	if(HitVFX != null):
 		var hitVFX = HitVFX.instantiate()

@@ -19,6 +19,7 @@ scale = Vector2(0.5, 0.5)
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Ethan" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.423529)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_7hsj3")

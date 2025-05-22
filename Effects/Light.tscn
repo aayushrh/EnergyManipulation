@@ -10,6 +10,7 @@ colors = PackedColorArray(0.996078, 0.835294, 0, 1, 1, 1, 0.501961, 1)
 [node name="Light" type="CPUParticles2D"]
 amount = 250
 lifetime = 0.2
+preprocess = 1.0
 lifetime_randomness = 1.0
 texture = ExtResource("1_vn3i5")
 emission_shape = 1

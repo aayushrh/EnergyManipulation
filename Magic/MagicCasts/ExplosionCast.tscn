@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dru3gy2rcs7rv"]
+[gd_scene load_steps=6 format=3 uid="uid://dru3gy2rcs7rv"]
 
 [ext_resource type="Script" path="res://Magic/MagicCasts/ExplosionCast.gd" id="1_ptv3o"]
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="2_ix0uu"]
-[ext_resource type="Script" path="res://Magic/MagicCasts/BlastArt.gd" id="3_k4st3"]
-[ext_resource type="Script" path="res://Magic/MagicCasts/hit_box_spawner.gd" id="4_scigc"]
+[ext_resource type="Script" path="res://Magic/MagicCasts/ExplosionArt.gd" id="3_3v872"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_52nd6"]
 
@@ -34,10 +33,7 @@ shape = SubResource("CircleShape2D_dfyfv")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Art" type="Node2D" parent="."]
-script = ExtResource("3_k4st3")
-
-[node name="HitBoxSpawner" type="Node2D" parent="."]
-script = ExtResource("4_scigc")
+script = ExtResource("3_3v872")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
