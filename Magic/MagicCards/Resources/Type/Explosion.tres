@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="TypeSpellCard" load_steps=7 format=3 uid="uid://yec66fv1fp0a"]
+
+[ext_resource type="PackedScene" uid="uid://p7jsod64n1gn" path="res://Magic/MagicCasts/Explosion.tscn" id="1_actfy"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_hktgn"]
+[ext_resource type="Script" path="res://Magic/MagicCards/TypeSpellCard.gd" id="2_b36j0"]
+[ext_resource type="Resource" uid="uid://cdhj6qtyw15iu" path="res://Magic/MagicCards/Resources/Attributes/Power_Proj_Spd.tres" id="3_c78gw"]
+[ext_resource type="Resource" uid="uid://b82qk5lssemgx" path="res://Magic/MagicCards/Resources/Attributes/Size_Cast_Spd.tres" id="4_4m1xa"]
+[ext_resource type="Texture2D" uid="uid://c2odrd60cjufp" path="res://Art/boot-stomp.png" id="5_cii4n"]
+
+[resource]
+script = ExtResource("2_b36j0")
+cardName = "Explosion"
+cardDescription = "Explosion around the player"
+SpellObj = ExtResource("1_actfy")
+color = Color(0, 0, 0, 1)
+icon = ExtResource("5_cii4n")
+cdMult = 1.0
+costMult = 1.0
+maxPowerTimeMult = 1.0
+castingTimeMult = 1.0
+contCostMult = 1.0
+aimType = 0
+attribute = Array[ExtResource("1_hktgn")]([ExtResource("3_c78gw"), ExtResource("4_4m1xa")])
+values = Array[String]([])
