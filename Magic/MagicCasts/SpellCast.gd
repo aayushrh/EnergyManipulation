@@ -4,8 +4,8 @@ class_name SpellCast
 var spell : Spell
 var holding : bool = true
 var sender : CharacterBody2D = null
-var anim_base = 20.0
-var anim_slow = 1.0
+var anim_base = 10.0
+var anim_slow = 2
 
 func _on_release() -> void:
 	holding = false
