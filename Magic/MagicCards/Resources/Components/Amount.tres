@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=6 format=3 uid="uid://eh4y7oyvhxw7"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_8n1ix"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_34tte"]
+[ext_resource type="Resource" uid="uid://c1j71um22n1vs" path="res://Magic/MagicCards/Resources/Attributes/Amount_Supreme.tres" id="2_lqxca"]
+[ext_resource type="Texture2D" uid="uid://v47r7dr2hhgx" path="res://Art/sprint (1).png" id="3_7iqyy"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="5_0vgjg"]
+
+[resource]
+script = ExtResource("2_34tte")
+spellEffects = ExtResource("5_0vgjg")
+cardName = "Amount"
+cardDescription = ""
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+castingEffects = Array[String]([])
+color = Color(0, 0, 0, 1)
+icon = ExtResource("3_7iqyy")
+cdMult = 0.0
+costMult = 0.0
+powerMult = 0.0
+attackSpeedMult = 0.0
+sizeMult = 0.0
+castingSpeedMult = 0.0
+attribute = Array[ExtResource("1_8n1ix")]([ExtResource("2_lqxca")])
+clashingAdvantage = 1.0
+isElement = false

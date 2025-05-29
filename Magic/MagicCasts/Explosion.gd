@@ -65,6 +65,7 @@ func _shoot():
 	blastProj.sender = sender
 	blastProj.mult = chargeMulti
 	blastProj.global_position = global_position
+	blastProj.castingCost = castingCost
 	blastProj._setSpell(spell.create())
 	get_tree().current_scene.add_child(blastProj)
 	if sender.type == 0:
@@ -98,7 +99,7 @@ func _process(delta):
 			#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
 				castingTimer -= delta
-				scale = Vector2(0.5, 0.5) * spell.getSize() * _castingAnimationCalc(castingTimer,totalChargeTime)
+				scale = Vector2(1, 1) * spell.getSize() * _castingAnimationCalc(castingTimer,totalChargeTime)
 			elif chargeTimer >= 0:
 				#print(spell.contcost())
 				#print(delta/spell.getMaxPowerTime())
@@ -111,7 +112,7 @@ func _process(delta):
 						done.emit()
 						_nameCallout()
 						#print(castingCost)
-					scale = Vector2(0.5, 0.5) * spell.getSize()*chargeMulti
+					scale = Vector2(1, 1) * spell.getSize()*chargeMulti
 					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				else:
 					shot = true

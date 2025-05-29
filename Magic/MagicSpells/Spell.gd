@@ -118,9 +118,11 @@ func getPower() -> float:
 
 func getPSpeed() -> float:
 	var ps = (getAttr("Proj. Spd.") + 50.0)/100.0
+	print("ps is : " + str(ps))
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			ps *= i.attackSpeedMult
+			print("ps for atackSpeed is : " + str(i.attackSpeedMult))
 	return ps
 
 func getASpeed() -> float:

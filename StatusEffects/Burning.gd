@@ -6,7 +6,7 @@ var dmg : float = 0.5
 
 func _init(life : float, power : float) -> void:
 	lifetime = life
-	dmg = 0.025 * power
+	dmg = 0.0125 * power
 	visual = load("res://Effects/Burning.tscn")
 	icon = load("res://Art/flame.png")
 	effectName = "Burning"

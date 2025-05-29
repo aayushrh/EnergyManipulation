@@ -11,10 +11,11 @@ var art : Node2D
 var exploded : bool = false
 var explosionTimer : float = 0
 var combined : bool = false
+var castingCost : float = 0.0
 
 func _setSpell(nspell : Spell) -> void:
 	spell = nspell
-	scale = Vector2.ONE * nspell.getSize() * mult
+	scale = Vector2(1.5, 1.5) * nspell.getSize() * mult
 
 func _setPower(p : float) -> void:
 	power = p
@@ -23,11 +24,6 @@ func _setPower(p : float) -> void:
 func _setRadius(r : float) -> void:
 	radius = r
 
-func getDelay() -> float:
-	# Delay scales inversely with spell speed
-	var speed_factor = max(0.1, spell.getPSpeed())
-	return delay_base / speed_factor
-
 func _ready() -> void:
 	art = $Art
 	if !spell.hasElement():
@@ -35,7 +31,8 @@ func _ready() -> void:
 	for i : ComponentSpellCard in spell.components:
 		i.callStartEffects(self)
 	$Art.redy()
-	explosionTimer = 0.2
+	explosionTimer = 0.2/spell.getPSpeed()
+	print("this is pspeed: " + str(spell.getPSpeed()))
 
 func _process(delta):
 	explosionTimer -= delta * Global.getTimeScale()
@@ -70,7 +67,12 @@ func explode() -> void:
 	for i : ComponentSpellCard in spell.components:
 		i.callVisualHitEffects(self)
 	
+	if bodies.size() > 0:
+		get_tree().current_scene.amountHit += 1
+		get_tree().current_scene.multiHits -= 1
+	
 	for body in bodies:
+		get_tree().current_scene.multiHits += 1
 		if is_instance_valid(body) and body.has_method("_hit"):
 			if body != sender and body.type != sender.type:
 				body._hit(self)

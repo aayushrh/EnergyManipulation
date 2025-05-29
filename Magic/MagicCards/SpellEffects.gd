@@ -8,7 +8,7 @@ func testHit(spellObj:SpellCasted, enemy):
 
 func addBurning(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy != null && dmgRed < 1):
-		var burning = Burning.new((spellObj.spell.getPower() * (1.0 - dmgRed))/spellObj.spell.getPower() * 2.5, spellObj.spell.getPower())
+		var burning = Burning.new((1.0 - dmgRed) * 2.5, spellObj.spell.getPower())
 		enemy.attachEffect(burning, false)
 
 func addSoggy(dmgRed, spellObj:SpellCasted, enemy):

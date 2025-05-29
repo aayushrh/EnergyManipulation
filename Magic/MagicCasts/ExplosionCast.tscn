@@ -3,21 +3,21 @@
 [ext_resource type="Script" path="res://Magic/MagicCasts/ExplosionCast.gd" id="1_ptv3o"]
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="2_ix0uu"]
 [ext_resource type="Script" path="res://Magic/MagicCasts/ExplosionArt.gd" id="3_3v872"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_52nd6"]
+[ext_resource type="Texture2D" uid="uid://gat5b1iyrcwx" path="res://Art/DottedCircle.png" id="4_d65jy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfyfv"]
 resource_local_to_scene = true
 radius = 93.1933
 
 [node name="ExplosionCast" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_ptv3o")
 metadata/_edit_horizontal_guides_ = [-255.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_52nd6")
+disabled = true
 
 [node name="Icon" type="Sprite2D" parent="."]
 visible = false
@@ -34,6 +34,10 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Art" type="Node2D" parent="."]
 script = ExtResource("3_3v872")
+
+[node name="DottedCircle" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_d65jy")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

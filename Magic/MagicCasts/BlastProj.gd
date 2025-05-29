@@ -35,6 +35,7 @@ func _setSize(size : Vector2) -> void:
 	setSize = true
 
 func getSpeed() -> float:
+	print("this is psped: " + str(spell.getPSpeed()))
 	return speed * spell.getPSpeed() #* mult
 
 func _ready() -> void:
