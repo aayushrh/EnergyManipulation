@@ -1,13 +1,15 @@
 extends Node2D
 
 var processed = false
+var rng = RandomNumberGenerator.new()
 
 func redy():
+	var randomOffset = rng.randf_range(0, 2*PI)
 	for i in get_children().size():
 		
 		var num = get_children().size()
 		print("this is i: " + str(i))
-		var angle = (float(i))/(float(get_children().size())) * 2.0 * PI
+		var angle = (float(i))/(float(get_children().size())) * 2.0 * PI + randomOffset
 		get_children()[i].position = Vector2(cos(angle), sin(angle)) * 100
 		get_children()[i].scale = Vector2(0.5/get_children().size(), 0.5/get_children().size())
 		if get_child(i) is CPUParticles2D:

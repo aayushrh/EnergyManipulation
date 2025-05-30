@@ -16,14 +16,15 @@ script = ExtResource("1_axrnp")
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 28.0
-offset_right = 280.0
-offset_bottom = 44.0
+offset_left = 17.0
+offset_top = 22.0
+offset_right = 277.0
+offset_bottom = 38.0
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_jfq2e")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_t5spd")
-min_value = -50.0
-max_value = 50.0
+min_value = 50.0
+max_value = 150.0
+value = 75.0
 
 [node name="Label" type="Label" parent="HSlider"]
 layout_mode = 1

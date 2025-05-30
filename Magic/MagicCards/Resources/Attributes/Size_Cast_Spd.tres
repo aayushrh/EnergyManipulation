@@ -6,7 +6,13 @@
 script = ExtResource("1_33wxy")
 Ltext = "Size"
 Rtext = "Cast. Spd."
-min = -50.0
-max = 50.0
+minL = -50.0
+maxL = 50.0
+minR = -50.0
+maxR = 50.0
 num = 0.0
 step = 1.0
+percentL = true
+percentR = true
+addL = 100.0
+addR = 100.0

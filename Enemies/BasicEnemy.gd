@@ -516,7 +516,8 @@ func awareness(delta):
 		dodgeDir = 0
 	for n in help:
 		if(help.size()>=blockOrFlight):
-			if(block == -1):
+			pass
+			'''if(block == -1):
 				if(canDash):
 					dash(avgDir(help))
 					"if(tactCheck(100) and is_this_thing_too_close_to_me((global_position-n.global_position-n.v).angle(),n.v,DASHSPEED)):
@@ -528,7 +529,7 @@ func awareness(delta):
 						do_block()
 					else:
 						velocity = avgDir(help) * TOPSPEED"
-					velocity = avgDir(help) * TOPSPEED
+					velocity = avgDir(help) * TOPSPEED'''
 		elif(block == -1):
 			if(canDash):
 				dash(perp_vector(avgDir(help)))

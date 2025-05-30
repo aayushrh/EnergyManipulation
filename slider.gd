@@ -1,18 +1,18 @@
 extends Control
 
-signal value_changed(lval: float, rval: float, bval: float, gradient: float, num: int)
+signal value_changed(lval: float, rval: float, num: int)
 signal nuhuh()
 var num = 0
 var attr = null
 var n = 0
 
 func _ready():
-	$HSlider/Label.text = attr.attr.Ltext
-	$HSlider/Label2.text = attr.attr.Rtext
-	$HSlider.min_value = attr.attr.min
+	$HSlider/Label.text = attr.attr.Rtext
+	$HSlider/Label2.text = attr.attr.Ltext
+	$HSlider.min_value = attr.attr.minL
 	n = attr.attr.num
-	$HSlider.value = attr.rightvalue + attr.attr.min
-	$HSlider.max_value = attr.attr.max
+	$HSlider.value = attr.leftvalue
+	$HSlider.max_value = attr.attr.maxL
 	$HSlider.step = attr.attr.step
 
 func init(atr):
@@ -21,12 +21,11 @@ func init(atr):
 func getNum():
 	return $HSlider.value
 
-
 func _on_h_slider_value_changed(value: float) -> void:
-	var rightvalue = (value + 100)
-	var leftvalue = (100 - value)
-	var gradient = abs(value-(n))/($HSlider.max_value-n)
-	value_changed.emit(leftvalue, rightvalue, n + 100, gradient, num)
+	var ratio = (value - attr.attr.minL)/(attr.attr.maxL-attr.attr.minL)
+	var rightvalue = attr.attr.minR + ((1.0-ratio) * (attr.attr.maxR - attr.attr.minR))
+	var leftvalue = value
+	value_changed.emit(leftvalue, rightvalue, num)
 
 
 func _on_h_slider_drag_started() -> void:

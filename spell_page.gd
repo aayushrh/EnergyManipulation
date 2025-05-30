@@ -32,10 +32,10 @@ func show_card(car):
 			if(!check):
 				check = AttributesWrapper.new(c)
 				spell.attributes.append(check)
-			cook(check.attr.Ltext,check.leftvalue / (check.attr.num - check.attr.min) * 100)
-			cook(check.attr.Rtext,check.rightvalue / (check.attr.num + check.attr.max) * 100)
+			cook(check.attr.Ltext,check.leftvalue + check.attr.addL, check.attr.percentL)
+			cook(check.attr.Rtext,check.rightvalue + check.attr.addR, check.attr.percentR)
 			var slide = slider.instantiate()
-			slide.value_changed.connect(diffNum)
+			slide.value_changed.connect(updateVals)
 			slide.nuhuh.connect(nuhuh)
 			slide.num = counter
 			slide.init(check)
@@ -58,7 +58,7 @@ func checkAttributeExistence(attribute):
 			return s
 	return null
 
-func cook(txt, val):
+func cook(txt, val, percent):
 	var hbox = HBoxContainer.new()
 	var lab1 = Label.new()
 	var lab2 = Label.new()
@@ -67,7 +67,10 @@ func cook(txt, val):
 	lab1.horizontal_alignment = 0
 	lab1.text = txt
 	lab2.horizontal_alignment = 2
-	lab2.text = str(val) + "%"
+	if percent:
+		lab2.text = str(val) + "%"
+	else:
+		lab2.text = str(val)
 	lab2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox.add_child(lab1)
 	hbox.add_child(lab2)
@@ -87,9 +90,40 @@ func gradient(c1: Color, c2: Color, blend: float):
 	c += (c2-c1)*blend
 	return c
 
-func diffNum(lval, rval, bval, grad, at):
-	
+func updateVals(lval, rval, at):
 	var num = at*2
+	
+	if(lval > card.attribute[at].num):
+		var grad = (lval - card.attribute[at].num)/(card.attribute[at].maxL - card.attribute[at].num)
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num].get_child(0).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num].get_child(1).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+	elif(lval == card.attribute[at].num):
+		gay[num].get_child(0).set("theme_override_colors/font_color", GREY)
+		gay[num].get_child(1).set("theme_override_colors/font_color", GREY)
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", GREY)
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", GREY)
+	else:
+		var grad = (card.attribute[at].num - lval)/(card.attribute[at].num - card.attribute[at].minL)
+		gay[num + 1].get_child(0).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num + 1].get_child(1).set("theme_override_colors/font_color", gradient(GREY, GREEN, grad))
+		gay[num].get_child(0).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+		gay[num].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
+	
+	if(card.attribute[at].percentL):
+		gay[num].get_child(1).text = str(lval + card.attribute[at].addL) + "%"
+	else:
+		gay[num].get_child(1).text = str(lval + card.attribute[at].addL)
+	if(card.attribute[at].percentR):
+		gay[num + 1].get_child(1).text = str(rval + card.attribute[at].addR) + "%"
+	else:
+		gay[num + 1].get_child(1).text = str(rval + card.attribute[at].addR)
+	get_parent().updateAttr(lval, rval, card.attribute[at])
+
+func diffNum(lval, rval, bval, grad, at):
+	var num = at*2
+	
 	if(lval>bval):
 		gay[num + 1].get_child(0).set("theme_override_colors/font_color", gradient(GREY, RED, grad))
 		gay[num + 1].get_child(1).set("theme_override_colors/font_color", gradient(GREY, RED, grad))

@@ -102,8 +102,8 @@ func updateMaxPages():
 func updateAttr(lvalue, rvalue, at):
 	for i in spell.attributes:
 		if i.attr == at:
-			i.leftvalue = (lvalue-50) * (at.num - at.min)/50
-			i.rightvalue = (rvalue-50) * (at.num + at.max)/50
+			i.leftvalue = lvalue
+			i.rightvalue = rvalue
 	MagicMenu.selectedSpell = spell
 	MagicMenu.reloadSpell()
 

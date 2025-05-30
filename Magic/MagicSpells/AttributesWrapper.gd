@@ -7,5 +7,6 @@ var leftvalue : float
 
 func _init(att:Attributes) -> void:
 	attr = att
-	rightvalue = -att.num + 50
-	leftvalue = att.num + 50
+	var ratio = (att.num - att.minL)/(att.maxL-att.minL)
+	rightvalue = att.minR + ((1.0-ratio) * (att.maxR - att.minR))
+	leftvalue = att.num
