@@ -27,7 +27,7 @@ var enemiesKilled = 0
 @onready var Indicator = preload("res://Effects/EnemyIndicator.tscn")
 
 func _ready():
-	var spell = Spell.new("Fireball")
+	var spell : Spell = Spell.new("Fireball")
 	spell.components = testComponentSpellCard
 	spell.type = testTypeSpellCard
 	spell.binding = 69

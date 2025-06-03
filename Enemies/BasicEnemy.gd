@@ -1,66 +1,66 @@
 extends CharacterBody2D
 class_name BasicEnemy
 
-var player = null
-var cooldown = 5
-var can_attack = true
-var slow = false
-var effects = []
-var vfx = []
-var nomove = false
-var dmgTaken = 0
-var time = 0
-var block = -1
-var blocking = false
-var rng = RandomNumberGenerator.new()
-var detectMagic = []
-var magic = []#player casted spell
-var spells = []# enemy casted spells
-var castedIndex = -1
-var canDash = true
-var type = 1
-var nomoveinput = false
-var wisdom = 1.0
-var fuck = false # fuck nature
-var dodgeDir = 0
-var moveDir = 0.0
+var player : Player = null
+var cooldown : float = 5
+var can_attack : bool = true
+var slow : bool = false
+var effects : Array = []
+var vfx : Array = []
+var nomove: bool = false
+var dmgTaken : float = 0
+var time : float = 0
+var block : float = -1
+var blocking : bool = false
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+var detectMagic : Array = []
+var magic : Array = []#player casted spell
+var spells : Array = []# enemy casted spells
+var castedIndex : int = -1
+var canDash : bool = true
+var type : int = 1
+var nomoveinput : bool = false
+var wisdom : float = 1.0
+var fuck : bool = false # fuck nature
+var dodgeDir : int = 0
+var moveDir : float = 0.0
 var blast = null
-var casting = false
-var healing = 1.0
-var bonusHealBlock = false
-var MAXHEALTH = 0
-var MAXMANA = 100.0 : set = _max_mana_change
-var agg = false#(randi_range(0,1)==0)
-var pause = false
-var stored_energy = MAXMANA : set = _energy_change
-var mana = stored_energy
-var blinded = false
-var reactionDelay = 0.0
-var intel = 1
-var hp = 0.0
-var stage = 0
-var delt = 0
-var prediction = false
+var casting : bool = false
+var healing : float = 1.0
+var bonusHealBlock : bool = false
+var MAXHEALTH : float = 0
+var MAXMANA : float = 100.0 : set = _max_mana_change
+var agg : bool = false#(randi_range(0,1)==0)
+var pause : bool = false
+var stored_energy : float = MAXMANA : set = _energy_change
+var mana : float = stored_energy
+var blinded : bool = false
+var reactionDelay : float = 0.0
+var intel : float = 1
+var hp : float = 0.0
+var stage : int = 0
+var delt : float = 0
+var prediction : bool = false
 var healthbar = null
-var chargeTime = 0
+var chargeTime : float = 0
 
-@export var HPBARMULT = 80.0
-@export var BARSPEED = 20.0
-@export var health = 0.0 : set = _health_change
-@export var checkAngle = 45 # angle checked for things that will be going towards them
-@export var blockOrFlight = 2 # how many will have to be going for it to block
-@export var tact = 100 - int(agg)*75 # chance to do smarter things
-@export var DASHSPEED = 2500
-@export var cooldownAttack = 1.0
-@export var TOPSPEED = 200
-@export var ROTATIONSPEED = 10
+@export var HPBARMULT : float = 80.0
+@export var BARSPEED : float = 20.0
+@export var health : float = 0.0 : set = _health_change
+@export var checkAngle : float = 45 # angle checked for things that will be going towards them
+@export var blockOrFlight : int = 2 # how many will have to be going for it to block
+@export var tact : float = 100 - int(agg)*75 # chance to do smarter things
+@export var DASHSPEED : float = 2500
+@export var cooldownAttack : float = 1.0
+@export var TOPSPEED : float = 200
+@export var ROTATIONSPEED : float = 10
 @export var Shockwave : PackedScene
-@export var dash_cd = 5
-@export var dash_time = 0.1
-@export var block_cd = 1.0
-@export var caution_range = 300
-@export var min_range = 300 - 50*int(agg)
-@export var max_range = 500 - 50*int(agg)
+@export var dash_cd : float = 5
+@export var dash_time : float = 0.1
+@export var block_cd : float = 1.0
+@export var caution_range : float = 300
+@export var min_range : float = 300 - 50*int(agg)
+@export var max_range : float = 500 - 50*int(agg)
 
 @export var art : Node2D
 @export var softBody : Area2D
