@@ -2,9 +2,9 @@ extends Node2D
 class_name HitBoxParticle
 
 var dir: Vector2
-var timer = 0.1
-var timer2 = 1
-var rng = RandomNumberGenerator.new()
+var timer : float = 0.1
+var timer2 : float = 1
+var rng := RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scale *= 0.1
@@ -27,20 +27,18 @@ func _process(delta: float) -> void:
 		self.position+=dir*120*delta
 	
 
-func circle(delta):
+func circle(delta:float) -> void:
 	position = position.rotated(PI*6*delta)
-	
-	
 
-func closest_colors():
-	var e = get_parent().get_parent().get_child(3).get_children()
-	var smd = -1
-	var smd2 = -1
+func closest_colors() -> void:
+	var e := get_parent().get_parent().get_child(3).get_children()
+	var smd := -1
+	var smd2 := -1
 	var col: Color
 	var col2: Color
-	for i in e:
+	for i:Node2D in e:
 		if(i.is_class("CPUParticles2D")):
-			var temp = i.position.distance_squared_to(position)
+			var temp := i.position.distance_squared_to(position)
 			if(smd<0 || temp < smd):
 				
 				if(col):

@@ -25,6 +25,6 @@ func _tick(entity:Node2D, delta:float) -> void:
 	if(timer < 0):
 		take_dmg(entity)
 
-func take_dmg(entity):
+func take_dmg(entity:Node2D) -> void:
 	entity.health -= dmg
 	timer = 0.1

@@ -2,27 +2,26 @@ extends SpellCast
 
 signal done
 
-var direction = Vector2.ZERO
-var castingTimer = 0
-var totalChargeTime = 0
-var chargeTimer = 0
-var shot = false
-var timesShot = 0
-var timer = 0
-var chargeMulti = 1.0
+var direction : Vector2 = Vector2.ZERO
+var castingTimer : float = 0
+var totalChargeTime : float = 0
+var chargeTimer : float = 0
+var shot : bool = false
+var timesShot : int = 0
+var timer : float = 0
+var chargeMulti : float = 1.0
 var speed = 1000.0
-var buttonLetGo = false
+var buttonLetGo : bool = false
 var castingCost = 0
-var slow = true
-var startingLocation = Vector2.ZERO
+var slow : bool = true
+var startingLocation : Vector2 = Vector2.ZERO
 
-@onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
-@onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
+@onready var BlastProj := preload("res://Magic/MagicCasts/BlastProj.tscn")
 
-func getMousePos():
+func getMousePos() -> Vector2:
 	return get_global_mouse_position()
 
-func setSpell(nspell):
+func setSpell(nspell : Spell) -> void:
 	spell = nspell
 	totalChargeTime = spell.getCastingTime()
 	castingTimer = totalChargeTime
@@ -36,8 +35,8 @@ func setSpell(nspell):
 		$Icon.texture = spell.type.icon
 		$Icon.self_modulate = Color(spell.type.color, 0.5)
 		$Icon.scale = Vector2(0.3, 0.3)
-	for i in range(spell.components.size()):
-		var icon = Sprite2D.new()
+	for i : int in range(spell.components.size()):
+		var icon := Sprite2D.new()
 		icon.texture = spell.components[i].icon
 		icon.self_modulate = Color(spell.components[i].color, 0.5)
 		icon.scale = Vector2(0.15, 0.15)
@@ -45,24 +44,16 @@ func setSpell(nspell):
 		print(icon.position)
 		$Pivot.add_child(icon)
 
-func _ready():
+func _ready() -> void:
 	if spell != null:
-		for i in spell.components:
+		for i : ComponentSpellCard in spell.components:
 			i.callCastingEffects(self)
 
-func setStartingLoc(pos):
+func setStartingLoc(pos : Vector2) -> void:
 	startingLocation = pos
 
-func _nameCallout():
-	pass
-	#var magicNameCallout = MagicNameCallout.instantiate()
-	#magicNameCallout.position = Vector2(0, 60)
-	#magicNameCallout._show(spell)
-	#sender.add_child(magicNameCallout)
-
-func _shoot():
-	#print(spell.attributes.getPSpeed())
-	var blastProj = BlastProj.instantiate()
+func _shoot() -> void:
+	var blastProj := BlastProj.instantiate()
 	blastProj.speed = speed
 	blastProj.sender = sender
 	blastProj.mult = chargeMulti
@@ -77,17 +68,11 @@ func _shoot():
 	if startingLocation == Vector2.ZERO:
 		direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 	else:
-		var diff = startingLocation - get_global_mouse_position()
-		var angle = atan2(diff.y, diff.x)
+		var diff := startingLocation - get_global_mouse_position()
+		var angle := atan2(diff.y, diff.x)
 		direction = Vector2(cos(angle + PI), sin(angle + PI))
-		
-	#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 
-func draw():
-	draw_arc($Icon.position, 256 * 0.3 * chargeMulti, 0, 2*PI, 50, Color.WHITE)
-	draw_circle(Vector2.ZERO, 256, Color.WHITE, false)
-
-func _process(delta):
+func _process(delta:float) -> void:
 	delta *= Global.getTimeScale()
 	if startingLocation != Vector2.ZERO:
 		$Ethan.global_position = startingLocation
@@ -97,7 +82,7 @@ func _process(delta):
 	
 	queue_redraw()
 	$Pivot.rotate(PI/160*delta*120.0)
-	for i in $Pivot.get_children():
+	for i : Node2D in $Pivot.get_children():
 		i.rotate(-PI/160*delta*120.0)
 	if !is_instance_valid(sender):
 		queue_free()
@@ -107,8 +92,8 @@ func _process(delta):
 			if startingLocation == Vector2.ZERO:
 				direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			else:
-				var diff = startingLocation - get_global_mouse_position()
-				var angle = atan2(diff.y, diff.x)
+				var diff := startingLocation - get_global_mouse_position()
+				var angle := atan2(diff.y, diff.x)
 				direction = Vector2(cos(angle + PI), sin(angle + PI))
 			#direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
 			if (castingTimer >= 0 ):
@@ -124,31 +109,28 @@ func _process(delta):
 					if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 						shot = true
 						done.emit()
-						_nameCallout()
 						#print(castingCost)
 					scale = Vector2(0.5, 0.5) * spell.getSize()*chargeMulti
 					chargeMulti *= pow(pow(2,delta),1/spell.getMaxPowerTime())
 				else:
 					shot = true
 					done.emit()
-					_nameCallout()
 			else:
 				if buttonLetGo or (spell.binding != null and !Input.is_key_pressed(spell.binding)):
 					shot = true
 					done.emit()
-					_nameCallout()
 			if startingLocation == Vector2.ZERO:
 				global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
 			else:
-				var diff = startingLocation - get_global_mouse_position()
-				var angle = atan2(diff.y, diff.x)
+				var diff := startingLocation - get_global_mouse_position()
+				var angle := atan2(diff.y, diff.x)
 				global_position = startingLocation + Vector2(cos(angle + PI), sin(angle + PI)) * 100
 		else:
 			if startingLocation == Vector2.ZERO:
 				global_position = sender.global_position + Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2)) * 100
 			else:
-				var diff = startingLocation - get_global_mouse_position()
-				var angle = atan2(diff.y, diff.x)
+				var diff := startingLocation - get_global_mouse_position()
+				var angle := atan2(diff.y, diff.x)
 				global_position = startingLocation + Vector2(cos(angle + PI), sin(angle + PI)) * 100
 			timer -= delta
 			if timer <= 0:
@@ -157,8 +139,6 @@ func _process(delta):
 					_shoot()
 					if timesShot >= spell.getAmount():
 						sender.doneCasting()
-						#if(spell.style != null and spell.style.spellName.to_lower() == "horse"):
-							#sender.stored_energy += 0.36 * (spell.initCost() + castingCost)
 						queue_free()
 						spell._notUsing()
 

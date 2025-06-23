@@ -17,13 +17,6 @@ func _setSpell(nspell : Spell) -> void:
 	spell = nspell
 	scale = Vector2(1.5, 1.5) * nspell.getSize() * mult
 
-func _setPower(p : float) -> void:
-	power = p
-	setPower = true
-
-func _setRadius(r : float) -> void:
-	radius = r
-
 func _ready() -> void:
 	art = $Art
 	if !spell.hasElement():
@@ -42,27 +35,8 @@ func _process(delta):
 func explode() -> void:
 	if exploded: return
 	exploded = true
-
-	'''# Area check
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsShapeQueryParameters2D.new()
-	query.shape = CircleShape2D.new()
-	query.shape.set_radius(radius)
-	query.transform = Transform2D(0, global_position)
-	query.collision_mask = 1 # Adjust as needed
-
-	var results = space_state.intersect_shape(query, 100)
-
-	for result in results:
-		var body = result.collider
-		if is_instance_valid(body) and body.has_method("_hit"):
-			if body != sender and body.type != sender.type:
-				body._hit(self)
-				for i : ComponentSpellCard in spell.components:
-					i.callHitEffects(self, body)
-	'''
 	
-	var bodies = $Area2D.get_overlapping_bodies()
+	var bodies : Array[Node2D] = $Area2D.get_overlapping_bodies()
 	
 	for i : ComponentSpellCard in spell.components:
 		i.callVisualHitEffects(self)
@@ -71,7 +45,7 @@ func explode() -> void:
 		get_tree().current_scene.amountHit += 1
 		get_tree().current_scene.multiHits -= 1
 	
-	for body in bodies:
+	for body : Node2D in bodies:
 		get_tree().current_scene.multiHits += 1
 		if is_instance_valid(body) and body.has_method("_hit"):
 			if body != sender and body.type != sender.type:

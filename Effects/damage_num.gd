@@ -1,9 +1,9 @@
 extends Node2D
 
-var setAnimSpeed = 1
+var setAnimSpeed : float = 1
 
 func _displayNum(num : float, player : bool) -> void:
-	var numb = num
+	var numb : float = num
 	if num != 0:
 		if num > 0:
 			$Label.set("theme_override_colors/font_color", Color(0, 1, 0))
@@ -15,8 +15,6 @@ func _displayNum(num : float, player : bool) -> void:
 			else:
 				$Label.set("theme_override_colors/font_color", Color(1, 1, 1))
 			$Label.scale = Vector2(min(max(-num, 0.4), 0.75), min(max(-num, 0.4), 0.75))
-		#setAnimSpeed = min(max((0.25)/numb,0.05), 2)
-		#$Timer.start(0.05)
 		$AnimationPlayer.speed_scale = min(max((0.25)/numb,0.05), 2)
 		if numb >= 0.1:
 			$Label.text = str(ceil(numb * 10))
@@ -25,7 +23,7 @@ func _displayNum(num : float, player : bool) -> void:
 	else:
 		$Label.text = ""
 
-func _ready():
+func _ready() -> void:
 	$AnimationPlayer.play("InandOut")
 	
 func _process(delta: float) -> void:
@@ -33,9 +31,5 @@ func _process(delta: float) -> void:
 	setAnimSpeed = delta * 120
 	$AnimationPlayer.speed_scale = setAnimSpeed
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(anim_name:String) -> void:
 	queue_free()
-
-func _on_timer_timeout():
-	pass
-	#$AnimationPlayer.speed_scale = setAnimSpeed

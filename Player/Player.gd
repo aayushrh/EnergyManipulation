@@ -27,7 +27,6 @@ class_name Player
 @onready var GoodBlock = preload("res://Effects/GoodBlock.tscn")
 @onready var BadBlock = preload("res://Effects/BadBlock.tscn")
 @onready var EffectUI = preload("res://World/UI/EffectUI.tscn")
-@onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 @onready var DamageNum = preload("res://Effects/DamageNum.tscn")
 
 var base_top_speed = 0.0
@@ -187,7 +186,7 @@ func display_dmg(change):
 		var damageNum = DamageNum.instantiate()
 		damageNum.global_position = global_position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
 		damageNum._displayNum(change, true)
-		get_tree().current_scene.add_child(damageNum)
+		get_tree().current_scene.add_child.call_deferred(damageNum)
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy

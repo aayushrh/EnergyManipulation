@@ -12,10 +12,10 @@ var setPower : bool = false
 var power : float = 0
 var castingCost : float = 0
 var combined : bool = false
-var lifetime = 100.0
-var fuse = true
+var lifetime : float = 100.0
+var fuse : bool = true
 
-var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
+var BlastProj := preload("res://Magic/MagicCasts/BlastProj.tscn")
 
 func _setSpell(nspell : Spell) -> void:
 	scale = Vector2(0.5, 0.5) * nspell.getSize() * mult
@@ -65,7 +65,7 @@ func damageTaken() -> float:
 	return power
 
 func clone() -> Blast:
-	var blast = Blast.new()
+	var blast := Blast.new()
 	blast.global_position = global_position
 	blast.spell = spell
 	blast.sender = sender
@@ -81,12 +81,12 @@ func _on_area_2d_body_entered(body : Node2D) -> void:
 				else:
 					get_tree().current_scene.multiHits += 1
 				hit += 1
-			for i in spell.components:
+			for i:ComponentSpellCard in spell.components:
 				i.callHitEffects(self, body)
 		queue_free()
 
-func _on_area_2d_area_entered(area : Area2D):
-	var body = area.get_parent()
+func _on_area_2d_area_entered(area : Area2D) -> void:
+	var body := area.get_parent()
 	if(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
 		if(abs(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  - spell.initCost() * mult * spell.getClashingAdvantage()) > (spell.initCost() * mult * spell.getClashingAdvantage() + body.spell.initCost() * body.mult * body.spell.getClashingAdvantage())/16):
 			if(is_instance_valid(body)):
@@ -109,12 +109,12 @@ func _on_area_2d_area_entered(area : Area2D):
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName and body.sender != sender:
 		if(body.fuse && fuse):
 			if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
-				var blast = BlastProj.instantiate()
-				var nspell = Spell.new("newThing")
+				var blast := BlastProj.instantiate()
+				var nspell := Spell.new("newThing")
 				blast.combined = true
 				nspell.components.append_array(spell.components)
 				nspell.components.append_array(body.spell.components)
-				var j = 0
+				var j : int = 0
 				while j < nspell.components.size():
 					if nspell.components[j] == Global.defaultElement:
 						nspell.components.remove_at(j)

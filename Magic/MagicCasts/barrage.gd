@@ -16,7 +16,6 @@ var startingLocation = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 
 @onready var BlastProj = preload("res://Magic/MagicCasts/BlastProj.tscn")
-@onready var MagicNameCallout = preload("res://Magic/MagicCasts/MagicNameCallout.tscn")
 
 func getMousePos():
 	return get_global_mouse_position()

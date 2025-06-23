@@ -14,4 +14,3 @@ theme_override_fonts/font = ExtResource("1_1nbhk")
 theme_override_font_sizes/font_size = 32
 text = "BAD"
 script = ExtResource("1_v1d4o")
-lifetime = 120

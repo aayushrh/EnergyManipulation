@@ -105,7 +105,7 @@ func getAttr(nname : String) -> float:
 	return 50
 
 func getSupreme() -> float:
-	var r = 1.0
+	var r : float = 1.0
 	for i:AttributesWrapper in attributes:
 		if(i.attr.Ltext == "Supreme"):
 			r *= (i.leftvalue + 100.0)/(100.0)
@@ -126,7 +126,7 @@ func getPower() -> float:
 	return p * getSupreme()
 
 func getPSpeed() -> float:
-	var ps = (getAttr("Proj. Spd.") + 100.0)/100.0
+	var ps : float = (getAttr("Proj. Spd.") + 100.0)/100.0
 	print("ps is : " + str(ps))
 	if(components != null):
 		for i:ComponentSpellCard in components:
@@ -135,14 +135,14 @@ func getPSpeed() -> float:
 	return ps * (1.0+getSupreme())/2
 
 func getASpeed() -> float:
-	var cs = (getAttr("Cast. Spd.") + 100.0)/100.0
+	var cs : float = (getAttr("Cast. Spd.") + 100.0)/100.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			cs *= i.castingSpeedMult
 	return cs * getSupreme()
 
 func getSize() -> float:
-	var s = (getAttr("Size") + 100.0)/100.0
+	var s : float = (getAttr("Size") + 100.0)/100.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			s *= i.sizeMult
@@ -155,13 +155,13 @@ func hasElement() -> bool:
 	return false
 
 func getAmount() -> float:
-	var a = getAttr("Amount")
+	var a : int = getAttr("Amount")
 	if a != 50:
 		return a
 	return 1
 
 func getClashingAdvantage() -> float:
-	var c = 1
+	var c :float = 1.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			c *= i.clashingAdvantage
