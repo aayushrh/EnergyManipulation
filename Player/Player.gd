@@ -134,7 +134,6 @@ func set_dash_cd(f: float):
 
 func set_block_cd(f: float):
 	BLOCKCD = f
-	print(BLOCKCD)
 	$CanvasLayer/TextureProgressBar.max_value = BLOCKCD
 
 
@@ -144,7 +143,6 @@ func _blockCharging(delta):
 	if(blockTimer <= 0):
 		blockTimer += BLOCKCD
 		blockCharges += 1
-		print(str(blockCharges) + "charges")
 	elif(blockCharges < maxBlockCharges and blockTimer > 0):
 		blockTimer -= delta
 
@@ -154,7 +152,6 @@ func _dashCharging(delta):
 	if(dashTimer <= 0):
 		dashTimer += DASHCD
 		dashCharges += 1
-		print(str(dashCharges) + "charges")
 	elif(dashCharges < maxDashCharges and dashTimer > 0):
 		dashTimer -= delta
 
@@ -335,7 +332,6 @@ func _effectsHandle(delta):
 
 func _friction(delta):
 	velocity *= pow(FRICTION,delta)
-	print(FRICTION)
 
 func _movement(delta):
 	var newVel = velocity
@@ -500,7 +496,6 @@ func processHaventChecked():
 	for e in effectsHaventChecked:
 		if(e is LightBlindness and searchLight() != -1):
 			effects[searchLight()].lifeTimeStack.append(e.lifetime)
-			print(str(effects[searchLight()].stack) + "stacks")
 			continue
 		if(e is DarkBlindness and searchDark() != -1):
 			effects[searchDark()].lifeTimeStack.append(e.lifetime)

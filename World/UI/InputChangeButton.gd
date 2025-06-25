@@ -9,8 +9,6 @@ func _input(event):
 	if (event is InputEventKey) and changing:
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)
-		print(event)
-		print(InputMap.action_get_events(action))
 		_not_changing()
 		$HBoxContainer/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(event.keycode) + ".png")
 		currentShown = event.keycode

@@ -25,7 +25,6 @@ func _ready() -> void:
 		i.callStartEffects(self)
 	$Art.redy()
 	explosionTimer = 0.2/spell.getPSpeed()
-	print("this is pspeed: " + str(spell.getPSpeed()))
 
 func _process(delta):
 	explosionTimer -= delta * Global.getTimeScale()

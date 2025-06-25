@@ -14,7 +14,7 @@ func _on_hitbox_body_entered(body):
 
 func damageTaken(reciever):
 	var damage = energy
-	print(damage * (256 - reciever.global_position.distance_to(sender.global_position))/256)
+	#print(damage * (256 - reciever.global_position.distance_to(sender.global_position))/256)
 	return damage * (256 - reciever.global_position.distance_to(sender.global_position))/256
 	
 func _process(delta):

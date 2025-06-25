@@ -80,7 +80,6 @@ func _ready():
 	spell.components = componentCards
 	health = 5.0
 	spells = [spell]
-	print("start health is : " + str(health))
 
 func _finishCharge():
 	slow = false
@@ -102,7 +101,6 @@ func _max_mana_change(newMax: float):
 
 func _shoot(delta):
 	if(player!=null):
-		print("shootCalled")
 		var track = -1
 		for e:Spell in spells:
 			track += 1
@@ -119,7 +117,6 @@ func _shoot(delta):
 
 func _health_change(newHP: float):
 	var change = newHP - health
-	print("This is change: " + str(change))
 	if(change > 0):
 		health += change
 	elif(change < 0):
@@ -182,11 +179,7 @@ func _effectsHandle(delta):
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken()
-	print("This is dmg:" + str(dmgTaken))
-	print("This is health before: " + str(health))
 	health -= dmgTaken
-	print("This is health sub:" + str(dmgTaken))
-	print("This is health after: " + str(health))
 	time = 0
 
 func doneCasting():

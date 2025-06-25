@@ -22,7 +22,6 @@ func _process(delta):
 	if(!Global.isPaused()):
 		var spawn = rng.randi_range(0, 250)
 		if(spawn < 1 and spawned < ceil(sqrt(waveNumber + .25) - .5)):
-			print(str(ceil(sqrt(waveNumber + .25) - .5)) + " GAY")
 			var num = rng.randi_range(0, 3)
 			var spawnLoc = Vector2.ZERO
 			if(num == 0):

@@ -83,7 +83,6 @@ func giveBackEnergy(spellObj:SpellCasted):
 
 func changePosToMouse(spellObj: SpellCast):
 	spellObj.setStartingLoc(spellObj.getMousePos())
-	print(spellObj.getMousePos())
 
 func testOngo(spellObj:SpellCasted):
 	print("spell is ongoing")

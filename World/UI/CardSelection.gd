@@ -44,7 +44,6 @@ func _show():
 func onSelectedCard(card):
 	if(Global.pause[0] != 1):
 		Global.magicCards.append(card)
-		print(card)
 		_hide()
 
 func _hide():

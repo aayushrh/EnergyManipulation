@@ -49,7 +49,6 @@ func _process(delta):
 		$CanvasLayer/MainMenu._show()
 		Global.pause[0] = 1
 		$CanvasLayer/ScrollContainer/SpellListUI.reload()
-		print("true")
 	for e in $Enemies.get_children():
 		var cameraPos = camera.get_screen_center_position()
 		var placed = false

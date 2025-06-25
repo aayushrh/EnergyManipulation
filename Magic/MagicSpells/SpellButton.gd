@@ -14,7 +14,6 @@ func _initialize():
 		#$HBoxContainer/Button.text = "?"
 		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_any_outline.png")
 	else:
-		print(spell.binding)
 		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(spell.binding) + ".png")
 		#$HBoxContainer/Button.text = (char)(spell.binding)
 
@@ -30,7 +29,6 @@ func _input(event):
 	if changing and event is InputEventKey and event.pressed:
 		Global.spellList.remove_at(Global.spellList.find(spell))
 		spell.binding = event.keycode
-		print("this is event keycode: " + str(event.keycode))
 		#$HBoxContainer/Button.text = char(event.keycode)
 		$HBoxContainer/Button/TextureRect.texture = load("res://Art/KeyboardIcons/keyboard_" + str(event.keycode) + ".png")
 		Global.spellList.append(spell)

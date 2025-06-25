@@ -110,7 +110,6 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
-2d/run_on_separate_thread=true
 2d/default_linear_damp=0.0
 2d/add_type_hints=false
 

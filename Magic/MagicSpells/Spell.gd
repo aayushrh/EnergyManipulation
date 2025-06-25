@@ -119,7 +119,6 @@ func getAttrScaled(nname : String) -> float:
 
 func getPower() -> float:
 	var p : float = (getAttr("Power") + 100.0)/100.0
-	print("Power is: " + str(p))
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			p *= i.powerMult
@@ -127,11 +126,9 @@ func getPower() -> float:
 
 func getPSpeed() -> float:
 	var ps : float = (getAttr("Proj. Spd.") + 100.0)/100.0
-	print("ps is : " + str(ps))
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			ps *= i.attackSpeedMult
-			print("ps for atackSpeed is : " + str(i.attackSpeedMult))
 	return ps * (1.0+getSupreme())/2
 
 func getASpeed() -> float:

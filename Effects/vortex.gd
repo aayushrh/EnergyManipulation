@@ -93,7 +93,6 @@ func color_change(delta):
 	else:
 		$"Vortex(2)".self_modulate = Color(0.4, 0.4, 0.4)
 	$"Vortex(2)".self_modulate.a = 0.6
-	print(elements.size())
 	
 
 func _on_area_2d_body_entered(body):

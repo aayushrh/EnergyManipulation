@@ -24,7 +24,6 @@ func setSpell(nspell):
 	spell = nspell
 	totalChargeTime = spell.getCastingTime()*5
 	castingTimer = totalChargeTime
-	print("this is casting timer " + str(castingTimer))
 	chargeTimer = spell.getMaxPowerTime()*10
 	#scale = Vector2(0.5, 0.5) * spell.getSize()
 	scale = Vector2(0.5, 0.5) * spell.getSize() * _castingAnimationCalc(castingTimer,totalChargeTime)
@@ -41,7 +40,6 @@ func setSpell(nspell):
 		icon.self_modulate = Color(spell.components[i].color, 0.5)
 		icon.scale = Vector2(0.15, 0.15)
 		icon.position = Vector2(sin(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3, cos(i/(spell.components.size()+0.0) * 2*PI) * 500*0.3)
-		print(icon.position)
 		$Pivot.add_child(icon)
 
 func _ready():
@@ -102,7 +100,6 @@ func draw():
 	draw_circle(Vector2.ZERO, 256, Color.WHITE, false)
 
 func _process(delta):
-	print("This is charge multi: " + str(chargeMulti))
 	delta *= Global.getTimeScale()
 	if startingLocation != Vector2.ZERO:
 		$Ethan.global_position = startingLocation

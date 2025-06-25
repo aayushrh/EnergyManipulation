@@ -71,7 +71,6 @@ var chargeTime : float = 0
 @onready var DamageNum = preload("res://Effects/DamageNum.tscn")
 
 func _ready():
-	print(stage)
 	art.finishCharge.connect(_finishCharge)
 	rng.randomize()
 	var num = rng.randi_range(0, 9)
@@ -127,8 +126,6 @@ func _ready():
 	
 	reactionDelay /= 2
 	
-	print("spellcount is: " + str(spellcount))
-	
 	stored_energy *= wisdom
 	MAXMANA *= wisdom
 	rng.randomize()
@@ -154,7 +151,6 @@ func _ready():
 	#spell.attributes = Attributes.new(rng.randf_range(-50,50),rng.randf_range(-50,50),r)
 	spells.append(spell)
 	health = MAXHEALTH
-	print(health)
 
 func _finishCharge():
 	slow = false
@@ -199,7 +195,6 @@ func _max_mana_change(newMax: float):
 
 func _health_change(newHP: float):
 	var change = newHP - health
-	print("This is change: " + str(change))
 	if(change > 0):
 		if(!bonusHealBlock):
 			change = change * healing
@@ -277,7 +272,6 @@ func _effectsHandle(delta):
 
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken()
-	print("This is dmg:" + str(dmgTaken))
 	if(block>0):
 		health -= dmgTaken*(1-_dmgRed(time-block))
 		un_block()
@@ -285,7 +279,6 @@ func _hit(hitbox):
 		for i in hitbox.spell.components:
 			i.callBlockEffects(0, hitbox, self)
 		health -= dmgTaken
-		print("This is health sub:" + str(dmgTaken))
 	time = 0
 
 func _move(delta):
@@ -316,7 +309,6 @@ func _move(delta):
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			inputV = (player.global_position - global_position).normalized() * -1
 		if(!nomoveinput and !$Charging.emitting):
-			print($Charging.emitting)
 			velocity += inputV * 20
 		
 		#if velocity.length() > TOPSPEED:
@@ -343,8 +335,6 @@ func _move(delta):
 				blast = null
 				castedIndex = -1
 		velocity -= softBodyPush * TOPSPEED
-		if softBodyPush != Vector2.ZERO:
-			print("softbody: " + str(softBodyPush))
 		velocity *= Global.getTimeScale()
 		if(slow):
 			velocity = velocity * 0.5
@@ -461,7 +451,6 @@ func dash(dir):
 	canDash = false
 	$dashing.start(dash_time)
 	$dash_cd.start(dash_cd+dash_time)
-	print("dash")
 
 func do_block():
 	pass
@@ -565,7 +554,6 @@ func _on_block_cd_timeout() -> void:
 
 func _on_dash_cd_timeout() -> void:
 	canDash = true
-	print("finishDash")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.get_parent() is Blast and is_instance_valid(area.get_parent().sender) and area.get_parent().sender.type != type):
@@ -581,7 +569,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 func _on_dashing_timeout() -> void:
 	nomove = false
 	velocity = Vector2.ZERO
-	print("dash is done")
 
 func getIntel():
 	if searchDark() != -1:
