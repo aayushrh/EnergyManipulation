@@ -177,6 +177,8 @@ func _health_change(newHP: float):
 	display_dmg(change)
 	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
 	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
+	var x = (health * 255)/MAXHEALTH
+	$CanvasLayer/HealthText.text = "[color=#%x%x%x]%d/%d[/color]" % [x, x, x, health * 10, MAXHEALTH * 10]
 
 func display_dmg(change):
 	if get_tree() != null:
@@ -199,6 +201,8 @@ func _energy_change(newMANA: float):
 		if(stored_energy < 0):
 			stored_energy = 0
 	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
+	var x = (stored_energy * 255)/MAXMANA
+	$CanvasLayer/EnergyText.text = "[color=#%x%x%x]%d/%d[/color]" % [x, x, x, stored_energy * 10, MAXMANA * 10]
 
 
 func block():
