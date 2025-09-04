@@ -194,11 +194,11 @@ func _energy_change(newMANA: float):
 			var chamt = MAXMANA * floor(stored_energy/MAXMANA + 1) - stored_energy
 			change -= chamt * pow(2,floor(stored_energy/MAXMANA))
 			stored_energy += chamt
-			get_tree().current_scene.damageHealed += chamt
-		stored_energy += change/pow(2,floor(stored_energy/MAXHEALTH))
+		stored_energy += change/pow(2,floor(stored_energy/MAXMANA))
 	elif(change < 0):
 		stored_energy += change
 		if(stored_energy < 0):
+			health += stored_energy/2
 			stored_energy = 0
 	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
 	var x = (stored_energy * 255)/MAXMANA
