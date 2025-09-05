@@ -105,7 +105,7 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 			for i : ComponentSpellCard in body.spell.components:
 				i.callVisualHitEffects(body)
 			body.queue_free()
-	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName and body.sender != sender:
+	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName:
 		if(body.fuse && fuse):
 			if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
 				var blast := BlastProj.instantiate()

@@ -75,7 +75,7 @@ func _ready():
 	rng.randomize()
 	var num = rng.randi_range(0, 9)
 	rng.randomize()
-	var spell = Spell.new("firstSpell")
+	var spell = Spell.new("firstSpell" + str(rng.randf_range(0, 1)))
 	spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	while true:
 		var comp = get_tree().current_scene.allComponentSpellCards[rng.randi_range(0, get_tree().current_scene.allComponentSpellCards.size() - 1)]
