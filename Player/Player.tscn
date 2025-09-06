@@ -32,13 +32,6 @@ shape = SubResource("CircleShape2D_7140r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="EnergyBar2" type="ColorRect" parent="CanvasLayer"]
-offset_left = 20.0
-offset_top = 70.0
-offset_right = 120.0
-offset_bottom = 90.0
-color = Color(0.337255, 0.337255, 0.337255, 1)
-
 [node name="HealthBar2" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0
 offset_top = 20.0
@@ -75,11 +68,25 @@ offset_right = 420.0
 offset_bottom = 60.0
 color = Color(1, 0, 0, 1)
 
+[node name="EnergyBar2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 90.0
+color = Color(0.337255, 0.337255, 0.337255, 1)
+
 [node name="EnergyBar" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0
 offset_top = 70.0
 offset_right = 420.0
 offset_bottom = 90.0
+
+[node name="EnergyBar3" type="ColorRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 420.0
+offset_bottom = 90.0
+color = Color(0.00294348, 0.231735, 0.887726, 1)
 
 [node name="ActualEnergyBar" type="ColorRect" parent="CanvasLayer"]
 offset_left = 20.0
@@ -87,13 +94,6 @@ offset_top = 70.0
 offset_right = 420.0
 offset_bottom = 90.0
 color = Color(0, 0.482353, 1, 1)
-
-[node name="EnergyBar3" type="ColorRect" parent="CanvasLayer"]
-offset_left = 20.0
-offset_top = 70.0
-offset_right = 120.0
-offset_bottom = 90.0
-color = Color(0.00294348, 0.231735, 0.887726, 1)
 
 [node name="EnergyText" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 1
