@@ -69,10 +69,10 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				var blastProj := BlastProj.instantiate()
 				blastProj.speed = spellObj.speed
 				blastProj.sender = spellObj.sender
-				blastProj.mult = spellObj.chargeMulti
-				blastProj.global_position = spellObj.global_position
+				blastProj.mult = 1 #spellObj.chargeMulti
+				blastProj.global_position = enemy.global_position
 				blastProj._setSpell(spellObj.spell.create())
-				var direction = spellObj.direction
+				var direction = spellObj.velocity.normalized()
 				var range = 0.5*log(shrapnel + 2)
 				var aoffset = (((float)(i - shrapnel / 2))/(float)(shrapnel)) * range
 				var ndir = direction.rotated(aoffset)
@@ -87,14 +87,14 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 			for i in range(shrapnel):
 				var blastProj := ExplosionCast.instantiate()
 				blastProj.sender = spellObj.sender
-				blastProj.mult = spellObj.chargeMulti
+				blastProj.mult = 1 #spellObj.chargeMulti
 				var rangeMult = 1.5 * log(shrapnel + 2)
 				var maxOffset = rangeMult * 130.0 * spellObj.spell.getSize()
 				var offset = rng.randf_range(0, maxOffset)
 				var angle = rng.randf_range(0, 2*PI)
 				rng.randomize()
 				var offsetV = Vector2(cos(angle), sin(angle)) * offset
-				blastProj.global_position = spellObj.global_position + offsetV
+				blastProj.global_position = enemy.global_position + offsetV
 				blastProj.castingCost = spellObj.castingCost
 				blastProj._setSpell(spellObj.spell.create())
 				spellObj.get_tree().current_scene.add_child(blastProj)
