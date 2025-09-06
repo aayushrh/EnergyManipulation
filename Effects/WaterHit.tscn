@@ -96,6 +96,7 @@ process_material = SubResource("ParticleProcessMaterial_i7gyf")
 texture = ExtResource("1_ih73a")
 lifetime = 0.2
 one_shot = true
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 script = ExtResource("2_f6kb0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

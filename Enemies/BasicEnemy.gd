@@ -93,20 +93,19 @@ func _ready():
 		0, 1, 2, 3: #Dashing dude
 			agg = true
 			dash_cd = 2.5 / pow(1.05,s)
-			MAXHEALTH = 2 + s/20.0
-			intel = 0.8 + s/20.0
+			MAXHEALTH = 2 + s/15.0
+			intel = 0.5 + s/30.0
 			reactionDelay = randf_range(0.105,0.150)
-			wisdom = 0.5 + s/50
+			wisdom = 1 + s/40
 			spellcount += floor(s/6)
-			#TOPSPEED *= 2
 		4, 5, 6: #Power dude
 			agg = rng.randi_range(0, 1) == 0
-			dash_cd = 5
+			dash_cd = 5 / pow(1.03, s)
 			MAXHEALTH = 2 + s/10.0
-			intel = 1 + s/5.0
+			intel = 1 + s/10.0
 			reactionDelay = randf_range(0.2,0.3)
 			wisdom = 0.5 + s/100
-			spellcount = 1 + floor(s/10)
+			spellcount += floor(s/10)
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
 		7, 8: #Healthy dude
 			agg = rng.randi_range(0, 1) == 0
@@ -125,13 +124,11 @@ func _ready():
 			wisdom = 2 + s/2
 			spellcount += floor(s/3)
 	
-	reactionDelay /= 2
-	
 	stored_energy *= wisdom
 	MAXMANA *= wisdom
 	rng.randomize()
-	for i in (max(1, spellcount)):
-		var spell2 = Spell.new("Spell Number " + str(i))
+	for i in range(spellcount):
+		var spell2 = Spell.new("Spell Number " + str(i)  + str(rng.randf_range(0, 1)))
 		spell2.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 		var isElement = false
 		while(!isElement):
@@ -212,7 +209,9 @@ func _health_change(newHP: float):
 			if(!fuck):
 				get_tree().current_scene.damageDealt -= change
 			if(health <= 0):
-				queue_free()
+				$EnemyArt._kill()
+				pause = true
+				#queue_free()
 				get_tree().current_scene.enemiesKilled += 1
 		if is_instance_valid(currentDamageNum):
 			currentDamageNum.global_position = global_position + Vector2(50, -50)

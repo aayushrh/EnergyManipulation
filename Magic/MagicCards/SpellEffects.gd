@@ -45,13 +45,16 @@ func addDarkBlindness(spellObj:SpellCasted, enemy):
 func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 	if(!is_instance_valid(spellObj.sender) || enemy is Wall || dmgRed >= 1):
 		return
+	var mult = 0.5
+	if spellObj.isShrapnel:
+		mult = 0.1
 	spellObj.sender.bonusHealBlock = true
-	spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
+	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult
 	spellObj.sender.bonusHealBlock = false
 	if(enemy.health > 0):
-		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
+		spellObj.sender.health += mult * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 	else:
-		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
+		spellObj.sender.health += mult * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
@@ -101,13 +104,14 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				spellObj.get_tree().current_scene.add_child(blastProj)
 
 func takeHealth(spellObj:SpellCasted):
-	if(spellObj.sender is BasicEnemy):
-		spellObj.sender.fuck = true
-	if(!spellObj.combined):
-		if(spellObj.sender.health > 0.5 * spellObj.spell.getPower() * spellObj.mult):
-			spellObj.sender.health -= 0.5 * spellObj.spell.getPower() * spellObj.mult
-		else:
-			spellObj.sender.health = 0.001
+	if !spellObj.isShrapnel:
+		if(spellObj.sender is BasicEnemy):
+			spellObj.sender.fuck = true
+		if(!spellObj.combined):
+			if(spellObj.sender.health > 0.5 * spellObj.spell.getPower() * spellObj.mult):
+				spellObj.sender.health -= 0.5 * spellObj.spell.getPower() * spellObj.mult
+			else:
+				spellObj.sender.health = 0.001
 
 func unbound(spellObj:SpellCast):
 	spellObj.slow = false
@@ -123,7 +127,8 @@ func giveBackHP(dmgRed, spellObj, enemy):
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 
 func giveBackEnergy(spellObj:SpellCasted):
-	spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost) / spellObj.spell.getAmount()
+	if !spellObj.isShrapnel:
+		spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost) / spellObj.spell.getAmount()
 
 func changePosToMouse(spellObj: SpellCast):
 	spellObj.setStartingLoc(spellObj.getMousePos())
