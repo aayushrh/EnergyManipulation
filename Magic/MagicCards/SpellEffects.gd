@@ -49,9 +49,9 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 	spellObj.sender.health += 0.5 * spellObj.spell.getPower() * spellObj.mult
 	spellObj.sender.bonusHealBlock = false
 	if(enemy.health > 0):
-		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult
+		spellObj.sender.health += 0.5 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 	else:
-		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult
+		spellObj.sender.health += 0.5 * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
@@ -76,7 +76,7 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				var range = 0.5*log(shrapnel + 2)
 				var aoffset = (((float)(i - shrapnel / 2))/(float)(shrapnel)) * range
 				var ndir = direction.rotated(aoffset)
-				blastProj.global_position += ndir.normalized() * 45
+				blastProj.global_position += ndir.normalized() * (45 + 100 * spellObj.spell.scale.length)
 				blastProj._setV(ndir)
 				blastProj.castingCost = spellObj.castingCost
 				blastProj.isShrapnel = true

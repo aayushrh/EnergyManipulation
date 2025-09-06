@@ -38,7 +38,7 @@ func _display(num : float, player : bool):
 				$AnimationPlayer.stop()
 				$AnimationPlayer.play("UpandAwayDelay")
 			else:
-				$Label.text = str(round(num * 10)/10.0)
+				$Label.text = str(round(num * 100)/10.0)
 				currentNum = num
 		else:
 			$Label.set("theme_override_colors/font_color", Color(0, 1, 0))

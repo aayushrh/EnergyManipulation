@@ -1,24 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://btnljhyfn10ue"]
+[gd_scene load_steps=11 format=3 uid="uid://btnljhyfn10ue"]
 
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_ih73a"]
-[ext_resource type="Script" path="res://Effects/hitParticleTimeSlow.gd" id="2_7wsh1"]
+[ext_resource type="Script" path="res://Effects/GPUEffects.gd" id="2_f6kb0"]
 
-[node name="WaterHit" type="CPUParticles2D"]
+[sub_resource type="Gradient" id="Gradient_r2b8h"]
+offsets = PackedFloat32Array(0, 0.844262, 1)
+colors = PackedColorArray(0, 0.501961, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xroye"]
+gradient = SubResource("Gradient_r2b8h")
+
+[sub_resource type="Curve" id="Curve_sj4g2"]
+_data = [Vector2(0.00662251, 0.489259), 0.0, 0.0, 0, 0, Vector2(1, 0.239401), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2phvh"]
+curve = SubResource("Curve_sj4g2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i7gyf"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 80.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_2phvh")
+color_ramp = SubResource("GradientTexture1D_xroye")
+
+[sub_resource type="Animation" id="Animation_nmdwq"]
+resource_name = "Explosion"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:process_material:emission_shape_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(5, 5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_l1h3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:process_material:emission_shape_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_te3s8"]
+_data = {
+"Explosion": SubResource("Animation_nmdwq"),
+"RESET": SubResource("Animation_l1h3e")
+}
+
+[node name="WaterHit" type="GPUParticles2D"]
 emitting = false
 amount = 500
-lifetime = 12.0
-one_shot = true
-speed_scale = 50.0
-explosiveness = 1.0
-lifetime_randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_i7gyf")
 texture = ExtResource("1_ih73a")
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 40.0
-scale_amount_min = 0.05
-scale_amount_max = 0.1
-color = Color(0.278431, 0.631373, 1, 1)
-hue_variation_min = 0.36
-hue_variation_max = 0.36
-script = ExtResource("2_7wsh1")
+lifetime = 0.2
+one_shot = true
+script = ExtResource("2_f6kb0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_te3s8")
+}
+autoplay = "Explosion"

@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://6r5s1j4tbvng"]
+[gd_scene load_steps=7 format=3 uid="uid://6r5s1j4tbvng"]
 
 [ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_vn3i5"]
 [ext_resource type="Script" path="res://Effects/blastVisualChange.gd" id="2_spewm"]
-[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="3_5uai1"]
+[ext_resource type="Texture2D" uid="uid://dog1oshsp3r55" path="res://Art/polar-star.png" id="3_dpo46"]
+[ext_resource type="Script" path="res://Effects/trailAdded.gd" id="5_qv1s4"]
+[ext_resource type="Script" path="res://Effects/uprightSprite.gd" id="6_5xyww"]
 
 [sub_resource type="Gradient" id="Gradient_fvdh6"]
 colors = PackedColorArray(0.996078, 0.835294, 0, 1, 1, 1, 0.501961, 1)
 
 [node name="Light" type="CPUParticles2D"]
+emitting = false
 amount = 250
 lifetime = 0.2
 preprocess = 1.0
@@ -23,9 +26,19 @@ scale_amount_max = 0.1
 color_ramp = SubResource("Gradient_fvdh6")
 script = ExtResource("2_spewm")
 
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_dpo46")
+script = ExtResource("6_5xyww")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 0, 1)
 position = Vector2(-0.999969, 1)
 scale = Vector2(0.6875, 0.667969)
-texture = ExtResource("3_5uai1")
+texture = ExtResource("3_dpo46")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("5_qv1s4")
+trailLength = 10

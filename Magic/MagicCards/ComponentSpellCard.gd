@@ -33,15 +33,8 @@ enum{
 var type = 0
 
 func callHitEffects(spellObj:SpellCasted, enemy):
-	if(HitVFX != null):
-		var hitVFX = HitVFX.instantiate()
-		hitVFX.emitting = true
-		hitVFX.position = spellObj.global_position
-		if spellObj.get_tree() != null:
-			spellObj.get_tree().current_scene.add_child(hitVFX)
-	for e in hitEffects:
-		var callable = Callable(spellEffects, e)
-		callable.call(spellObj, enemy)
+	callVisualHitEffects(spellObj)
+	callNonVisualHitEffects(spellObj, enemy)
 
 func callNonVisualHitEffects(spellObj:SpellCasted, enemy):
 	for e in hitEffects:
@@ -51,7 +44,10 @@ func callNonVisualHitEffects(spellObj:SpellCasted, enemy):
 func callVisualHitEffects(spellObj:SpellCasted):
 	if(HitVFX != null):
 		var hitVFX = HitVFX.instantiate()
-		hitVFX.emitting = true
+		if hitVFX is GPUParticles2D:
+			hitVFX._setScale(spellObj.scale * 0.3)
+		else:
+			hitVFX.emitting = true
 		hitVFX.position = spellObj.global_position
 		if spellObj.get_tree() != null:
 			spellObj.get_tree().current_scene.add_child(hitVFX)
