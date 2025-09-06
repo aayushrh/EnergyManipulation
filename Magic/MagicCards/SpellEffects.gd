@@ -59,7 +59,7 @@ func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy.searchLight() != -1):
 		enemy.health -= 0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchLight()].stack
 
-func shrapnelProc(dmgRed, spellObj:SpellCasted, enemy):
+func shrapnelProc(spellObj:SpellCasted, enemy):
 	if(enemy is Wall):
 		return
 	if(spellObj is Blast and !spellObj.isShrapnel):

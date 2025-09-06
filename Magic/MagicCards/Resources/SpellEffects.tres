@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="SpellEffects" load_steps=3 format=3 uid="uid://cewcbihcpnife"]
+[gd_resource type="Resource" script_class="SpellEffects" load_steps=5 format=3 uid="uid://cewcbihcpnife"]
 
 [ext_resource type="Script" path="res://Magic/MagicCards/SpellEffects.gd" id="1_8en5q"]
 [ext_resource type="PackedScene" uid="uid://b7achmtdheu5u" path="res://Effects/Vortex.tscn" id="1_62ypw"]
+[ext_resource type="PackedScene" uid="uid://b7n1s2fb77tim" path="res://Magic/MagicCasts/BlastProj.tscn" id="1_r8br5"]
+[ext_resource type="PackedScene" uid="uid://dru3gy2rcs7rv" path="res://Magic/MagicCasts/ExplosionCast.tscn" id="2_1po3o"]
 
 [resource]
 script = ExtResource("1_8en5q")
 VortexScene = ExtResource("1_62ypw")
+BlastProj = ExtResource("1_r8br5")
+ExplosionCast = ExtResource("2_1po3o")
