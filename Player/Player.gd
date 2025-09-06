@@ -206,7 +206,8 @@ func _energy_change(newMANA: float):
 		if(stored_energy < 0):
 			health += stored_energy/2
 			stored_energy = 0
-	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * 5, MAXMANA*ENERGYBARMULT)
+	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * ENERGYBARMULT, MAXMANA*ENERGYBARMULT)
+	$CanvasLayer/EnergyBar3.size.x = stored_energy * ENERGYBARMULT
 	var x = (stored_energy * 255)/MAXMANA
 	$CanvasLayer/EnergyText.text = "[color=#%x%x%x]%d/%d[/color]" % [x, x, x, stored_energy * 10, MAXMANA * 10]
 
@@ -242,11 +243,7 @@ func _heal(delta):
 		
 
 func updateEnergy():
-	$CanvasLayer/EnergyBar.size.x = min(mana * 5, MAXMANA*ENERGYBARMULT)
-	if(mana * 5 > MAXMANA*ENERGYBARMULT):
-		$CanvasLayer/EnergyBar3.size.x = mana - MAXMANA*ENERGYBARMULT/5
-	else:
-		$CanvasLayer/EnergyBar3.size.x = 0
+	$CanvasLayer/EnergyBar.size.x = mana
 
 func magic_check(delta):
 	var hit = false
