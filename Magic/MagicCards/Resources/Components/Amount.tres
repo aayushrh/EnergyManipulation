@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_8n1ix"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_34tte"]
 [ext_resource type="Resource" uid="uid://c1j71um22n1vs" path="res://Magic/MagicCards/Resources/Attributes/Amount_Supreme.tres" id="2_lqxca"]
-[ext_resource type="Texture2D" uid="uid://v47r7dr2hhgx" path="res://Art/sprint (1).png" id="3_7iqyy"]
+[ext_resource type="Texture2D" uid="uid://dq2legxu4w2pm" path="res://Art/Amount.png" id="3_xbfqk"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="5_0vgjg"]
 
 [resource]
@@ -16,8 +16,8 @@ ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
 blockEffects = Array[String]([])
 castingEffects = Array[String]([])
-color = Color(0, 0, 0, 1)
-icon = ExtResource("3_7iqyy")
+color = Color(0.509804, 0.509804, 0.509804, 1)
+icon = ExtResource("3_xbfqk")
 cdMult = 1.2
 costMult = 1.2
 powerMult = 1.0

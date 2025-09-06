@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://vj56ldubctv8"]
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_28dgm"]
-[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_ds836"]
+[ext_resource type="Texture2D" uid="uid://ckjjo8b072ehe" path="res://Art/Placed.png" id="2_hjxxo"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_icsiv"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_01kmq"]
 
@@ -15,8 +15,8 @@ ongoingEffects = Array[String]([])
 startEffects = Array[String]([])
 blockEffects = Array[String]([])
 castingEffects = Array[String](["changePosToMouse"])
-color = Color(1, 1, 1, 1)
-icon = ExtResource("2_ds836")
+color = Color(0.215686, 0.215686, 0.215686, 1)
+icon = ExtResource("2_hjxxo")
 cdMult = 1.2
 costMult = 1.2
 powerMult = 1.0

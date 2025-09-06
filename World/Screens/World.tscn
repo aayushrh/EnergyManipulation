@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=35 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -25,7 +25,6 @@
 [ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Components/Default.tres" id="12_qtnuf"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="16_rxmm3"]
 [ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
-[ext_resource type="Resource" uid="uid://beg00d1bfprlu" path="res://Magic/MagicCards/Resources/Type/Barrage.tres" id="22_rpyql"]
 [ext_resource type="Resource" uid="uid://yec66fv1fp0a" path="res://Magic/MagicCards/Resources/Type/Explosion.tres" id="23_qk785"]
 [ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="24_4r4ro"]
 [ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="25_lh46v"]
@@ -1492,7 +1491,7 @@ layout_mode = 2
 
 [node name="CardSelection" parent="CanvasLayer" node_paths=PackedStringArray("spawner") instance=ExtResource("8_v2hr7")]
 visible = false
-cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y"), ExtResource("10_i3moq"), ExtResource("9_7j7bf"), ExtResource("9_dhoch"), ExtResource("5_3gf8k"), ExtResource("22_rpyql"), ExtResource("23_qk785"), ExtResource("7_3b64n"), ExtResource("24_4r4ro"), ExtResource("25_lh46v")])
+cardsToShow = Array[Resource]([ExtResource("2_5nixq"), ExtResource("9_vavhn"), ExtResource("2_c5j3f"), ExtResource("4_ov6f6"), ExtResource("7_6b0eb"), ExtResource("8_dkp5y"), ExtResource("10_i3moq"), ExtResource("9_7j7bf"), ExtResource("9_dhoch"), ExtResource("5_3gf8k"), ExtResource("23_qk785"), ExtResource("7_3b64n"), ExtResource("24_4r4ro"), ExtResource("25_lh46v")])
 spawner = NodePath("../../Spawner")
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]
