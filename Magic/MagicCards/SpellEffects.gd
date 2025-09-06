@@ -76,7 +76,7 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				var range = 0.5*log(shrapnel + 2)
 				var aoffset = (((float)(i - shrapnel / 2))/(float)(shrapnel)) * range
 				var ndir = direction.rotated(aoffset)
-				blastProj.global_position += ndir.normalized() * (45 + 100 * spellObj.spell.scale.length)
+				blastProj.global_position += ndir.normalized() * (45 + 100 * spellObj.scale.length())
 				blastProj._setV(ndir)
 				blastProj.castingCost = spellObj.castingCost
 				blastProj.isShrapnel = true
@@ -97,6 +97,7 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				blastProj.global_position = enemy.global_position + offsetV
 				blastProj.castingCost = spellObj.castingCost
 				blastProj._setSpell(spellObj.spell.create())
+				blastProj.isShrapnel = true
 				spellObj.get_tree().current_scene.add_child(blastProj)
 
 func takeHealth(spellObj:SpellCasted):
