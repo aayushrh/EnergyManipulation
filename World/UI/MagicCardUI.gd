@@ -27,13 +27,17 @@ func _show(card):
 	match(card.type):
 		0:
 			$VBoxContainer/Label2.text = "Element"
-			$VBoxContainer/Label4.visible = true
+			if card.powerMult != 1:
+				$VBoxContainer/Label4.visible = true
 			$VBoxContainer/Label4.text = "Power Multiplier: " + str(card.powerMult)
-			$VBoxContainer/Label5.visible = true
+			if card.castingSpeedMult != 1:
+				$VBoxContainer/Label5.visible = true
 			$VBoxContainer/Label5.text = "Cast Spd Multiplier: " + str(card.castingSpeedMult)
-			$VBoxContainer/Label6.visible = true
+			if card.attackSpeedMult != 1:
+				$VBoxContainer/Label6.visible = true
 			$VBoxContainer/Label6.text = "Proj Spd Multiplier: " + str(card.attackSpeedMult)
-			$VBoxContainer/Label7.visible = true
+			if card.sizeMult != 1:
+				$VBoxContainer/Label7.visible = true
 			$VBoxContainer/Label7.text = "Size Multiplier: " + str(card.sizeMult)
 		1:
 			$VBoxContainer/Label2.text = "Style"

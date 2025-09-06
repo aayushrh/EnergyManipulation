@@ -52,17 +52,27 @@ func setStartingLoc(pos : Vector2) -> void:
 	startingLocation = pos
 
 func _shoot() -> void:
-	var blastProj := BlastProj.instantiate()
-	blastProj.speed = speed
-	blastProj.sender = sender
-	blastProj.mult = chargeMulti
-	blastProj.global_position = global_position
-	blastProj._setSpell(spell.create())
-	blastProj._setV(direction)
-	blastProj.castingCost = castingCost
-	get_tree().current_scene.add_child(blastProj)
-	if sender.type == 0:
-		get_tree().current_scene.amountShot += 1
+	var cluster = spell.getCluster()
+	
+	for i in range(cluster):
+		var blastProj := BlastProj.instantiate()
+		blastProj.speed = speed
+		blastProj.sender = sender
+		blastProj.mult = chargeMulti
+		blastProj.global_position = global_position
+		blastProj._setSpell(spell.create())
+		if cluster >= 2:
+			var range = 0.5*log(cluster + 2)
+			var aoffset = (((float)(i - cluster / 2))/(float)(cluster)) * range
+			var ndir = direction.rotated(aoffset)
+			blastProj._setV(ndir)
+		else:
+			blastProj._setV(direction)
+		blastProj.castingCost = castingCost
+		get_tree().current_scene.add_child(blastProj)
+		if sender.type == 0:
+			get_tree().current_scene.amountShot += 1
+	
 	timer = 0.1 * 1/spell.getASpeed()
 	if startingLocation == Vector2.ZERO:
 		direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))

@@ -157,6 +157,18 @@ func getAmount() -> float:
 		return a
 	return 1
 
+func getCluster() -> float:
+	var a : int = getAttr("Cluster")
+	if a != 50:
+		return a
+	return 1
+
+func getShrapnel() -> float:
+	var a : int = getAttr("Shrapnel")
+	if a != 50:
+		return a
+	return 1
+
 func getClashingAdvantage() -> float:
 	var c :float = 1.0
 	if(components != null):

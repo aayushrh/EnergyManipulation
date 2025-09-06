@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=6 format=3 uid="uid://cq77jib3t08n6"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_21w3w"]
+[ext_resource type="Resource" uid="uid://j33s3g1w1lkv" path="res://Magic/MagicCards/Resources/Attributes/Shrapnel_Supreme.tres" id="2_kwsyy"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_q2wr1"]
+[ext_resource type="Texture2D" uid="uid://qo0fdurc66m" path="res://Art/hypersonic-bolt.png" id="3_tw8en"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="3_w3gf3"]
+
+[resource]
+script = ExtResource("2_q2wr1")
+spellEffects = ExtResource("3_w3gf3")
+cardName = "Shrapnel"
+cardDescription = "Spell recreates smaller versions of itself on hit with enemy"
+hitEffects = Array[String](["shrapnelProc"])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+castingEffects = Array[String]([])
+color = Color(0, 0, 0, 1)
+icon = ExtResource("3_tw8en")
+cdMult = 1.0
+costMult = 1.2
+powerMult = 1.0
+attackSpeedMult = 1.0
+sizeMult = 1.0
+castingSpeedMult = 1.0
+attribute = Array[ExtResource("1_21w3w")]([ExtResource("2_kwsyy")])
+clashingAdvantage = 1.0
+isElement = false

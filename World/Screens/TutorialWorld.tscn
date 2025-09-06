@@ -1,18 +1,10 @@
-[gd_scene load_steps=37 format=4 uid="uid://0yitol7oi1fw"]
+[gd_scene load_steps=29 format=4 uid="uid://0yitol7oi1fw"]
 
 [ext_resource type="Script" path="res://World/Screens/TutorialWorld.gd" id="1_738rp"]
 [ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="2_d0dsv"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_a50p2"]
-[ext_resource type="Resource" uid="uid://dsvsnjbntmnj3" path="res://Magic/MagicCards/Resources/Components/Vortex.tres" id="3_im7qu"]
 [ext_resource type="Resource" uid="uid://4fshb01775ox" path="res://Magic/MagicCards/Resources/Components/TutorialMagic.tres" id="3_rtkrx"]
-[ext_resource type="Resource" uid="uid://vj56ldubctv8" path="res://Magic/MagicCards/Resources/Components/Placed.tres" id="4_ya1b4"]
-[ext_resource type="Resource" uid="uid://yec66fv1fp0a" path="res://Magic/MagicCards/Resources/Type/Explosion.tres" id="5_m00qf"]
-[ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Components/Fire.tres" id="5_osteo"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="6_fpkp6"]
-[ext_resource type="Resource" uid="uid://bbvudeis28j5p" path="res://Magic/MagicCards/Resources/Components/Light.tres" id="6_wsaf0"]
-[ext_resource type="Resource" uid="uid://bgya6tyk2afhu" path="res://Magic/MagicCards/Resources/Components/Dark.tres" id="7_e71e2"]
-[ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Components/Nature.tres" id="8_ac4jh"]
-[ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Components/Water.tres" id="9_plcub"]
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="10_3wmpt"]
 [ext_resource type="Texture2D" uid="uid://bqxet0k0e2dwr" path="res://Art/KeyboardIcons/keyboard_87.png" id="11_t1mqx"]
 [ext_resource type="Texture2D" uid="uid://c1h5v6qgynsdn" path="res://Art/KeyboardIcons/keyboard_65.png" id="12_25a78"]
@@ -1450,8 +1442,8 @@ size = Vector2(83.0001, 1422)
 [node name="TutorialWorld" type="Node2D" node_paths=PackedStringArray("player")]
 position = Vector2(0, -8)
 script = ExtResource("1_738rp")
-testComponentSpellCard = Array[ExtResource("3_a50p2")]([ExtResource("3_im7qu"), ExtResource("4_ya1b4"), ExtResource("5_osteo"), ExtResource("6_wsaf0"), ExtResource("7_e71e2"), ExtResource("8_ac4jh"), ExtResource("9_plcub")])
-testTypeSpellCard = ExtResource("5_m00qf")
+testComponentSpellCard = Array[ExtResource("3_a50p2")]([ExtResource("3_rtkrx")])
+testTypeSpellCard = ExtResource("2_d0dsv")
 tutorialElement = ExtResource("3_rtkrx")
 defaultElement = ExtResource("14_jwfqg")
 player = NodePath("Player")

@@ -7,7 +7,7 @@ extends Control
 
 @export var  MAXPRESSTIME = 0.25
 
-var spell = Global.spellList[0]
+var spell : Spell = Global.spellList[0]
 var pageNum = 0
 var maxPages = 0
 var pressed_timer = 0
@@ -181,6 +181,11 @@ func _on_delete_pressed():
 	var cardRemoved = null
 	if(pageNum - 1 <= spell.components.size()):
 		cardRemoved = spell.components[getCurrentPage() - 1]
+		for i in cardRemoved.attribute:
+			for a in range(spell.attributes.size()):
+				if (spell.attributes[a].attr == i):
+					spell.attributes.remove_at(a)
+					break
 		spell.components.remove_at(getCurrentPage() - 1)
 	reload(false)
 	Global.magicCards.append(cardRemoved)

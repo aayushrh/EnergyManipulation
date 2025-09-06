@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://dvtb22581wdl4"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_sac1g"]
+
+[resource]
+script = ExtResource("1_sac1g")
+Ltext = "Cluster"
+Rtext = "Supreme"
+minL = 1.0
+maxL = 10.0
+minR = -50.0
+maxR = 0.0
+num = 0.0
+step = 1.0
+percentL = false
+percentR = true
+addL = 0.0
+addR = 100.0

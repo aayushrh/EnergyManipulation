@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://j33s3g1w1lkv"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_bdndy"]
+
+[resource]
+script = ExtResource("1_bdndy")
+Ltext = "Shrapnel"
+Rtext = "Supreme"
+minL = 1.0
+maxL = 10.0
+minR = -50.0
+maxR = 0.0
+num = 0.0
+step = 1.0
+percentL = false
+percentR = true
+addL = 0.0
+addR = 100.0

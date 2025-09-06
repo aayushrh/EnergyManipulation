@@ -15,6 +15,7 @@ var buttonLetGo : bool = false
 var castingCost : float = 0
 var slow : bool = true
 var startingLocation : Vector2 = Vector2.ZERO
+var rng = RandomNumberGenerator.new()
 
 @onready var ExplosionCast := preload("res://Magic/MagicCasts/ExplosionCast.tscn")
 
@@ -48,13 +49,30 @@ func setStartingLoc(pos:Vector2) -> void:
 	startingLocation = pos
 
 func _shoot() -> void:
-	var blastProj := ExplosionCast.instantiate()
-	blastProj.sender = sender
-	blastProj.mult = chargeMulti
-	blastProj.global_position = global_position
-	blastProj.castingCost = castingCost
-	blastProj._setSpell(spell.create())
-	get_tree().current_scene.add_child(blastProj)
+	var cluster = spell.getCluster()
+	if cluster >= 2:
+		for i in range(cluster):
+			var blastProj := ExplosionCast.instantiate()
+			blastProj.sender = sender
+			blastProj.mult = chargeMulti
+			var rangeMult = 1.5 * log(cluster + 2)
+			var maxOffset = rangeMult * 130.0 * spell.getSize()
+			var offset = rng.randf_range(0, maxOffset)
+			var angle = rng.randf_range(0, 2*PI)
+			rng.randomize()
+			var offsetV = Vector2(cos(angle), sin(angle)) * offset
+			blastProj.global_position = global_position + offsetV
+			blastProj.castingCost = castingCost
+			blastProj._setSpell(spell.create())
+			get_tree().current_scene.add_child(blastProj)
+	else:
+		var blastProj := ExplosionCast.instantiate()
+		blastProj.sender = sender
+		blastProj.mult = chargeMulti
+		blastProj.global_position = global_position
+		blastProj.castingCost = castingCost
+		blastProj._setSpell(spell.create())
+		get_tree().current_scene.add_child(blastProj)
 	if sender.type == 0:
 		get_tree().current_scene.amountShot += 1
 	timer = 0.1 * 1/spell.getASpeed()
