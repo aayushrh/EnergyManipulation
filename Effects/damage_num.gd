@@ -1,6 +1,7 @@
 extends Node2D
 
 var setAnimSpeed : float = 1
+var currentNum : float = -1
 
 func _displayNum(num : float, player : bool) -> void:
 	var numb : float = num
@@ -23,8 +24,41 @@ func _displayNum(num : float, player : bool) -> void:
 	else:
 		$Label.text = ""
 
+func _display(num : float, player : bool):
+	if num != 0:
+		if num < 0:
+			if player:
+				$Label.set("theme_override_colors/font_color", Color(1, 0, 0))
+			else:
+				$Label.set("theme_override_colors/font_color", Color(1, 1, 1))
+			
+			if currentNum != -1:
+				$Label.text = str(round((currentNum + num) * 100)/10.0)
+				currentNum += num
+				$AnimationPlayer.stop()
+				$AnimationPlayer.play("UpandAwayDelay")
+			else:
+				$Label.text = str(round(num * 10)/10.0)
+				currentNum = num
+		else:
+			$Label.set("theme_override_colors/font_color", Color(0, 1, 0))
+			
+			if currentNum != -1:
+				$Label.text = str(round((currentNum + num) * 100)/10.0)
+				currentNum += num
+				$AnimationPlayer.stop()
+				$AnimationPlayer.play("UpandAwayDelay")
+			else:
+				$Label.text = str(round(num * 100)/10.0)
+				currentNum = num
+	else:
+		$Label.text = ''
+
+func _disappear():
+	queue_free()
+
 func _ready() -> void:
-	$AnimationPlayer.play("InandOut")
+	$AnimationPlayer.play("UpandAway")
 	
 func _process(delta: float) -> void:
 	delta *= Global.getTimeScale()

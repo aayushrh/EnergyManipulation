@@ -69,6 +69,7 @@ var dashTimer = 2
 var maxBlockCharges = 2.25
 var maxDashCharges = 2.5
 var dashTimed = -1
+var currentDamageNum = null
 
 func _ready():
 	#updateEnergy()
@@ -182,10 +183,15 @@ func _health_change(newHP: float):
 
 func display_dmg(change):
 	if get_tree() != null:
-		var damageNum = DamageNum.instantiate()
-		damageNum.global_position = global_position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
-		damageNum._displayNum(change, true)
-		get_tree().current_scene.add_child.call_deferred(damageNum)
+		if is_instance_valid(currentDamageNum):
+			currentDamageNum.global_position = global_position + Vector2(50, -50)
+			currentDamageNum._display(change, true)
+		else:
+			var damageNum = DamageNum.instantiate()
+			damageNum.global_position = global_position + Vector2(50, -50)
+			damageNum._display(change, true)
+			get_tree().current_scene.add_child.call_deferred(damageNum)
+			currentDamageNum = damageNum
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
