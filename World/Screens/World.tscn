@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=39 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -10,9 +10,12 @@
 [ext_resource type="Resource" uid="uid://eh4y7oyvhxw7" path="res://Magic/MagicCards/Resources/Components/Amount.tres" id="4_p0sh2"]
 [ext_resource type="Resource" uid="uid://vj56ldubctv8" path="res://Magic/MagicCards/Resources/Components/Placed.tres" id="5_3gf8k"]
 [ext_resource type="PackedScene" uid="uid://1sfun4lwfipy" path="res://Magic/MagicSpells/SpellUI.tscn" id="5_cmnpc"]
+[ext_resource type="Resource" uid="uid://h4kgehu7k8y5" path="res://Magic/MagicCards/Resources/Components/Dev_cld.tres" id="7_2reo3"]
 [ext_resource type="Resource" uid="uid://cyg8d0qh30y25" path="res://Magic/MagicCards/Resources/Components/Unbound.tres" id="7_3b64n"]
 [ext_resource type="Resource" uid="uid://bbvudeis28j5p" path="res://Magic/MagicCards/Resources/Components/Light.tres" id="7_6b0eb"]
 [ext_resource type="PackedScene" uid="uid://dxkhkth0ukk5s" path="res://World/UI/MainMenuIG.tscn" id="7_55fww"]
+[ext_resource type="Resource" uid="uid://ctwgexk5c8oph" path="res://Magic/MagicCards/Resources/Components/Dev_cas.tres" id="7_xtbcg"]
+[ext_resource type="Resource" uid="uid://bkml3e4h5vjd" path="res://Magic/MagicCards/Resources/Components/Dev_cos.tres" id="8_3t2w7"]
 [ext_resource type="Resource" uid="uid://bgya6tyk2afhu" path="res://Magic/MagicCards/Resources/Components/Dark.tres" id="8_dkp5y"]
 [ext_resource type="PackedScene" uid="uid://bj4aovx2vn01h" path="res://World/UI/CardSelection.tscn" id="8_v2hr7"]
 [ext_resource type="Script" path="res://World/Wall.gd" id="9_4eups"]
@@ -1448,7 +1451,7 @@ radius = 37.5
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testComponentSpellCard = Array[ExtResource("4_5utis")]([ExtResource("25_lh46v"), ExtResource("24_4r4ro")])
+testComponentSpellCard = Array[ExtResource("4_5utis")]([ExtResource("25_lh46v"), ExtResource("24_4r4ro"), ExtResource("4_p0sh2"), ExtResource("7_6b0eb"), ExtResource("7_xtbcg"), ExtResource("7_2reo3"), ExtResource("8_3t2w7")])
 testTypeSpellCard = ExtResource("4_ov6f6")
 allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("2_c5j3f"), ExtResource("7_6b0eb"), ExtResource("9_dhoch"), ExtResource("7_3b64n"), ExtResource("9_vavhn")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])

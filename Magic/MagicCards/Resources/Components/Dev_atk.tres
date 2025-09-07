@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://b0fn585mvikoo"]
+
+[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_acecx"]
+[ext_resource type="Texture2D" uid="uid://cqlqy6maiphbm" path="res://Art/pegasus.png" id="2_t11si"]
+[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_sssse"]
+[ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_6nqoo"]
+
+[resource]
+script = ExtResource("3_sssse")
+spellEffects = ExtResource("4_6nqoo")
+cardName = "Dev Attack Speed"
+cardDescription = ""
+hitEffects = Array[String]([])
+ongoingEffects = Array[String]([])
+startEffects = Array[String]([])
+blockEffects = Array[String]([])
+castingEffects = Array[String]([])
+color = Color(0, 0, 0, 1)
+icon = ExtResource("2_t11si")
+cdMult = 1.0
+costMult = 1.0
+powerMult = 1.0
+attackSpeedMult = 100.0
+sizeMult = 1.0
+castingSpeedMult = 1.0
+attribute = Array[ExtResource("1_acecx")]([])
+clashingAdvantage = 1.0
+isElement = true
