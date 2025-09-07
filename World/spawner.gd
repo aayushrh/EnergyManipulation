@@ -22,7 +22,7 @@ func _process(delta):
 	if(!Global.isPaused()):
 		rng.randomize()
 		var spawn = rng.randi_range(0, 250)
-		if(spawn < 1 and spawned < min(ceil(0.25 * waveNumber), 2)):
+		if(spawn < 1 and spawned < min(ceil(0.2 * waveNumber), 2)):
 			var num = rng.randi_range(0, 3)
 			var spawnLoc = Vector2.ZERO
 			if(num == 0):
@@ -42,7 +42,7 @@ func _process(delta):
 			enemyParent.add_child(basicEnemy)
 			spawned += 1
 		
-		if enemyParent.get_children().size() <= 0 and spawned >= min(ceil(0.25 * waveNumber), 2):
+		if enemyParent.get_children().size() <= 0 and spawned >= min(ceil(0.2 * waveNumber), 2):
 			readyToSpawn = true
 			if !emitted:
 				waveFinished.emit()

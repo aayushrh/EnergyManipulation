@@ -6,10 +6,10 @@
 script = ExtResource("1_sac1g")
 Ltext = "Cluster"
 Rtext = "Supreme"
-minL = 1.0
+minL = 2.0
 maxL = 10.0
-minR = -50.0
-maxR = 0.0
+minR = -85.0
+maxR = -30.0
 num = 0.0
 step = 1.0
 percentL = false
