@@ -64,6 +64,8 @@ func _shoot() -> void:
 			blastProj.global_position = global_position + offsetV
 			blastProj.castingCost = castingCost
 			blastProj._setSpell(spell.create())
+			if i > 0:
+				blastProj.isCluster = true
 			get_tree().current_scene.add_child(blastProj)
 	else:
 		var blastProj := ExplosionCast.instantiate()

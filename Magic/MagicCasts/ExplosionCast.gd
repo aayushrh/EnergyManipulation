@@ -13,6 +13,7 @@ var explosionTimer : float = 0
 var combined : bool = false
 var castingCost : float = 0.0
 var isShrapnel : bool = false
+var isCluster : bool = false
 
 func _setSpell(nspell : Spell) -> void:
 	spell = nspell

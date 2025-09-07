@@ -15,6 +15,7 @@ var combined : bool = false
 var lifetime : float = 100.0
 var fuse : bool = true
 var isShrapnel : bool = false
+var isCluster : bool = false
 
 var BlastProj := preload("res://Magic/MagicCasts/BlastProj.tscn")
 

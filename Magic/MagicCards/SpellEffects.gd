@@ -47,14 +47,15 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 		return
 	var mult = 0.5
 	if spellObj.isShrapnel:
-		mult = 0.1
+		mult = 0.05
 	spellObj.sender.bonusHealBlock = true
-	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult
+	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult / spellObj.spell.getCluster()
 	spellObj.sender.bonusHealBlock = false
 	if(enemy.health > 0):
 		spellObj.sender.health += mult * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 	else:
 		spellObj.sender.health += mult * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
+		enemy.health = 0
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):

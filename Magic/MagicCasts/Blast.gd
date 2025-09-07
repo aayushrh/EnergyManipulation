@@ -62,10 +62,12 @@ func _shoot() -> void:
 		blastProj.global_position = global_position
 		blastProj._setSpell(spell.create())
 		if cluster >= 2:
-			var range = 0.5*log(cluster + 2)
+			var range = log(cluster)
 			var aoffset = (((float)(i - cluster / 2))/(float)(cluster)) * range
 			var ndir = direction.rotated(aoffset)
 			blastProj._setV(ndir)
+			if i > 0:
+				blastProj.isCluster = true
 		else:
 			blastProj._setV(direction)
 		blastProj.castingCost = castingCost
