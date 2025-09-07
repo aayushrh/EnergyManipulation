@@ -16,6 +16,7 @@ var lifetime : float = 100.0
 var fuse : bool = true
 var isShrapnel : bool = false
 var isCluster : bool = false
+var isFused : bool = false
 
 var BlastProj := preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -108,7 +109,7 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 				i.callVisualHitEffects(body)
 			body.queue_free()
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName:
-		if(body.fuse && fuse):
+		if(body.fuse && fuse && not body.isFused && not isFused):
 			if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
 				var blast := BlastProj.instantiate()
 				var nspell := Spell.new("newThing")
@@ -133,6 +134,8 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 					i.callVisualHitEffects(self)
 				for i : ComponentSpellCard in body.spell.components:
 					i.callVisualHitEffects(body)
+				isFused = true
+				body.isFused = true
 				queue_free()
 				body.queue_free()
 				get_tree().current_scene.add_child(blast)
