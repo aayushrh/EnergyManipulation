@@ -186,4 +186,4 @@ process_material = SubResource("ParticleProcessMaterial_nwric")
 texture = ExtResource("3_gd0ko")
 lifetime = 0.2
 one_shot = true
-visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+visibility_rect = Rect2(-100000, -100000, 200000, 200000)
