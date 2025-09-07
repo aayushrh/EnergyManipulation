@@ -47,7 +47,9 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 		return
 	var mult = 0.5
 	if spellObj.isShrapnel:
-		mult = 0.05
+		mult *= 0.1
+	if spellObj.fuse:
+		mult *= 0.5
 	spellObj.sender.bonusHealBlock = true
 	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult / spellObj.spell.getCluster()
 	spellObj.sender.bonusHealBlock = false
@@ -55,7 +57,6 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 		spellObj.sender.health += mult * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
 	else:
 		spellObj.sender.health += mult * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
-		enemy.health = 0
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
@@ -128,8 +129,8 @@ func giveBackHP(dmgRed, spellObj, enemy):
 	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
 
 func giveBackEnergy(spellObj:SpellCasted):
-	if !spellObj.isShrapnel:
-		spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost) / spellObj.spell.getAmount()
+	if !spellObj.isShrapnel and !spellObj.fuse:
+		spellObj.sender.stored_energy += 0.25 * (spellObj.spell.initCost() + spellObj.castingCost) / spellObj.spell.getAmount() / spellObj.spell.getCluster()
 
 func changePosToMouse(spellObj: SpellCast):
 	spellObj.setStartingLoc(spellObj.getMousePos())
