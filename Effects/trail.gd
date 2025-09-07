@@ -11,6 +11,6 @@ func _process(delta):
 			remove_point(points.size())
 		#points.append(parent.global_position)
 		add_point(parent.global_position, 0)
-		print(str(points.size()))
+		#print(str(points.size()))
 	else:
 		queue_free()
