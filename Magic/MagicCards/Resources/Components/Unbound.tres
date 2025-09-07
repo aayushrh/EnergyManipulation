@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_jlk4q"]
 [ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_67e2k"]
-[ext_resource type="Texture2D" uid="uid://btk3lbdu8655e" path="res://Art/Unbound.png" id="2_137om"]
+[ext_resource type="Texture2D" uid="uid://bydayjagt6uc6" path="res://Art/Unbound.png" id="2_137om"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_016sv"]
 
 [resource]

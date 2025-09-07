@@ -48,7 +48,7 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 	var mult = 0.5
 	if spellObj.isShrapnel:
 		mult *= 0.1
-	if spellObj.fuse:
+	if !(spellObj is Explosion) and spellObj.fuse:
 		mult *= 0.5
 	spellObj.sender.bonusHealBlock = true
 	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult / spellObj.spell.getCluster()

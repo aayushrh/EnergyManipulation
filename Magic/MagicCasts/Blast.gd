@@ -52,6 +52,14 @@ func setStartingLoc(pos : Vector2) -> void:
 	startingLocation = pos
 
 func _shoot() -> void:
+	
+	if startingLocation == Vector2.ZERO:
+		direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
+	else:
+		var diff := startingLocation - get_global_mouse_position()
+		var angle := atan2(diff.y, diff.x)
+		direction = Vector2(cos(angle + PI), sin(angle + PI))
+	
 	var cluster = spell.getCluster()
 	
 	for i in range(cluster):
@@ -76,12 +84,6 @@ func _shoot() -> void:
 			get_tree().current_scene.amountShot += 1
 	
 	timer = 0.1 * 1/spell.getASpeed()
-	if startingLocation == Vector2.ZERO:
-		direction = Vector2(cos(sender.rotation_degrees * PI/180 - PI/2), sin(sender.rotation_degrees * PI/180 - PI/2))
-	else:
-		var diff := startingLocation - get_global_mouse_position()
-		var angle := atan2(diff.y, diff.x)
-		direction = Vector2(cos(angle + PI), sin(angle + PI))
 
 func _process(delta:float) -> void:
 	delta *= Global.getTimeScale()
