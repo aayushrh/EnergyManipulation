@@ -8,8 +8,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("TestTimeSlow"):
-		if Global.timeScale == 1:
-			Global.timeScale = 0.1
-		else:
-			Global.timeScale = 1
+	pass
+	#if Input.is_action_just_pressed("TestTimeSlow"):
+	#	if Global.timeScale == 1:
+	#		Global.timeScale = 0.1
+	#	else:
+	#		Global.timeScale = 1
