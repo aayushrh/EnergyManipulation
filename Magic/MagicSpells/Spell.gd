@@ -167,7 +167,7 @@ func getShrapnel() -> float:
 	var a : int = getAttr("Shrapnel")
 	if a != 50:
 		return a
-	return 1
+	return 0
 
 func getClashingAdvantage() -> float:
 	var c :float = 1.0
