@@ -103,7 +103,7 @@ func _ready():
 			dash_cd = 5 / pow(1.03, s)
 			MAXHEALTH = 2 + s/10.0
 			intel = 1 + s/10.0
-			reactionDelay = randf_range(0.2,0.3)
+			reactionDelay = randf_range(0.15,0.25)
 			wisdom = 0.5 + s/100
 			spellcount += floor(s/10)
 			#spell.style = get_tree().current_scene.allStyleSpellCards[0]
@@ -112,7 +112,7 @@ func _ready():
 			dash_cd = 5
 			MAXHEALTH = 4 + s / 2.0
 			intel = 0.75 + s/25.0
-			reactionDelay = randf_range(0.4,0.5)
+			reactionDelay = randf_range(0.35,0.45)
 			wisdom = 1 + s/100
 			spellcount += floor(s/8)
 		9: # Wisdom dude
