@@ -58,19 +58,20 @@ var pause = false
 var hitbox = null
 var hitboxEffects = []
 var effectsHaventChecked : Array[Effects] = []
-var intel = 1.0# * 10000000
-var wisdom = 1.0
-var comprehension = 1.0
+var intel := 1.0 : set = _intel_change
+var wisdom := 1.0
+var comprehension := 1.0
 var spellHit = null
-var blockCharges = 1
-var blockTimer = 2
-var dashCharges = 1
-var dashTimer = 2
-var maxBlockCharges = 2.25
-var maxDashCharges = 2.5
-var dashTimed = -1
+var blockCharges := 1
+var blockTimer := 2.0
+var dashCharges := 1
+var dashTimer := 2.0
+var maxBlockCharges := 2.25
+var maxDashCharges := 2.5
+var dashTimed := -1.0
 var currentDamageNumH = null
 var currentDamageNumD = null
+var manaRegen := 0.0
 
 func _ready():
 	#updateEnergy()
@@ -84,6 +85,7 @@ func _ready():
 func _process(delta):
 	delta *= Global.getTimeScale()
 	
+	stored_energy += manaRegen * delta
 	if dashTimed > 0:
 		dashTimed -= delta
 		velocity = velocity.normalized() * DASHSPEED * Global.getTimeScale()
@@ -157,6 +159,10 @@ func _dashCharging(delta):
 	elif(dashCharges < maxDashCharges and dashTimer > 0):
 		dashTimer -= delta
 
+func _intel_change(newInt):
+	for spell in Global.spellList:
+		spell.intel = intel
+
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
@@ -226,10 +232,10 @@ func _energy_change(newMANA: float):
 
 func block():
 	if(Input.is_action_just_pressed("Block") and blockCharges > 0):
-			$PlayerArt._block()
-			blocking = true
-			time_last_block = time
-			blockCharges -= 1
+		$PlayerArt._block()
+		blocking = true
+		time_last_block = time
+		blockCharges -= 1
 	if(Input.is_action_just_released("Block") and blocking):
 		$PlayerArt._unblock()
 		blocking = false
@@ -545,8 +551,8 @@ func searchDark():
 
 func getIntel():
 	if searchDark() != -1:
-		return (intel * pow(.95,effects[searchDark()].stack))
-	return intel
+		return pow(.95,effects[searchDark()].stack)
+	return 1
 
 func removeEffects(effect):
 	for b in effects:

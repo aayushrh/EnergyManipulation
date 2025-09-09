@@ -9,6 +9,7 @@ var binding : int = -1
 var cooldown : float = 0
 var using : bool = false
 var slow : bool = true
+var intel : float = 1.0
 
 func create() -> Spell:
 	var newSpell : Spell = Spell.new(spellName)
@@ -18,6 +19,7 @@ func create() -> Spell:
 	newSpell.binding = binding
 	newSpell.cooldown = cooldown
 	newSpell.using = using
+	newSpell.intel = intel
 	for i:AttributesWrapper in attributes:
 		newSpell.attributes.append(i)
 	return newSpell
@@ -27,6 +29,7 @@ func _init(namen:String) -> void:
 
 func _cast(sender:CharacterBody2D) -> SpellCast:
 	if(type != null):
+		intel *= sender.getIntel()
 		var cast : SpellCast = type.SpellObj.instantiate()
 		cast.sender = sender
 		var dupe : Spell = create()
@@ -56,7 +59,7 @@ func getcd() -> float:
 			cd *= i.cdMult
 	if(type != null):
 		cd *= type.cdMult
-	return cd
+	return cd / pow(intel,0.5)
 
 func getCastingTime() -> float:
 	var time : float = 1
@@ -65,7 +68,7 @@ func getCastingTime() -> float:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.castingTimeMult
-	return time
+	return time / pow(intel,0.5)
 
 func getMaxPowerTime() -> float:
 	var time : float = 1.25
@@ -74,7 +77,7 @@ func getMaxPowerTime() -> float:
 			time *= 1/i.castingSpeedMult
 	if(type != null):
 		time *= type.maxPowerTimeMult
-	return time
+	return time / pow(intel,0.5)
 
 #perfect block = 10 mana
 func initCost() -> float:
@@ -84,7 +87,7 @@ func initCost() -> float:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.costMult
-	return cost
+	return cost / pow(intel,0.25)
 
 #total cost for max charge expect for holdings
 func contcost() -> float:
@@ -94,7 +97,7 @@ func contcost() -> float:
 			cost *= i.costMult
 	if(type != null):
 		cost *= type.contCostMult
-	return cost
+	return cost / pow(intel,0.25)
 
 func getAttr(nname : String) -> float:
 	for i:AttributesWrapper in attributes:
@@ -122,28 +125,28 @@ func getPower() -> float:
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			p *= i.powerMult
-	return p * getSupreme()
+	return p * getSupreme() * intel
 
 func getPSpeed() -> float:
 	var ps : float = (getAttr("Proj. Spd.") + 100.0)/100.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			ps *= i.attackSpeedMult
-	return ps * (1.0+getSupreme())/2
+	return ps * (1.0+getSupreme())/2 * pow(intel,0.5)
 
 func getASpeed() -> float:
 	var cs : float = (getAttr("Cast. Spd.") + 100.0)/100.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			cs *= i.castingSpeedMult
-	return cs * getSupreme()
+	return cs * getSupreme() * pow(intel,0.5)
 
 func getSize() -> float:
 	var s : float = (getAttr("Size") + 100.0)/100.0
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			s *= i.sizeMult
-	return s * getSupreme()
+	return s * getSupreme() * pow(intel,0.25)
 
 func hasElement() -> bool:
 	for i:ComponentSpellCard in components:
@@ -174,4 +177,4 @@ func getClashingAdvantage() -> float:
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			c *= i.clashingAdvantage
-	return c
+	return c * intel

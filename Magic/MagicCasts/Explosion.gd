@@ -16,6 +16,7 @@ var castingCost : float = 0
 var slow : bool = true
 var startingLocation : Vector2 = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
+var fuse = false
 
 @onready var ExplosionCast := preload("res://Magic/MagicCasts/ExplosionCast.tscn")
 

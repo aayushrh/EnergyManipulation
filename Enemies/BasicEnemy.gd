@@ -36,7 +36,7 @@ var stored_energy : float = MAXMANA : set = _energy_change
 var mana : float = stored_energy
 var blinded : bool = false
 var reactionDelay : float = 0.0
-var intel : float = 1
+var intel : float = 1 : set = _intel_change
 var hp : float = 0.0
 var stage : int = 0
 var delt : float = 0
@@ -136,6 +136,7 @@ func _ready():
 			isElement = newCard.isElement
 			spell2.components.append(newCard)
 		spells.append(spell2)
+	_intel_change(intel)
 	#var spell = Spell.new("firstSpell")
 	#spell.type = get_tree().current_scene.allTypeSpellCards[rng.randi_range(0, get_tree().current_scene.allTypeSpellCards.size() - 1)]
 	#spell.style = get_tree().current_scene.allStyleSpellCards[rng.randi_range(0, get_tree().current_scene.allStyleSpellCards.size() - 1)]
@@ -190,6 +191,10 @@ func _physics_process(delta):
 func _max_mana_change(newMax: float):
 	healthbar.update_maxMana(newMax)
 	MAXMANA = newMax
+
+func _intel_change(newInt: float):
+	for spell in spells:
+		spell.intel = newInt
 
 func _health_change(newHP: float):
 	var change = newHP - health
@@ -577,8 +582,8 @@ func _on_dashing_timeout() -> void:
 
 func getIntel():
 	if searchDark() != -1:
-		return (intel * pow(.95,effects[searchDark()].stack))
-	return intel
+		return pow(.95,effects[searchDark()].stack)
+	return 1
 
 func attachEffect(effect, check = true):
 	if effect.enemyShows:
