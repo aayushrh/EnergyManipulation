@@ -72,6 +72,7 @@ var dashTimed := -1.0
 var currentDamageNumH = null
 var currentDamageNumD = null
 var manaRegen := 0.0
+var speedModifier := 1.0
 
 func _ready():
 	#updateEnergy()
@@ -88,7 +89,7 @@ func _process(delta):
 	stored_energy += manaRegen * delta
 	if dashTimed > 0:
 		dashTimed -= delta
-		velocity = velocity.normalized() * DASHSPEED * Global.getTimeScale()
+		velocity = velocity.normalized() * DASHSPEED * Global.getTimeScale() * speedModifier
 		if dashTimed < 0:
 			dashTimed = -1
 			_on_dashing_timer_timeout()
@@ -320,7 +321,7 @@ func _doubleClickCheck(delta):
 
 func dash(dir):
 	if(dashCharges > 0):#canDash()):
-		velocity = dir * DASHSPEED
+		velocity = dir * DASHSPEED * speedModifier
 		dashing = true
 		dashTimed = DASHTIME
 		#$DashingTimer.start(DASHTIME)
@@ -349,7 +350,7 @@ func rotateToTarget(target, delta):
 	rotation_degrees -= 90
 	var angleTo = transform.x.angle_to(direction)
 	rotation_degrees += 90
-	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
+	rotate(sign(angleTo) * min(delta * ROTATIONSPEED * speedModifier, abs(angleTo)))
 
 func _effectsHandle(delta):
 	for e in effects:
@@ -366,9 +367,9 @@ func _movement(delta):
 	input_vector = input_vector.normalized()
 	newVel += input_vector * ACCELERATION * delta
 	if(!blocking and !slow):
-		newVel = newVel.limit_length(TOPSPEED * Global.getTimeScale())
+		newVel = newVel.limit_length(TOPSPEED * speedModifier * Global.getTimeScale())
 	else:
-		newVel = newVel.limit_length(TOPSPEED / 2 * Global.getTimeScale())
+		newVel = newVel.limit_length(TOPSPEED * speedModifier / 2 * Global.getTimeScale())
 	
 	velocity = newVel
 
@@ -451,11 +452,11 @@ func _hit_register():
 	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):
 		return
 	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
-	processHaventChecked()
 	for i in spellHit.components:
 		i.callBlockEffects(dmgRed, hitbox, self)
 	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):
 		return
+	processHaventChecked()
 	effectsHaventChecked = []
 	#print("timeDiff: " + str(abs(time_last_hit-time_last_block)))
 	#print("damage: " + str(dmgTaken * (1-dmgRed)))
@@ -519,15 +520,15 @@ func attachEffect(effect, needsChecking=true):
 
 func processHaventChecked():
 	for e in effectsHaventChecked:
-		if(e is LightBlindness and searchEffect("Light") != -1):
-			effects[searchEffect("Light")].lifeTimeStack.append(e.lifetime)
+		#if(e is LightBlindness and searchEffect("Light") != -1):
+			#effects[searchEffect("Light")].lifeTimeStack.append(e.lifetime)
+			#continue
+		#if(e is DarkBlindness and searchEffect("Dark") != -1):
+			#effects[searchEffect("Dark")].lifeTimeStack.append(e.lifetime)
+			#continue
+		if(e.stackable and searchEffect(e) != -1):
+			effects[searchEffect(e)]._stack(e)
 			continue
-		if(e is DarkBlindness and searchEffect("Dark") != -1):
-			effects[searchEffect("Dark")].lifeTimeStack.append(e.lifetime)
-			continue
-		#if(e is Burning and searchFire() != -1):
-			#effects[searchFire()].lifeTimeStack.append(e.lifetime)
-			#effects[searchFire()].dmg.append(e.dmg)
 		var visual = e.visual.instantiate()
 		add_child(visual)
 		vfx.append(visual)

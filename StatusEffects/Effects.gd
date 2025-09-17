@@ -10,3 +10,6 @@ class_name Effects
 
 func _tick(entity : Node2D, delta : float) -> void:
 	pass
+
+func _stack(entity : Effects) -> void:
+	pass

@@ -35,3 +35,9 @@ func _tick(entity : Node2D, delta : float) -> void:
 			lifetime = lifeTimeStack[0]
 			lifeTimeStack.remove_at(0)
 		#entity.TOPSPEED *= 2
+
+func _stack(entity : Effects) -> void:
+	if(entity.effectName == effectName):
+		lifeTimeStack.append(entity.lifetime)
+	else:
+		push_error("We fucked up somehow(LightStacks)")

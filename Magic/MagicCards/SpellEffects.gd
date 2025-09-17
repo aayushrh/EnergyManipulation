@@ -13,12 +13,12 @@ func testHit(spellObj:SpellCasted, enemy):
 func addBurning(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy != null && dmgRed < 1):
 		var burning = Burning.new((1.0 - dmgRed) * 2.5, spellObj.spell.getPower())
-		enemy.attachEffect(burning, false)
+		enemy.attachEffect(burning)
 
 func addSoggy(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy != null && dmgRed < 1):
 		var soggy = Soggy.new((spellObj.spell.getPower() * (1.0 - dmgRed)) * 3)
-		enemy.attachEffect(soggy, false)
+		enemy.attachEffect(soggy)
 
 func addStun(spellObj:SpellCasted, enemy):
 	if(enemy != null):
