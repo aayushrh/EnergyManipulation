@@ -61,8 +61,8 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
 		return
-	if(enemy.searchLight() != -1):
-		enemy.health -= 0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchLight()].stack
+	if(enemy.searchEffect("Light") != -1):
+		enemy.health -= 0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchEffect("Light")].stack
 
 func shrapnelProc(spellObj:SpellCasted, enemy):
 	if(enemy is Wall):

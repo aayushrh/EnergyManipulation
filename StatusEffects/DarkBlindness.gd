@@ -10,7 +10,7 @@ func _init(life : float) -> void:
 	lifetime = life
 	visual = load("res://Effects/DarkBlindness.tscn")
 	icon = load("res://Art/sight-disabled (1).png")
-	effectName = "Darkness"
+	effectName = "Dark"
 	enemyShows = false
 
 func _tick(entity : Node2D, delta : float) -> void:

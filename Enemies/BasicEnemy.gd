@@ -543,18 +543,17 @@ func awareness(delta):
 	#if(help.size() == 0 and player != null and player.casting):
 	#	velocity = (player.global_position - global_position).normalized() * -TOPSPEED
 
-func searchLight():
+func searchEffect(thing):
+	var check: String
+	if thing is Effects:
+		check = thing.effectName.to_lower()
+	elif thing is String:
+		check = thing.to_lower()
+	else:
+		push_error("use a string or effect as a parameter you mf")
 	var i = 0
 	for e in effects:
-		if e is LightBlindness:
-			return i
-		i += 1
-	return - 1
-
-func searchDark():
-	var i = 0
-	for e in effects:
-		if e is DarkBlindness:
+		if e.effectName.to_lower() == check:
 			return i
 		i += 1
 	return - 1
@@ -581,8 +580,8 @@ func _on_dashing_timeout() -> void:
 	velocity = Vector2.ZERO
 
 func getIntel():
-	if searchDark() != -1:
-		return pow(.95,effects[searchDark()].stack)
+	if searchEffect("Dark") != -1:
+		return pow(.95,effects[searchEffect("Dark")].stack)
 	return 1
 
 func attachEffect(effect, check = true):

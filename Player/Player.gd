@@ -519,12 +519,15 @@ func attachEffect(effect, needsChecking=true):
 
 func processHaventChecked():
 	for e in effectsHaventChecked:
-		if(e is LightBlindness and searchLight() != -1):
-			effects[searchLight()].lifeTimeStack.append(e.lifetime)
+		if(e is LightBlindness and searchEffect("Light") != -1):
+			effects[searchEffect("Light")].lifeTimeStack.append(e.lifetime)
 			continue
-		if(e is DarkBlindness and searchDark() != -1):
-			effects[searchDark()].lifeTimeStack.append(e.lifetime)
+		if(e is DarkBlindness and searchEffect("Dark") != -1):
+			effects[searchEffect("Dark")].lifeTimeStack.append(e.lifetime)
 			continue
+		#if(e is Burning and searchFire() != -1):
+			#effects[searchFire()].lifeTimeStack.append(e.lifetime)
+			#effects[searchFire()].dmg.append(e.dmg)
 		var visual = e.visual.instantiate()
 		add_child(visual)
 		vfx.append(visual)
@@ -533,25 +536,24 @@ func processHaventChecked():
 		effectUI.initialize(e)
 		$CanvasLayer/ScrollContainer/HBoxContainer.add_child(effectUI)
 
-func searchLight():
+func searchEffect(thing):
+	var check: String
+	if thing is Effects:
+		check = thing.effectName.to_lower()
+	elif thing is String:
+		check = thing.to_lower()
+	else:
+		push_error("use a string or effect as a parameter you mf")
 	var i = 0
 	for e in effects:
-		if e is LightBlindness:
-			return i
-		i += 1
-	return - 1
-
-func searchDark():
-	var i = 0
-	for e in effects:
-		if e is DarkBlindness:
+		if e.effectName.to_lower() == check:
 			return i
 		i += 1
 	return - 1
 
 func getIntel():
-	if searchDark() != -1:
-		return pow(.95,effects[searchDark()].stack)
+	if searchEffect("Dark") != -1:
+		return pow(.95,effects[searchEffect("Dark")].stack)
 	return 1
 
 func removeEffects(effect):
