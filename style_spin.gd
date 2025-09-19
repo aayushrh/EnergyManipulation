@@ -9,7 +9,7 @@ var tim = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	delta *= Global.getTimeScale()
+	#delta *= Global.getTimeScale()
 	tim += delta
 	global_position = center + dist * Vector2.UP.rotated(float(num+tim)/float(amt) * 2 * PI) * delta * 120
 	#$TextureRect2.scale = Vector2(1.3 + 0.2 * sin(tim*2),1.3 + 0.2 * sin(tim*2))

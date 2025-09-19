@@ -9,8 +9,8 @@ var timer := 0.1
 
 func _init(life : float, power : float) -> void:
 	stackable = true
-	lifetime = life * 5
-	dmgStack = [0.0125 * power / 5]
+	lifetime = life * 1.25
+	dmgStack = [0.0125 * power / 1.5]
 	visual = load("res://Effects/Burning.tscn")
 	icon = load("res://Art/flame.png")
 	effectName = "Burning"
