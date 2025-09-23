@@ -2,7 +2,7 @@ extends Effects
 class_name Soggy
 
 var stack := 1
-var base := 2
+var base := 1.5
 var baselog := log(base)
 
 func _init(life : float) -> void:
