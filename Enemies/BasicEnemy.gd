@@ -44,6 +44,7 @@ var prediction : bool = false
 var healthbar = null
 var chargeTime : float = 0
 var currentDamageNum = null
+var dmgNum = {}
 
 @export var HPBARMULT : float = 80.0
 @export var BARSPEED : float = 20.0
@@ -220,17 +221,63 @@ func _health_change(newHP: float):
 				get_tree().current_scene.enemiesKilled += 1
 		if is_instance_valid(currentDamageNum):
 			currentDamageNum.global_position = global_position + Vector2(50, -50)
-			currentDamageNum._display(change, false)
+			currentDamageNum._display(change)
 		else:
 			"""var damageNum = DamageNum.instantiate()
 			damageNum.global_position = global_position + Vector2(50, -50)
-			damageNum._displayNum(change, false)
+			damageNum._displayNum(change)
 			get_tree().current_scene.add_child(damageNum)
 			currentDamageNum = damageNum"""
 			pass
 	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
 	healthbar.get_over_health().size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 	fuck = false
+	
+func commit_dmg(change: float, dict := {}):
+	var c : Color
+	var inc : Color
+	var thing = ""
+	var cng = 0
+	var show = true
+	var heal = false
+	var type = "normal"
+	if change < 0:
+		c = Color(1, 0, 0)
+	elif change == 0:
+		return
+	else:
+		c = Color(0, 1, 0)
+	if(dict):
+		inc = dict["color"] if dict.has("color") else Color(1,1,1)
+		heal = dict["heal"] if dict.has("heal") else false
+		if(dict.has("crit")):
+			for i in dict["crit"]:
+				thing += "!"
+		show = not dict["hide"] if dict.has("hide") else true
+		type = dict["type"] if dict.has("type") else "normal"
+	if(type == "normal"):
+		type = "damage" if change < 0 else "heal"
+	var oh = health
+	health += change * healing if change > 0 and heal else change
+	cng = health - oh
+	inc = Color(1,1,1) if not inc else inc
+	if(show):
+		display_dmg(cng, c, inc, type, thing)
+
+func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing := ""):
+	if get_tree() != null:
+		if (type == ""):
+			type = "damage" if change < 0 else "heal"
+		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
+			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type]._display(change)
+		else:
+			var dn = DamageNum.instantiate()
+			dn.create(c, inc)
+			get_tree().current_scene.add_child.call_deferred(dn)
+			dmgNum[type] = dn
+			dmgNum[type]._display(change)
+			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -284,12 +331,12 @@ func _effectsHandle(delta):
 func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken()
 	if(block>0):
-		health -= dmgTaken*(1-_dmgRed(time-block))
+		commit_dmg(-dmgTaken*(1-_dmgRed(time-block)))
 		un_block()
 	else:
 		for i in hitbox.spell.components:
 			i.callBlockEffects(0, hitbox, self)
-		health -= dmgTaken
+		commit_dmg(-dmgTaken)
 	time = 0
 
 func _move(delta):

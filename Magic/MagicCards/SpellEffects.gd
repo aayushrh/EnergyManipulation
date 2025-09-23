@@ -50,19 +50,17 @@ func lifesteal(dmgRed, spellObj:SpellCasted, enemy):
 		mult *= 0.1
 	if !(spellObj is Explosion) and spellObj.fuse:
 		mult *= 0.5
-	spellObj.sender.bonusHealBlock = true
-	spellObj.sender.health += mult * spellObj.spell.getPower() * spellObj.mult / spellObj.spell.getCluster()
-	spellObj.sender.bonusHealBlock = false
+	spellObj.sender.commit_dmg(mult * spellObj.spell.getPower() * spellObj.mult / spellObj.spell.getCluster())
 	if(enemy.health > 0):
-		spellObj.sender.health += mult * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
+		spellObj.sender.commit_dmg(mult * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster(), {"heal": true})
 	else:
-		spellObj.sender.health += mult * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster()
+		spellObj.sender.commit_dmg(mult * (enemy.health + spellObj.damageTaken() * (1.0 - dmgRed)) * spellObj.mult / spellObj.spell.getCluster(), {"heal": true})
 
 func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
 		return
 	if(enemy.searchEffect("Light") != -1):
-		enemy.health -= 0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchEffect("Light")].stack
+		enemy.commit_dmg(-0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchEffect("Light")].stack, {"type": "light", "color": Color(1, 1, 0)})
 
 func shrapnelProc(spellObj:SpellCasted, enemy):
 	if(enemy is Wall):
@@ -111,9 +109,9 @@ func takeHealth(spellObj:SpellCasted):
 			spellObj.sender.fuck = true
 		if(!spellObj.combined):
 			if(spellObj.sender.health + 0.001 >= 0.5 * spellObj.spell.getPower() * spellObj.mult):
-				spellObj.sender.health -= 0.5 * spellObj.spell.getPower() * spellObj.mult
+				spellObj.sender.commit_dmg(-0.5 * spellObj.spell.getPower() * spellObj.mult, {"type": "Drawback", "color": Color(0, 0.5, 0)})
 			else:
-				spellObj.sender.health = 0.001
+				spellObj.sender.commit_dmg(-spellObj.sender.health + 0.001, {"type": "Drawback", "color": Color(0, 0.5, 0)})
 
 func unbound(spellObj:SpellCast):
 	spellObj.slow = false
@@ -123,10 +121,10 @@ func addVortex(spellObj:SpellCasted):
 	vortex._setSpell(spellObj.spell, spellObj.sender.type)
 	spellObj.add_child(vortex)
 
-func giveBackHP(dmgRed, spellObj, enemy):
+"""func giveBackHP(dmgRed, spellObj, enemy):
 	if(is_instance_valid(spellObj) and spellObj.sender is BasicEnemy):
 		spellObj.sender.fuck = true
-	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed
+	spellObj.sender.health -= spellObj.spell.getPower() * dmgRed"""
 
 func giveBackEnergy(spellObj:SpellCasted):
 	if !spellObj.isShrapnel and !spellObj.fuse:

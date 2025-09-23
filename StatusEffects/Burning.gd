@@ -38,10 +38,9 @@ func _tick(entity:Node2D, delta:float) -> void:
 			lifetime = lifeTimeStack[0]
 			lifeTimeStack.remove_at(0)
 			dmgStack.remove_at(0)
-
 func take_dmg(entity:Node2D) -> void:
 	for d in dmgStack:
-		entity.health -= d
+		entity.commit_dmg(-d, {"type": "burn", "color": Color(1, 0.5, 0)})
 	timer = 0.1
 
 func _stack(entity : Effects) -> void:

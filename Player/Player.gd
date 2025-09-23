@@ -46,7 +46,6 @@ var health = 0.0 : set = _health_change
 var hp = 0.0#display hp
 var healing = 1.0
 var healScale = 1.0
-var bonusHealBlock = false
 var slow = false
 var rotation_speed = 0
 var onLastTurn = false
@@ -166,8 +165,6 @@ func _intel_change(newInt):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		if(!bonusHealBlock):
-			change *= healing
 		while(change/pow(2,floor(health/MAXHEALTH)) > MAXHEALTH * floor(health/MAXHEALTH + 1) - health):
 			var chamt = MAXHEALTH * floor(health/MAXHEALTH + 1) - health
 			change -= chamt * pow(2,floor(health/MAXHEALTH))
@@ -187,12 +184,13 @@ func _health_change(newHP: float):
 	var x = (health * 255)/MAXHEALTH
 	$CanvasLayer/HealthText.text = "[color=#%x%x%x]%d/%d[/color]" % [x, x, x, health * 10, MAXHEALTH * 10]
 
-func commit_dmg(change: float, dict: Dictionary):
+func commit_dmg(change: float, dict := {}):
 	var c : Color
 	var inc : Color
 	var thing = ""
 	var cng = 0
 	var show = true
+	var heal = false
 	var type = "normal"
 	if change < 0:
 		c = Color(1, 0, 0)
@@ -201,39 +199,36 @@ func commit_dmg(change: float, dict: Dictionary):
 	else:
 		c = Color(0, 1, 0)
 	if(dict):
-		inc = dict["color"] if dict.has("color") else c
+		inc = dict["color"] if dict.has("color") else Color(1,1,1)
+		heal = dict["heal"] if dict.has("heal") else false
 		if(dict.has("crit")):
 			for i in dict["crit"]:
 				thing += "!"
 		show = not dict["hide"] if dict.has("hide") else true
 		type = dict["type"] if dict.has("type") else "normal"
-	if(not inc):
-		inc = c
 	if(type == "normal"):
 		type = "damage" if change < 0 else "heal"
 	var oh = health
-	if change < 0:
-		health += change
-	else:
-		health += change * healing
+	health += change * healing if change > 0 and heal else change
 	cng = health - oh
+	inc = Color(1,1,1) if not inc else inc
 	if(show):
 		display_dmg(cng, c, inc, type, thing)
 
-func display_dmg(change: float, c: Color, inc: Color, type := "", thing := ""):
+func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing := ""):
 	if get_tree() != null:
 		if (type == ""):
 			type = "damage" if change < 0 else "heal"
 		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
-			dmgNum[type].global_position = global_position + Vector2(50, -50)
-			dmgNum[type]._display(change, true)
+			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type]._display(change)
 		else:
 			var dn = DamageNum.instantiate()
 			dn.create(c, inc)
 			get_tree().current_scene.add_child.call_deferred(dn)
 			dmgNum[type] = dn
-			dmgNum[type]._display(change, true)
-			dmgNum[type].global_position = global_position + Vector2(50, -50)
+			dmgNum[type]._display(change)
+			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -246,7 +241,7 @@ func _energy_change(newMANA: float):
 	elif(change < 0):
 		stored_energy += change
 		if(stored_energy < 0):
-			health += stored_energy/2
+			commit_dmg(stored_energy/2, {"hide": true})
 			stored_energy = 0
 	$CanvasLayer/ActualEnergyBar.size.x = min(stored_energy * ENERGYBARMULT, MAXMANA*ENERGYBARMULT)
 	$CanvasLayer/EnergyBar3.size.x = stored_energy * ENERGYBARMULT
@@ -277,7 +272,7 @@ func _heal(delta):
 		elif(healScale > 1):
 			healScale *= pow(0.75, delta)
 		stored_energy -= delta * 6 * healScale * pow(v, 0.99)
-		health += delta * v * healScale
+		commit_dmg(delta * v * healScale)
 		
 		#get_tree().current_scene.damageHealed += MAXHEALTH * delta/2.5
 	elif(healScale > 1):

@@ -3,14 +3,15 @@ extends Node2D
 var setAnimSpeed : float = 1
 var currentNum : float = -1
 
-func create(c, sc):
+func create(c, sc := Color(1,1,1,0.8)):
 	$Label.set("theme_override_colors/font_color", c)
-	#$Label/Label2.set("theme_override_colors/font_color", sc)
-	$Label/Label2.set("theme_override_colors/font_color", Color(1,1,1,0.5))
+	var n = sc
+	n.a = 0.8
+	$Label/Label2.set("theme_override_colors/font_color", n)
 
 
 #non stacking
-func _displayNum(num : float, player : bool) -> void:
+func _displayNum(num : float) -> void:
 	var numb : float = abs(num)
 	if num != 0:
 		$Label.scale = Vector2(min(max(num, 0.25), 0.75), min(max(num, 0.25), 0.75))
@@ -24,7 +25,7 @@ func _displayNum(num : float, player : bool) -> void:
 	$Label/Label2.text = $Label.text
 
 #stacking
-func _display(num : float, player : bool):
+func _display(num : float):
 	print("ASSDF" + str(num))
 	if num != 0:
 		if currentNum != -1:

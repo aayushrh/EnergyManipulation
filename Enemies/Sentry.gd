@@ -27,7 +27,6 @@ var moveDir = 0.0
 var blast = null
 var casting = false
 var healing = 1.0
-var bonusHealBlock = false
 var MAXHEALTH = 0
 var MAXMANA = 100.0 : set = _max_mana_change
 var agg = false#(randi_range(0,1)==0)
@@ -114,24 +113,9 @@ func _shoot(delta):
 				ROTATIONSPEED /= 2
 				e.resetCooldown(true, 1)
 				casting = true
-
+	
 func _health_change(newHP: float):
-	var change = newHP - health
-	if(change > 0):
-		health += change
-	elif(change < 0):
-		health += change
-		if (get_tree()!=null):
-			if(!fuck):
-				get_tree().current_scene.damageDealt -= change
-			if(health <= 0):
-				queue_free()
-				get_tree().current_scene.enemiesKilled += 1
-		"""var damageNum = DamageNum.instantiate()
-		damageNum.global_position = global_position + Vector2(50, -50)
-		damageNum._displayNum(change, false)
-		get_tree().current_scene.add_child(damageNum)"""
-	fuck = false
+	pass
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -178,9 +162,10 @@ func _effectsHandle(delta):
 		e._tick(self, delta)
 
 func _hit(hitbox):
-	dmgTaken = hitbox.damageTaken()
+	pass
+	"""dmgTaken = hitbox.damageTaken()
 	health -= dmgTaken
-	time = 0
+	time = 0"""
 
 func doneCasting():
 	slow = false
