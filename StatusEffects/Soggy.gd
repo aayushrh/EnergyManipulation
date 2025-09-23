@@ -28,6 +28,6 @@ func _tick(entity : Node2D, delta : float) -> void:
 
 func _stack(entity : Effects) -> void:
 	if(entity.effectName == effectName):
-		lifetime = max(lifetime, entity.lifetime) + min(lifetime, entity.lifetime)/4
+		lifetime = max(lifetime, entity.lifetime) + min(lifetime, entity.lifetime)/2
 	else:
 		push_error("We fucked up somehow(WaterStacks)")
