@@ -127,10 +127,10 @@ func _health_change(newHP: float):
 			if(health <= 0):
 				queue_free()
 				get_tree().current_scene.enemiesKilled += 1
-		var damageNum = DamageNum.instantiate()
+		"""var damageNum = DamageNum.instantiate()
 		damageNum.global_position = global_position + Vector2(50, -50)
 		damageNum._displayNum(change, false)
-		get_tree().current_scene.add_child(damageNum)
+		get_tree().current_scene.add_child(damageNum)"""
 	fuck = false
 
 func _energy_change(newMANA: float):

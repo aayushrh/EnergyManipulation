@@ -69,8 +69,7 @@ var dashTimer := 2.0
 var maxBlockCharges := 2.25
 var maxDashCharges := 2.5
 var dashTimed := -1.0
-var currentDamageNumH = null
-var currentDamageNumD = null
+var dmgNum = {}
 var manaRegen := 0.0
 var speedModifier := 1.0
 
@@ -183,34 +182,58 @@ func _health_change(newHP: float):
 		if(health < 0):
 			get_tree().current_scene.death()
 			Global.unPause()
-	display_dmg(change)
 	$CanvasLayer/ActualHealthBar.size.x = min(health * HPBARMULT, MAXHEALTH * HPBARMULT)
 	$CanvasLayer/HealthBar3.size.x = health * HPBARMULT
 	var x = (health * 255)/MAXHEALTH
 	$CanvasLayer/HealthText.text = "[color=#%x%x%x]%d/%d[/color]" % [x, x, x, health * 10, MAXHEALTH * 10]
 
-func display_dmg(change):
+func commit_dmg(change: float, dict: Dictionary):
+	var c : Color
+	var inc : Color
+	var thing = ""
+	var cng = 0
+	var show = true
+	var type = "normal"
+	if change < 0:
+		c = Color(1, 0, 0)
+	elif change == 0:
+		return
+	else:
+		c = Color(0, 1, 0)
+	if(dict):
+		inc = dict["color"] if dict.has("color") else c
+		if(dict.has("crit")):
+			for i in dict["crit"]:
+				thing += "!"
+		show = not dict["hide"] if dict.has("hide") else true
+		type = dict["type"] if dict.has("type") else "normal"
+	if(not inc):
+		inc = c
+	if(type == "normal"):
+		type = "damage" if change < 0 else "heal"
+	var oh = health
+	if change < 0:
+		health += change
+	else:
+		health += change * healing
+	cng = health - oh
+	if(show):
+		display_dmg(cng, c, inc, type, thing)
+
+func display_dmg(change: float, c: Color, inc: Color, type := "", thing := ""):
 	if get_tree() != null:
-		if change < 0:
-			if is_instance_valid(currentDamageNumD):
-				currentDamageNumD.global_position = global_position + Vector2(50, -50)
-				currentDamageNumD._display(change, true)
-			else:
-				var damageNum = DamageNum.instantiate()
-				damageNum.global_position = global_position + Vector2(50, -50)
-				damageNum._display(change, true)
-				get_tree().current_scene.add_child.call_deferred(damageNum)
-				currentDamageNumD = damageNum
+		if (type == ""):
+			type = "damage" if change < 0 else "heal"
+		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
+			dmgNum[type].global_position = global_position + Vector2(50, -50)
+			dmgNum[type]._display(change, true)
 		else:
-			if is_instance_valid(currentDamageNumH):
-				currentDamageNumH.global_position = global_position + Vector2(-75, -50)
-				currentDamageNumH._display(change, true)
-			else:
-				var damageNum = DamageNum.instantiate()
-				damageNum.global_position = global_position + Vector2(-75, -50)
-				damageNum._display(change, true)
-				get_tree().current_scene.add_child.call_deferred(damageNum)
-				currentDamageNumH = damageNum
+			var dn = DamageNum.instantiate()
+			dn.create(c, inc)
+			get_tree().current_scene.add_child.call_deferred(dn)
+			dmgNum[type] = dn
+			dmgNum[type]._display(change, true)
+			dmgNum[type].global_position = global_position + Vector2(50, -50)
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -465,7 +488,7 @@ func _hit_register():
 	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	stored_energy += spellHit.initCost() * dmgRed * 2 * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
-	health -= dmgTaken * (1-dmgRed)
+	commit_dmg(-dmgTaken * (1-dmgRed), {"crit":10})
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
 	#updateHealth()

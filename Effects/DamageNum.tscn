@@ -192,6 +192,15 @@ theme_override_fonts/font = ExtResource("1_ygwuh")
 theme_override_font_sizes/font_size = 52
 text = "50"
 
+[node name="Label2" type="Label" parent="Label"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 61.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("1_ygwuh")
+theme_override_font_sizes/font_size = 52
+text = "50"
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 

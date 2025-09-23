@@ -222,11 +222,12 @@ func _health_change(newHP: float):
 			currentDamageNum.global_position = global_position + Vector2(50, -50)
 			currentDamageNum._display(change, false)
 		else:
-			var damageNum = DamageNum.instantiate()
+			"""var damageNum = DamageNum.instantiate()
 			damageNum.global_position = global_position + Vector2(50, -50)
 			damageNum._displayNum(change, false)
 			get_tree().current_scene.add_child(damageNum)
-			currentDamageNum = damageNum
+			currentDamageNum = damageNum"""
+			pass
 	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
 	healthbar.get_over_health().size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
 	fuck = false
