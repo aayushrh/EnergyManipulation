@@ -572,7 +572,7 @@ func searchEffect(thing):
 
 func getIntel():
 	if searchEffect("Dark") != -1:
-		return pow(.95,effects[searchEffect("Dark")].stack)
+		return pow(.925,effects[searchEffect("Dark")].stack)
 	return 1
 
 func removeEffects(effect):

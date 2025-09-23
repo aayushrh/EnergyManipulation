@@ -60,7 +60,7 @@ func lightStack(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy is Wall || dmgRed >= 1):
 		return
 	if(enemy.searchEffect("Light") != -1):
-		enemy.commit_dmg(-0.05 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchEffect("Light")].stack, {"type": "light", "color": Color(1, 1, 0)})
+		enemy.commit_dmg(-0.0375 * (spellObj.spell.getPower() * (1.0 - dmgRed)) * spellObj.mult * enemy.effects[enemy.searchEffect("Light")].stack, {"type": "light", "color": Color(1, 1, 0)})
 
 func shrapnelProc(spellObj:SpellCasted, enemy):
 	if(enemy is Wall):
