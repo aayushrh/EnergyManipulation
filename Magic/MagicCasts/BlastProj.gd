@@ -99,25 +99,25 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 			if(is_instance_valid(self)):
 				for i : ComponentSpellCard in spell.components:
 					i.callVisualHitEffects(self)
-					if(!isShrapnel):
-						var shrapnel = spell.getShrapnel()
-						if shrapnel >= 1:
-							for num in range(shrapnel):
-								var blastProj := BlastProj.instantiate()
-								blastProj.speed = speed
-								blastProj.sender = sender
-								blastProj.mult = 1 #spellObj.chargeMulti
-								blastProj.global_position = area.global_position
-								blastProj._setSpell(spell.create())
-								var direction = velocity.normalized()
-								var range = 0.5*log(shrapnel + 2)
-								var aoffset = (((float)(num - shrapnel / 2))/(float)(shrapnel)) * range
-								var ndir = direction.rotated(aoffset)
-								blastProj.global_position += ndir.normalized() * (45 + 100 * scale.length())
-								blastProj._setV(ndir)
-								blastProj.castingCost = castingCost
-								blastProj.isShrapnel = true
-								get_tree().current_scene.add_child(blastProj)
+				if(!isShrapnel):
+					var shrapnel = spell.getShrapnel()
+					if shrapnel >= 1:
+						for num in range(shrapnel):
+							var blastProj := BlastProj.instantiate()
+							blastProj.speed = speed
+							blastProj.sender = sender
+							blastProj.mult = 1 #spellObj.chargeMulti
+							blastProj.global_position = area.global_position
+							blastProj._setSpell(spell.create())
+							var direction = velocity.normalized()
+							var range = 0.5*log(shrapnel + 2)
+							var aoffset = (((float)(num - shrapnel / 2))/(float)(shrapnel)) * range
+							var ndir = direction.rotated(aoffset)
+							blastProj.global_position += ndir.normalized() * (45 + 100 * scale.length())
+							blastProj._setV(ndir)
+							blastProj.castingCost = castingCost
+							blastProj.isShrapnel = true
+							get_tree().current_scene.add_child(blastProj)
 				queue_free()
 		elif(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  > spell.initCost() * mult * spell.getClashingAdvantage()  and is_instance_valid(self)):
 			for i : ComponentSpellCard in spell.components:
