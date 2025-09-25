@@ -219,12 +219,14 @@ func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing
 	if get_tree() != null:
 		if (type == ""):
 			type = "damage" if change < 0 else "heal"
+		if (len(thing) > 0):
+			type += thing
 		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
 			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
 			dmgNum[type]._display(change)
 		else:
 			var dn = DamageNum.instantiate()
-			dn.create(c, inc)
+			dn.create(c, inc, thing)
 			get_tree().current_scene.add_child.call_deferred(dn)
 			dmgNum[type] = dn
 			dmgNum[type]._display(change)
@@ -483,7 +485,7 @@ func _hit_register():
 	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	stored_energy += spellHit.initCost() * dmgRed * 2 * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
-	commit_dmg(-dmgTaken * (1-dmgRed), {"crit":10})
+	commit_dmg(-dmgTaken * (1-dmgRed))
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
 	#updateHealth()

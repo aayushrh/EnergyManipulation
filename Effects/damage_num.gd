@@ -2,31 +2,31 @@ extends Node2D
 
 var setAnimSpeed : float = 1
 var currentNum : float = -1
+var add := ""
 
-func create(c, sc := Color(1,1,1,0.8)):
+func create(c, sc := Color(1,1,1,0.8), add := ""):
 	$Label.set("theme_override_colors/font_color", c)
 	var n = sc
 	n.a = 0.8
 	$Label/Label2.set("theme_override_colors/font_color", n)
+	self.add = add
 
 
 #non stacking
 func _displayNum(num : float) -> void:
 	var numb : float = abs(num)
 	if num != 0:
-		$Label.scale = Vector2(min(max(num, 0.25), 0.75), min(max(num, 0.25), 0.75))
-		$AnimationPlayer.speed_scale = min(max((0.25)/numb,0.05), 2)
-		if numb >= 0.1:
-			$Label.text = str(ceil(numb * 10))
-		else:
-			$Label.text = str(ceil((numb * 100.0))/10.0)
+		$Label.scale = $Label.scale * max(min(pow(len(add),0.25),2.5),1)
+		$AnimationPlayer.play("UpandAwayDelay")
+		$Label.text = str(round(num * 100)/10.0)
 	else:
 		$Label.text = ""
+	$Label.text = $Label.text + add
 	$Label/Label2.text = $Label.text
 
 #stacking
 func _display(num : float):
-	print("ASSDF" + str(num))
+	$Label.scale = $Label.scale * max(min(pow(len(add),0.25),2.5),1)
 	if num != 0:
 		if currentNum != -1:
 			$Label.text = str(round((currentNum + num) * 100)/10.0)
@@ -36,6 +36,7 @@ func _display(num : float):
 		else:
 			$Label.text = str(round(num * 100)/10.0)
 			currentNum = num
+		$Label.text = $Label.text + add
 	else:
 		$Label.text = ''
 	$Label/Label2.text = $Label.text
