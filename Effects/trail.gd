@@ -8,7 +8,7 @@ func _process(delta):
 		width = 75 * parent.scale.x
 		if points.size() >= trail_length:
 			#points.remove_at(0)
-			remove_point(points.size())
+			remove_point(points.size() - 1)
 		#points.append(parent.global_position)
 		add_point(parent.global_position, 0)
 		#print(str(points.size()))

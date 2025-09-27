@@ -45,6 +45,7 @@ var healthbar = null
 var chargeTime : float = 0
 var currentDamageNum = null
 var dmgNum = {}
+var speedModifier = 1
 
 @export var HPBARMULT : float = 80.0
 @export var BARSPEED : float = 20.0
@@ -220,7 +221,8 @@ func _health_change(newHP: float):
 				#queue_free()
 				get_tree().current_scene.enemiesKilled += 1
 		if is_instance_valid(currentDamageNum):
-			currentDamageNum.global_position = global_position + Vector2(50, -50)
+			#currentDamageNum.global_position = global_position + Vector2(50, -50)
+			currentDamageNum.update_pos(global_position)
 			currentDamageNum._display(change)
 		else:
 			"""var damageNum = DamageNum.instantiate()
@@ -269,7 +271,8 @@ func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing
 		if (type == ""):
 			type = "damage" if change < 0 else "heal"
 		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
-			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			#dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type].update_pos(global_position)
 			dmgNum[type]._display(change)
 		else:
 			var dn = DamageNum.instantiate()
@@ -277,7 +280,8 @@ func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing
 			get_tree().current_scene.add_child.call_deferred(dn)
 			dmgNum[type] = dn
 			dmgNum[type]._display(change)
-			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type].update_pos(global_position)
+			#dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -369,22 +373,6 @@ func _move(delta):
 		if(!nomoveinput and !$Charging.emitting):
 			velocity += inputV * 20
 		
-		#if velocity.length() > TOPSPEED:
-			#velocity = velocity.normalized() * TOPSPEED
-		
-		#if((player.global_position - global_position).length() > max_range + caution_range * int(!agg and player.casting)):
-			#velocity = (player.global_position - global_position).normalized() * TOPSPEED
-		#elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
-			#velocity = (player.global_position - global_position).normalized() * -TOPSPEED
-		#else:
-			#pass
-			#if(moveDir == 0):
-			#	moveDir = rng.randi_range(0,1)*2-1
-			#elif(rng.randi_range(0,10000)==1):
-			#	moveDir = -moveDir
-			#else:
-			#	moveDir = moveDir*pow(1.5,delta)
-			#velocity = set_perp_vector((player.global_position - global_position).normalized(), moveDir>0) * TOPSPEED
 		awareness(delta)
 		if(agg):
 			aggro(player, delta)
@@ -393,14 +381,15 @@ func _move(delta):
 				blast = null
 				castedIndex = -1
 		velocity -= softBodyPush * TOPSPEED
-		velocity *= Global.getTimeScale()
+		velocity *= Global.getTimeScale() * speedModifier
 		if(slow):
 			velocity = velocity * 0.5
+		
 
 func rotateToTarget(target, delta):
 	var direction = (target - global_position)
 	var angleTo = transform.x.angle_to(direction) + PI/2
-	rotate(sign(angleTo) * min(delta * ROTATIONSPEED, abs(angleTo)))
+	rotate(sign(angleTo) * min(delta * ROTATIONSPEED * speedModifier, abs(angleTo)))
 
 func _punch():
 	art._startPunch()

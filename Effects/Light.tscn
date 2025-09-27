@@ -41,4 +41,4 @@ texture = ExtResource("3_dpo46")
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("5_qv1s4")
-trailLength = 10
+trailLength = 20

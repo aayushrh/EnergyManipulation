@@ -222,7 +222,7 @@ func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing
 		if (len(thing) > 0):
 			type += thing
 		if dmgNum.has(type) and is_instance_valid(dmgNum[type]):
-			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type].update_pos(global_position)
 			dmgNum[type]._display(change)
 		else:
 			var dn = DamageNum.instantiate()
@@ -230,7 +230,7 @@ func display_dmg(change: float, c: Color, inc := Color(1,1,1), type := "", thing
 			get_tree().current_scene.add_child.call_deferred(dn)
 			dmgNum[type] = dn
 			dmgNum[type]._display(change)
-			dmgNum[type].global_position = global_position + Vector2(rng.randi_range(50, -50),rng.randi_range(50, -50))
+			dmgNum[type].update_pos(global_position)
 
 func _energy_change(newMANA: float):
 	var change = newMANA - stored_energy
@@ -485,7 +485,7 @@ func _hit_register():
 	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	stored_energy += spellHit.initCost() * dmgRed * 2 * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
-	commit_dmg(-dmgTaken * (1-dmgRed))
+	commit_dmg(-dmgTaken * (1-dmgRed), {"crit": 10})
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
 	#updateHealth()

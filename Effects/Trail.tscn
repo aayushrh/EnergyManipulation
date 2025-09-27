@@ -11,4 +11,4 @@ width = 100.0
 width_curve = SubResource("Curve_o66aa")
 default_color = Color(1, 1, 0, 0.478431)
 script = ExtResource("1_a5axn")
-trail_length = 10
+trail_length = 20

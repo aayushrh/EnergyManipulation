@@ -3,6 +3,8 @@ extends Node2D
 var setAnimSpeed : float = 1
 var currentNum : float = -1
 var add := ""
+var rng := RandomNumberGenerator.new()
+var offset_position = Vector2.ZERO
 
 func create(c, sc := Color(1,1,1,0.8), add := ""):
 	$Label.set("theme_override_colors/font_color", c)
@@ -46,6 +48,7 @@ func _disappear():
 	queue_free()
 
 func _ready() -> void:
+	offset_position = Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
 	$AnimationPlayer.play("UpandAway")
 	
 func _process(delta: float) -> void:
@@ -56,3 +59,6 @@ func _process(delta: float) -> void:
 func _on_animation_player_animation_finished(anim_name:String) -> void:
 	print("num: " + str(currentNum))
 	queue_free()
+
+func update_pos(npos : Vector2):
+	global_position = npos + offset_position

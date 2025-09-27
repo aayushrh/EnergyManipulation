@@ -14,8 +14,7 @@ func _init(life : float) -> void:
 
 func _tick(entity : Node2D, delta : float) -> void:
 	entity.speedModifier = baselog/log(stack + base)
-	print(entity.speedModifier)
-	stack = floor(lifetime + 0.5)
+	stack = lifetime
 	lifetime -= delta
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))

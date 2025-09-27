@@ -92,7 +92,6 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 	if(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type != sender.type):
 		if(abs(body.spell.initCost() * body.mult * body.spell.getClashingAdvantage()  - spell.initCost() * mult * spell.getClashingAdvantage()) > (spell.initCost() * mult * spell.getClashingAdvantage() + body.spell.initCost() * body.mult * body.spell.getClashingAdvantage())/16):
 			if(is_instance_valid(body)):
-				
 				for i : ComponentSpellCard in body.spell.components:
 					i.callVisualHitEffects(body)
 				body.queue_free()
