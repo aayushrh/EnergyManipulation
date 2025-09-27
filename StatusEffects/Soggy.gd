@@ -1,7 +1,7 @@
 extends Effects
 class_name Soggy
 
-var stack := 1
+var stack := 1.0
 var base := 1.5
 var baselog := log(base)
 
@@ -13,8 +13,8 @@ func _init(life : float) -> void:
 	effectName = "Soggy"
 
 func _tick(entity : Node2D, delta : float) -> void:
-	entity.speedModifier = baselog/log(stack + base)
-	stack = lifetime
+	entity.speedModifier = baselog/log(lifetime + base)
+	stack = snapped(lifetime, 0.1)
 	lifetime -= delta
 	if lifetime <= 0:
 		entity.effects.remove_at(entity.effects.find(self))

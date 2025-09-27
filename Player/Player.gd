@@ -485,7 +485,7 @@ func _hit_register():
 	#stored_energy += dmgTaken * dmgRed * 10 * wisdom
 	stored_energy += spellHit.initCost() * dmgRed * 2 * wisdom
 	get_tree().current_scene.damageBlocked += dmgTaken * dmgRed
-	commit_dmg(-dmgTaken * (1-dmgRed), {"crit": 10})
+	commit_dmg(-dmgTaken * (1-dmgRed))
 	#updateEnergy()
 	#$CanvasLayer/HealthBar.size.x = health*20.0
 	#updateHealth()
