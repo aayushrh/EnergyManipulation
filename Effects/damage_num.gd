@@ -44,7 +44,6 @@ func _display(num : float):
 	$Label/Label2.text = $Label.text
 
 func _disappear():
-	print("numero: " + str(currentNum))
 	queue_free()
 
 func _ready() -> void:
@@ -57,7 +56,6 @@ func _process(delta: float) -> void:
 	$AnimationPlayer.speed_scale = setAnimSpeed
 
 func _on_animation_player_animation_finished(anim_name:String) -> void:
-	print("num: " + str(currentNum))
 	queue_free()
 
 func update_pos(npos : Vector2):

@@ -17,9 +17,9 @@ func _process(delta):
 	if(!cooked):
 		kysgodot()
 		cooked = true
-	if(!orphan):
-		$ColorRect2.size = get_parent().size
-		$ColorRect2.global_position = get_parent().global_position
+		if(!orphan):
+			$ColorRect2.size = get_parent().size
+			$ColorRect2.global_position = get_parent().global_position
 	if(get_viewport().get_mouse_position().x > global_position.x and get_viewport().get_mouse_position().x < global_position.x + $ColorRect2.size.x and get_viewport().get_mouse_position().y > global_position.y and get_viewport().get_mouse_position().y < global_position.y + $ColorRect2.size.y):
 		if(!wparents or get_viewport().get_mouse_position().x > corner1.x and get_viewport().get_mouse_position().x < corner2.x and get_viewport().get_mouse_position().y > corner1.y and get_viewport().get_mouse_position().y < corner2.y):
 			_on_mouse_entered()
@@ -51,3 +51,5 @@ func kysgodot():
 	corner1 = gp.global_position
 	corner2 = gp.global_position + gp.size
 	wparents = true
+	print(corner1)
+	print(corner2)
