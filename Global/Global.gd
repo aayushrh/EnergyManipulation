@@ -25,6 +25,12 @@ var badBlocks = 0
 var noBlocks = 0
 var enemiesKilled = 0
 var hasDoneTutorial = false
+var intel = 0
+var wis = 0
+var agl = 0
+var con = 0
+var com = 0#communism
+var free = 0
 
 func unPause():
 	for i in pause.size():

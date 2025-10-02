@@ -4,6 +4,7 @@ extends Control
 #@onready var MagicCreation = preload("res://SpellCreation.tscn")
 @onready var InputChangeSystem = preload("res://World/UI/input_change_system.tscn")
 @onready var Stats = preload("res://World/Screens/Stats.tscn")
+@onready var StatTree = preload("res://World/UI/StatTree.tscn")
 
 var timer = 0
 
@@ -37,3 +38,8 @@ func _on_exit_pressed():
 
 func _on_check_button_pressed():
 	Global.particlesNotShowing = !Global.particlesNotShowing
+
+
+func _on_stats_2_pressed() -> void:
+	var stats = StatTree.instantiate()
+	add_child(stats)

@@ -4,15 +4,16 @@ signal finishedSelecting()
 
 @export var cardSelection : Control
 @export var freeInc := 3
-var intel = 0
-var wis = 0
-var agl = 0
-var con = 0
-var com = 0#communism
-var free = 0 : set = _freeChange
+var intel = Global.intel
+var wis = Global.wis
+var agl = Global.agl
+var con = Global.con
+var com = Global.com#communism
+var free = Global.free : set = _freeChange
 
 func _ready():
-	cardSelection.connect("finishedSelecting", _show)
+	pass
+	#cardSelection.connect("finishedSelecting", _show)
 
 func logWithBase(value, base): return log(value) / log(base)
 
@@ -23,6 +24,7 @@ func _show():
 func shew():
 	Global.pause[1] = 1
 	visible = true
+	update()
 
 func update():
 	$ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label2.text = str(agl)
@@ -35,6 +37,12 @@ func _hide():
 	if(Global.pause[0] != 1):
 		Global.pause[1] = 0
 	visible = false
+	Global.intel = intel
+	Global.wis = wis
+	Global.agl = agl
+	Global.con = con
+	Global.com = com
+	Global.free = free
 	finishedSelecting.emit()
 
 func _freeChange(new):
