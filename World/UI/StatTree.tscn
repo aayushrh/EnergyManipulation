@@ -289,6 +289,7 @@ text = "Exit"
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/agility" to="." method="_on_agility_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect4/HBoxContainer/const" to="." method="_on_const_pressed"]
 [connection signal="pressed" from="ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/const" to="." method="_on_comp_pressed"]
+[connection signal="pressed" from="Button" to="." method="_hide"]
 
 [editable path="ColorRect2/VBoxContainer/ColorRect/HBoxContainer/Intel/Tooltip"]
 [editable path="ColorRect2/VBoxContainer/ColorRect2/HBoxContainer/wisdom/Tooltip"]
