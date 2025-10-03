@@ -76,7 +76,7 @@ func _on_const_pressed():
 	if isValidPress():
 		con += 1
 		get_tree().current_scene.player.MAXHEALTH *= 1.21
-		get_tree().current_scene.player.health *= 1.21/get_tree().current_scene.player.healing
+		get_tree().current_scene.player.commit_dmg(get_tree().current_scene.player.health * .21, {"hide":true})
 		get_tree().current_scene.player.healing *= 1.1
 		update()
 
