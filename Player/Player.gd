@@ -159,6 +159,7 @@ func _dashCharging(delta):
 		dashTimer -= delta
 
 func _intel_change(newInt):
+	intel = newInt
 	for spell in Global.spellList:
 		spell.intel = intel
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://r51ga47bbd3n" path="res://World/UI/Tooltip.tscn" id="2_3610f"]
 
 [node name="StatTree" type="Control"]
-z_index = -100
+z_index = 100
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

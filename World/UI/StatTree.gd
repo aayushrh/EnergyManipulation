@@ -1,9 +1,6 @@
 extends Control
 
-signal finishedSelecting()
-
 @export var cardSelection : Control
-@export var freeInc := 3
 var intel = Global.intel
 var wis = Global.wis
 var agl = Global.agl
@@ -12,19 +9,17 @@ var com = Global.com#communism
 var free = Global.free : set = _freeChange
 
 func _ready():
-	pass
-	#cardSelection.connect("finishedSelecting", _show)
+	update()
+	print(Global.free)
+	free = Global.free
+	Global.pause[1] = 1
 
 func logWithBase(value, base): return log(value) / log(base)
 
 func _show():
-	free += freeInc
-	shew()
-
-func shew():
 	Global.pause[1] = 1
 	visible = true
-	update()
+	
 
 func update():
 	$ColorRect2/VBoxContainer/ColorRect3/HBoxContainer/Label2.text = str(agl)
@@ -34,16 +29,14 @@ func update():
 	$ColorRect2/VBoxContainer/ColorRect5/HBoxContainer/Label2.text = str(com)
 
 func _hide():
-	if(Global.pause[0] != 1):
-		Global.pause[1] = 0
-	visible = false
+	Global.pause[1] = 0
 	Global.intel = intel
 	Global.wis = wis
 	Global.agl = agl
 	Global.con = con
 	Global.com = com
 	Global.free = free
-	finishedSelecting.emit()
+	queue_free()
 
 func _freeChange(new):
 	free = new
@@ -52,7 +45,7 @@ func _freeChange(new):
 	$ColorRect2/Label.text = "Available Stat Points: %s" % [free]
 
 func isValidPress():
-	if visible and Global.pause[0] != 1 and free > 0:
+	if visible and free > 0:
 		free -= 1
 		return true 
 	return false
@@ -62,6 +55,7 @@ func _on_intel_pressed():
 		intel += 1
 		get_tree().current_scene.player.intel *= 1.05
 		update()
+		print(get_tree().current_scene.player.intel)
 
 func _on_wisdom_pressed():
 	if isValidPress():

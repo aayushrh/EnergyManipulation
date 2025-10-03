@@ -1,5 +1,7 @@
 extends Node
 
+@export var freeInc := 3
+
 var pause = [0,0]#pos 0 is menu pause, 1 is selection pause
 var lastTSCN = ""
 

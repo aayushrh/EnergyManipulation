@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=35 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -25,7 +25,6 @@
 [ext_resource type="Resource" uid="uid://bc4w4qn0qflj6" path="res://Magic/MagicCards/Resources/Components/Haste.tres" id="10_i3moq"]
 [ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Components/Default.tres" id="12_qtnuf"]
 [ext_resource type="Texture2D" uid="uid://bw3olysqadtsy" path="res://Art/medievalRTS_spritesheet.png" id="16_rxmm3"]
-[ext_resource type="PackedScene" uid="uid://cc6oqlnhotm1f" path="res://World/UI/StatTree.tscn" id="19_ddly2"]
 [ext_resource type="Resource" uid="uid://yec66fv1fp0a" path="res://Magic/MagicCards/Resources/Type/Explosion.tres" id="23_qk785"]
 [ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="24_4r4ro"]
 [ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="25_lh46v"]
@@ -1498,10 +1497,6 @@ spawner = NodePath("../../Spawner")
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("7_55fww")]
 visible = false
 
-[node name="StatTree" parent="CanvasLayer" node_paths=PackedStringArray("cardSelection") instance=ExtResource("19_ddly2")]
-visible = false
-cardSelection = NodePath("../CardSelection")
-
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 1053.0
 offset_top = 18.0
@@ -1513,7 +1508,7 @@ text = "FPS: "
 script = ExtResource("9_vxjm2")
 enemyParent = NodePath("../Enemies")
 player = NodePath("../Player")
-cardSelection = NodePath("../CanvasLayer/StatTree")
+cardSelection = NodePath("../CanvasLayer/CardSelection")
 
 [node name="Enemies" type="Node2D" parent="."]
 

@@ -40,6 +40,7 @@ func _show():
 	card2._show(randCard)
 	randCard = temp[rng.randi_range(0, temp.size() - 1)]
 	card3._show(randCard)
+	Global.free += Global.freeInc
 
 func onSelectedCard(card):
 	if(Global.pause[0] != 1):
