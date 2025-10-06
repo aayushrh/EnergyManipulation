@@ -1,18 +1,80 @@
-[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://c1j71um22n1vs"]
+[gd_resource type="Resource" script_class="Attributes" load_steps=9 format=3 uid="uid://c1j71um22n1vs"]
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_im80p"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_75am1"]
+
+[sub_resource type="Resource" id="Resource_dcsqv"]
+script = ExtResource("2_75am1")
+expression = "x"
+suffix = ""
+prefix = "+"
+alias = "Amount"
+default = 1.0
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_h6pno"]
+script = ExtResource("2_75am1")
+expression = "90/pow(x,0.5)"
+suffix = "%"
+prefix = ""
+alias = "Power"
+default = 100.0
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_vfcu2"]
+script = ExtResource("2_75am1")
+expression = "100/(log(x+1)+1)"
+suffix = "%"
+prefix = ""
+alias = "Size"
+default = 100.0
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_qd2kp"]
+script = ExtResource("2_75am1")
+expression = "100*pow(x,0.5)"
+suffix = "%"
+prefix = ""
+alias = "Cooldown"
+default = 100.0
+posColor = Color(1, 0, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(0, 1, 0, 1)
+
+[sub_resource type="Resource" id="Resource_gra0m"]
+script = ExtResource("2_75am1")
+expression = "100/pow(x+1,0.60206)"
+suffix = "%"
+prefix = ""
+alias = "Cast. Spd."
+default = 100.0
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_6m7vc"]
+script = ExtResource("2_75am1")
+expression = "300/(log(x+1)+3)"
+suffix = "%"
+prefix = ""
+alias = "Proj. Spd."
+default = 100.0
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_im80p")
 Ltext = "Amount"
 Rtext = "Supreme"
-minL = 2.0
-maxL = 10.0
-minR = -50.0
-maxR = -10.0
-num = 0.0
-step = 1.0
-percentL = false
-percentR = true
-addL = 0.0
-addR = 100.0
+min = 0.0
+max = 9.0
+start = 1.0
+strings = Array[String](["amount", "power", "size", "cooldown", "casting_speed", "projectile_speed"])
+tags = Array[ExtResource("2_75am1")]([SubResource("Resource_dcsqv"), SubResource("Resource_h6pno"), SubResource("Resource_vfcu2"), SubResource("Resource_qd2kp"), SubResource("Resource_gra0m"), SubResource("Resource_6m7vc")])

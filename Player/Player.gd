@@ -268,7 +268,7 @@ func _draw():
 
 func _heal(delta):
 	if(Input.is_action_pressed("Heal") and stored_energy > delta):
-		var v = healing / (log(velocity.length_squared()/100)/log(10) + 1)
+		var v = healing / (log(velocity.length_squared()/100) + 1)
 		if(velocity.length_squared() < 100):
 			v = healing
 			healScale *= pow(1.1,delta)
