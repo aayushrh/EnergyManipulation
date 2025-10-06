@@ -4,13 +4,14 @@ var myParent : Node2D
 var timer : float = 0.0
 
 func _process(delta: float) -> void:
+	print("im alive")
 	delta *= Global.getTimeScale()
 	timer -= delta
 	if(!is_instance_valid(myParent)):
 		queue_free()
 	else:
 		global_position = myParent.global_position
-	$Node2D.visible = timer >= 0.0
+	$Node2D.visible = timer > 0.0
 
 func get_over_health() -> Node2D:
 	return $over
