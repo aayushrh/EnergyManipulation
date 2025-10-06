@@ -202,9 +202,7 @@ func commit_dmg(change: float, dict := {}):
 	if(dict):
 		inc = dict["color"] if dict.has("color") else Color(1,1,1)
 		heal = dict["heal"] if dict.has("heal") else false
-		if(dict.has("crit")):
-			for i in dict["crit"]:
-				thing += "!"
+		thing += "!".repeat(dict["crit"]) if dict.has("crit") else ""
 		show = not dict["hide"] if dict.has("hide") else true
 		type = dict["type"] if dict.has("type") else "normal"
 	if(type == "normal"):
