@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkbwww3ktnguy"]
+
+[ext_resource type="Script" path="res://Enemies/BaseEnemy.gd" id="1_43cok"]
+[ext_resource type="PackedScene" uid="uid://cwb75qx3d6iod" path="res://Enemies/SoftBody.tscn" id="2_3kctb"]
+[ext_resource type="PackedScene" uid="uid://bfugmqkrscero" path="res://Enemies/enemyArt.tscn" id="3_w41iw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nw1a5"]
+radius = 25.0
+
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("softBody", "enemyArt")]
+collision_layer = 2
+collision_mask = 10
+script = ExtResource("1_43cok")
+softBody = NodePath("")
+enemyArt = NodePath("EnemyArt")
+
+[node name="SoftBody" parent="." instance=ExtResource("2_3kctb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nw1a5")
+
+[node name="EnemyArt" parent="." instance=ExtResource("3_w41iw")]

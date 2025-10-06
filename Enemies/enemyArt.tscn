@@ -1,8 +1,52 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfugmqkrscero"]
+[gd_scene load_steps=20 format=3 uid="uid://bfugmqkrscero"]
 
 [ext_resource type="Script" path="res://Enemies/enemyArt.gd" id="1_l6bng"]
+[ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_8hol5"]
 [ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_ca6vm"]
 [ext_resource type="PackedScene" uid="uid://bjdxvwof6staf" path="res://Effects/charging.tscn" id="3_c2wng"]
+[ext_resource type="Shader" path="res://Enemies/enemyArt.gdshader" id="3_m36pn"]
+
+[sub_resource type="Gradient" id="Gradient_vbeqr"]
+colors = PackedColorArray(0, 0.694118, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kdvbb"]
+gradient = SubResource("Gradient_vbeqr")
+
+[sub_resource type="Curve" id="Curve_7iae7"]
+_data = [Vector2(0, 0.0883117), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.0714285), 0.0, 0.0, 0, 0, Vector2(1, 0.0714285), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c4fft"]
+curve = SubResource("Curve_7iae7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ilfni"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 75.0
+radial_velocity_min = -300.0
+radial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_c4fft")
+color_ramp = SubResource("GradientTexture1D_kdvbb")
+
+[sub_resource type="Animation" id="Animation_hmcwf"]
+resource_name = "Charging"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_cdd5r"]
 resource_name = "Death"
@@ -218,18 +262,139 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GPUParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LArm:material:shader_parameter/whiteness")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RArm:material:shader_parameter/whiteness")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body:material:shader_parameter/whiteness")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bbqu2"]
+resource_name = "Ready"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LArm:material:shader_parameter/whiteness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RArm:material:shader_parameter/whiteness")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body:material:shader_parameter/whiteness")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lpfx"]
 _data = {
+"Charging": SubResource("Animation_hmcwf"),
 "Death": SubResource("Animation_cdd5r"),
 "Punch": SubResource("Animation_j6erc"),
-"RESET": SubResource("Animation_fxsu2")
+"RESET": SubResource("Animation_fxsu2"),
+"Ready": SubResource("Animation_bbqu2")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2xov"]
+shader = ExtResource("3_m36pn")
+shader_parameter/whiteness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mm7dy"]
+shader = ExtResource("3_m36pn")
+shader_parameter/whiteness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yyoc"]
+shader = ExtResource("3_m36pn")
+shader_parameter/whiteness = 0.0
 
 [node name="EnemyArt" type="Node2D" node_paths=PackedStringArray("particles", "animPlayer")]
 script = ExtResource("1_l6bng")
 particles = NodePath("RArm/Charging")
 animPlayer = NodePath("AnimationPlayer")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ilfni")
+texture = ExtResource("2_8hol5")
+lifetime = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -237,11 +402,13 @@ libraries = {
 }
 
 [node name="LArm" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m2xov")
 position = Vector2(-20, -20)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_ca6vm")
 
 [node name="RArm" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mm7dy")
 position = Vector2(20, -20)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_ca6vm")
@@ -250,5 +417,6 @@ texture = ExtResource("2_ca6vm")
 scale = Vector2(13.3333, 13.3333)
 
 [node name="Body" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5yyoc")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ca6vm")
