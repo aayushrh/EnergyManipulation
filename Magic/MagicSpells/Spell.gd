@@ -100,53 +100,42 @@ func contcost() -> float:
 	return cost / pow(intel,0.25)
 
 func getAttr(nname : String) -> float:
+	var x = nname.to_lower()
 	for i:AttributesWrapper in attributes:
-		if(i.attr.Ltext == nname):
-			return i.leftvalue
-		if(i.attr.Rtext == nname):
-			return i.rightvalue
-	return 50
-
-func getSupreme() -> float:
-	var r : float = 1.0
-	for i:AttributesWrapper in attributes:
-		if(i.attr.Ltext == "Supreme"):
-			r *= (i.leftvalue + 100.0)/(100.0)
-		if(i.attr.Rtext == "Supreme"):
-			r *= (i.rightvalue + 100.0)/(100.0)
-	return r
+		if(i.d.has(x)):
+			return (i.d[x]["value"])
+	return -1
 
 func getAttrScaled(nname : String) -> float:
-	var n : float = (getAttr(nname) + 50.0)/100.0
-	return n
+	return getAttr(nname)/100.0 if getAttr(nname) > 0 else 1.0
 
 func getPower() -> float:
-	var p : float = (getAttr("Power") + 100.0)/100.0
+	var p : float = getAttrScaled("Power")
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			p *= i.powerMult
-	return p * getSupreme() * intel
+	return p * intel
 
 func getPSpeed() -> float:
-	var ps : float = (getAttr("Proj. Spd.") + 100.0)/100.0
+	var ps : float = getAttrScaled("Projectile_Speed")
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			ps *= i.attackSpeedMult
-	return ps * (1.0+getSupreme())/2 * pow(intel,0.5)
+	return ps * pow(intel,0.5)
 
 func getASpeed() -> float:
-	var cs : float = (getAttr("Cast. Spd.") + 100.0)/100.0
+	var cs : float = getAttrScaled("Casting_Speed")
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			cs *= i.castingSpeedMult
-	return cs * getSupreme() * pow(intel,0.5)
+	return cs * pow(intel,0.5)
 
 func getSize() -> float:
-	var s : float = (getAttr("Size") + 100.0)/100.0
+	var s : float = getAttrScaled("Size")
 	if(components != null):
 		for i:ComponentSpellCard in components:
 			s *= i.sizeMult
-	return s * getSupreme() * pow(intel,0.25)
+	return s * pow(intel,0.25)
 
 func hasElement() -> bool:
 	for i:ComponentSpellCard in components:
@@ -154,25 +143,21 @@ func hasElement() -> bool:
 			return true
 	return false
 
+func getAmt(x: String) -> float:
+	var a : int = getAttr(x)
+	return 1 + a if a != -1 else 1
+
 func getAmount() -> float:
-	var a : int = getAttr("Amount")
-	if a != 50:
-		return a
-	return 1
+	return getAmt("Amount")
 
 func getCluster() -> float:
-	var a : int = getAttr("Cluster")
-	if a != 50:
-		return a
-	return 1
+	return getAmt("Cluster")
 
 func getShrapnel() -> float:
-	var a : int = getAttr("Shrapnel")
-	if a != 50:
-		return a
-	return 0
+	return getAmt("Shrapnel")
 
 func getClashingAdvantage() -> float:
+	var a : int = getAttrScaled("Clash")
 	var c :float = 1.0
 	if(components != null):
 		for i:ComponentSpellCard in components:

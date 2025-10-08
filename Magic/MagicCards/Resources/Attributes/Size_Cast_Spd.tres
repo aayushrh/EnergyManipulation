@@ -1,18 +1,14 @@
-[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://b82qk5lssemgx"]
+[gd_resource type="Resource" script_class="Attributes" load_steps=3 format=3 uid="uid://b82qk5lssemgx"]
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_33wxy"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_xhyci"]
 
 [resource]
 script = ExtResource("1_33wxy")
 Ltext = "Size"
 Rtext = "Cast. Spd."
-minL = -50.0
-maxL = 50.0
-minR = -50.0
-maxR = 50.0
-num = 0.0
-step = 1.0
-percentL = true
-percentR = true
-addL = 100.0
-addR = 100.0
+min = 0.0
+max = 0.0
+start = 0.0
+strings = Array[String]([])
+tags = Array[ExtResource("2_xhyci")]([])
