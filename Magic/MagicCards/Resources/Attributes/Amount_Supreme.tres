@@ -71,7 +71,7 @@ negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_6m7vc"]
 script = ExtResource("2_75am1")
-expression = "300/(log(x+1)/log(10)+3)"
+expression = "2.86272752832*100/(log(x+1)/log(10)+2.86272752832)"
 suffix = "%"
 prefix = ""
 alias = "Proj. Spd."

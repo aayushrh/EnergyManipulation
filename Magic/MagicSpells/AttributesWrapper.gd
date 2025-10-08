@@ -29,6 +29,7 @@ func _init(attri:Attributes) -> void:
 			d[e]["prefix"] = attr.tags[i].prefix
 			d[e]["default"] = attr.tags[i].default
 			d[e]["value"] = exp.execute()
+			d[e]["round"] = attr.tags[i].round
 			d[e]["posColor"] = attr.tags[i].posColor
 			d[e]["negColor"] = attr.tags[i].negColor
 			d[e]["defColor"] = attr.tags[i].defColor
@@ -47,16 +48,17 @@ func calc(i:String) -> float:
 		var x = valueArray(d[i]["vCount"])
 		if(len(x)>0):
 			if(exp.parse(d[i]["expression"] % x) == OK):
-				d[i]["value"] = exp.execute()
+				d[i]["value"] = snappedf(exp.execute(), d[i]["round"])
 				return d[i]["value"]
 		else:
 			if(exp.parse(d[i]["expression"]) == OK):
-				d[i]["value"] = exp.execute()
+				d[i]["value"] = snappedf(exp.execute(), d[i]["round"])
 				return d[i]["value"]
 		push_error("Something went wrong\nValue: %s\nExpression: %s\ninput: %s" % [value, d[i]["expression"], i])
 	else:
 		push_error("mf dict doesn't have %s as an attributetype" % i)
 	return NAN
+
 
 func valueArray(i:int) -> Array:
 	var e = []
