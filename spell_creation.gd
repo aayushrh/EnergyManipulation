@@ -100,7 +100,7 @@ func updateMaxPages():
 	maxPages += spell.components.size()
 
 func updateAttr(value, at):
-	for i in spell.attributes:
+	for i in spell.attributes[pageNum - 2]:
 		if i.attr == at:
 			i._updateValue(value)
 	MagicMenu.selectedSpell = spell
@@ -151,6 +151,7 @@ func reload(forward):
 		updateMaxPages()
 		$TableOfContents.spell = spell
 		$SpellPage.spell = spell
+		$SpellPage.pageNum = pageNum
 		$TableOfContents.reset()
 		get_parent()._finish()
 		dontTurn = false
@@ -180,11 +181,8 @@ func _on_delete_pressed():
 	var cardRemoved = null
 	if(pageNum - 1 <= spell.components.size()):
 		cardRemoved = spell.components[getCurrentPage() - 1]
-		for i in cardRemoved.attribute:
-			for a in range(spell.attributes.size()):
-				if (spell.attributes[a].attr == i):
-					spell.attributes.remove_at(a)
-					break
+		spell.attributes.remove_at(getCurrentPage() - 1)
+		print(spell.attributes)
 		spell.components.remove_at(getCurrentPage() - 1)
 	reload(false)
 	Global.magicCards.append(cardRemoved)

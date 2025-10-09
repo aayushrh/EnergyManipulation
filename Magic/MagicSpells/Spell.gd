@@ -3,7 +3,7 @@ class_name Spell
 
 var components : Array[ComponentSpellCard]
 var type : TypeSpellCard
-var attributes: Array[AttributesWrapper]
+var attributes: Array[Array] #Array[Array[AttributesWrapper]]
 var spellName : String = ""
 var binding : int = -1
 var cooldown : float = 0
@@ -20,8 +20,11 @@ func create() -> Spell:
 	newSpell.cooldown = cooldown
 	newSpell.using = using
 	newSpell.intel = intel
-	for i:AttributesWrapper in attributes:
-		newSpell.attributes.append(i)
+	for arr : Array[AttributesWrapper] in attributes:
+		var x : Array[AttributesWrapper] = []
+		for i : AttributesWrapper in arr:
+			x.append(i)
+		newSpell.attributes.append(x)
 	return newSpell
 
 func _init(namen:String) -> void:
@@ -102,9 +105,10 @@ func contcost() -> float:
 func getAttr(nname : String) -> Array[float]:
 	var returnval : Array[float] = []
 	var x = nname.to_lower()
-	for i:AttributesWrapper in attributes:
-		if(i.d.has(x)):
-			returnval.append(i.d[x]["value"])
+	for arr : Array[AttributesWrapper] in attributes:
+		for i : AttributesWrapper in arr:
+			if(i.d.has(x)):
+				returnval.append(i.d[x]["value"])
 	return returnval
 
 func getAttrScaled(nname : String) -> float:

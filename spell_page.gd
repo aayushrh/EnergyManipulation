@@ -12,6 +12,7 @@ var RED = Color(1, .2, .2)
 var GREEN = Color(.2, 1, .2)
 var GREY = Color(1, 1, 1)
 var checks: Array[AttributesWrapper]
+var pageNum := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,7 +32,7 @@ func show_card(car):
 			var check = checkAttributeExistence(c)
 			if(!check):
 				check = AttributesWrapper.new(c) #AttributesWrapper.new(c)
-				spell.attributes.append(check)
+				spell.attributes[pageNum - 2].append(check)
 			checks.append(check)
 			var slide = slider.instantiate()
 			slide.value_changed.connect(updateVals)
@@ -51,8 +52,9 @@ func antihomo():
 
 func checkAttributeExistence(attribute):
 	for s in spell.attributes:
-		if(s.attr == attribute):
-			return s
+		for t in s:
+			if(t.attr == attribute):
+				return t
 	return null
 
 func cook(dic: AttributesWrapper):

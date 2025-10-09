@@ -1,4 +1,4 @@
-extends Control
+"""extends Control
 
 @export var Title: Label
 @export var Size: HSlider
@@ -76,3 +76,4 @@ func _input(event):
 
 func _on_keybind_pressed():
 	changing = true
+"""

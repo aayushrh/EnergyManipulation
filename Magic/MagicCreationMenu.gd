@@ -27,6 +27,7 @@ func _changeSpell(nspell):
 func addCard(type):
 	_change(type)
 	$AnimationPlayer.play("MoveLeft")
+	selectedSpell.attributes.append([])
 	#position.x = 350
 
 func _finish():
