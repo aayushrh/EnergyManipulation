@@ -18,7 +18,6 @@ func _init(attri:Attributes) -> void:
 		var exp = Expression.new()
 		var nExp = (attr.tags[i].expression.replace("x", "%s"))
 		var xCount = nExp.count("%s")
-		print(valueArray(xCount).size())
 		if (valueArray(xCount).size() > 0 and exp.parse(nExp % valueArray(xCount)) != OK) or (valueArray(xCount).size() == 0 and exp.parse(nExp) != OK):
 			push_error("expression didn't parse right for init rip lol")
 		else:
@@ -28,6 +27,7 @@ func _init(attri:Attributes) -> void:
 			d[e]["suffix"] = attr.tags[i].suffix
 			d[e]["prefix"] = attr.tags[i].prefix
 			d[e]["default"] = attr.tags[i].default
+			d[e]["mult"] = pow(10, attr.tags[i].displayExpo)
 			d[e]["value"] = exp.execute()
 			d[e]["round"] = attr.tags[i].round
 			d[e]["posColor"] = attr.tags[i].posColor
@@ -89,4 +89,4 @@ func _updateValue(newValue: float) -> bool:
 	return false
 
 func getValueString(pos: String) -> String:
-	return "%s%s%s" % [d[pos]["prefix"], d[pos]["value"], d[pos]["suffix"]]
+	return "%s%s%s" % [d[pos]["prefix"], (d[pos]["value"] * d[pos]["mult"]), d[pos]["suffix"]]

@@ -6,7 +6,8 @@ var pause = [0,0]#pos 0 is menu pause, 1 is selection pause
 var lastTSCN = ""
 
 var magicCards = []
-var spellList = []
+var spellList : Array[Spell] = []
+var oldList : Array[Spell] = spellList
 var particlesNotShowing = false
 
 var timeScale = 1.0
@@ -33,6 +34,16 @@ var agl = 0
 var con = 0
 var com = 0#communism
 var free = 0
+var needUpdate = false
+
+func _process(delta: float) -> void:
+	if(needUpdate):
+		print("unupdated")
+	if(spellList != oldList):
+		oldList = []
+		for i in spellList:
+			oldList.append(i)
+		needUpdate = true
 
 func unPause():
 	for i in pause.size():

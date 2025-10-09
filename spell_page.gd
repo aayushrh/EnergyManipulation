@@ -33,7 +33,6 @@ func show_card(car):
 				check = AttributesWrapper.new(c) #AttributesWrapper.new(c)
 				spell.attributes.append(check)
 			checks.append(check)
-			print(check.d)
 			var slide = slider.instantiate()
 			slide.value_changed.connect(updateVals)
 			slide.nuhuh.connect(nuhuh)
@@ -74,8 +73,6 @@ func cook(dic: AttributesWrapper):
 		hbox.add_child(lab1)
 		hbox.add_child(lab2)
 		arr.append(hbox)
-		print(lab1.text)
-		print(lab2.text)
 		$ColorRect/VScrollBar/VBoxContainer.add_child(hbox)
 	gay.append(arr)
 

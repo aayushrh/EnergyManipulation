@@ -107,7 +107,7 @@ func getAttr(nname : String) -> float:
 	return -1
 
 func getAttrScaled(nname : String) -> float:
-	return getAttr(nname)/100.0 if getAttr(nname) > 0 else 1.0
+	return getAttr(nname) if getAttr(nname) > 0 else 1.0
 
 func getPower() -> float:
 	var p : float = getAttrScaled("Power")
@@ -154,7 +154,7 @@ func getCluster() -> float:
 	return getAmt("Cluster")
 
 func getShrapnel() -> float:
-	return getAmt("Shrapnel")
+	return getAmt("Shrapnel") - 1
 
 func getClashingAdvantage() -> float:
 	var a : int = getAttrScaled("Clash")

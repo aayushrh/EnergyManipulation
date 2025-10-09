@@ -51,5 +51,3 @@ func kysgodot():
 	corner1 = gp.global_position
 	corner2 = gp.global_position + gp.size
 	wparents = true
-	print(corner1)
-	print(corner2)

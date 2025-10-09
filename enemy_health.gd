@@ -4,7 +4,7 @@ var myParent : Node2D
 var timer : float = 0.0
 
 func _process(delta: float) -> void:
-	print("im alive")
+	#print("im alive")
 	delta *= Global.getTimeScale()
 	timer -= delta
 	if(!is_instance_valid(myParent)):

@@ -5,22 +5,26 @@
 
 [sub_resource type="Resource" id="Resource_8cbcg"]
 script = ExtResource("2_866so")
-expression = "x"
+expression = "x/100.0"
 suffix = "%"
 prefix = ""
 alias = "Power"
-default = 100.0
+default = 1.0
+displayExpo = 2
+round = 0.01
 posColor = Color(0, 1, 0, 1)
 defColor = Color(0.6, 0.6, 0.6, 1)
 negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_j7ga1"]
 script = ExtResource("2_866so")
-expression = "200-x"
+expression = "2-x/100.0"
 suffix = "%"
 prefix = ""
 alias = "Proj. Spd."
-default = 100.0
+default = 1.0
+displayExpo = 2
+round = 0.01
 posColor = Color(0, 1, 0, 1)
 defColor = Color(0.6, 0.6, 0.6, 1)
 negColor = Color(1, 0, 0, 1)

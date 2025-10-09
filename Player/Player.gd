@@ -83,7 +83,10 @@ func _ready():
 
 func _process(delta):
 	delta *= Global.getTimeScale()
-	
+	if(Global.needUpdate):
+		print("HELLO")
+		_intel_change(intel)
+		Global.needUpdate = false
 	stored_energy += manaRegen * delta
 	if dashTimed > 0:
 		dashTimed -= delta
