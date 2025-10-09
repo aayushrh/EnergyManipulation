@@ -53,31 +53,31 @@ func isValidPress():
 func _on_intel_pressed():
 	if isValidPress():
 		intel += 1
-		get_tree().current_scene.player.intel *= 1.05
+		get_tree().current_scene.player.intel *= 1.025
 		update()
 		print(get_tree().current_scene.player.intel)
 
 func _on_wisdom_pressed():
 	if isValidPress():
 		wis += 1
-		get_tree().current_scene.player.wisdom *= 1.05
-		get_tree().current_scene.player.MAXMANA *= 1.1
+		get_tree().current_scene.player.wisdom *= 1.025
+		get_tree().current_scene.player.MAXMANA *= 1.05
 		update()
 
 func _on_agility_pressed():
 	if isValidPress():
 		agl += 1
-		get_tree().current_scene.player.TOPSPEED *= 1.05
-		get_tree().current_scene.player.maxDashCharges += 0.5
-		get_tree().current_scene.player.DASHCD /= 1.05
+		get_tree().current_scene.player.TOPSPEED *= 1.025
+		get_tree().current_scene.player.maxDashCharges += 0.25
+		get_tree().current_scene.player.DASHCD /= 1.025
 		update()
 
 func _on_const_pressed():
 	if isValidPress():
 		con += 1
-		get_tree().current_scene.player.MAXHEALTH *= 1.21
-		get_tree().current_scene.player.commit_dmg(get_tree().current_scene.player.health * .21, {"hide":true})
-		get_tree().current_scene.player.healing *= 1.1
+		get_tree().current_scene.player.MAXHEALTH *= 1.075
+		get_tree().current_scene.player.commit_dmg(get_tree().current_scene.player.health * .075, {"hide":true})
+		get_tree().current_scene.player.healing *= 1.0375
 		update()
 
 

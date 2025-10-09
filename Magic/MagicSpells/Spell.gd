@@ -99,15 +99,19 @@ func contcost() -> float:
 		cost *= type.contCostMult
 	return cost / pow(intel,0.25)
 
-func getAttr(nname : String) -> float:
+func getAttr(nname : String) -> Array[float]:
+	var returnval : Array[float] = []
 	var x = nname.to_lower()
 	for i:AttributesWrapper in attributes:
 		if(i.d.has(x)):
-			return (i.d[x]["value"])
-	return -1
+			returnval.append(i.d[x]["value"])
+	return returnval
 
 func getAttrScaled(nname : String) -> float:
-	return getAttr(nname) if getAttr(nname) > 0 else 1.0
+	var r = 1.0
+	for i in getAttr(nname):
+		r *= i
+	return r
 
 func getPower() -> float:
 	var p : float = getAttrScaled("Power")
@@ -144,8 +148,10 @@ func hasElement() -> bool:
 	return false
 
 func getAmt(x: String) -> float:
-	var a : int = getAttr(x)
-	return 1 + a if a != -1 else 1
+	var r = 1
+	for i in getAttr(x):
+		r += i
+	return r
 
 func getAmount() -> float:
 	return getAmt("Amount")
