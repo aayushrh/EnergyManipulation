@@ -56,7 +56,7 @@ func resetCooldown(use:bool, multi:float) -> void:
 	using = use
 
 func getcd() -> float:
-	var cd : float = 3
+	var cd : float = 3 * getAttrScaled("Cooldown")
 	if(components != null):
 		for i : ComponentSpellCard in components:
 			cd *= i.cdMult

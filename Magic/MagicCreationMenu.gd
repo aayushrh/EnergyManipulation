@@ -7,7 +7,7 @@ var dontLeave = false
 @export var element : Button
 @export var type : Button
 @export var style : Button
-@export var cardList : VBoxContainer
+@export var cardList : CardList
 
 func _changeSpell(nspell):
 	#$Control.visible = true
@@ -27,7 +27,7 @@ func _changeSpell(nspell):
 func addCard(type):
 	_change(type)
 	$AnimationPlayer.play("MoveLeft")
-	selectedSpell.attributes.append([])
+	#selectedSpell.attributes.append([])
 	#position.x = 350
 
 func _finish():

@@ -1,6 +1,7 @@
 extends Node2D
 
-
+@export var times : Array[float] = [1, 0.1]
+var pos = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -9,7 +10,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("TestTimeSlow"):
-		if Global.timeScale == 1:
-			Global.timeScale = 0.1
-		else:
-			Global.timeScale = 1
+		pos = (pos + 1) % len(times)
+		Global.timeScale = times[pos]

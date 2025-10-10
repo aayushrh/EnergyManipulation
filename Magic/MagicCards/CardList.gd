@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name CardList
 
 @onready var MagicButton = preload("res://Magic/MagicCards/MagicCardButton.tscn")
 

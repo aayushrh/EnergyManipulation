@@ -13,27 +13,27 @@ var attr : Attributes = null
 func _init(attri:Attributes) -> void:
 	attr = attri
 	var i = 0
-	for e in attr.strings:
+	for e in attr.tags:
 		
 		var exp = Expression.new()
-		var nExp = (attr.tags[i].expression.replace("x", "%s"))
+		var nExp = (e.expression.replace("x", "%s"))
 		var xCount = nExp.count("%s")
 		if (valueArray(xCount).size() > 0 and exp.parse(nExp % valueArray(xCount)) != OK) or (valueArray(xCount).size() == 0 and exp.parse(nExp) != OK):
 			push_error("expression didn't parse right for init rip lol")
 		else:
-			d[e] = {}
-			d[e]["expression"] = nExp
-			d[e]["vCount"] = xCount
-			d[e]["suffix"] = attr.tags[i].suffix
-			d[e]["prefix"] = attr.tags[i].prefix
-			d[e]["default"] = attr.tags[i].default
-			d[e]["mult"] = pow(10, attr.tags[i].displayExpo)
-			d[e]["value"] = exp.execute()
-			d[e]["round"] = attr.tags[i].round
-			d[e]["posColor"] = attr.tags[i].posColor
-			d[e]["negColor"] = attr.tags[i].negColor
-			d[e]["defColor"] = attr.tags[i].defColor
-			d[e]["alias"] = attr.tags[i].alias if attr.tags[i].alias != "" else e
+			d[e.name] = {}
+			d[e.name]["expression"] = nExp
+			d[e.name]["vCount"] = xCount
+			d[e.name]["suffix"] = e.suffix
+			d[e.name]["prefix"] = e.prefix
+			d[e.name]["default"] = e.default
+			d[e.name]["mult"] = pow(10, e.displayExpo)
+			d[e.name]["value"] = exp.execute()
+			d[e.name]["round"] = e.round
+			d[e.name]["posColor"] = e.posColor
+			d[e.name]["negColor"] = e.negColor
+			d[e.name]["defColor"] = e.defColor
+			d[e.name]["alias"] = e.alias if e.alias != "" else e.name
 		i += 1
 	min = attr.min
 	max = attr.max

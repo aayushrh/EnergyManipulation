@@ -181,7 +181,7 @@ func _on_delete_pressed():
 	var cardRemoved = null
 	if(pageNum - 1 <= spell.components.size()):
 		cardRemoved = spell.components[getCurrentPage() - 1]
-		spell.attributes.remove_at(getCurrentPage() - 1)
+		spell.attributes.remove_at(getCurrentPage())
 		print(spell.attributes)
 		spell.components.remove_at(getCurrentPage() - 1)
 	reload(false)

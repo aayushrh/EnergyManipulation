@@ -5,7 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_8cbcg"]
 script = ExtResource("2_866so")
-expression = "x/100.0"
+name = "power"
+expression = "x*.01"
 suffix = "%"
 prefix = ""
 alias = "Power"
@@ -18,7 +19,8 @@ negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_j7ga1"]
 script = ExtResource("2_866so")
-expression = "2-x/100.0"
+name = "projectile_speed"
+expression = "2-x*.01"
 suffix = "%"
 prefix = ""
 alias = "Proj. Spd."
@@ -37,5 +39,4 @@ min = 50.0
 max = 150.0
 start = 100.0
 step = 5.0
-strings = Array[String](["power", "projectile_speed"])
 tags = Array[ExtResource("2_866so")]([SubResource("Resource_8cbcg"), SubResource("Resource_j7ga1")])

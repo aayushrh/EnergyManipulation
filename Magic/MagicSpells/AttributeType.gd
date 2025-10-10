@@ -1,6 +1,7 @@
 extends Resource
 class_name AttributeType
 
+@export var name : String = ""
 @export var expression : String = "x"
 @export var suffix : String = ""
 @export var prefix : String = ""

@@ -12,7 +12,7 @@ var RED = Color(1, .2, .2)
 var GREEN = Color(.2, 1, .2)
 var GREY = Color(1, 1, 1)
 var checks: Array[AttributesWrapper]
-var pageNum := 2
+var pageNum := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +25,9 @@ func _process(delta: float) -> void:
 func show_card(car):
 	antihomo()
 	if car != null:
+		refresh()
+		print(spell.attributes)
+		print(pageNum)
 		$ColorRect2._show(car)
 		var counter = 0
 		card = car
@@ -32,7 +35,7 @@ func show_card(car):
 			var check = checkAttributeExistence(c)
 			if(!check):
 				check = AttributesWrapper.new(c) #AttributesWrapper.new(c)
-				spell.attributes[pageNum - 2].append(check)
+				spell.attributes[pageNum].append(check)
 			checks.append(check)
 			var slide = slider.instantiate()
 			slide.value_changed.connect(updateVals)
@@ -44,6 +47,12 @@ func show_card(car):
 	else:
 		$ColorRect3.visible = true
 
+func refresh():
+	print(len(spell.components))
+	while(len(spell.attributes) < len(spell.components) + 1):
+		spell.attributes.insert(pageNum, [])
+
+
 func antihomo():
 	for i in $ColorRect/VScrollBar/VBoxContainer.get_children():
 		i.queue_free()
@@ -51,10 +60,9 @@ func antihomo():
 	checks = []
 
 func checkAttributeExistence(attribute):
-	for s in spell.attributes:
-		for t in s:
-			if(t.attr == attribute):
-				return t
+	for t in spell.attributes[pageNum]:
+		if(t.attr == attribute):
+			return t
 	return null
 
 func cook(dic: AttributesWrapper):
@@ -80,12 +88,9 @@ func cook(dic: AttributesWrapper):
 
 func change(num):
 	if(num >= 0):
+		pageNum = num
 		visible = true
-		if(num == 0):
-			card = spell.type
-		else:
-			card = spell.components[num-1]
-		show_card(card)
+		show_card(spell.type if num == 0 else spell.components[num - 1])
 
 func updateVals(val : float, at : int):
 	var num = at*2
