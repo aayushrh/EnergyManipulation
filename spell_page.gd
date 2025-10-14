@@ -96,6 +96,7 @@ func updateVals(val : float, at : int):
 	var num = at*2
 	if(checks[at]._updateValue(val)):
 		var i = 0
+		print(checks[at].d)
 		for key in checks[at].d:
 			gay[at][i].get_child(0).set("theme_override_colors/font_color", checks[at].getColor(key))
 			gay[at][i].get_child(1).set("theme_override_colors/font_color", checks[at].getColor(key))

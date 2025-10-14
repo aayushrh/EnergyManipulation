@@ -1,18 +1,112 @@
-[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://dvtb22581wdl4"]
+[gd_resource type="Resource" script_class="Attributes" load_steps=10 format=3 uid="uid://dvtb22581wdl4"]
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_sac1g"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_6aato"]
+
+[sub_resource type="Resource" id="Resource_6p6kv"]
+script = ExtResource("2_6aato")
+name = "cluster"
+expression = "x+1"
+suffix = ""
+prefix = "+"
+alias = "Cluster"
+default = 1.0
+displayExpo = 0
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_2cxds"]
+script = ExtResource("2_6aato")
+name = "power"
+expression = ".6/pow(x+1,0.5)"
+suffix = "%"
+prefix = ""
+alias = "Power"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_ldxl6"]
+script = ExtResource("2_6aato")
+name = "clash"
+expression = ".6/pow(x+1,0.5)"
+suffix = "%"
+prefix = ""
+alias = "Clash"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_grmle"]
+script = ExtResource("2_6aato")
+name = "size"
+expression = "1/(log(x+1)/log(100)+1)"
+suffix = "%"
+prefix = ""
+alias = "Size"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_dtn3w"]
+script = ExtResource("2_6aato")
+name = "cooldown"
+expression = "1*pow(x+1,0.5)"
+suffix = "%"
+prefix = ""
+alias = "Cooldown"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(1, 0, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(0, 1, 0, 1)
+
+[sub_resource type="Resource" id="Resource_npncj"]
+script = ExtResource("2_6aato")
+name = "casting_speed"
+expression = "1/pow(x+1,0.60206)"
+suffix = "%"
+prefix = "Cast. Spd."
+alias = ""
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_dwqdf"]
+script = ExtResource("2_6aato")
+name = "projectile_speed"
+expression = "2.86272752832/(log(x+1)/log(10)+2.86272752832)"
+suffix = "%"
+prefix = ""
+alias = "projectile_speed"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_sac1g")
 Ltext = "Cluster"
 Rtext = "Supreme"
-minL = 2.0
-maxL = 10.0
-minR = -85.0
-maxR = -30.0
-num = 0.0
+min = 0.0
+max = 8.0
+start = 0.0
 step = 1.0
-percentL = false
-percentR = true
-addL = 0.0
-addR = 100.0
+tags = Array[ExtResource("2_6aato")]([SubResource("Resource_6p6kv"), SubResource("Resource_2cxds"), SubResource("Resource_ldxl6"), SubResource("Resource_grmle"), SubResource("Resource_dtn3w"), SubResource("Resource_npncj"), SubResource("Resource_dwqdf")])

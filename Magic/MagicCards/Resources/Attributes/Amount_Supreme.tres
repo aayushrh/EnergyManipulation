@@ -10,7 +10,7 @@ expression = "x+1"
 suffix = ""
 prefix = "+"
 alias = "Amount"
-default = 0.0
+default = 1.0
 displayExpo = 0
 round = 0.01
 posColor = Color(0, 1, 0, 1)
@@ -48,7 +48,7 @@ negColor = Color(1, 0, 0, 1)
 [sub_resource type="Resource" id="Resource_vfcu2"]
 script = ExtResource("2_75am1")
 name = "size"
-expression = "1/(log(x+1)/log(10)+1)"
+expression = "1/(log(x+1)/log(100)+1)"
 suffix = "%"
 prefix = ""
 alias = "Size"
