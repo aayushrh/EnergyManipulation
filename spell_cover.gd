@@ -47,6 +47,7 @@ func on_open():
 			if(s.isElement):
 				elements.append(s);
 			else:
+				print("Made stylespin")
 				var t = img.instantiate()
 				t.num = n
 				n += 1

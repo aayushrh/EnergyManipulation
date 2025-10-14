@@ -1,6 +1,9 @@
 extends SpellCasted
 class_name Blast
 
+static var idTotal = 0
+
+var id = 0
 var v : Vector2 = Vector2.ZERO
 var speed : float = 1000
 var mult : float = 1
@@ -41,6 +44,9 @@ func getSpeed() -> float:
 	return speed * spell.getPSpeed() #* mult
 
 func _ready() -> void:
+	id = idTotal
+	idTotal += 1
+	
 	art = $Art
 	
 	if !spell.hasElement():
@@ -128,7 +134,7 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 			body.queue_free()
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName:
 		if(body.fuse && fuse && not body.isFused && not isFused):
-			if(body.global_position.x + body.global_position.y < global_position.x + global_position.y):
+			if(body.id < id):
 				var blast := BlastProj.instantiate()
 				var nspell := Spell.new("newThing")
 				blast.combined = true

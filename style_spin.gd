@@ -10,11 +10,13 @@ var tim = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#delta *= Global.getTimeScale()
+	print("im here pos: " + str($TextureRect.global_position))
 	tim += delta
-	global_position = center + dist * Vector2.UP.rotated(float(num+tim)/float(amt) * 2 * PI) * delta * 120
+	rotation_degrees = tim * 900 * delta + (float(num)/float(amt) * 360)
+	global_position = center
+	#global_position = center + dist * Vector2.UP.rotated(float(num+tim)/float(amt) * 2 * PI) * delta * 120
 	#$TextureRect2.scale = Vector2(1.3 + 0.2 * sin(tim*2),1.3 + 0.2 * sin(tim*2))
 	#$TextureRect2.position = Vector2(-20, -20) * $TextureRect2.scale.x
-
 
 
 func changeIcon(t):
