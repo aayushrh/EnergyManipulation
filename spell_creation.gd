@@ -184,7 +184,7 @@ func _on_delete_pressed():
 	if(pageNum - 1 <= spell.components.size()):
 		cardRemoved = spell.components[getCurrentPage() - 1]
 		spell.attributes.remove_at(getCurrentPage())
-		print(spell.attributes)
+		#print(spell.attributes)
 		spell.components.remove_at(getCurrentPage() - 1)
 	reload(false)
 	Global.magicCards.append(cardRemoved)

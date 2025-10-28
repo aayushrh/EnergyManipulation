@@ -26,8 +26,8 @@ func show_card(car):
 	antihomo()
 	if car != null:
 		refresh()
-		print(spell.attributes)
-		print(pageNum)
+		#print(spell.attributes)
+		#print(pageNum)
 		$ColorRect2._show(car)
 		var counter = 0
 		card = car
@@ -48,7 +48,7 @@ func show_card(car):
 		$ColorRect3.visible = true
 
 func refresh():
-	print(len(spell.components))
+	#print(len(spell.components))
 	while(len(spell.attributes) < len(spell.components) + 1):
 		spell.attributes.insert(pageNum, [])
 
@@ -96,7 +96,7 @@ func updateVals(val : float, at : int):
 	var num = at*2
 	if(checks[at]._updateValue(val)):
 		var i = 0
-		print(checks[at].d)
+		#print(checks[at].d)
 		for key in checks[at].d:
 			gay[at][i].get_child(0).set("theme_override_colors/font_color", checks[at].getColor(key))
 			gay[at][i].get_child(1).set("theme_override_colors/font_color", checks[at].getColor(key))

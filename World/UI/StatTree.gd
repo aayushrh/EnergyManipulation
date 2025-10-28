@@ -10,7 +10,7 @@ var free = Global.free : set = _freeChange
 
 func _ready():
 	update()
-	print(Global.free)
+	#print(Global.free)
 	free = Global.free
 	Global.pause[1] = 1
 
@@ -55,7 +55,7 @@ func _on_intel_pressed():
 		intel += 1
 		get_tree().current_scene.player.intel *= 1.025
 		update()
-		print(get_tree().current_scene.player.intel)
+		#print(get_tree().current_scene.player.intel)
 
 func _on_wisdom_pressed():
 	if isValidPress():

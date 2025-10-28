@@ -10,7 +10,7 @@ var tim = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#delta *= Global.getTimeScale()
-	print("im here pos: " + str($TextureRect.global_position))
+	#print("im here pos: " + str($TextureRect.global_position))
 	tim += delta
 	rotation_degrees = tim * 900 * delta + (float(num)/float(amt) * 360)
 	global_position = center
