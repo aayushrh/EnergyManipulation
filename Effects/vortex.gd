@@ -50,8 +50,9 @@ func _process(delta):
 	rotation_degrees -= 180 * delta
 	color_change(delta)
 	if spell != null and !Global.isPaused():
-		var suctionPower = spell.getAttrScaled("Suction Power") * 50
-		
+		var suctionPower = spell.getAttrScaled("Suction_Power") * 50
+		$"Vortex(2)".scale = Vector2(suctionPower/25, suctionPower/25)
+		$Area2D/CollisionShape2D.scale = Vector2(suctionPower/25, suctionPower/25)
 		var hasV = false
 		for i in bodiesIn:
 			for j in i.get_children():
@@ -64,7 +65,7 @@ func _process(delta):
 				if i is CharacterBody2D and !hasV:
 					timer -= delta
 					if(timer <= 0):
-						i.commit_dmg(-spell.getPower() * spell.getAttrScaled("Suction Damage") * 2.5 / max(pow(i.global_position.distance_to(global_position) / spell.getSize() * 10,0.5),0.5)/6, {"type": "vortex", "color": Color(0.01,0.01,0.01)})
+						i.commit_dmg(-spell.getPower() * spell.getAttrScaled("Suction_Damage") * 2.5 / max(pow(i.global_position.distance_to(global_position) / spell.getSize() * 10,0.5),0.5)/6, {"type": "vortex", "color": Color(0.01,0.01,0.01)})
 						timer = tickRate
 					if !i.slow:
 						i.velocity -= (i.global_position - global_position).normalized() * suctionPower
