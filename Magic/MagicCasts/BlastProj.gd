@@ -110,12 +110,14 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 					if shrapnel >= 1:
 						for num in range(shrapnel):
 							var blastProj := BlastProj.instantiate()
-							blastProj.speed = speed
+							blastProj.speed = speed * spell.getAttrScaled("shrapnel_projectile_speed")
 							blastProj.sender = sender
 							blastProj.mult = 1 #spellObj.chargeMulti
 							blastProj.global_position = area.global_position
 							blastProj.id = id
 							blastProj._setSpell(spell.create())
+							blastProj._setPower(power * spell.getAttrScaled("shrapnel_power"))
+							blastProj._setSize(scale * spell.getAttrScaled("shrapnel_size"))
 							var direction = velocity.normalized()
 							var range = 0.5*log(shrapnel + 2)
 							var aoffset = (((float)(num - shrapnel / 2))/(float)(shrapnel)) * range
