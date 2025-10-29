@@ -62,12 +62,16 @@ func _shoot() -> void:
 	
 	var cluster = spell.getCluster()
 	
+	var id = Blast.idTotal
+	Blast.idTotal += 1
+	
 	for i in range(cluster):
 		var blastProj := BlastProj.instantiate()
 		blastProj.speed = speed
 		blastProj.sender = sender
 		blastProj.mult = chargeMulti
 		blastProj.global_position = global_position
+		blastProj.id = id
 		blastProj._setSpell(spell.create())
 		if cluster >= 2:
 			var range = log(cluster)
