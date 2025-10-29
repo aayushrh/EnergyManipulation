@@ -136,9 +136,10 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 			for i : ComponentSpellCard in body.spell.components:
 				i.callVisualHitEffects(body)
 			body.queue_free()
-	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName:
+	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName and body.id != id:
 		if(body.fuse && fuse && not body.isFused && not isFused):
 			if(body.id < id):
+				print("fused, id = " + id)
 				var blast := BlastProj.instantiate()
 				var nspell := Spell.new("newThing")
 				blast.combined = true
