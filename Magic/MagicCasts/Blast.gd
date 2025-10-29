@@ -15,6 +15,7 @@ var buttonLetGo : bool = false
 var castingCost = 0
 var slow : bool = true
 var startingLocation : Vector2 = Vector2.ZERO
+var id = -1;
 
 @onready var BlastProj := preload("res://Magic/MagicCasts/BlastProj.tscn")
 
@@ -47,6 +48,8 @@ func _ready() -> void:
 	if spell != null:
 		for i : ComponentSpellCard in spell.components:
 			i.callCastingEffects(self)
+	var id = Blast.idTotal
+	Blast.idTotal += 1
 
 func setStartingLoc(pos : Vector2) -> void:
 	startingLocation = pos
@@ -61,9 +64,6 @@ func _shoot() -> void:
 		direction = Vector2(cos(angle + PI), sin(angle + PI))
 	
 	var cluster = spell.getCluster()
-	
-	var id = Blast.idTotal
-	Blast.idTotal += 1
 	
 	for i in range(cluster):
 		var blastProj := BlastProj.instantiate()
