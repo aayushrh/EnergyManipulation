@@ -75,6 +75,7 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 				blastProj.mult = 1 #spellObj.chargeMulti
 				blastProj.global_position = enemy.global_position
 				blastProj._setSpell(spellObj.spell.create())
+				blastProj.id = spellObj.id
 				var direction = spellObj.velocity.normalized()
 				var range = 0.5*log(shrapnel + 2)
 				var aoffset = (((float)(i - shrapnel / 2))/(float)(shrapnel)) * range

@@ -3,7 +3,7 @@ class_name Blast
 
 static var idTotal = 0
 
-var id = 0
+var id = -1
 var v : Vector2 = Vector2.ZERO
 var speed : float = 1000
 var mult : float = 1
@@ -44,8 +44,9 @@ func getSpeed() -> float:
 	return speed * spell.getPSpeed() #* mult
 
 func _ready() -> void:
-	id = idTotal
-	idTotal += 1
+	if id == -1:
+		id = idTotal
+		idTotal += 1
 	
 	art = $Art
 	
@@ -113,6 +114,7 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 							blastProj.sender = sender
 							blastProj.mult = 1 #spellObj.chargeMulti
 							blastProj.global_position = area.global_position
+							blastProj.id = id
 							blastProj._setSpell(spell.create())
 							var direction = velocity.normalized()
 							var range = 0.5*log(shrapnel + 2)
