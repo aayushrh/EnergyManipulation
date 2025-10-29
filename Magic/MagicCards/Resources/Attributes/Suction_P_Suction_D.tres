@@ -1,16 +1,42 @@
-[gd_resource type="Resource" script_class="Attributes" load_steps=2 format=3 uid="uid://5fw8y15de5eq"]
+[gd_resource type="Resource" script_class="Attributes" load_steps=5 format=3 uid="uid://5fw8y15de5eq"]
 
 [ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_lymbn"]
+[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_aailx"]
+
+[sub_resource type="Resource" id="Resource_8nm1w"]
+script = ExtResource("2_aailx")
+name = "suction_power"
+expression = "x*.01"
+suffix = "%"
+prefix = ""
+alias = "Suction Power"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_4448j"]
+script = ExtResource("2_aailx")
+name = "suction_damage"
+expression = "2-x*0.01"
+suffix = "%"
+prefix = ""
+alias = "Suction Damage"
+default = 1.0
+displayExpo = 2
+round = 0.01
+posColor = Color(0, 1, 0, 1)
+defColor = Color(0.6, 0.6, 0.6, 1)
+negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_lymbn")
 Ltext = "Suction Power"
 Rtext = "Suction Damage"
-minL = -50.0
-maxL = 50.0
-minR = -50.0
-maxR = 50.0
-num = 0.0
-step = 1.0
-percentL = true
-percentR = true
+min = 50.0
+max = 150.0
+start = 100.0
+step = 5.0
+tags = Array[ExtResource("2_aailx")]([SubResource("Resource_8nm1w"), SubResource("Resource_4448j")])
