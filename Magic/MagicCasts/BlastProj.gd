@@ -139,7 +139,6 @@ func _on_area_2d_area_entered(area : Area2D) -> void:
 	elif(body is Blast and is_instance_valid(body.sender) and is_instance_valid(sender) and body.sender.type == sender.type) and body.spell.type == spell.type and body.spell.spellName != spell.spellName and body.id != id:
 		if(body.fuse && fuse && not body.isFused && not isFused):
 			if(body.id < id):
-				print("fused, id = " + id)
 				var blast := BlastProj.instantiate()
 				var nspell := Spell.new("newThing")
 				blast.combined = true
