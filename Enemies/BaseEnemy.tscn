@@ -7,11 +7,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nw1a5"]
 radius = 25.0
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("softBody", "enemyArt")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("enemyArt")]
 collision_layer = 2
 collision_mask = 10
 script = ExtResource("1_43cok")
-softBody = NodePath("")
 enemyArt = NodePath("EnemyArt")
 
 [node name="SoftBody" parent="." instance=ExtResource("2_3kctb")]

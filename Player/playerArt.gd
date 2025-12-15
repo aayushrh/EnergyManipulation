@@ -4,6 +4,8 @@ var order = 1
 var queued = false
 var punching = false
 
+@export var animationTree : AnimationTree
+
 signal hit
 
 func _click():
@@ -12,6 +14,19 @@ func _click():
 	else:
 		order = 1
 		_hit()
+
+func _process(delta):
+	global_rotation_degrees = 0;
+	animationTree.set("parameters/BlendTree/TimeScale/scale", Global.timeScale)
+
+func _set_velocity(velocity : Vector2):
+	animationTree.set("parameters/BlendTree/StateMachine/conditions/run", velocity.length() > 70 * Global.timeScale)
+	animationTree.set("parameters/BlendTree/StateMachine/conditions/idle", velocity.length() < 70 * Global.timeScale)
+	$Sprite.flip_h = velocity.x < 0
+	
+func _dash(cur):
+	animationTree.set("parameters/BlendTree/StateMachine/conditions/dash", cur)
+	animationTree.set("parameters/BlendTree/StateMachine/conditions/stop_dash", !cur)
 
 func _block():
 	if($AnimationPlayer.is_playing()):

@@ -133,6 +133,7 @@ func _process(delta):
 	if(Global.isPaused()):
 		$PlayerArt._unblock()
 		blocking = false
+	$PlayerArt._set_velocity(velocity)
 
 func set_dash_cd(f: float):
 	DASHCD = f
@@ -343,6 +344,7 @@ func _doubleClickCheck(delta):
 
 func dash(dir):
 	if(dashCharges > 0):#canDash()):
+		$PlayerArt._dash(true)
 		velocity = dir * DASHSPEED * speedModifier
 		dashing = true
 		dashTimed = DASHTIME
@@ -468,6 +470,7 @@ func doneCasting():
 	casting = false
 
 func _on_dashing_timer_timeout():
+	$PlayerArt._dash(false)
 	dashing = false
 
 func _hit_register():

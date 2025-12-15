@@ -17,7 +17,7 @@ radius = 38.0132
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HurtBackground")]
 script = ExtResource("1_u8cgp")
 ACCELERATION = 5000.0
-FRICTION = 0.03
+FRICTION = 0.001
 TOPSPEED = 500.0
 TURNINGSPEED = 1.0
 DASHSPEED = 3000.0
