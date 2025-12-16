@@ -7,15 +7,14 @@
 colors = PackedColorArray(0, 1, 0.16078432, 1, 0.5882353, 1, 0.40392157, 0)
 
 [node name="Poison" type="CPUParticles2D"]
-amount = 100
+amount = 50
 texture = ExtResource("1_20mwp")
 lifetime = 0.35000000000000003
 speed_scale = 0.5
 emission_shape = 1
-emission_sphere_radius = 25.0
+emission_sphere_radius = 40.0
 spread = 180.0
 gravity = Vector2(0, -980)
-initial_velocity_min = 100.0
 initial_velocity_max = 200.0
 angle_max = 360.0
 scale_amount_min = 0.04
