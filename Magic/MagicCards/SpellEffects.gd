@@ -106,13 +106,16 @@ func shrapnelProc(spellObj:SpellCasted, enemy):
 
 func takeHealth(spellObj:SpellCasted):
 	if !spellObj.isShrapnel:
-		if(spellObj.sender is BasicEnemy):
-			spellObj.sender.fuck = true
 		if(!spellObj.combined):
 			if(spellObj.sender.health + 0.001 >= 0.5 * spellObj.spell.getPower() * spellObj.mult):
-				spellObj.sender.commit_dmg(-0.5 * spellObj.spell.getPower() * spellObj.mult, {"type": "Drawback", "color": Color(0, 0.5, 0)})
+				spellObj.sender.commit_dmg(-0.5 * spellObj.spell.getPower() * spellObj.mult, {"type": "drawback", "color": Color(0, 0.5, 0)})
 			else:
-				spellObj.sender.commit_dmg(-spellObj.sender.health + 0.001, {"type": "Drawback", "color": Color(0, 0.5, 0)})
+				spellObj.sender.commit_dmg(-spellObj.sender.health + 0.001, {"type": "drawback", "color": Color(0, 0.5, 0)})
+
+func addPoison(dmgRed, spellObj:SpellCasted, enemy):
+	if(enemy != null && dmgRed < 1):
+		var burning = Burning.new((1.0 - dmgRed) * 2.5, spellObj.spell.getPower())
+		enemy.attachEffect(burning)
 
 func unbound(spellObj:SpellCast):
 	spellObj.slow = false

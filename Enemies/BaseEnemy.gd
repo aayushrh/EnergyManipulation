@@ -12,7 +12,6 @@ var nomoveinput : bool = false
 var fuck : bool = false # fuck nature
 var moveDir : float = 0.0
 var healing : float = 1.0
-var bonusHealBlock : bool = false
 var agg : bool = false
 var pause : bool = false
 var blinded : bool = false
@@ -74,8 +73,6 @@ func _physics_process(delta):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		if(!bonusHealBlock):
-			change = change * healing
 		while(change/pow(2,floor(health/MAXHEALTH)) > MAXHEALTH * floor(health/MAXHEALTH + 1) - health):
 			var chamt = MAXHEALTH * floor(health/MAXHEALTH + 1) - health
 			change -= chamt * pow(2,floor(health/MAXHEALTH))

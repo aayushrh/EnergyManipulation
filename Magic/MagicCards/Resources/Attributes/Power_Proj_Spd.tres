@@ -1,35 +1,25 @@
 [gd_resource type="Resource" script_class="Attributes" load_steps=5 format=3 uid="uid://cdhj6qtyw15iu"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_1gawn"]
-[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_866so"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_1gawn"]
+[ext_resource type="Script" uid="uid://dkkxsxna627av" path="res://Magic/MagicSpells/AttributeType.gd" id="2_866so"]
 
 [sub_resource type="Resource" id="Resource_8cbcg"]
 script = ExtResource("2_866so")
 name = "power"
 expression = "x*.01"
 suffix = "%"
-prefix = ""
 alias = "Power"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_j7ga1"]
 script = ExtResource("2_866so")
 name = "projectile_speed"
 expression = "2-x*.01"
 suffix = "%"
-prefix = ""
 alias = "Proj. Spd."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_1gawn")

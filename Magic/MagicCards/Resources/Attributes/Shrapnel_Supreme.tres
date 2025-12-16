@@ -1,76 +1,52 @@
 [gd_resource type="Resource" script_class="Attributes" load_steps=10 format=3 uid="uid://bfwbdrvqmr26d"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_bdndy"]
-[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_0pm8u"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_bdndy"]
+[ext_resource type="Script" uid="uid://dkkxsxna627av" path="res://Magic/MagicSpells/AttributeType.gd" id="2_0pm8u"]
 
 [sub_resource type="Resource" id="Resource_w0o15"]
 script = ExtResource("2_0pm8u")
 name = "shrapnel"
 expression = "x + 1"
-suffix = ""
 prefix = "+"
 alias = "Shrapnel"
 default = 1.0
-displayExpo = 0
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_lxsy1"]
 script = ExtResource("2_0pm8u")
 name = "shrapnel_power"
 expression = ".6/pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Shrap. Pwr."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_bypo0"]
 script = ExtResource("2_0pm8u")
 name = "shrapnel_clash"
 expression = ".6/pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Shrap. Clash"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_b4y8i"]
 script = ExtResource("2_0pm8u")
 name = "shrapnel_size"
 expression = "1/(log(x+1)/log(100)+1)"
 suffix = "%"
-prefix = ""
 alias = "Shrap. Size"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_wonb6"]
 script = ExtResource("2_0pm8u")
 name = "cooldown"
 expression = "1*pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Cooldown"
 default = 1.0
 displayExpo = 2
-round = 0.01
 posColor = Color(1, 0, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
 negColor = Color(0, 1, 0, 1)
 
 [sub_resource type="Resource" id="Resource_1nyd5"]
@@ -78,35 +54,22 @@ script = ExtResource("2_0pm8u")
 name = "casting speed"
 expression = "1/pow(x+1,0.60206)"
 suffix = "%"
-prefix = ""
 alias = "Cast. Spd."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_tj4r1"]
 script = ExtResource("2_0pm8u")
 name = "shrapnel_projectile_speed"
 expression = "2.86272752832/(log(x+1)/log(10)+2.86272752832)"
 suffix = "%"
-prefix = ""
 alias = "Shrap. Proj. Spd."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_bdndy")
 Ltext = "Shrapnel"
 Rtext = "Supreme"
-min = 0.0
 max = 8.0
-start = 0.0
-step = 1.0
 tags = Array[ExtResource("2_0pm8u")]([SubResource("Resource_w0o15"), SubResource("Resource_lxsy1"), SubResource("Resource_bypo0"), SubResource("Resource_b4y8i"), SubResource("Resource_wonb6"), SubResource("Resource_1nyd5"), SubResource("Resource_tj4r1")])

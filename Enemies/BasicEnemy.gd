@@ -21,13 +21,11 @@ var canDash : bool = true
 var type : int = 1
 var nomoveinput : bool = false
 var wisdom : float = 1.0
-var fuck : bool = false # fuck nature
 var dodgeDir : int = 0
 var moveDir : float = 0.0
 var blast = null
 var casting : bool = false
 var healing : float = 1.0
-var bonusHealBlock : bool = false
 var MAXHEALTH : float = 0
 var MAXMANA : float = 100.0 : set = _max_mana_change
 var agg : bool = false#(randi_range(0,1)==0)
@@ -201,8 +199,6 @@ func _intel_change(newInt: float):
 func _health_change(newHP: float):
 	var change = newHP - health
 	if(change > 0):
-		if(!bonusHealBlock):
-			change = change * healing
 		while(change/pow(2,floor(health/MAXHEALTH)) > MAXHEALTH * floor(health/MAXHEALTH + 1) - health):
 			var chamt = MAXHEALTH * floor(health/MAXHEALTH + 1) - health
 			change -= chamt * pow(2,floor(health/MAXHEALTH))
@@ -213,8 +209,6 @@ func _health_change(newHP: float):
 	elif(change < 0):
 		health += change
 		if (get_tree()!=null):
-			if(!fuck):
-				get_tree().current_scene.damageDealt -= change
 			if(health <= 0):
 				$EnemyArt._kill()
 				pause = true
@@ -233,7 +227,6 @@ func _health_change(newHP: float):
 			pass
 	healthbar.get_actual_health().size.x = min((health * HPBARMULT)/(MAXHEALTH*1.0),HPBARMULT)
 	healthbar.get_over_health().size.x = (health * HPBARMULT)/(MAXHEALTH*1.0)
-	fuck = false
 	
 func commit_dmg(change: float, dict := {}):
 	var c : Color
@@ -262,6 +255,8 @@ func commit_dmg(change: float, dict := {}):
 	var oh = health
 	health += change * healing if change > 0 and heal else change
 	cng = health - oh
+	if(cng < 0 && type != "drawback"):
+		get_tree().current_scene.damageDealt -= cng
 	inc = Color(1,1,1) if not inc else inc
 	if(show):
 		display_dmg(cng, c, inc, type, thing)

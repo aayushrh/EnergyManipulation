@@ -1,76 +1,52 @@
 [gd_resource type="Resource" script_class="Attributes" load_steps=10 format=3 uid="uid://c1j71um22n1vs"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_im80p"]
-[ext_resource type="Script" path="res://Magic/MagicSpells/AttributeType.gd" id="2_75am1"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_im80p"]
+[ext_resource type="Script" uid="uid://dkkxsxna627av" path="res://Magic/MagicSpells/AttributeType.gd" id="2_75am1"]
 
 [sub_resource type="Resource" id="Resource_dcsqv"]
 script = ExtResource("2_75am1")
 name = "amount"
 expression = "x+1"
-suffix = ""
 prefix = "+"
 alias = "Amount"
 default = 1.0
-displayExpo = 0
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_h6pno"]
 script = ExtResource("2_75am1")
 name = "power"
 expression = ".75/pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Power"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_xsifj"]
 script = ExtResource("2_75am1")
 name = "clash"
 expression = ".75/pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Clash Power"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_vfcu2"]
 script = ExtResource("2_75am1")
 name = "size"
 expression = "1/(log(x+1)/log(100)+1)"
 suffix = "%"
-prefix = ""
 alias = "Size"
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_qd2kp"]
 script = ExtResource("2_75am1")
 name = "cooldown"
 expression = "1*pow(x+1,0.5)"
 suffix = "%"
-prefix = ""
 alias = "Cooldown"
 default = 1.0
 displayExpo = 2
-round = 0.01
 posColor = Color(1, 0, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
 negColor = Color(0, 1, 0, 1)
 
 [sub_resource type="Resource" id="Resource_gra0m"]
@@ -78,35 +54,22 @@ script = ExtResource("2_75am1")
 name = "casting_speed"
 expression = "1/pow(x+1,0.60206)"
 suffix = "%"
-prefix = ""
 alias = "Cast. Spd."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_6m7vc"]
 script = ExtResource("2_75am1")
 name = "projectile_speed"
 expression = "2.86272752832/(log(x+1)/log(10)+2.86272752832)"
 suffix = "%"
-prefix = ""
 alias = "Proj. Spd."
 default = 1.0
 displayExpo = 2
-round = 0.01
-posColor = Color(0, 1, 0, 1)
-defColor = Color(0.6, 0.6, 0.6, 1)
-negColor = Color(1, 0, 0, 1)
 
 [resource]
 script = ExtResource("1_im80p")
 Ltext = "Amount"
 Rtext = "Supreme"
-min = 0.0
 max = 8.0
-start = 0.0
-step = 1.0
 tags = Array[ExtResource("2_75am1")]([SubResource("Resource_dcsqv"), SubResource("Resource_h6pno"), SubResource("Resource_xsifj"), SubResource("Resource_vfcu2"), SubResource("Resource_qd2kp"), SubResource("Resource_gra0m"), SubResource("Resource_6m7vc")])
