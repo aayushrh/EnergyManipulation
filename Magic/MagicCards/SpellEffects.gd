@@ -114,7 +114,7 @@ func takeHealth(spellObj:SpellCasted):
 
 func addPoison(dmgRed, spellObj:SpellCasted, enemy):
 	if(enemy != null && dmgRed < 1):
-		var burning = Burning.new((1.0 - dmgRed) * 2.5, spellObj.spell.getPower())
+		var burning = Poisoned.new((1.0 - dmgRed) * 2.5, spellObj.spell.getPower())
 		enemy.attachEffect(burning)
 
 func unbound(spellObj:SpellCast):

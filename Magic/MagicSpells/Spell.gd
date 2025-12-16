@@ -124,6 +124,12 @@ func getPower() -> float:
 			p *= i.powerMult
 	return p * intel
 
+func getPoison() -> float:
+	for c in components:
+		if (c.cardName == "Nature"):
+			return 0
+	return 1
+
 func getPSpeed() -> float:
 	var ps : float = getAttrScaled("Projectile_Speed")
 	if(components != null):

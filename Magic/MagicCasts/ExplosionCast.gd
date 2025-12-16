@@ -60,5 +60,5 @@ func explode() -> void:
 
 func damageTaken() -> float:
 	if !setPower:
-		return spell.getPower() * ((mult - 1) / 2.0 + 1)
+		return spell.getPower() * ((mult - 1) / 2.0 + 1) * spell.getPoison()
 	return power

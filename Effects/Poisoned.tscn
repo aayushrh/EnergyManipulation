@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://do13kcip3rtl3"]
+
+[ext_resource type="Texture2D" uid="uid://ubq6uwtbjkht" path="res://Art/whiteCircle.png" id="1_20mwp"]
+[ext_resource type="Script" uid="uid://c4eodinnwmauc" path="res://Effects/VFXIndentifier.gd" id="2_bt46p"]
+
+[sub_resource type="Gradient" id="Gradient_fvdh6"]
+colors = PackedColorArray(0, 1, 0.16078432, 1, 0.5882353, 1, 0.40392157, 0)
+
+[node name="Poison" type="CPUParticles2D"]
+amount = 100
+texture = ExtResource("1_20mwp")
+lifetime = 0.35000000000000003
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 25.0
+spread = 180.0
+gravity = Vector2(0, -980)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.04
+scale_amount_max = 0.06
+color_ramp = SubResource("Gradient_fvdh6")
+script = ExtResource("2_bt46p")
+vfxName = "Poison"
