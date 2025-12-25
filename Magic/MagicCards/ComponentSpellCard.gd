@@ -27,6 +27,7 @@ enum{
 @export var sizeMult : float
 @export var castingSpeedMult : float
 @export var attribute : Array[Attributes]
+@export var tags : Array[String]
 @export var clashingAdvantage : float = 1.0
 @export var isElement : bool
 

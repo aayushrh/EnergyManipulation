@@ -42,12 +42,13 @@ func take_dmg(entity:Node2D) -> void:
 func tick_lifeTime(delta:float):
 	
 	for l in len(lifeTimeStack):
-		lifeTimeStack[l] -= delta
-		lifetime = min(lifeTimeStack[l], lifetime)
-		if lifeTimeStack[l] < 0:
-			lifeTimeStack.remove_at(l)
-			dmgStack.remove_at(l)
-			l -= 1
+		if (l < len(lifeTimeStack)):
+			lifeTimeStack[l] -= delta
+			lifetime = min(lifeTimeStack[l], lifetime)
+			if lifeTimeStack[l] < 0:
+				lifeTimeStack.remove_at(l)
+				dmgStack.remove_at(l)
+				l -= 1
 
 func _stack(entity : Effects) -> void:
 	if(entity.effectName == effectName):

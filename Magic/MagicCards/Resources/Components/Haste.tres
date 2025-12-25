@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://bc4w4qn0qflj6"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_llqmq"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_d6yn1"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_llqmq"]
+[ext_resource type="Script" uid="uid://bd3nowgi6huvj" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_d6yn1"]
 [ext_resource type="Texture2D" uid="uid://cqlqy6maiphbm" path="res://Art/pegasus.png" id="2_fdds6"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="3_kiea3"]
 
@@ -10,11 +10,6 @@ script = ExtResource("2_d6yn1")
 spellEffects = ExtResource("3_kiea3")
 cardName = "Haste"
 cardDescription = "Decreases your cooldown by 25%"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
-startEffects = Array[String]([])
-blockEffects = Array[String]([])
-castingEffects = Array[String]([])
 color = Color(0.686275, 0.686275, 0.686275, 1)
 icon = ExtResource("2_fdds6")
 cdMult = 0.75
@@ -23,6 +18,4 @@ powerMult = 1.0
 attackSpeedMult = 0.95
 sizeMult = 1.0
 castingSpeedMult = 0.95
-attribute = Array[ExtResource("1_llqmq")]([])
-clashingAdvantage = 1.0
-isElement = false
+tags = Array[String](["light", "electric"])

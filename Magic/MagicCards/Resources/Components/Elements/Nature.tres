@@ -24,5 +24,6 @@ powerMult = 1.0
 attackSpeedMult = 0.75
 sizeMult = 0.9
 castingSpeedMult = 0.9
+tags = Array[String](["nature"])
 clashingAdvantage = 0.75
 isElement = true

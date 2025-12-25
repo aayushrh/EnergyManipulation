@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=5 format=3 uid="uid://vj56ldubctv8"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_28dgm"]
-[ext_resource type="Texture2D" uid="uid://ckjjo8b072ehe" path="res://Art/Placed.png" id="2_hjxxo"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_icsiv"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_28dgm"]
+[ext_resource type="Texture2D" uid="uid://c3ps6qwb4fsro" path="res://Art/Placed.png" id="2_hjxxo"]
+[ext_resource type="Script" uid="uid://bd3nowgi6huvj" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_icsiv"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_01kmq"]
 
 [resource]
@@ -10,10 +10,6 @@ script = ExtResource("2_icsiv")
 spellEffects = ExtResource("4_01kmq")
 cardName = "Placed"
 cardDescription = "Changes the starting position of your spell to the mousePosition when you casted said spell"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
-startEffects = Array[String]([])
-blockEffects = Array[String]([])
 castingEffects = Array[String](["changePosToMouse"])
 color = Color(1, 1, 1, 1)
 icon = ExtResource("2_hjxxo")
@@ -23,6 +19,4 @@ powerMult = 1.0
 attackSpeedMult = 1.0
 sizeMult = 0.5
 castingSpeedMult = 1.0
-attribute = Array[ExtResource("1_28dgm")]([])
-clashingAdvantage = 1.0
-isElement = false
+tags = Array[String](["offensive"])

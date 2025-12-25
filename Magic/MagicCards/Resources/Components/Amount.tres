@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=6 format=3 uid="uid://eh4y7oyvhxw7"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_8n1ix"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_34tte"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_8n1ix"]
+[ext_resource type="Script" uid="uid://bd3nowgi6huvj" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_34tte"]
 [ext_resource type="Resource" uid="uid://c1j71um22n1vs" path="res://Magic/MagicCards/Resources/Attributes/Amount_Supreme.tres" id="2_lqxca"]
-[ext_resource type="Texture2D" uid="uid://dq2legxu4w2pm" path="res://Art/Amount.png" id="3_xbfqk"]
+[ext_resource type="Texture2D" uid="uid://dr0mkj5m7ibbd" path="res://Art/Amount.png" id="3_xbfqk"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="5_0vgjg"]
 
 [resource]
@@ -11,11 +11,6 @@ script = ExtResource("2_34tte")
 spellEffects = ExtResource("5_0vgjg")
 cardName = "Amount"
 cardDescription = "Changes the amount of the spell you cast in a row"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
-startEffects = Array[String]([])
-blockEffects = Array[String]([])
-castingEffects = Array[String]([])
 color = Color(0.509804, 0.509804, 0.509804, 1)
 icon = ExtResource("3_xbfqk")
 cdMult = 1.2
@@ -25,5 +20,4 @@ attackSpeedMult = 1.0
 sizeMult = 1.0
 castingSpeedMult = 1.0
 attribute = Array[ExtResource("1_8n1ix")]([ExtResource("2_lqxca")])
-clashingAdvantage = 1.0
-isElement = false
+tags = Array[String](["offensive", "fire", "light"])

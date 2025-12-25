@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://4t10t75oom4y" path="res://Effects/FireHit.tscn" id="1_5xhal"]
 [ext_resource type="PackedScene" uid="uid://cv7ctjy2t1vta" path="res://Effects/Fire.tscn" id="2_1qnc8"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_dtym7"]
+[ext_resource type="Script" uid="uid://bd3nowgi6huvj" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="3_dtym7"]
 [ext_resource type="Texture2D" uid="uid://k38t2nurtyaw" path="res://Art/fire-zone.png" id="3_g8ubt"]
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="3_uevfr"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="3_uevfr"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="4_c6np5"]
 
 [resource]
@@ -12,11 +12,7 @@ script = ExtResource("3_dtym7")
 spellEffects = ExtResource("4_c6np5")
 cardName = "Fire"
 cardDescription = "Imbues the spell with fire and attaches burning to the target once hit"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
-startEffects = Array[String]([])
 blockEffects = Array[String](["addBurning"])
-castingEffects = Array[String]([])
 HitVFX = ExtResource("1_5xhal")
 StartVFX = ExtResource("2_1qnc8")
 color = Color(1, 0.192157, 0, 1)
@@ -27,6 +23,5 @@ powerMult = 1.1
 attackSpeedMult = 0.8
 sizeMult = 1.0
 castingSpeedMult = 0.8
-attribute = Array[ExtResource("3_uevfr")]([])
-clashingAdvantage = 1.0
+tags = Array[String](["fire"])
 isElement = true

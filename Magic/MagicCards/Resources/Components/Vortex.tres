@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ComponentSpellCard" load_steps=6 format=3 uid="uid://dsvsnjbntmnj3"]
 
-[ext_resource type="Script" path="res://Magic/MagicSpells/Attributes.gd" id="1_cjc48"]
-[ext_resource type="Script" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_wo8yl"]
+[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_cjc48"]
+[ext_resource type="Script" uid="uid://bd3nowgi6huvj" path="res://Magic/MagicCards/ComponentSpellCard.gd" id="2_wo8yl"]
 [ext_resource type="Texture2D" uid="uid://dg1jfkaulxkqm" path="res://Art/vortex (2).png" id="3_8l16w"]
 [ext_resource type="Resource" uid="uid://5fw8y15de5eq" path="res://Magic/MagicCards/Resources/Attributes/Suction_P_Suction_D.tres" id="3_kye65"]
 [ext_resource type="Resource" uid="uid://cewcbihcpnife" path="res://Magic/MagicCards/Resources/SpellEffects.tres" id="5_sjd8h"]
@@ -11,12 +11,7 @@ script = ExtResource("2_wo8yl")
 spellEffects = ExtResource("5_sjd8h")
 cardName = "Vortex"
 cardDescription = "spawns a vortex around your spell that pulls enemies and projectiles in and damages them, at the cost of half the damage"
-hitEffects = Array[String]([])
-ongoingEffects = Array[String]([])
 startEffects = Array[String](["addVortex"])
-blockEffects = Array[String]([])
-castingEffects = Array[String]([])
-color = Color(0, 0, 0, 1)
 icon = ExtResource("3_8l16w")
 cdMult = 1.2
 costMult = 1.2
@@ -25,5 +20,4 @@ attackSpeedMult = 1.0
 sizeMult = 1.0
 castingSpeedMult = 1.0
 attribute = Array[ExtResource("1_cjc48")]([ExtResource("3_kye65")])
-clashingAdvantage = 1.0
-isElement = false
+tags = Array[String](["dark", "water"])

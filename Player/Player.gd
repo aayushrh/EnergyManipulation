@@ -72,6 +72,8 @@ var dmgNum = {}
 var manaRegen := 0.0
 var speedModifier := 1.0
 
+var testTag := Tag.new()
+
 func _ready():
 	#updateEnergy()
 	$PlayerArt.hit.connect(_shockwave)

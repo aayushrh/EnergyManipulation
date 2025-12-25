@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1ih3khnb752"]
 
 [ext_resource type="FontFile" uid="uid://tffy4cxls2dq" path="res://Art/KodeMono-Regular.ttf" id="1_rntnr"]
-[ext_resource type="Script" path="res://Magic/MagicCards/MagicCardButton.gd" id="1_yqehn"]
+[ext_resource type="Script" uid="uid://byfc525so2j8w" path="res://Magic/MagicCards/MagicCardButton.gd" id="1_yqehn"]
 [ext_resource type="Texture2D" uid="uid://gfadr1fql6h1" path="res://Art/boar.png" id="2_oov5a"]
 
 [node name="Button" type="Button"]
