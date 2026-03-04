@@ -16,7 +16,7 @@ func _click():
 		_hit()
 
 func _process(delta):
-	global_rotation_degrees = 0;
+	#global_rotation_degrees = 0;
 	animationTree.set("parameters/BlendTree/TimeScale/scale", Global.timeScale)
 
 func _set_velocity(velocity : Vector2):

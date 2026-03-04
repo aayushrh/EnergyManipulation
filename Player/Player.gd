@@ -296,12 +296,14 @@ func magic_check(delta):
 			if Input.is_key_pressed(e.binding):
 				hit = true
 			if Input.is_key_pressed(e.binding) and !onLastTurn and e.cooldown < 0 and !casting and stored_energy >= e.initCost():
-				var blast = e._cast(self)
-				get_tree().current_scene.spellsCasted += 1
-				ROTATIONSPEED /= 2
-				stored_energy -= e.initCost()
-				slow = blast.slow
+				var cost = e.initCost()
 				e.resetCooldown(true,pow(0.95,comprehension))
+				var blast = e._cast(self)
+				if (is_instance_valid(blast)):
+					get_tree().current_scene.spellsCasted += 1
+					ROTATIONSPEED /= 2
+					stored_energy -= cost
+					slow = blast.slow
 				#updateEnergy()
 	onLastTurn = hit
 
@@ -468,6 +470,7 @@ func doneCasting():
 	slow = false
 	ROTATIONSPEED *= 2
 	casting = false
+	print("doneCasting")
 
 func _on_dashing_timer_timeout():
 	$PlayerArt._dash(false)

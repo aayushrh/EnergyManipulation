@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Attributes" load_steps=10 format=3 uid="uid://dvtb22581wdl4"]
 
-[ext_resource type="Script" uid="uid://553uhcn8754r" path="res://Magic/MagicSpells/Attributes.gd" id="1_sac1g"]
-[ext_resource type="Script" uid="uid://dkkxsxna627av" path="res://Magic/MagicSpells/AttributeType.gd" id="2_6aato"]
+[ext_resource type="Script" uid="uid://w0xtb5sdsynu" path="res://Magic/MagicSpells/Attributes.gd" id="1_sac1g"]
+[ext_resource type="Script" uid="uid://dnakrcrp4nlsr" path="res://Magic/MagicSpells/AttributeType.gd" id="2_6aato"]
 
 [sub_resource type="Resource" id="Resource_6p6kv"]
 script = ExtResource("2_6aato")

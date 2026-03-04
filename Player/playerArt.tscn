@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://bqvqepqd2f3sp"]
 
-[ext_resource type="Script" path="res://Player/playerArt.gd" id="1_x87mt"]
+[ext_resource type="Script" uid="uid://cjf4pighomf5j" path="res://Player/playerArt.gd" id="1_x87mt"]
 [ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_wtj7s"]
 [ext_resource type="Texture2D" uid="uid://r0f6r36kq38s" path="res://Art/adventurer-v1.5-Sheet.png" id="3_o2lcs"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://hk746uh550im" path="res://Player/playerArtStateMachine.tres" id="4_wg6p7"]
@@ -365,14 +365,14 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lpfx"]
 _data = {
-"Block": SubResource("Animation_6lmr5"),
-"Punch-1": SubResource("Animation_j6erc"),
-"Punch-2": SubResource("Animation_5re1q"),
-"Punch-3": SubResource("Animation_br856"),
-"RESET": SubResource("Animation_fxsu2"),
-"Return-1": SubResource("Animation_bw2k5"),
-"Return-2": SubResource("Animation_8hxlr"),
-"Return-3": SubResource("Animation_mhrki")
+&"Block": SubResource("Animation_6lmr5"),
+&"Punch-1": SubResource("Animation_j6erc"),
+&"Punch-2": SubResource("Animation_5re1q"),
+&"Punch-3": SubResource("Animation_br856"),
+&"RESET": SubResource("Animation_fxsu2"),
+&"Return-1": SubResource("Animation_bw2k5"),
+&"Return-2": SubResource("Animation_8hxlr"),
+&"Return-3": SubResource("Animation_mhrki")
 }
 
 [sub_resource type="Animation" id="Animation_gbig5"]
@@ -452,6 +452,42 @@ tracks/1/keys = {
 "args": [],
 "method": &"_unlock_movement"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_md8i8"]
+resource_name = "Dash"
+length = 0.2
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [24, 25]
+}
+
+[sub_resource type="Animation" id="Animation_r0qgq"]
+resource_name = "DashEnd"
+length = 0.3
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [25, 26, 28]
 }
 
 [sub_resource type="Animation" id="Animation_kuatx"]
@@ -587,56 +623,20 @@ tracks/0/keys = {
 "values": [24, 25, 26]
 }
 
-[sub_resource type="Animation" id="Animation_md8i8"]
-resource_name = "Dash"
-length = 0.2
-loop_mode = 1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [24, 25]
-}
-
-[sub_resource type="Animation" id="Animation_r0qgq"]
-resource_name = "DashEnd"
-length = 0.3
-loop_mode = 1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.09, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [25, 26, 28]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bix75"]
 _data = {
-"AirAttack": SubResource("Animation_gbig5"),
-"Attack": SubResource("Animation_e4w4l"),
-"Dash": SubResource("Animation_md8i8"),
-"DashEnd": SubResource("Animation_r0qgq"),
-"Death": SubResource("Animation_kuatx"),
-"Falling": SubResource("Animation_3yllm"),
-"Hurt": SubResource("Animation_3y0ey"),
-"Idle": SubResource("Animation_blwqi"),
-"Jumping": SubResource("Animation_btrpb"),
-"RESET": SubResource("Animation_867fd"),
-"Running": SubResource("Animation_btc6j"),
-"Sliding": SubResource("Animation_ssip3")
+&"AirAttack": SubResource("Animation_gbig5"),
+&"Attack": SubResource("Animation_e4w4l"),
+&"Dash": SubResource("Animation_md8i8"),
+&"DashEnd": SubResource("Animation_r0qgq"),
+&"Death": SubResource("Animation_kuatx"),
+&"Falling": SubResource("Animation_3yllm"),
+&"Hurt": SubResource("Animation_3y0ey"),
+&"Idle": SubResource("Animation_blwqi"),
+&"Jumping": SubResource("Animation_btrpb"),
+&"RESET": SubResource("Animation_867fd"),
+&"Running": SubResource("Animation_btc6j"),
+&"Sliding": SubResource("Animation_ssip3")
 }
 
 [node name="PlayerArt" type="Node2D" node_paths=PackedStringArray("animationTree")]
@@ -645,27 +645,25 @@ animationTree = NodePath("AnimationTree")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3lpfx")
+&"": SubResource("AnimationLibrary_3lpfx")
 }
 
 [node name="LArm" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-20, -20)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_wtj7s")
 
 [node name="RArm" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(20, -20)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_wtj7s")
 
 [node name="Body" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_wtj7s")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("3_o2lcs")
@@ -674,7 +672,7 @@ vframes = 16
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bix75")
+&"": SubResource("AnimationLibrary_bix75")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

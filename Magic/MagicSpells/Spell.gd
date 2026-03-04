@@ -10,6 +10,7 @@ var cooldown : float = 0
 var using : bool = false
 var slow : bool = true
 var intel : float = 1.0
+var free : bool = false
 
 func create() -> Spell:
 	var newSpell : Spell = Spell.new(spellName)
@@ -38,10 +39,11 @@ func _cast(sender:CharacterBody2D) -> SpellCast:
 		var dupe : Spell = create()
 		#if(dupe.element == null):
 			#dupe.element = sender.get_tree().current_scene.defaultElement
+		cast.connect("done", _notUsing)
 		cast.setSpell(dupe)
 		cast.global_position = sender.global_position
 		sender.get_tree().current_scene.add_child(cast)
-		cast.connect("done", _notUsing)
+		free = false
 		return cast
 	else:
 		_notUsing()
@@ -50,6 +52,7 @@ func _cast(sender:CharacterBody2D) -> SpellCast:
 
 func _notUsing() -> void:
 	using = false
+	print("not using")
 
 func resetCooldown(use:bool, multi:float) -> void:
 	cooldown = getcd()*multi
@@ -84,6 +87,8 @@ func getMaxPowerTime() -> float:
 
 #perfect block = 10 mana
 func initCost() -> float:
+	if (free):
+		return 0
 	var cost : float = 1
 	if(components != null):
 		for i:ComponentSpellCard in components:

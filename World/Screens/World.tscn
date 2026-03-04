@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=4 uid="uid://nqt08ivqhy5v"]
 
-[ext_resource type="Script" uid="uid://fm7yxxmubso2" path="res://World/Screens/World.gd" id="1_dcdsc"]
+[ext_resource type="Script" uid="uid://c4r2vk1ylnqrd" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
 [ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Components/Elements/Fire.tres" id="2_5nixq"]
 [ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Components/Elements/Nature.tres" id="2_c5j3f"]
@@ -28,7 +28,7 @@
 [ext_resource type="Resource" uid="uid://yec66fv1fp0a" path="res://Magic/MagicCards/Resources/Type/Explosion.tres" id="23_qk785"]
 [ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="24_4r4ro"]
 [ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="25_lh46v"]
-[ext_resource type="Script" uid="uid://qguj1n4qjouh" path="res://World/Screens/test.gd" id="26_n8u7l"]
+[ext_resource type="Script" uid="uid://w58npo55wftv" path="res://World/Screens/test.gd" id="26_n8u7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("9_tvb2g")
@@ -1447,7 +1447,6 @@ radius = 37.5
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testComponentSpellCard = Array[ExtResource("4_5utis")]([ExtResource("4_p0sh2"), ExtResource("24_4r4ro"), ExtResource("9_dhoch")])
 testTypeSpellCard = ExtResource("4_ov6f6")
 allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("2_c5j3f"), ExtResource("7_6b0eb"), ExtResource("9_dhoch"), ExtResource("7_3b64n"), ExtResource("9_vavhn")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
