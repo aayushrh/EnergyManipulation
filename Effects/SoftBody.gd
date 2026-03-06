@@ -5,7 +5,8 @@ var bodiesInSpace= []
 func getVector():
 	var softBodyPush = Vector2.ZERO
 	for i in bodiesInSpace:
-		softBodyPush += global_position.direction_to(i.global_position) * 1/((global_position.distance_to(i.global_position))/50)
+		if (i != self):
+			softBodyPush += global_position.direction_to(i.global_position) * 1/((global_position.distance_to(i.global_position))/50)
 	return softBodyPush
 
 func _on_body_entered(body):

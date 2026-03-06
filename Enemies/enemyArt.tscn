@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=3 uid="uid://bfugmqkrscero"]
 
-[ext_resource type="Script" path="res://Enemies/enemyArt.gd" id="1_l6bng"]
+[ext_resource type="Script" uid="uid://c2lghfv8pdp5r" path="res://Enemies/enemyArt.gd" id="1_l6bng"]
 [ext_resource type="Texture2D" uid="uid://dts7ralytc8kq" path="res://Art/TrueWhiteCircle.png" id="2_8hol5"]
 [ext_resource type="Texture2D" uid="uid://i4ieveg4cd1m" path="res://Art/Brandon.png" id="2_ca6vm"]
 [ext_resource type="PackedScene" uid="uid://bjdxvwof6staf" path="res://Effects/charging.tscn" id="3_c2wng"]
-[ext_resource type="Shader" path="res://Enemies/enemyArt.gdshader" id="3_m36pn"]
+[ext_resource type="Shader" uid="uid://d0nokbfnu5joy" path="res://Enemies/enemyArt.gdshader" id="3_m36pn"]
 
 [sub_resource type="Gradient" id="Gradient_vbeqr"]
 colors = PackedColorArray(0, 0.694118, 1, 1, 1, 1, 1, 1)
@@ -26,6 +26,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 100.0
 emission_ring_inner_radius = 75.0
+emission_ring_cone_angle = 90.0
 radial_velocity_min = -300.0
 radial_velocity_max = -200.0
 gravity = Vector3(0, 0, 0)
@@ -363,14 +364,28 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0, 1.0, 0.0]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_finish_Ready"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lpfx"]
 _data = {
-"Charging": SubResource("Animation_hmcwf"),
-"Death": SubResource("Animation_cdd5r"),
-"Punch": SubResource("Animation_j6erc"),
-"RESET": SubResource("Animation_fxsu2"),
-"Ready": SubResource("Animation_bbqu2")
+&"Charging": SubResource("Animation_hmcwf"),
+&"Death": SubResource("Animation_cdd5r"),
+&"Punch": SubResource("Animation_j6erc"),
+&"RESET": SubResource("Animation_fxsu2"),
+&"Ready": SubResource("Animation_bbqu2")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2xov"]
@@ -392,13 +407,13 @@ animPlayer = NodePath("AnimationPlayer")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_ilfni")
 texture = ExtResource("2_8hol5")
 lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_ilfni")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3lpfx")
+&"": SubResource("AnimationLibrary_3lpfx")
 }
 
 [node name="LArm" type="Sprite2D" parent="."]

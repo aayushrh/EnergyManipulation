@@ -39,9 +39,14 @@ func _ready():
 	#Global.magicCards.append(testTypeSpellCard)
 	Global.spellList = [spell]#, spell2]
 	Global.defaultElement = defaultElement
+	if ($CanvasLayer == null):
+		return
 	$CanvasLayer/ScrollContainer/SpellListUI.reload()
 
 func _process(delta):
+	
+	if ($CanvasLayer == null):
+		return
 	
 	$CanvasLayer/Label.text = "FPS: " + str(round(1/delta))
 	

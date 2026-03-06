@@ -35,6 +35,7 @@ var con = 0
 var com = 0#communism
 var free = 0
 var needUpdate = false
+var player = null
 
 func _process(delta: float) -> void:
 	if(needUpdate):

@@ -32,6 +32,7 @@ var test = false
 @export var MAXHEALTH : float = 10.0
 
 @export_category("Movement")
+@export var SPEED : float = 40
 @export var TOPSPEED : float = 200
 @export var ROTATIONSPEED : float = 10
 @export var caution_range : float = 300
@@ -49,8 +50,9 @@ func _ready():
 	player = Global.player
 	healthbar = HealthBar.instantiate()
 	healthbar.myParent = self
-	#add_child(healthbar)
+	add_child(healthbar)
 	print("healthbar?")
+	print("ready?")
 	health = MAXHEALTH
 
 func _physics_process(delta):
@@ -69,6 +71,7 @@ func _physics_process(delta):
 		move_and_slide()
 	if(!Global.isPaused and pause):
 		_effectsHandle(delta)
+	
 
 func _health_change(newHP: float):
 	var change = newHP - health
@@ -168,6 +171,8 @@ func _move(delta):
 	velocity *= pow(0.9,delta*120)
 	
 	var softBodyPush = $SoftBody.getVector()
+	if (softBodyPush.x == null or softBodyPush.y == null or is_nan(softBodyPush.x) or is_nan(softBodyPush.y)):
+		softBodyPush = Vector2.ZERO
 	
 	if player != null:
 		rotateToTarget(player.global_position, delta)
@@ -177,7 +182,7 @@ func _move(delta):
 		elif((player.global_position - global_position).length() < min_range + caution_range * int(!agg and player.casting)):
 			inputV = (player.global_position - global_position).normalized() * -1
 		
-		velocity += inputV * 20
+		velocity += inputV * SPEED
 		
 		velocity -= softBodyPush * TOPSPEED
 		velocity *= Global.getTimeScale() * speedModifier

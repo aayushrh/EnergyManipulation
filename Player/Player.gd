@@ -79,6 +79,7 @@ func _ready():
 	health = MAXHEALTH
 	stored_energy = MAXMANA/10
 	base_top_speed = TOPSPEED
+	Global.player = self
 	get_tree().current_scene.damageHealed = 0
 
 func _process(delta):
@@ -410,13 +411,13 @@ func _hit(hitbox):
 	dmgTaken = hitbox.damageTaken()
 	spellHit = hitbox.spell
 	time_last_hit = time
-	$HitRegister.start(0.06125)
+	$HitRegister.start(0.06125*1.5)
 	#_hit_register()
 
 func _dmgRed(blockTime):
 	var mod = 1.5
 	
-	if(blockTime < 0 and blockTime > -0.02085 * mod):
+	if(blockTime <= 0 and blockTime > -0.02085 * mod):
 		var perfectBlock = PerfectBlock.instantiate()
 		perfectBlock.global_position = hitbox.global_position
 		get_tree().current_scene.add_child(perfectBlock)
@@ -479,7 +480,7 @@ func _on_dashing_timer_timeout():
 func _hit_register():
 	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):
 		return
-	var dmgRed = _dmgRed(abs(time_last_hit-time_last_block))
+	var dmgRed = _dmgRed(time_last_hit-time_last_block)
 	for i in spellHit.components:
 		i.callBlockEffects(dmgRed, hitbox, self)
 	if(!is_instance_valid(self) or !is_instance_valid(get_tree())):

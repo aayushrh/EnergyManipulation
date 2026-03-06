@@ -390,7 +390,7 @@ func _punch():
 	art._startPunch()
 
 func _on_vision_body_entered(body):
-	if!(body is Wall):
+	if!(body is Wall) and body is Player:
 		player = body
 
 func runDelay(arr):

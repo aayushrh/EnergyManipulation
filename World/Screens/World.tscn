@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=36 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" uid="uid://c4r2vk1ylnqrd" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="24_4r4ro"]
 [ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="25_lh46v"]
 [ext_resource type="Script" uid="uid://w58npo55wftv" path="res://World/Screens/test.gd" id="26_n8u7l"]
+[ext_resource type="PackedScene" uid="uid://cn1ecnoq70uf3" path="res://Enemies/TacklingEnemy.tscn" id="30_ld6yb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("9_tvb2g")
@@ -1512,6 +1513,10 @@ cardSelection = NodePath("../CanvasLayer/CardSelection")
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="TacklingEnemy" parent="Enemies" instance=ExtResource("30_ld6yb")]
+position = Vector2(-382, -168)
+damage = 1.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
 limit_left = -1500
@@ -1551,14 +1556,13 @@ script = ExtResource("9_4eups")
 position = Vector2(-3, -7.5)
 shape = SubResource("RectangleShape2D_g6vus")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(12, 1095)
-rotation = 1.5708
+[node name="StaticBody2D4" type="StaticBody2D" parent="StaticBody2D3"]
+position = Vector2(2181, -6.007895)
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("9_4eups")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3/StaticBody2D4"]
 position = Vector2(-3, -7.5)
 shape = SubResource("RectangleShape2D_g6vus")
 

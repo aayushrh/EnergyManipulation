@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmahu7rsl04ox"]
+
+[ext_resource type="PackedScene" uid="uid://cn1ecnoq70uf3" path="res://Enemies/TacklingEnemy.tscn" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://c4r2vk1ylnqrd" path="res://World/Screens/World.gd" id="1_epypp"]
+[ext_resource type="Resource" uid="uid://sjflt6hs06eu" path="res://Magic/MagicCards/Resources/Components/Elements/Default.tres" id="2_0hol4"]
+[ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="2_epypp"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_epypp")
+player = NodePath("Player")
+defaultElement = ExtResource("2_0hol4")
+
+[node name="TacklingEnemy" parent="." instance=ExtResource("1_0e48y")]
+position = Vector2(742, 397)
+
+[node name="Player" parent="." instance=ExtResource("2_epypp")]
+position = Vector2(252, 377)

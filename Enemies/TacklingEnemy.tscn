@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn1ecnoq70uf3"]
+[gd_scene load_steps=6 format=3 uid="uid://cn1ecnoq70uf3"]
 
-[ext_resource type="Script" path="res://Enemies/TacklingEnemy.gd" id="1_43cok"]
+[ext_resource type="Script" uid="uid://xih2pj6in3uj" path="res://Enemies/TacklingEnemy.gd" id="1_43cok"]
 [ext_resource type="PackedScene" uid="uid://cwb75qx3d6iod" path="res://Enemies/SoftBody.tscn" id="3_gytvd"]
 [ext_resource type="PackedScene" uid="uid://bfugmqkrscero" path="res://Enemies/enemyArt.tscn" id="4_54brp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2k0v4"]
 radius = 25.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n84ai"]
+radius = 36.94
+
 [node name="TacklingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("softBody", "enemyArt")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_43cok")
-TOPSPEED = 400.0
+speed = 1000.0
+MAXHEALTH = 1.0
 caution_range = 200.0
 min_range = 150.0
 max_range = 250.0
@@ -22,3 +28,10 @@ shape = SubResource("CircleShape2D_2k0v4")
 [node name="EnemyArt" parent="." instance=ExtResource("4_54brp")]
 
 [node name="SoftBody" parent="." instance=ExtResource("3_gytvd")]
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_n84ai")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
