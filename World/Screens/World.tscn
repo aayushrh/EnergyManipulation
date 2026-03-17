@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://nqt08ivqhy5v"]
+[gd_scene load_steps=35 format=4 uid="uid://nqt08ivqhy5v"]
 
 [ext_resource type="Script" uid="uid://c4r2vk1ylnqrd" path="res://World/Screens/World.gd" id="1_dcdsc"]
 [ext_resource type="PackedScene" uid="uid://mpo3uyl0648p" path="res://Player/Player.tscn" id="1_s7tpg"]
@@ -29,7 +29,6 @@
 [ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="24_4r4ro"]
 [ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="25_lh46v"]
 [ext_resource type="Script" uid="uid://w58npo55wftv" path="res://World/Screens/test.gd" id="26_n8u7l"]
-[ext_resource type="PackedScene" uid="uid://cn1ecnoq70uf3" path="res://Enemies/TacklingEnemy.tscn" id="30_ld6yb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpu2p"]
 texture = ExtResource("9_tvb2g")
@@ -1448,9 +1447,7 @@ radius = 37.5
 script = ExtResource("1_dcdsc")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
-testComponentSpellCard = null
 testTypeSpellCard = ExtResource("4_ov6f6")
-testComponentSpellCard2 = null
 allComponentSpellCards = Array[ExtResource("4_5utis")]([ExtResource("8_dkp5y"), ExtResource("2_5nixq"), ExtResource("2_c5j3f"), ExtResource("7_6b0eb"), ExtResource("9_dhoch"), ExtResource("7_3b64n"), ExtResource("9_vavhn")])
 allTypeSpellCards = Array[ExtResource("9_d37x6")]([ExtResource("4_ov6f6")])
 defaultElement = ExtResource("12_qtnuf")
@@ -1501,6 +1498,7 @@ spawner = NodePath("../../Spawner")
 visible = false
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
 offset_left = 1053.0
 offset_top = 18.0
 offset_right = 1248.0
@@ -1514,10 +1512,6 @@ player = NodePath("../Player")
 cardSelection = NodePath("../CanvasLayer/CardSelection")
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="TacklingEnemy" parent="Enemies" instance=ExtResource("30_ld6yb")]
-position = Vector2(-382, -168)
-damage = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)

@@ -10,8 +10,9 @@ var spell : Spell
 
 @export var range : float = 200
 @export var speed : float = 200
-@export var time : float = 0.5
+@export var dist_dash : float = 100
 @export var damage : float = 10.0
+@export var max_cooldown: float = 10.0
 
 func _ready():
 	super._ready()
@@ -27,10 +28,13 @@ func _process(delta):
 		dashing = false
 		overrideMove = false
 		timer = -1.0
+		$CollisionShape2D.disabled = false
 		print("finish tackle")
 	
 	if player != null and player.global_position.distance_to(global_position) <= range and cooldown <= 0 and !dashing:
+		cooldown = max_cooldown
 		overrideMove = true
+		$CollisionShape2D.disabled = true
 		$EnemyArt._play_ready()
 		dir = (player.global_position - global_position).normalized()
 
@@ -43,7 +47,7 @@ func clone() -> TacklingEnemy:
 func _finish_ready():
 	dashing = true
 	velocity = speed * dir * Global.timeScale
-	timer = time
+	timer = dist_dash/speed
 	print("start tackle")
 
 func damageTaken():

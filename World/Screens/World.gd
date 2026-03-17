@@ -9,7 +9,6 @@ var damageHealed = 0
 var damageDealt = 0
 var spellsCasted = 0
 var perfectBlocks = 0
-lmao wtf is thsi
 var goodBlocks = 0
 var badBlocks = 0
 var noBlocks = 0

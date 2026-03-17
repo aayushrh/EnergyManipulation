@@ -12,3 +12,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("TestTimeSlow"):
 		pos = (pos + 1) % len(times)
 		Global.timeScale = times[pos]
+	if Input.is_action_just_pressed("NoMouse"):
+		if (Input.mouse_mode == Input.MOUSE_MODE_HIDDEN):
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

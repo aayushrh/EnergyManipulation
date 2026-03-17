@@ -1,0 +1,177 @@
+[gd_scene load_steps=21 format=3 uid="uid://bvodf2am0rgu6"]
+
+[ext_resource type="PackedScene" uid="uid://dprovuraroe3v" path="res://World/UI/MagicCardUI.tscn" id="1_dhmuj"]
+[ext_resource type="Resource" uid="uid://dghrkrrfamq1q" path="res://Magic/MagicCards/Resources/Components/Elements/Nature.tres" id="2_n1g33"]
+[ext_resource type="Resource" uid="uid://vphyfgyk040g" path="res://Magic/MagicCards/Resources/Components/Elements/Water.tres" id="3_hp54m"]
+[ext_resource type="Resource" uid="uid://eh4y7oyvhxw7" path="res://Magic/MagicCards/Resources/Components/Amount.tres" id="4_sq1jt"]
+[ext_resource type="Resource" uid="uid://bgya6tyk2afhu" path="res://Magic/MagicCards/Resources/Components/Elements/Dark.tres" id="5_6tw04"]
+[ext_resource type="Resource" uid="uid://cykjt4uf46qp0" path="res://Magic/MagicCards/Resources/Components/Elements/Fire.tres" id="6_og2iy"]
+[ext_resource type="Resource" uid="uid://bbvudeis28j5p" path="res://Magic/MagicCards/Resources/Components/Elements/Light.tres" id="7_hy72r"]
+[ext_resource type="Resource" uid="uid://dxtr6nkun1cah" path="res://Magic/MagicCards/Resources/Components/Cluster.tres" id="8_am0ev"]
+[ext_resource type="Resource" uid="uid://vj56ldubctv8" path="res://Magic/MagicCards/Resources/Components/Placed.tres" id="9_kod53"]
+[ext_resource type="Resource" uid="uid://bc4w4qn0qflj6" path="res://Magic/MagicCards/Resources/Components/Haste.tres" id="10_fsdgl"]
+[ext_resource type="Resource" uid="uid://8m3sjm7j4nmo" path="res://Magic/MagicCards/Resources/Components/Efficiency.tres" id="11_w7as3"]
+[ext_resource type="Resource" uid="uid://cq77jib3t08n6" path="res://Magic/MagicCards/Resources/Components/Shrapnel.tres" id="12_bjwaw"]
+[ext_resource type="Resource" uid="uid://cyg8d0qh30y25" path="res://Magic/MagicCards/Resources/Components/Unbound.tres" id="13_cedhb"]
+[ext_resource type="Resource" uid="uid://dsvsnjbntmnj3" path="res://Magic/MagicCards/Resources/Components/Vortex.tres" id="14_dqxuh"]
+[ext_resource type="Resource" uid="uid://uwu0oq7tl6uy" path="res://Magic/MagicCards/Resources/Type/Blast.tres" id="15_ijnjb"]
+[ext_resource type="Resource" uid="uid://yec66fv1fp0a" path="res://Magic/MagicCards/Resources/Type/Explosion.tres" id="16_wa20m"]
+[ext_resource type="Script" uid="uid://c3064ox843oko" path="res://CameraTest.gd" id="17_hp54m"]
+
+[sub_resource type="Animation" id="Animation_6rtb2"]
+resource_name = "Move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.09750365, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(576, 150), Vector2(576, 830)]
+}
+
+[sub_resource type="Animation" id="Animation_gkb6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 130)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80sll"]
+_data = {
+&"Move": SubResource("Animation_6rtb2"),
+&"RESET": SubResource("Animation_gkb6h")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = -191.0
+offset_right = 1170.0
+offset_bottom = 1200.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.768, 0.768)
+
+[node name="ColorRect" parent="VBoxContainer" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("2_n1g33")
+
+[node name="ColorRect2" parent="VBoxContainer" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("3_hp54m")
+
+[node name="ColorRect3" parent="VBoxContainer" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("4_sq1jt")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -175.0
+offset_right = 530.0
+offset_bottom = 325.0
+scale = Vector2(0.768, 0.768)
+
+[node name="ColorRect" parent="VBoxContainer2" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("5_6tw04")
+
+[node name="ColorRect2" parent="VBoxContainer2" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("6_og2iy")
+
+[node name="ColorRect3" parent="VBoxContainer2" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("7_hy72r")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_right = 760.0
+offset_bottom = 500.0
+scale = Vector2(0.768, 0.768)
+
+[node name="ColorRect" parent="VBoxContainer3" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("8_am0ev")
+
+[node name="ColorRect2" parent="VBoxContainer3" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("9_kod53")
+
+[node name="ColorRect3" parent="VBoxContainer3" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("10_fsdgl")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 690.0
+offset_top = -175.0
+offset_right = 990.0
+offset_bottom = 325.0
+scale = Vector2(0.768, 0.768)
+
+[node name="ColorRect" parent="VBoxContainer4" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("11_w7as3")
+
+[node name="ColorRect2" parent="VBoxContainer4" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("12_bjwaw")
+
+[node name="ColorRect3" parent="VBoxContainer4" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("13_cedhb")
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 920.0
+offset_right = 1220.0
+offset_bottom = 500.0
+scale = Vector2(0.768, 0.768)
+
+[node name="ColorRect" parent="VBoxContainer5" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("14_dqxuh")
+
+[node name="ColorRect2" parent="VBoxContainer5" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("15_ijnjb")
+
+[node name="ColorRect3" parent="VBoxContainer5" instance=ExtResource("1_dhmuj")]
+layout_mode = 2
+cardToShow = ExtResource("16_wa20m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 130)
+script = ExtResource("17_hp54m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_80sll")
+}
+autoplay = "Move"
+speed_scale = 0.1
